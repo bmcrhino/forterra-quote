@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     });
 
     const resp = await fetch(`https://api.rentcast.io/v1/properties?${params}`, {
-      headers: { 'X-Api-Key': process.env.RENTCAST_API_KEY, 'Accept': 'application/json' }
+      headers: { 'X-Api-Key': (process.env.RENTCAST_API_KEY || '').trim(), 'Accept': 'application/json' }
     });
 
     if (!resp.ok) {

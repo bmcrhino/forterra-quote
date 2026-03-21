@@ -9,9 +9,9 @@ export default async function handler(req, res) {
       rodentInspection, customQuote, specialties
     } = req.body;
 
-    const TOKEN = process.env.GHL_API_TOKEN;
-    const LOCATION_ID = process.env.GHL_LOCATION_ID;
-    const PIPELINE_ID = process.env.GHL_PIPELINE_ID;
+    const TOKEN = (process.env.GHL_API_TOKEN || '').trim();
+    const LOCATION_ID = (process.env.GHL_LOCATION_ID || '').trim();
+    const PIPELINE_ID = (process.env.GHL_PIPELINE_ID || '').trim();
     
     if (!TOKEN || !LOCATION_ID) {
       console.error('Missing env vars: TOKEN=', !!TOKEN, 'LOC=', !!LOCATION_ID);
@@ -64,7 +64,7 @@ export default async function handler(req, res) {
     
     if (!contactResp.ok) {
       console.error('GHL contact error:', contactResp.status, JSON.stringify(contactData));
-      return res.status(200).json({ success: false, error: 'Failed to create contact', details: contactData, status: contactResp.status, tokenPrefix: TOKEN.substring(0,10), locationId: LOCATION_ID });
+      return res.status(200).json({ success: false, error: 'Failed to create contact' });
     }
 
     const contactId = contactData.contact?.id;
