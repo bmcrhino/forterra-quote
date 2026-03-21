@@ -30,20 +30,27 @@ export default async function handler(req, res) {
       firstName: firstName || '',
       lastName: lastName || '',
       email: email || '',
-      phone: phone || '',
+      phone: phone ? (phone.startsWith('+') ? phone : '+1' + phone.replace(/\D/g, '')) : '',
       address1: address || '',
       city: city || '',
       state: 'TX',
       postalCode: zip || '',
       tags: tags,
-      source: 'website-quote',
-      customField: {}
+      source: 'website-quote'
     };
 
-    // Add custom fields as needed
-    if (sqft) contactBody.customField.sqft = String(sqft);
-    if (lotSize) contactBody.customField.lot_size = String(lotSize);
-    if (propertyType) contactBody.customField.property_type = propertyType;
+    // Add notes with property info
+    const notes = [];
+    if (sqft) notes.push(`Sqft: ${sqft}`);
+    if (lotSize) notes.push(`Lot: ${lotSize} acres`);
+    if (propertyType) notes.push(`Type: ${propertyType}`);
+    if (plan) notes.push(`Plan: ${plan}`);
+    if (billing) notes.push(`Billing: ${billing}`);
+    if (pests && pests.length) notes.push(`Pests: ${pests.join(', ')}`);
+    if (addons && addons.length) notes.push(`Addons: ${addons.join(', ')}`);
+    if (preferredDate) notes.push(`Preferred date: ${preferredDate}`);
+    if (preferredTime) notes.push(`Preferred time: ${preferredTime}`);
+    if (notes.length) contactBody.companyName = notes.join(' | ');
 
     const contactResp = await fetch('https://services.leadconnectorhq.com/contacts/', {
       method: 'POST',
