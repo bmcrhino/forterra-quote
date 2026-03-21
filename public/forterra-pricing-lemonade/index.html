@@ -1,0 +1,2403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Your Quote — Forterra Pest Control</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ========================================
+       FORTERRA QUOTING WIZARD — Lemonade-Style
+       ======================================== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --orange: #F77D00;
+      --orange-hover: #E06F00;
+      --orange-light: #FFF3E6;
+      --orange-10: rgba(247, 125, 0, 0.1);
+      --bark: #986D4F;
+      --soil: #42372F;
+      --stem: #54654E;
+      --sunshine: #F4D14F;
+      --sky: #97C4DB;
+      --leaf: #B1C4AA;
+      --twilight: #1A6991;
+      --white: #FFFFFF;
+      --off-white: #F9FAFB;
+      --warm-beige: #EFDCCB;
+      --light-grey: #F3F4F6;
+      --border-grey: #E5E7EB;
+      --input-border: #D1D5DB;
+      --medium-grey: #9CA3AF;
+      --dark-grey: #374151;
+      --near-black: #1A1A1A;
+      --success: #047857;
+      --success-bg: #ECFDF5;
+      --error: #B91C1C;
+      --error-bg: #FEF2F2;
+      --font-display: 'Libre Franklin', 'Franklin Gothic URW', 'Arial Narrow', sans-serif;
+      --font-body: 'Lora', 'Benton Modern Text', 'Georgia', serif;
+      --radius: 4px;
+      --radius-md: 8px;
+      --radius-lg: 8px;
+      --radius-xl: 12px;
+      --radius-full: 4px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+      --shadow-xl: 0 16px 48px rgba(0,0,0,0.15);
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--soil);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ========================================
+       WIZARD SHELL
+       ======================================== */
+    .wizard-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Bar */
+    .wizard-topbar {
+      background: var(--stem);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+      padding: 0 24px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .wizard-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .wizard-logo svg { flex-shrink: 0; }
+    .wizard-phone {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 15px;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color var(--transition);
+    }
+    .wizard-phone:hover { color: var(--white); }
+
+    /* Progress Bar */
+    .progress-bar {
+      background: var(--off-white);
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border-grey);
+    }
+    .progress-steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .progress-step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--medium-grey);
+      transition: color var(--transition);
+      white-space: nowrap;
+    }
+    .progress-step.active { color: var(--orange); }
+    .progress-step.completed { color: var(--success); }
+    .progress-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid var(--border-grey);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--medium-grey);
+      background: var(--white);
+      transition: all var(--transition);
+    }
+    .progress-step.active .progress-dot {
+      border-color: var(--orange);
+      background: var(--orange);
+      color: var(--white);
+    }
+    .progress-step.completed .progress-dot {
+      border-color: var(--success);
+      background: var(--success);
+      color: var(--white);
+    }
+    .progress-connector {
+      width: 40px;
+      height: 2px;
+      background: var(--border-grey);
+      margin: 0 8px;
+      transition: background var(--transition);
+    }
+    .progress-connector.active { background: var(--orange); }
+    .progress-connector.completed { background: var(--success); }
+
+    /* Main Content Area */
+    .wizard-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px 80px;
+      min-height: calc(100vh - 64px - 60px);
+    }
+
+    /* ========================================
+       WIZARD SCREENS
+       ======================================== */
+    .wizard-screen {
+      display: none;
+      max-width: 560px;
+      width: 100%;
+      margin: 0 auto;
+      animation: screenFadeIn 0.5s ease;
+    }
+    .wizard-screen.active { display: block; }
+
+    @keyframes screenFadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Avatar + Chat Bubble */
+    .avatar-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--warm-beige);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .avatar svg { width: 32px; height: 32px; }
+    .chat-bubble {
+      background: var(--off-white);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
+      padding: 20px 24px;
+      font-family: var(--font-body);
+      font-size: 20px;
+      line-height: 1.5;
+      color: var(--soil);
+      max-width: 460px;
+    }
+    .chat-bubble strong {
+      color: var(--orange);
+      font-weight: 600;
+    }
+    .chat-bubble-small {
+      font-size: 16px;
+      color: var(--dark-grey);
+      margin-top: 8px;
+    }
+
+    /* Form Elements */
+    .wizard-form { margin-top: 8px; }
+    .form-group { margin-bottom: 20px; }
+    .form-label {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--bark);
+      margin-bottom: 8px;
+    }
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      font-family: var(--font-body);
+      font-size: 17px;
+      color: var(--soil);
+      background: var(--white);
+      border: 1px solid var(--input-border);
+      border-radius: var(--radius);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .form-input:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 2px var(--orange-10);
+    }
+    .form-input::placeholder { color: var(--medium-grey); }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-hint {
+      font-family: var(--font-display);
+      font-size: 13px;
+      color: var(--medium-grey);
+      margin-top: 6px;
+    }
+    .form-error {
+      font-family: var(--font-display);
+      font-size: 13px;
+      color: var(--error);
+      margin-top: 6px;
+      display: none;
+    }
+    .form-error.visible { display: block; }
+
+    /* Buttons */
+    .btn-wizard {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 16px 32px;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all var(--transition);
+      text-decoration: none;
+      min-width: 200px;
+    }
+    .btn-wizard-primary {
+      background: var(--orange);
+      color: var(--white);
+    }
+    .btn-wizard-primary:hover {
+      background: var(--orange-hover);
+      box-shadow: 0 4px 16px rgba(247, 125, 0, 0.35);
+      transform: translateY(-1px);
+    }
+    .btn-wizard-primary:disabled {
+      background: var(--border-grey);
+      color: var(--medium-grey);
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+    .btn-wizard-secondary {
+      background: var(--white);
+      color: var(--soil);
+      border: 2px solid var(--border-grey);
+    }
+    .btn-wizard-secondary:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+    .btn-wizard-ghost {
+      background: transparent;
+      color: var(--dark-grey);
+      padding: 12px 20px;
+      font-size: 14px;
+      min-width: auto;
+    }
+    .btn-wizard-ghost:hover { color: var(--orange); }
+
+    .btn-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .btn-row-center { justify-content: center; }
+    .btn-row-between { justify-content: space-between; }
+
+    /* ========================================
+       SELECTION CARDS (Property Type)
+       ======================================== */
+    .select-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .select-card {
+      background: var(--white);
+      border: 1px solid var(--input-border);
+      border-radius: var(--radius-lg);
+      padding: 24px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .select-card:hover {
+      border-color: var(--orange);
+      box-shadow: var(--shadow-md);
+    }
+    .select-card.selected {
+      border-color: var(--orange);
+      background: var(--orange-light);
+    }
+    .select-card-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+    .select-card-icon svg {
+      width: 32px;
+      height: 32px;
+    }
+    .select-card-label {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--soil);
+    }
+
+    /* ========================================
+       PEST SELECTION (Multi-select tiles)
+       ======================================== */
+    .pest-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .pest-tile {
+      background: var(--white);
+      border: 2px solid var(--border-grey);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all var(--transition);
+      user-select: none;
+    }
+    .pest-tile:hover { border-color: var(--orange); }
+    .pest-tile.selected {
+      border-color: var(--orange);
+      background: var(--orange-light);
+    }
+    .pest-tile-icon { flex-shrink: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
+    .pest-tile-icon svg { width: 24px; height: 24px; }
+    .pest-tile-text {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--soil);
+    }
+    .pest-tile .checkmark {
+      margin-left: auto;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--border-grey);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+      flex-shrink: 0;
+    }
+    .pest-tile.selected .checkmark {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+    .pest-tile.selected .checkmark svg { opacity: 1; }
+    .pest-tile .checkmark svg { opacity: 0; transition: opacity 0.2s; }
+
+    .see-more-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 12px;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--orange);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      width: 100%;
+      border-radius: var(--radius-md);
+      transition: background var(--transition);
+    }
+    .see-more-btn:hover { background: var(--orange-10); }
+    .pest-grid-expanded { display: none; }
+    .pest-grid-expanded.visible {
+      display: grid;
+      animation: screenFadeIn 0.3s ease;
+    }
+
+    /* ========================================
+       FOLLOW-UP QUESTIONS
+       ======================================== */
+    .followup-card {
+      background: var(--off-white);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border-grey);
+      animation: screenFadeIn 0.4s ease;
+    }
+    .followup-question {
+      font-family: var(--font-body);
+      font-size: 17px;
+      color: var(--soil);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .followup-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .followup-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--white);
+      border: 2px solid var(--border-grey);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all var(--transition);
+      font-family: var(--font-display);
+      font-size: 15px;
+      color: var(--soil);
+    }
+    .followup-option:hover { border-color: var(--orange); }
+    .followup-option.selected {
+      border-color: var(--orange);
+      background: var(--orange-light);
+    }
+    .followup-radio {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid var(--border-grey);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all var(--transition);
+    }
+    .followup-option.selected .followup-radio {
+      border-color: var(--orange);
+      background: var(--orange);
+    }
+    .followup-radio-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--white);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .followup-option.selected .followup-radio-dot { opacity: 1; }
+    .followup-note {
+      font-family: var(--font-display);
+      font-size: 13px;
+      color: var(--bark);
+      margin-top: 4px;
+      margin-bottom: 4px;
+      padding: 10px 14px;
+      background: var(--warm-beige);
+      border-radius: var(--radius);
+      display: none;
+    }
+    .followup-note.visible { display: block; }
+
+    /* Specialty pest check (Group B) */
+    .specialty-option {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 18px; background: var(--white);
+      border: 2px solid var(--border-grey); border-radius: var(--radius);
+      cursor: pointer; transition: border-color 0.2s, background 0.2s;
+    }
+    .specialty-option:hover { border-color: var(--orange); }
+    .specialty-option.selected { border-color: var(--orange); background: #FFF8F0; }
+    .specialty-check-box {
+      width: 24px; height: 24px; border-radius: 6px;
+      border: 2px solid var(--border-grey); background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: all 0.2s;
+    }
+    .specialty-check-box svg { opacity: 0; transition: opacity 0.2s; }
+    .specialty-option.selected .specialty-check-box {
+      background: var(--orange); border-color: var(--orange);
+    }
+    .specialty-option.selected .specialty-check-box svg { opacity: 1; }
+    .specialty-info { display: flex; flex-direction: column; gap: 2px; text-align: left; }
+    .specialty-info strong { font-family: var(--font-display); font-size: 16px; color: var(--soil); }
+    .specialty-info span { font-size: 14px; color: var(--medium-grey); }
+
+    /* ========================================
+       CALCULATING ANIMATION
+       ======================================== */
+    .calculating-screen { text-align: center; max-width: 480px; }
+    .calculating-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 28px;
+      color: var(--soil);
+      margin-bottom: 8px;
+    }
+    .calculating-subtitle {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--dark-grey);
+      margin-bottom: 40px;
+    }
+    .calc-checklist {
+      list-style: none;
+      text-align: left;
+      max-width: 340px;
+      margin: 0 auto;
+    }
+    .calc-checklist li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 0;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--medium-grey);
+      border-bottom: 1px solid var(--light-grey);
+      transition: color 0.4s ease;
+    }
+    .calc-checklist li:last-child { border-bottom: none; }
+    .calc-checklist li.done { color: var(--soil); }
+    .calc-check {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid var(--border-grey);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.4s ease;
+    }
+    .calc-checklist li.done .calc-check {
+      background: var(--success);
+      border-color: var(--success);
+    }
+    .calc-check svg { opacity: 0; transition: opacity 0.3s; }
+    .calc-checklist li.done .calc-check svg { opacity: 1; }
+    .calc-spinner {
+      width: 26px;
+      height: 26px;
+      border: 3px solid var(--border-grey);
+      border-top-color: var(--orange);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+    .calc-checklist li.processing .calc-spinner { display: block; }
+    .calc-checklist li.processing .calc-check { display: none; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .calc-trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-grey);
+    }
+    .calc-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 13px;
+      color: var(--dark-grey);
+    }
+    .calc-trust-item svg { color: var(--success); flex-shrink: 0; }
+
+    /* ========================================
+       PLAN RECOMMENDATION
+       ======================================== */
+    .plan-rec { max-width: 600px; width: 100%; }
+    .plan-rec-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .plan-rec-header h2 {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 32px;
+      color: var(--soil);
+      margin-bottom: 4px;
+    }
+    .plan-rec-header p {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--dark-grey);
+    }
+    .billing-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .billing-label {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--medium-grey);
+      transition: color var(--transition);
+    }
+    .billing-label.active { color: var(--soil); font-weight: 600; }
+    .billing-switch {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      background: var(--border-grey);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background var(--transition);
+      padding: 0;
+    }
+    .billing-switch.active { background: var(--orange); }
+    .billing-switch-dot {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      background: var(--white);
+      border-radius: 50%;
+      transition: transform var(--transition);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+    .billing-switch.active .billing-switch-dot { transform: translateX(20px); }
+    .billing-save {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--success);
+      background: var(--success-bg);
+      padding: 3px 8px;
+      border-radius: var(--radius);
+      letter-spacing: 0.02em;
+    }
+    .plan-rec-desc {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--dark-grey);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .plan-rec-card {
+      background: var(--white);
+      border: 2px solid var(--orange);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .plan-rec-badge {
+      background: var(--orange);
+      color: var(--white);
+      text-align: center;
+      padding: 10px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .plan-rec-body { padding: 32px; }
+    .plan-rec-name {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bark);
+      margin-bottom: 4px;
+    }
+    .plan-rec-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 24px;
+      color: var(--soil);
+      margin-bottom: 16px;
+    }
+    .plan-rec-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .plan-rec-price {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 48px;
+      line-height: 1;
+      color: var(--soil);
+    }
+    .plan-rec-period {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 16px;
+      color: var(--medium-grey);
+    }
+    .plan-rec-initial {
+      font-family: var(--font-display);
+      font-size: 14px;
+      color: var(--dark-grey);
+      margin-bottom: 24px;
+    }
+    .plan-rec-initial strong { color: var(--soil); font-weight: 600; }
+    .plan-rec-features {
+      list-style: none;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--light-grey);
+    }
+    .plan-rec-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 6px 0;
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--dark-grey);
+      line-height: 1.4;
+    }
+    .plan-rec-features li svg {
+      flex-shrink: 0;
+      margin-top: 3px;
+      color: var(--orange);
+    }
+
+    /* Add-ons */
+    .plan-addons-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--bark);
+      margin-bottom: 12px;
+    }
+    .plan-addon-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--off-white);
+      border: 2px solid var(--border-grey);
+      border-radius: var(--radius-md);
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .plan-addon-item:hover { border-color: var(--orange); }
+    .plan-addon-item.selected {
+      border-color: var(--orange);
+      background: var(--orange-light);
+    }
+    .plan-addon-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .plan-addon-check {
+      width: 20px;
+      height: 20px;
+      border-radius: var(--radius);
+      border: 2px solid var(--border-grey);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+    }
+    .plan-addon-item.selected .plan-addon-check {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+    .plan-addon-check svg { opacity: 0; transition: opacity 0.2s; }
+    .plan-addon-item.selected .plan-addon-check svg { opacity: 1; }
+    .plan-addon-name {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--soil);
+    }
+    .plan-addon-price {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--orange);
+    }
+
+    /* Alt plans */
+    .alt-plans { margin-top: 24px; }
+    .alt-plans-label {
+      font-family: var(--font-display);
+      font-size: 13px;
+      color: var(--medium-grey);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .alt-plans-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .alt-plan-card {
+      background: var(--white);
+      border: 1px solid var(--input-border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      cursor: pointer;
+      text-align: center;
+      transition: all var(--transition);
+    }
+    .alt-plan-card:hover {
+      border-color: var(--orange);
+      box-shadow: var(--shadow-md);
+    }
+    .alt-plan-name {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bark);
+      margin-bottom: 2px;
+    }
+    .alt-plan-title {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--dark-grey);
+      margin-bottom: 8px;
+    }
+    .alt-plan-price {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 28px;
+      color: var(--soil);
+      line-height: 1;
+    }
+    .alt-plan-period {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 13px;
+      color: var(--medium-grey);
+    }
+
+    /* ========================================
+       SCHEDULING
+       ======================================== */
+    .schedule-screen { max-width: 560px; width: 100%; }
+    .schedule-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .schedule-header h2 {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 32px;
+      color: var(--soil);
+      margin-bottom: 4px;
+    }
+    .schedule-header p {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--dark-grey);
+    }
+    .calendar-mock {
+      background: var(--white);
+      border: 1px solid var(--border-grey);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 20px;
+    }
+    .calendar-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background: var(--off-white);
+      border-bottom: 1px solid var(--border-grey);
+    }
+    .calendar-month {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 17px;
+      color: var(--soil);
+    }
+    .calendar-arrow {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border-grey);
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .calendar-arrow:hover { border-color: var(--orange); }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0;
+      padding: 12px;
+    }
+    .calendar-day-label {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--medium-grey);
+      text-align: center;
+      padding: 8px 0;
+    }
+    .calendar-day {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--soil);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .calendar-day:hover { background: var(--orange-10); }
+    .calendar-day.disabled { color: var(--border-grey); cursor: default; }
+    .calendar-day.disabled:hover { background: none; }
+    .calendar-day.selected { background: var(--orange); color: var(--white); }
+    .calendar-day.today { border: 2px solid var(--orange); }
+
+    .time-slots {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .time-slot {
+      padding: 14px;
+      background: var(--white);
+      border: 2px solid var(--border-grey);
+      border-radius: var(--radius-md);
+      text-align: center;
+      cursor: pointer;
+      transition: all var(--transition);
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--soil);
+    }
+    .time-slot:hover { border-color: var(--orange); }
+    .time-slot.selected { border-color: var(--orange); background: var(--orange-light); }
+    .time-slot-note {
+      font-size: 11px;
+      color: var(--bark);
+      margin-top: 2px;
+      font-weight: 400;
+    }
+
+    .scarcity-banner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--orange-light);
+      border: 1px solid var(--orange);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      font-family: var(--font-display);
+      font-size: 14px;
+      color: var(--soil);
+    }
+    .scarcity-banner svg { flex-shrink: 0; color: var(--orange); }
+
+    /* ========================================
+       CONFIRMATION
+       ======================================== */
+    .confirmation-screen { text-align: center; max-width: 520px; }
+    .confirm-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--success-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+    .confirmation-screen h2 {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 32px;
+      color: var(--soil);
+      margin-bottom: 8px;
+    }
+    .confirmation-screen p {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--dark-grey);
+      margin-bottom: 24px;
+    }
+    .confirm-summary {
+      background: var(--off-white);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      text-align: left;
+      margin-bottom: 32px;
+    }
+    .confirm-summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-grey);
+      font-family: var(--font-display);
+      font-size: 15px;
+    }
+    .confirm-summary-row:last-child { border-bottom: none; }
+    .confirm-summary-label { color: var(--dark-grey); }
+    .confirm-summary-value { font-weight: 600; color: var(--soil); text-align: right; }
+
+    /* ========================================
+       EXIT INTENT POPUP
+       ======================================== */
+    .exit-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .exit-overlay.visible { display: flex; }
+    .exit-popup {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      max-width: 440px;
+      width: 100%;
+      padding: 40px 32px;
+      text-align: center;
+      position: relative;
+      animation: popupSlideUp 0.4s ease;
+      box-shadow: var(--shadow-xl);
+    }
+    @keyframes popupSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .exit-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: var(--light-grey);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition);
+    }
+    .exit-close:hover { background: var(--border-grey); }
+    .exit-badge {
+      display: inline-block;
+      background: var(--orange-light);
+      color: var(--orange);
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      margin-bottom: 16px;
+    }
+    .exit-popup h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 24px;
+      color: var(--soil);
+      margin-bottom: 8px;
+    }
+    .exit-popup p {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--dark-grey);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+    .exit-discount {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 40px;
+      color: var(--orange);
+      margin-bottom: 4px;
+    }
+    .exit-discount-label {
+      font-family: var(--font-display);
+      font-size: 14px;
+      color: var(--dark-grey);
+      margin-bottom: 24px;
+    }
+
+    /* ========================================
+       OOS + PROPERTY CONFIRM + TRANSITION
+       ======================================== */
+    .oos-screen { text-align: center; max-width: 480px; }
+    .oos-icon {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: var(--error-bg);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+    }
+    .oos-screen h2 { font-family: var(--font-body); font-weight: 400; font-size: 28px; color: var(--soil); margin-bottom: 8px; }
+    .oos-screen p { font-family: var(--font-body); font-size: 16px; color: var(--dark-grey); line-height: 1.6; }
+
+    .property-confirm-card {
+      background: var(--white);
+      border: 1px solid var(--border-grey);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      margin-top: 20px;
+    }
+    .property-map {
+      height: 180px;
+      background: linear-gradient(135deg, #C8DFC0, #A8CBA0);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .property-map-pin {
+      width: 40px; height: 40px;
+      background: var(--orange);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .property-map-pin-inner {
+      width: 14px; height: 14px;
+      background: var(--white);
+      border-radius: 50%;
+      transform: rotate(45deg);
+    }
+    .property-details { padding: 20px; }
+    .property-detail-row {
+      display: flex; justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--light-grey);
+    }
+    .property-detail-row:last-child { border-bottom: none; }
+    .property-detail-label { font-family: var(--font-display); font-size: 14px; color: var(--dark-grey); }
+    .property-detail-value { font-family: var(--font-display); font-weight: 600; font-size: 14px; color: var(--soil); }
+
+    .transition-screen { text-align: center; max-width: 480px; }
+    .transition-animation {
+      width: 120px; height: 120px;
+      margin: 0 auto 32px; position: relative;
+    }
+    .transition-circle {
+      width: 120px; height: 120px; border-radius: 50%;
+      border: 4px solid var(--border-grey);
+      border-top-color: var(--orange);
+      animation: spin 1.5s linear infinite;
+    }
+    .transition-house {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .transition-screen h2 { font-family: var(--font-body); font-weight: 400; font-size: 28px; color: var(--soil); margin-bottom: 8px; }
+    .transition-screen p { font-family: var(--font-body); font-size: 16px; color: var(--dark-grey); margin-bottom: 32px; }
+
+    /* Terms Modal */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5); z-index: 1000;
+      align-items: center; justify-content: center; padding: 24px;
+    }
+    .modal-overlay.visible { display: flex; }
+    .modal-content {
+      background: var(--white); border-radius: var(--radius-lg);
+      max-width: 520px; width: 100%; max-height: 80vh;
+      overflow-y: auto; padding: 32px;
+    }
+    .modal-content h3 { font-family: var(--font-display); font-weight: 600; font-size: 20px; color: var(--soil); margin-bottom: 16px; }
+    .modal-content p { font-family: var(--font-body); font-size: 15px; color: var(--dark-grey); line-height: 1.6; margin-bottom: 12px; }
+
+    /* ========================================
+       RESPONSIVE
+       ======================================== */
+    @media (max-width: 640px) {
+      .wizard-body { padding: 24px 16px 60px; }
+      .chat-bubble { font-size: 18px; padding: 16px 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .select-grid { grid-template-columns: repeat(2, 1fr); }
+      .pest-grid { grid-template-columns: 1fr; }
+      .progress-step span { display: none; }
+      .progress-connector { width: 20px; margin: 0 4px; }
+      .time-slots { grid-template-columns: 1fr; }
+      .alt-plans-row { grid-template-columns: 1fr; }
+      .calc-trust { flex-direction: column; gap: 12px; }
+      .plan-rec-price { font-size: 40px; }
+      .btn-wizard { min-width: 160px; padding: 14px 24px; }
+    }
+  </style>
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxxxxxxxxxx&libraries=places&callback=initAutocomplete"></script>
+</head>
+<body>
+
+  <div class="wizard-shell">
+
+    <!-- TOP BAR -->
+    <header class="wizard-topbar">
+      <a href="/" class="wizard-logo">
+        <img src="forterra-logo.png" alt="Forterra Pest Control" height="36">
+      </a>
+      <a href="tel:8176656527" class="wizard-phone">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg>
+        (817) 665-6527
+      </a>
+    </header>
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-bar">
+      <div class="progress-steps">
+        <div class="progress-step active" data-phase="you"><div class="progress-dot">1</div><span>You</span></div>
+        <div class="progress-connector" data-connector="0"></div>
+        <div class="progress-step" data-phase="home"><div class="progress-dot">2</div><span>Home</span></div>
+        <div class="progress-connector" data-connector="1"></div>
+        <div class="progress-step" data-phase="plans"><div class="progress-dot">3</div><span>Plans</span></div>
+        <div class="progress-connector" data-connector="2"></div>
+        <div class="progress-step" data-phase="schedule"><div class="progress-dot">4</div><span>Schedule</span></div>
+      </div>
+    </div>
+
+    <!-- WIZARD BODY -->
+    <div class="wizard-body">
+
+      <!-- S0: Intro (Group A only — no plan pre-selected) -->
+      <div class="wizard-screen active" data-screen="intro" data-phase="you">
+        <div class="avatar-row">
+          <div class="avatar" style="width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--warm-beige);display:flex;align-items:center;justify-content:center"><img src="avatar-sarah-cropped.jpg" alt="Sarah, Forterra specialist" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+          <div class="chat-bubble">Hi there! I'm <strong>Sarah</strong>, your Forterra Pest Control specialist. Let's find the right plan to protect your home.<div class="chat-bubble-small">It takes about 2 minutes — and no commitment required.</div></div>
+        </div>
+        <div style="text-align:center;margin-top:var(--lg)">
+          <button class="btn-wizard btn-wizard-primary" onclick="wizGoTo('name')" style="min-width:200px">Let's Get Started <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/></svg></button>
+          <p style="font-family:var(--font-display);font-size:13px;color:var(--medium-grey);margin-top:12px">Already know what you need? <a href="tel:8176656527" style="color:var(--orange);text-decoration:underline;font-weight:500">Call us directly</a></p>
+        </div>
+      </div>
+
+      <!-- S1: Name -->
+      <div class="wizard-screen" data-screen="name" data-phase="you">
+        <div class="avatar-row">
+          <div class="avatar" style="width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--warm-beige);display:flex;align-items:center;justify-content:center"><img src="avatar-sarah-cropped.jpg" alt="Sarah, Forterra specialist" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+          <div class="chat-bubble">Great! Let's start with your name so we can personalize your quote.<div class="chat-bubble-small">It takes about 2 minutes.</div></div>
+        </div>
+        <div class="wizard-form">
+          <div class="form-row">
+            <div class="form-group"><label class="form-label" for="firstName">First Name</label><input class="form-input" type="text" id="firstName" placeholder="Jane" autocomplete="given-name"></div>
+            <div class="form-group"><label class="form-label" for="lastName">Last Name</label><input class="form-input" type="text" id="lastName" placeholder="Smith" autocomplete="family-name"></div>
+          </div>
+          <div class="btn-row"><button class="btn-wizard btn-wizard-primary" onclick="afterName()" id="nameNext" disabled>Let's Go <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/></svg></button></div>
+        </div>
+      </div>
+
+      <!-- S2: Address -->
+      <div class="wizard-screen" data-screen="address" data-phase="you">
+        <div class="avatar-row">
+          <div class="avatar" style="width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--warm-beige);display:flex;align-items:center;justify-content:center"><img src="avatar-sarah-cropped.jpg" alt="Sarah, Forterra specialist" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+          <div class="chat-bubble">Nice to meet you, <strong id="displayName">there</strong>! What's your home address?</div>
+        </div>
+        <div class="wizard-form">
+          <div class="form-group"><label class="form-label" for="address">Street Address</label><input class="form-input" type="text" id="address" placeholder="123 Main St, Dallas, TX" autocomplete="street-address"><div class="form-hint">We'll use this to size your property and check our service area.</div></div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label" for="city">City</label><input class="form-input" type="text" id="city" placeholder="Dallas" autocomplete="address-level2"></div>
+            <div class="form-group"><label class="form-label" for="zip">Zip Code</label><input class="form-input" type="text" id="zip" placeholder="75201" maxlength="5" autocomplete="postal-code"><div class="form-error" id="zipError">We don't currently service this area.</div></div>
+          </div>
+          <div class="btn-row btn-row-between">
+            <button class="btn-wizard btn-wizard-ghost" onclick="wizBack()"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg> Back</button>
+            <button class="btn-wizard btn-wizard-primary" onclick="validateAddress()" id="addressNext" disabled>Continue <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- S2b: Out of Service -->
+      <div class="wizard-screen" data-screen="oos" data-phase="you">
+        <div class="oos-screen">
+          <div class="oos-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#B91C1C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg></div>
+          <h2>We're Not in Your Area Yet</h2>
+          <p>Forterra currently serves the Dallas-Fort Worth metroplex. We'd love to let you know when we reach your zip code.</p>
+          <div class="wizard-form" style="margin-top:24px">
+            <div class="form-group"><label class="form-label" for="oosEmail">Your Email</label><input class="form-input" type="email" id="oosEmail" placeholder="jane@email.com"></div>
+            <div class="btn-row btn-row-center"><button class="btn-wizard btn-wizard-primary" onclick="alert('Thanks! We\'ll notify you.')">Notify Me</button></div>
+            <div class="btn-row btn-row-center" style="margin-top:8px"><button class="btn-wizard btn-wizard-ghost" onclick="wizGoTo('address')">Try Another Address</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S3: Property Type -->
+      <div class="wizard-screen" data-screen="property-type" data-phase="you">
+        <div class="avatar-row">
+          <div class="avatar" style="width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--warm-beige);display:flex;align-items:center;justify-content:center"><img src="avatar-sarah-cropped.jpg" alt="Sarah, Forterra specialist" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+          <div class="chat-bubble">What type of property is this?</div>
+        </div>
+        <div class="select-grid">
+          <div class="select-card" onclick="selectProperty('house')" data-value="house"><span class="select-card-icon"><svg viewBox="0 0 32 32" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4L4 14h3v12h8v-8h2v8h8V14h3L16 4z"/></svg></span><div class="select-card-label">House</div></div>
+          <div class="select-card" onclick="selectProperty('condo')" data-value="condo"><span class="select-card-icon"><svg viewBox="0 0 32 32" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="20" height="24" rx="2"/><path d="M11 9h3M18 9h3M11 14h3M18 14h3M11 19h3M18 19h3M13 28v-4h6v4"/></svg></span><div class="select-card-label">Condo / Co-op</div></div>
+          <div class="select-card" onclick="selectProperty('townhome')" data-value="townhome"><span class="select-card-icon"><svg viewBox="0 0 32 32" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6L3 13h2v13h10V13h2L10 6z"/><path d="M22 10l-5 5h2v11h8V15h2l-7-5z"/><path d="M8 26v-5h4v5M20 26v-5h4v5"/></svg></span><div class="select-card-label">Townhome</div></div>
+        </div>
+        <div class="btn-row" style="margin-top:24px">
+          <button class="btn-wizard btn-wizard-ghost" onclick="wizBack()"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg> Back</button>
+        </div>
+      </div>
+
+      <!-- S4: Property Confirm -->
+      <div class="wizard-screen" data-screen="property-confirm" data-phase="you">
+        <div class="avatar-row">
+          <div class="avatar" style="width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--warm-beige);display:flex;align-items:center;justify-content:center"><img src="avatar-sarah-cropped.jpg" alt="Sarah, Forterra specialist" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+          <div class="chat-bubble">Here's what we found. Does this look right?</div>
+        </div>
+        <div class="property-confirm-card">
+          <div class="property-map"><div class="property-map-pin"><div class="property-map-pin-inner"></div></div></div>
+          <div class="property-details">
+            <div class="property-detail-row"><span class="property-detail-label">Address</span><span class="property-detail-value" id="confirmAddress">123 Main St</span></div>
+            <div class="property-detail-row"><span class="property-detail-label">Property Type</span><span class="property-detail-value" id="confirmType">House</span></div>
+            <div class="property-detail-row">
+              <span class="property-detail-label">Approx. Sq Ft</span>
+              <span class="property-detail-value" id="confirmSFT" style="display:inline">2,400</span>
+              <input class="form-input" type="number" id="editSFT" style="display:none;width:120px;padding:6px 10px;font-size:14px" min="500" max="20000">
+              <button class="btn-edit-property" id="editSFTBtn" onclick="toggleEditField('SFT')" style="font-family:var(--font-display);font-size:12px;color:var(--orange);background:none;border:none;cursor:pointer;text-decoration:underline;margin-left:8px">Edit</button>
+            </div>
+            <div class="property-detail-row">
+              <span class="property-detail-label">Lot Size</span>
+              <span class="property-detail-value" id="confirmLot" style="display:inline">0.18 acres</span>
+              <input class="form-input" type="number" id="editLot" step="0.01" style="display:none;width:120px;padding:6px 10px;font-size:14px" min="0.01" max="10">
+              <button class="btn-edit-property" id="editLotBtn" onclick="toggleEditField('Lot')" style="font-family:var(--font-display);font-size:12px;color:var(--orange);background:none;border:none;cursor:pointer;text-decoration:underline;margin-left:8px">Edit</button>
+            </div>
+          </div>
+        </div>
+        <p style="font-family:var(--font-display);font-size:12px;color:var(--medium-grey);text-align:center;margin-top:8px">Something not right? Click "Edit" to update the values.</p>
+        <div class="btn-row btn-row-between" style="margin-top:16px">
+          <button class="btn-wizard btn-wizard-ghost" onclick="wizBack()"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg> Back</button>
+          <button class="btn-wizard btn-wizard-primary" onclick="confirmProperty()">Looks Good <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></button>
+        </div>
+      </div>
+
+      <!-- S5: Account -->
+      <div class="wizard-screen" data-screen="account" data-phase="you">
+        <div class="avatar-row">
+          <div class="avatar" style="width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--warm-beige);display:flex;align-items:center;justify-content:center"><img src="avatar-sarah-cropped.jpg" alt="Sarah, Forterra specialist" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+          <div class="chat-bubble">Great progress! Where should we send your personalized quote?</div>
+        </div>
+        <div class="wizard-form">
+          <div class="form-group"><label class="form-label" for="email">Email Address</label><input class="form-input" type="email" id="email" placeholder="jane@email.com" autocomplete="email"></div>
+          <div class="form-group"><label class="form-label" for="phone">Phone Number</label><input class="form-input" type="tel" id="phone" placeholder="(555) 123-4567" autocomplete="tel"></div>
+          <div style="display:flex;align-items:flex-start;gap:10px;margin-top:4px">
+            <input type="checkbox" id="termsCheck" style="margin-top:4px;accent-color:var(--orange)">
+            <label for="termsCheck" style="font-family:var(--font-display);font-size:13px;color:var(--dark-grey);line-height:1.4;cursor:pointer">I agree to the <a href="#" onclick="showTerms();return false" style="color:var(--orange);text-decoration:underline">Terms of Service</a> and Privacy Policy</label>
+          </div>
+          <div class="btn-row btn-row-between">
+            <button class="btn-wizard btn-wizard-ghost" onclick="wizBack()"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg> Back</button>
+            <button class="btn-wizard btn-wizard-primary" onclick="submitAccount()" id="accountNext" disabled>Continue <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- S6b: Specialty Pest Check (Group B only) -->
+      <div class="wizard-screen" data-screen="specialty-check" data-phase="home">
+        <div class="avatar-row">
+          <div class="avatar" style="width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--warm-beige);display:flex;align-items:center;justify-content:center"><img src="avatar-sarah-cropped.jpg" alt="Sarah, Forterra specialist" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+          <div class="chat-bubble">One quick check before your quote — are any of these a current concern?</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px">
+          <div class="specialty-option" onclick="toggleSpecialty(this)" data-specialty="termites">
+            <div class="specialty-check-box"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div>
+            <div class="specialty-info"><strong>Termites</strong><span>Active damage, swarmers, or mud tubes</span></div>
+          </div>
+          <div class="specialty-option" onclick="toggleSpecialty(this)" data-specialty="rodents">
+            <div class="specialty-check-box"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div>
+            <div class="specialty-info"><strong>Rodents inside the home</strong><span>Mice or rats getting indoors</span></div>
+          </div>
+          <div class="specialty-option" onclick="toggleSpecialty(this)" data-specialty="carpenter">
+            <div class="specialty-check-box"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div>
+            <div class="specialty-info"><strong>Wood-destroying insects</strong><span>Carpenter ants or wood beetles</span></div>
+          </div>
+        </div>
+        <div class="btn-row btn-row-between" style="margin-top:28px">
+          <button class="btn-wizard btn-wizard-ghost" onclick="wizBack()"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg> Back</button>
+          <button class="btn-wizard btn-wizard-primary" onclick="submitSpecialty()" id="specialtyNext">None of these &mdash; get my quote <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/></svg></button>
+        </div>
+      </div>
+
+      <!-- S6: Pest Selection -->
+      <div class="wizard-screen" data-screen="pests" data-phase="pests">
+        <div class="avatar-row">
+          <div class="avatar" style="width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--warm-beige);display:flex;align-items:center;justify-content:center"><img src="avatar-sarah-cropped.jpg" alt="Sarah, Forterra specialist" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+          <div class="chat-bubble">Now let's talk pests. What are you dealing with? <strong>Select all that apply.</strong></div>
+        </div>
+        <div class="pest-grid" id="pestGridPrimary">
+          <div class="pest-tile" onclick="togglePest(this)" data-pest="prevention"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l-8 8v10a2 2 0 002 2h12a2 2 0 002-2V10l-8-8z"/><path d="M9 15l2 2 4-4"/></svg></span><span class="pest-tile-text">Prevention Only</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
+          <div class="pest-tile" onclick="togglePest(this)" data-pest="general"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3"/><path d="M8 7H4M20 7h-4M7 14l-3 3M17 14l3 3M12 10v4M9 18h6"/><circle cx="12" cy="18" r="4"/></svg></span><span class="pest-tile-text">General Pests</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
+          <div class="pest-tile" onclick="togglePest(this)" data-pest="termites"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M6 8h12M6 14h12M10 2v6M14 8v6M10 14v8"/></svg></span><span class="pest-tile-text">Termites</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
+          <div class="pest-tile" onclick="togglePest(this)" data-pest="rodents"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="8" ry="6"/><path d="M6 10c-1-3 0-6 2-7M18 10c1-3 0-6-2-7"/><circle cx="9" cy="13" r="1" fill="#986D4F"/><circle cx="15" cy="13" r="1" fill="#986D4F"/><path d="M12 15v1M4 14c-2 1-3 3-2 4M20 14c2 1 3 3 2 4"/></svg></span><span class="pest-tile-text">Rodents</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
+          <div class="pest-tile" onclick="togglePest(this)" data-pest="ants"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"/><ellipse cx="12" cy="14" rx="4" ry="3"/><ellipse cx="12" cy="20" rx="3" ry="2"/><path d="M7 8L4 5M17 8l3-3M7 14L3 16M17 14l4 2M8 19L5 22M16 19l3 3"/></svg></span><span class="pest-tile-text">Ants</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
+          <div class="pest-tile" onclick="togglePest(this)" data-pest="mosquitoes"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="16" r="4"/><path d="M12 12V5M12 5l-3-3M12 5l3-3"/><path d="M7 14L3 11M17 14l4-3M8 19l-3 3M16 19l3 3"/></svg></span><span class="pest-tile-text">Mosquitoes</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
+          <div class="pest-tile" onclick="togglePest(this)" data-pest="bees"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="6" ry="7"/><path d="M6 11h12M6 14h12M6 17h12"/><circle cx="12" cy="5" r="3"/><path d="M6 5L3 2M18 5l3-3"/></svg></span><span class="pest-tile-text">Bees / Wasps</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
+          <div class="pest-tile" onclick="togglePest(this)" data-pest="notsure"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 9a3 3 0 115 2c0 2-2 2-2 4"/><circle cx="12" cy="18" r="0.5" fill="#986D4F"/></svg></span><span class="pest-tile-text">I'm Not Sure</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
+        </div>
+        <button class="see-more-btn" id="seeMoreBtn" onclick="toggleSeeMore()">See More Pests <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4.22 6.22a.75.75 0 011.06 0L8 8.94l2.72-2.72a.75.75 0 011.06 1.06l-3.25 3.25a.75.75 0 01-1.06 0L4.22 7.28a.75.75 0 010-1.06z"/></svg></button>
+        <div class="pest-grid pest-grid-expanded" id="pestGridExpanded">
+          <div class="pest-tile" onclick="togglePest(this)" data-pest="cockroaches"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="8" rx="4" ry="3"/><ellipse cx="12" cy="16" rx="5" ry="6"/><path d="M12 11v1M7 6L4 3M17 6l3-3M6 13L3 11M18 13l3-2M7 19L4 22M17 19l3 3"/></svg></span><span class="pest-tile-text">Cockroaches</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
+          <div class="pest-tile" onclick="togglePest(this)" data-pest="fleas"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="5" ry="6"/><circle cx="12" cy="6" r="3"/><path d="M9 3l-2-1M15 3l2-1M7 11L4 9M17 11l3-2M8 18l-3 2M16 18l3 2"/></svg></span><span class="pest-tile-text">Fleas / Ticks</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
+          <div class="pest-tile" onclick="togglePest(this)" data-pest="spiders"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="4"/><circle cx="12" cy="17" r="3"/><path d="M8 8L4 4M16 8l4-4M8 12L3 14M16 12l5 2M9 18L5 22M15 18l4 4M8 15L4 17M16 15l4 2"/></svg></span><span class="pest-tile-text">Spiders</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
+          <div class="pest-tile" onclick="togglePest(this)" data-pest="scorpions"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-4"/><ellipse cx="12" cy="16" rx="4" ry="3"/><path d="M8 14l-3 2M16 14l3 2"/><path d="M12 13V8c0-2 2-4 4-4h1c0 2-1 3-2 4l-3 3"/><path d="M10 7l-3-1M14 7l3-1"/></svg></span><span class="pest-tile-text">Scorpions</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
+          <div class="pest-tile" onclick="togglePest(this)" data-pest="bedbugs"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="6" ry="5"/><path d="M9 9h6"/><ellipse cx="12" cy="7" rx="3" ry="2"/><path d="M6 12H3M18 12h3M6 16H3M18 16h3M8 19l-2 2M16 19l2 2"/></svg></span><span class="pest-tile-text">Bed Bugs</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
+          <div class="pest-tile" onclick="togglePest(this)" data-pest="crickets"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="5" ry="6"/><circle cx="12" cy="6" r="3"/><path d="M9 4L7 2M15 4l2-2"/><path d="M7 12L3 9M17 12l4-3M8 19l-3 4M16 19l3 4"/></svg></span><span class="pest-tile-text">Crickets</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
+        </div>
+        <div class="btn-row btn-row-between" style="margin-top:24px">
+          <button class="btn-wizard btn-wizard-ghost" onclick="wizBack()"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg> Back</button>
+          <button class="btn-wizard btn-wizard-primary" onclick="submitPests()" id="pestNext" disabled>Continue <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/></svg></button>
+        </div>
+      </div>
+
+      <!-- S7: Pest Follow-ups -->
+      <div class="wizard-screen" data-screen="pest-followups" data-phase="pests">
+        <div class="avatar-row">
+          <div class="avatar" style="width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--warm-beige);display:flex;align-items:center;justify-content:center"><img src="avatar-sarah-cropped.jpg" alt="Sarah, Forterra specialist" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+          <div class="chat-bubble">A few quick follow-up questions to get your quote right.</div>
+        </div>
+        <div id="followupContainer"></div>
+        <div class="btn-row btn-row-between" style="margin-top:24px">
+          <button class="btn-wizard btn-wizard-ghost" onclick="wizBack()"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg> Back</button>
+          <button class="btn-wizard btn-wizard-primary" onclick="submitFollowups()" id="followupNext">Continue <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/></svg></button>
+        </div>
+      </div>
+
+      <!-- S8: Transition -->
+      <div class="wizard-screen" data-screen="transition" data-phase="pests">
+        <div class="transition-screen">
+          <div class="transition-animation"><div class="transition-circle"></div><div class="transition-house"><svg width="40" height="40" viewBox="0 0 32 32" fill="none"><path d="M16 3L4 13h3v13h6v-7h6v7h6V13h3L16 3z" fill="#F77D00"/></svg></div></div>
+          <h2>Measuring your home...</h2>
+          <p>We're pulling property data for the most accurate quote.</p>
+          <div class="calc-trust">
+            <div class="calc-trust-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a3.5 3.5 0 00-3.5 3.5V6h-.25A1.75 1.75 0 002.5 7.75v5.5c0 .966.784 1.75 1.75 1.75h7.5A1.75 1.75 0 0013.5 13.25v-5.5A1.75 1.75 0 0011.75 6h-.25V4.5A3.5 3.5 0 008 1zm2 5V4.5a2 2 0 10-4 0V6h4z"/></svg> 256-bit encrypted</div>
+            <div class="calc-trust-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg> 18+ years experience</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S9: Calculating -->
+      <div class="wizard-screen" data-screen="calculating" data-phase="plans">
+        <div class="calculating-screen">
+          <h2 class="calculating-title">Calculating your price...</h2>
+          <p class="calculating-subtitle">Hang tight, this only takes a moment.</p>
+          <ul class="calc-checklist" id="calcChecklist">
+            <li><div class="calc-check"><svg width="14" height="14" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><div class="calc-spinner"></div>Analyzing property data</li>
+            <li><div class="calc-check"><svg width="14" height="14" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><div class="calc-spinner"></div>Matching pest treatments</li>
+            <li><div class="calc-check"><svg width="14" height="14" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><div class="calc-spinner"></div>Building coverage plan</li>
+            <li><div class="calc-check"><svg width="14" height="14" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><div class="calc-spinner"></div>Finalizing your price</li>
+          </ul>
+          <div class="calc-trust"><div class="calc-trust-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg> Money-back guarantee</div><div class="calc-trust-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg> No contracts required</div></div>
+        </div>
+      </div>
+
+      <!-- S10: Plan Recommendation -->
+      <div class="wizard-screen" data-screen="plan" data-phase="plans">
+        <div class="plan-rec">
+          <div class="plan-rec-header"><h2>Your Recommended Plan</h2><p>Based on your home and pest concerns</p></div>
+          <div class="billing-toggle">
+            <span class="billing-label active" id="billingMonthlyLabel">Monthly</span>
+            <button class="billing-switch" id="billingSwitch" onclick="toggleBilling()" aria-label="Toggle annual billing"><span class="billing-switch-dot"></span></button>
+            <span class="billing-label" id="billingAnnualLabel">Annual</span>
+            <span class="billing-save">Save 5%</span>
+          </div>
+          <div class="plan-rec-card">
+            <div class="plan-rec-badge">Recommended for You</div>
+            <div class="plan-rec-body">
+              <p class="plan-rec-name" id="recPlanName">STANDARD</p>
+              <h3 class="plan-rec-title" id="recPlanTitle">Pests + Termite Watch</h3>
+              <p class="plan-rec-desc" id="recPlanDesc">Best for people who want to stay on top of common pests and keep an eye on termites.</p>
+              <div class="plan-rec-price-row">
+                <span style="font-family:var(--font-display);font-weight:600;font-size:20px;color:var(--soil)">$</span>
+                <span class="plan-rec-price" id="recPrice">59</span>
+                <span class="plan-rec-period" id="recPeriod">/month</span>
+              </div>
+              <p class="plan-rec-initial">Initial service: <strong id="recInitial">$149</strong> (one-time)</p>
+              <ul class="plan-rec-features" id="recFeatures"></ul>
+              <p class="plan-addons-title">Available Add-ons</p>
+              <div id="addonsContainer">
+                <div class="plan-addon-item" onclick="toggleAddon(this)" data-addon="mosquito" data-price="52"><div class="plan-addon-left"><div class="plan-addon-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><span class="plan-addon-name">Mosquito Protection</span></div><span class="plan-addon-price">+$52/mo</span></div>
+                <div class="plan-addon-item" onclick="toggleAddon(this)" data-addon="rodent" data-price="0"><div class="plan-addon-left"><div class="plan-addon-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><span class="plan-addon-name">Rodent Exclusion Inspection</span></div><span class="plan-addon-price">FREE</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="alt-plans"><p class="alt-plans-label">Or choose a different plan</p><div class="alt-plans-row" id="altPlansRow"></div></div>
+          <div class="btn-row btn-row-between" style="margin-top:32px">
+            <button class="btn-wizard btn-wizard-ghost" onclick="wizBack()"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg> Back</button>
+            <button class="btn-wizard btn-wizard-primary" onclick="wizGoTo('schedule')" style="min-width:280px">Choose Plan &amp; Schedule <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- S11: Schedule -->
+      <div class="wizard-screen" data-screen="schedule" data-phase="schedule">
+        <div class="schedule-screen">
+          <div class="schedule-header"><h2>Schedule Your First Service</h2><p>Pick a date and time that works for you</p></div>
+          <div class="scarcity-banner"><svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm.75 4.75a.75.75 0 00-1.5 0v3.5c0 .199.079.39.22.53l2 2a.75.75 0 101.06-1.06l-1.78-1.78V6.75z"/></svg> High demand in your area &mdash; only <strong>&nbsp;3 slots left&nbsp;</strong> this week</div>
+          <div class="calendar-mock">
+            <div class="calendar-nav">
+              <button class="calendar-arrow" onclick="changeMonth(-1)"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg></button>
+              <span class="calendar-month" id="calendarMonth">March 2026</span>
+              <button class="calendar-arrow" onclick="changeMonth(1)"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/></svg></button>
+            </div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+          </div>
+          <div id="timeSlotsSection" style="display:none;margin-top:20px">
+            <p class="form-label" style="margin-bottom:12px">Select a time</p>
+            <div class="time-slots">
+              <div class="time-slot" onclick="selectTime(this)" data-time="am">Morning (8am &ndash; 12pm)<div class="time-slot-note">Most popular</div></div>
+              <div class="time-slot" onclick="selectTime(this)" data-time="pm">Afternoon (12pm &ndash; 5pm)</div>
+            </div>
+          </div>
+          <div class="btn-row btn-row-between" style="margin-top:32px">
+            <button class="btn-wizard btn-wizard-ghost" onclick="wizBack()"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg> Back</button>
+            <button class="btn-wizard btn-wizard-primary" onclick="confirmSchedule()" id="scheduleNext" disabled>Confirm Booking <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- S12: Confirmation -->
+      <div class="wizard-screen" data-screen="confirmation" data-phase="schedule">
+        <div class="confirmation-screen">
+          <div class="confirm-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#047857" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <h2>You're All Set!</h2>
+          <p>Your first service has been booked. We'll send a confirmation to your email.</p>
+          <div class="confirm-summary">
+            <div class="confirm-summary-row"><span class="confirm-summary-label">Plan</span><span class="confirm-summary-value" id="confirmPlan">Standard &mdash; $59/mo</span></div>
+            <div class="confirm-summary-row" id="confirmAddonsRow" style="display:none"><span class="confirm-summary-label">Add-ons</span><span class="confirm-summary-value" id="confirmAddons"></span></div>
+            <div class="confirm-summary-row"><span class="confirm-summary-label">First Service</span><span class="confirm-summary-value" id="confirmDate">March 5, 2026</span></div>
+            <div class="confirm-summary-row"><span class="confirm-summary-label">Time Window</span><span class="confirm-summary-value" id="confirmTime">Morning</span></div>
+            <div class="confirm-summary-row"><span class="confirm-summary-label">Address</span><span class="confirm-summary-value" id="confirmAddr2">123 Main St</span></div>
+            <div class="confirm-summary-row"><span class="confirm-summary-label">Initial Service</span><span class="confirm-summary-value" id="confirmInitialFee">$149</span></div>
+          </div>
+          <div class="btn-row btn-row-center"><a href="tel:8176656527" class="btn-wizard btn-wizard-secondary">Questions? Call Us</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- EXIT INTENT -->
+  <div class="exit-overlay" id="exitOverlay">
+    <div class="exit-popup">
+      <button class="exit-close" onclick="closeExitPopup()"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"/></svg></button>
+      <div class="exit-badge">Neighbor Discount</div>
+      <h3>We&rsquo;re already in your area</h3>
+      <p>We can add you to an existing route &mdash; saving us time and you money.</p>
+      <div class="exit-discount">$30 OFF</div>
+      <p class="exit-discount-label">your initial service</p>
+      <button class="btn-wizard btn-wizard-primary" onclick="applyExitDiscount()" style="width:100%">Claim $30 Off</button>
+      <button class="btn-wizard btn-wizard-ghost" onclick="closeExitPopup()" style="width:100%;margin-top:8px">No thanks</button>
+    </div>
+  </div>
+
+  <!-- TERMS MODAL -->
+  <div class="modal-overlay" id="termsModal">
+    <div class="modal-content">
+      <h3>Terms of Service</h3>
+      <p>By using Forterra Pest Control's online quoting tool, you agree to the following. Your quote is an estimate based on the information you provide and may be adjusted after an on-site inspection.</p>
+      <p>Services are provided on a recurring basis as described in your selected plan. You may cancel any time with 30 days written notice. Our money-back guarantee applies to your initial service.</p>
+      <div class="btn-row btn-row-center" style="margin-top:24px"><button class="btn-wizard btn-wizard-primary" onclick="closeTerms()">I Understand</button></div>
+    </div>
+  </div>
+
+  <script>
+    // ==========================================
+    // STATE
+    // ==========================================
+    const S = {
+      screen: 'intro', hist: [], groupB: false,
+      firstName: '', lastName: '', address: '', city: '', zip: '',
+      propertyType: '', sft: 0, lotSize: 0, lotAcres: 0,
+      email: '', phone: '',
+      pests: [], followups: {}, priceAdj: 0,
+      plan: 'standard', addons: [], specialties: [],
+      date: null, time: null,
+      rodentInspection: false, customQuote: false,
+      exitShown: false, exitApplied: false,
+      billing: 'monthly',
+      calMo: new Date().getMonth(), calYr: new Date().getFullYear(),
+      ghlContactCreated: false
+    };
+
+    // ==========================================
+    // SIZE-BAND PRICING
+    // ==========================================
+    const PRICE_BANDS = {
+      basic:    [{max:3000,mo:49,init:49},{max:5000,mo:59,init:59},{max:7000,mo:69,init:69}],
+      standard: [{max:3000,mo:59,init:99},{max:5000,mo:69,init:109},{max:7000,mo:79,init:119}],
+      premium:  [{max:3000,mo:69,init:369},{max:5000,mo:79,init:379},{max:7000,mo:89,init:389}],
+      sentricon:[{max:3000,mo:29,init:369},{max:5000,mo:31,init:379},{max:7000,mo:33,init:389}]
+    };
+    const MOSQUITO_BANDS = [
+      {max:0.25,mo:52,srvc:89},{max:0.50,mo:64,srvc:109},{max:0.75,mo:81,srvc:139},{max:1.0,mo:93,srvc:159}
+    ];
+    const ADDON_PRICES = {
+      fleas: 100, german_roaches: 200, carpenter_ants: 100,
+      no_contract: 200, extra_bait_box: 30, termite_spot: 400, termite_spot_add: 200
+    };
+
+    function getPricing(planKey, sqft) {
+      const bands = PRICE_BANDS[planKey];
+      if (!bands) return null;
+      for (const b of bands) { if (sqft <= b.max) return b; }
+      return null; // 7000+ = custom quote
+    }
+    function getMosquitoPricing(lotAcres) {
+      for (const b of MOSQUITO_BANDS) { if (lotAcres <= b.max) return b; }
+      return null; // >1 acre = custom quote
+    }
+    function annualPrice(monthly) { return Math.round(monthly * 0.95); }
+
+    const ZIPS = ['75001','75002','75006','75007','75010','75013','75019','75023','75024','75025','75028','75034','75035','75038','75039','75040','75041','75042','75043','75044','75048','75050','75051','75052','75054','75056','75057','75060','75061','75062','75063','75065','75067','75068','75069','75070','75071','75074','75075','75077','75078','75080','75081','75082','75083','75087','75088','75089','75093','75094','75098','75104','75115','75116','75119','75125','75126','75134','75137','75141','75142','75143','75146','75149','75150','75152','75154','75159','75160','75166','75167','75172','75180','75181','75182','75189','75201','75202','75203','75204','75205','75206','75207','75208','75209','75210','75211','75212','75214','75215','75216','75217','75218','75219','75220','75223','75224','75225','75226','75227','75228','75229','75230','75231','75232','75233','75234','75235','75236','75237','75238','75240','75241','75243','75244','75246','75247','75248','75249','75251','75252','75253','75254','76001','76002','76006','76010','76011','76012','76013','76014','76015','76016','76017','76018','76021','76022','76028','76034','76039','76040','76051','76052','76053','76054','76063','76092','76102','76103','76104','76105','76106','76107','76108','76109','76110','76111','76112','76114','76115','76116','76117','76118','76119','76120','76123','76126','76127','76131','76132','76133','76134','76135','76137','76140','76148','76155','76164','76177','76179','76180','76182','76244','76248','76262'];
+
+    const PHASES = ['you','home','plans','schedule'];
+    const SCR_PHASE = {intro:'you',name:'you',pests:'you','pest-followups':'you',address:'home',oos:'home','property-type':'home','property-confirm':'home',account:'home','specialty-check':'home',transition:'plans',calculating:'plans',plan:'plans',schedule:'schedule',confirmation:'schedule'};
+
+    const PLAN_TEMPLATES = {
+      basic:    {name:'BASIC',    title:'Broad Coverage',      desc:'Best for people who want broad coverage at a reasonable cost.', feat:['Quarterly Exterior Treatments','Interior Treatments (when needed)','Coverage for 50+ pests','Zero-Gap System\u2122','Exterior Rodent Protection','Money-back guarantee','Free re-services','Family & Pet Safe Treatments']},
+      standard: {name:'STANDARD', title:'Pests + Termite Watch',desc:'Best for people who want to stay on top of common pests and keep an eye on termites.', feat:['Quarterly Exterior Treatments','Interior Treatments (when needed)','Coverage for 50+ pests','Zero-Gap System\u2122','Exterior Rodent Protection','Money-back guarantee','Free re-services','Family & Pet Safe Treatments','Termite Monitoring System']},
+      premium:  {name:'PREMIUM',  title:'Total Home Defense',   desc:'Best for those who want to protect their home against termites and bugs.', feat:['Quarterly Exterior Treatments','Interior Treatments (when needed)','Coverage for 50+ pests','Zero-Gap System\u2122','Exterior Rodent Protection','Money-back guarantee','Free re-services','Family & Pet Safe Treatments','Termite Monitoring System','Sentricon\u00AE Baiting System','Full home termite warranty']},
+      mosquito: {name:'MOSQUITO SERVICE', title:'Seasonal Yard Protection', desc:'Targeted mosquito, flea & tick control for your outdoor spaces.', feat:['Mosquito, Flea & Tick Control (exterior)','7 Seasonal Services per year','Mosquito Bait Box Management','Zero-Gap System\u2122','Free re-services','Money-back guarantee']},
+      sentricon:{name:'SENTRICON\u00AE', title:'Termite-Only Shield', desc:'Standalone termite protection with Sentricon baiting system.', feat:['Termite Monitoring System','Sentricon\u00AE Baiting System','Full home termite warranty','Money-back guarantee','Free re-services','Family & Pet Safe Treatments']}
+    };
+
+    // Build dynamic PLANS object based on sqft/lot
+    function buildPlans() {
+      const sqft = S.sft || 2000;
+      const lotAcres = S.lotAcres || 0.18;
+      const plans = {};
+      ['basic','standard','premium','sentricon'].forEach(k => {
+        const band = getPricing(k, sqft);
+        const t = PLAN_TEMPLATES[k];
+        if (band) {
+          plans[k] = {...t, price: band.mo, annual: annualPrice(band.mo), init: band.init};
+        } else {
+          plans[k] = {...t, price: 0, annual: 0, init: 0, customQuote: true};
+        }
+      });
+      // Mosquito
+      const mq = getMosquitoPricing(lotAcres);
+      const mt = PLAN_TEMPLATES.mosquito;
+      if (mq) {
+        plans.mosquito = {...mt, price: mq.mo, annual: annualPrice(mq.mo), init: 0};
+      } else {
+        plans.mosquito = {...mt, price: 0, annual: 0, init: 0, customQuote: true};
+      }
+      return plans;
+    }
+    // Backward compat
+    let PLANS = buildPlans();
+
+    const CHK = '<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>';
+
+    // ==========================================
+    // NAV
+    // ==========================================
+    function wizGoTo(scr) {
+      if (S.screen === 'name') { S.firstName = $('firstName').value.trim(); S.lastName = $('lastName').value.trim(); }
+      if (S.screen !== scr) S.hist.push(S.screen);
+      S.screen = scr;
+      showScr(scr);
+    }
+    function wizBack() { if (S.hist.length) { S.screen = S.hist.pop(); showScr(S.screen); } }
+
+    function showScr(scr) {
+      document.querySelectorAll('.wizard-screen').forEach(s => s.classList.remove('active'));
+      const el = document.querySelector(`[data-screen="${scr}"]`);
+      if (el) { void el.offsetWidth; el.classList.add('active'); }
+      updateProg(scr);
+      if (scr === 'address') $('displayName').textContent = S.firstName || 'there';
+      if (scr === 'transition') setTimeout(() => wizGoTo('calculating'), 2500);
+      if (scr === 'calculating') runCalc();
+      if (scr === 'schedule') renderCal();
+      // Pre-select pests from pricing page category (Group A only, if they revisit pests)
+      if (scr === 'pests' && S.preselectedCategory) {
+        const pests = CATEGORY_PESTS[S.preselectedCategory] || [];
+        pests.forEach(p => {
+          const tile = document.querySelector(`.pest-tile[data-pest="${p}"]`);
+          if (tile && !tile.classList.contains('selected')) tile.classList.add('selected');
+        });
+        updPests();
+      }
+    }
+
+    function updateProg(scr) {
+      const ph = SCR_PHASE[scr] || 'you';
+      const idx = PHASES.indexOf(ph);
+      document.querySelectorAll('.progress-step').forEach((s,i) => { s.classList.remove('active','completed'); if (i<idx) s.classList.add('completed'); else if (i===idx) s.classList.add('active'); });
+      document.querySelectorAll('.progress-connector').forEach((c,i) => { c.classList.remove('active','completed'); if (i<idx) c.classList.add('completed'); else if (i===idx) c.classList.add('active'); });
+    }
+
+    function $(id) { return document.getElementById(id); }
+
+    // ==========================================
+    // S1: NAME
+    // ==========================================
+    $('firstName').addEventListener('input', chkName);
+    $('lastName').addEventListener('input', chkName);
+    function chkName() { $('nameNext').disabled = !($('firstName').value.trim() && $('lastName').value.trim()); }
+    function afterName() { wizGoTo(S.groupB ? 'address' : 'pests'); }
+    [$('firstName'),$('lastName')].forEach(i => i.addEventListener('keydown', e => { if (e.key==='Enter' && !$('nameNext').disabled) afterName(); }));
+
+    // ==========================================
+    // S2: ADDRESS
+    // ==========================================
+    [$('address'),$('city'),$('zip')].forEach(i => i.addEventListener('input', () => {
+      $('addressNext').disabled = !($('address').value.trim() && $('city').value.trim() && $('zip').value.trim().length===5);
+    }));
+
+    async function validateAddress() {
+      S.address = $('address').value.trim();
+      S.city = $('city').value.trim();
+      S.zip = $('zip').value.trim();
+      if (!ZIPS.includes(S.zip)) { $('zipError').classList.add('visible'); setTimeout(() => wizGoTo('oos'), 800); return; }
+      $('zipError').classList.remove('visible');
+
+      // Show transition screen while fetching
+      wizGoTo('transition');
+
+      try {
+        const resp = await fetch('/api/rentcast', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({address: S.address, city: S.city, state: 'TX', zip: S.zip})
+        });
+        const data = await resp.json();
+        if (data.success && data.sqft) {
+          S.sft = data.sqft;
+          // Rentcast returns lotSize in sqft, convert to acres
+          S.lotSize = data.lotSize ? (data.lotSize / 43560).toFixed(2) : '0.18';
+          S.lotAcres = parseFloat(S.lotSize);
+          S.propertyType = data.propertyType || 'Single Family';
+        } else {
+          // Fallback: let user enter manually
+          S.sft = 0;
+          S.lotSize = '0.18';
+          S.lotAcres = 0.18;
+          S.propertyType = 'Single Family';
+        }
+      } catch (err) {
+        console.error('Rentcast error:', err);
+        S.sft = 0;
+        S.lotSize = '0.18';
+        S.lotAcres = 0.18;
+        S.propertyType = 'Single Family';
+      }
+
+      // Rebuild pricing with new sqft
+      PLANS = buildPlans();
+
+      $('confirmAddress').textContent = `${S.address}, ${S.city}`;
+      $('confirmType').textContent = S.propertyType || 'Single Family';
+      if (S.sft > 0) {
+        $('confirmSFT').textContent = S.sft.toLocaleString();
+      } else {
+        // Show edit mode for sqft if API failed
+        $('confirmSFT').textContent = 'Enter below';
+        setTimeout(() => toggleEditField('SFT'), 100);
+      }
+      $('confirmLot').textContent = S.lotSize + ' acres';
+
+      // Check if property exceeds limits
+      if (S.sft >= 7000 || S.lotAcres > 1.0) {
+        S.customQuote = true;
+      }
+
+      // Go to property confirm (skip property-type since Rentcast tells us)
+      S.hist.pop(); // remove transition from history
+      wizGoTo('property-confirm');
+    }
+
+    // ==========================================
+    // S3: PROPERTY TYPE
+    // ==========================================
+    function selectProperty(t) {
+      S.propertyType = t;
+      document.querySelectorAll('[data-screen="property-type"] .select-card').forEach(c => c.classList.remove('selected'));
+      document.querySelector(`[data-value="${t}"]`).classList.add('selected');
+      $('confirmAddress').textContent = `${S.address}, ${S.city}`;
+      $('confirmType').textContent = t.charAt(0).toUpperCase()+t.slice(1);
+      $('confirmSFT').textContent = S.sft.toLocaleString();
+      $('confirmLot').textContent = `${S.lotSize} acres`;
+      setTimeout(() => wizGoTo(S.sft > 7000 ? 'account' : 'property-confirm'), 300);
+    }
+
+    // ==========================================
+    // S4b: PROPERTY CONFIRM — EDIT FIELDS
+    // ==========================================
+    function toggleEditField(field) {
+      const valEl = $('confirm'+field);
+      const inputEl = $('edit'+field);
+      const btnEl = $('edit'+field+'Btn');
+      if (inputEl.style.display === 'none') {
+        // Show input, hide value
+        inputEl.value = field === 'SFT' ? S.sft : S.lotSize;
+        inputEl.style.display = 'inline-block';
+        valEl.style.display = 'none';
+        btnEl.textContent = 'Save';
+        inputEl.focus();
+      } else {
+        // Save and hide input
+        const newVal = parseFloat(inputEl.value);
+        if (field === 'SFT' && newVal >= 500 && newVal <= 20000) {
+          S.sft = Math.round(newVal);
+          valEl.textContent = S.sft.toLocaleString();
+        } else if (field === 'Lot' && newVal >= 0.01 && newVal <= 10) {
+          S.lotSize = newVal.toFixed(2);
+          valEl.textContent = S.lotSize + ' acres';
+        }
+        inputEl.style.display = 'none';
+        valEl.style.display = 'inline';
+        btnEl.textContent = 'Edit';
+      }
+    }
+    function confirmProperty() {
+      // Close any open edit fields first
+      ['SFT','Lot'].forEach(f => {
+        if ($('edit'+f).style.display !== 'none') toggleEditField(f);
+      });
+      S.lotAcres = parseFloat(S.lotSize) || 0.18;
+      // Rebuild pricing with confirmed sqft
+      PLANS = buildPlans();
+      // Check custom quote threshold
+      if (S.sft >= 7000 || S.lotAcres > 1.0) {
+        S.customQuote = true;
+      }
+      wizGoTo('account');
+    }
+
+    // ==========================================
+    // S5: ACCOUNT
+    // ==========================================
+    [$('email'),$('phone')].forEach(i => i.addEventListener('input', chkAcct));
+    $('termsCheck').addEventListener('change', chkAcct);
+    function chkAcct() {
+      const eOk = $('email').value.includes('@') && $('email').value.includes('.');
+      const pOk = $('phone').value.replace(/\D/g,'').length >= 10;
+      $('accountNext').disabled = !(eOk && pOk && $('termsCheck').checked);
+    }
+    $('phone').addEventListener('input', function() {
+      let v = this.value.replace(/\D/g,'');
+      if (v.length>10) v=v.slice(0,10);
+      if (v.length>=6) this.value=`(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`;
+      else if (v.length>=3) this.value=`(${v.slice(0,3)}) ${v.slice(3)}`;
+    });
+    function submitAccount() {
+      S.email=$('email').value.trim(); S.phone=$('phone').value.trim();
+
+      // Fire partial GHL lead (quote started, may not complete)
+      fireGHLLead(true);
+
+      if (S.groupB) {
+        if (S.preselectedCategory === 'mosquitoes') { wizGoTo('transition'); }
+        else { wizGoTo('specialty-check'); }
+      }
+      else {
+        calcPlan();
+        if (S.followups.rodent === 'inside') { S.rodentInspection = true; wizGoTo('schedule'); }
+        else { wizGoTo('transition'); }
+      }
+    }
+
+    // ==========================================
+    // GHL LEAD SUBMISSION
+    // ==========================================
+    async function fireGHLLead(partial = false) {
+      try {
+        const body = {
+          firstName: S.firstName, lastName: S.lastName,
+          email: S.email, phone: S.phone,
+          address: S.address, city: S.city, zip: S.zip,
+          sqft: S.sft, lotSize: S.lotAcres,
+          propertyType: S.propertyType,
+          plan: S.plan, pests: S.pests, addons: S.addons,
+          billing: S.billing, partial: partial,
+          rodentInspection: S.rodentInspection,
+          customQuote: S.customQuote,
+          specialties: S.specialties
+        };
+        if (!partial && S.date) {
+          const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+          body.preferredDate = `${S.date.getFullYear()}-${String(S.date.getMonth()+1).padStart(2,'0')}-${String(S.date.getDate()).padStart(2,'0')}`;
+          body.preferredTime = S.time === 'am' ? 'Morning' : 'Afternoon';
+        }
+        await fetch('/api/ghl-lead', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(body)
+        });
+        S.ghlContactCreated = true;
+      } catch (err) {
+        console.error('GHL lead error:', err);
+      }
+    }
+    function showTerms() { $('termsModal').classList.add('visible'); }
+    function closeTerms() { $('termsModal').classList.remove('visible'); }
+
+    // ==========================================
+    // S6: PESTS
+    // ==========================================
+    function togglePest(el) { el.classList.toggle('selected'); updPests(); }
+    function updPests() {
+      S.pests = []; document.querySelectorAll('.pest-tile.selected').forEach(t => S.pests.push(t.dataset.pest));
+      $('pestNext').disabled = S.pests.length===0;
+    }
+    function toggleSeeMore() {
+      const ex = $('pestGridExpanded'), btn = $('seeMoreBtn');
+      if (ex.classList.contains('visible')) { ex.classList.remove('visible'); btn.innerHTML='See More Pests <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4.22 6.22a.75.75 0 011.06 0L8 8.94l2.72-2.72a.75.75 0 011.06 1.06l-3.25 3.25a.75.75 0 01-1.06 0L4.22 7.28a.75.75 0 010-1.06z"/></svg>'; }
+      else { ex.classList.add('visible'); btn.innerHTML='Show Less <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M11.78 9.78a.75.75 0 01-1.06 0L8 7.06 5.28 9.78a.75.75 0 01-1.06-1.06l3.25-3.25a.75.75 0 011.06 0l3.25 3.25a.75.75 0 010 1.06z"/></svg>'; }
+    }
+    function submitPests() {
+      const fq = buildFQ();
+      if (fq.length) { renderFQ(fq); wizGoTo('pest-followups'); }
+      else { wizGoTo('address'); }
+    }
+
+    // ==========================================
+    // S7: FOLLOW-UPS
+    // ==========================================
+    function buildFQ() {
+      const q=[], p=S.pests;
+      // Keep follow-ups focused on plan-changing / inspection-needed pests only
+      if (p.includes('prevention')) q.push({id:'prev',q:'Which pests would you like protection against?',opts:[{l:'General pests (ants, spiders, roaches)',v:'general'},{l:'Termites',v:'termites'},{l:'All of the above',v:'all'}]});
+      if (p.includes('termites')) q.push({id:'termite',q:'Do you suspect an active termite infestation?',opts:[{l:'Yes, I see signs of damage or swarmers',v:'yes',n:'Active treatment may require an on-site inspection'},{l:'No, just want prevention',v:'no'},{l:"Not sure \u2014 I'd like an inspection",v:'inspect'}]});
+      if (p.includes('rodents')) q.push({id:'rodent',q:'Are the rodents getting inside your home?',opts:[{l:'Yes, I hear or see them inside',v:'inside',n:"We'll schedule a free on-site inspection"},{l:'No, just outside / in the yard',v:'outside'}]});
+      if (p.includes('notsure')) q.push({id:'notsure',q:"No worries! How would you like to proceed?",opts:[{l:'Schedule a free inspection',v:'inspect'},{l:'Start with general prevention',v:'prevention'},{l:"I'd like to talk to someone first",v:'call'}]});
+      return q;
+    }
+    // Conversational Q&A: show one question at a time
+    let fqList = [];
+    let fqIndex = 0;
+
+    function renderFQ(qs) {
+      fqList = qs;
+      fqIndex = 0;
+      showCurrentFQ();
+    }
+    function showCurrentFQ() {
+      const c = $('followupContainer'); c.innerHTML = '';
+      if (fqIndex >= fqList.length) { submitFollowups(); return; }
+      const q = fqList[fqIndex];
+      const progress = `<p style="font-family:var(--font-display);font-size:12px;color:var(--medium-grey);margin-bottom:12px;text-align:center">Question ${fqIndex+1} of ${fqList.length}</p>`;
+      const d = document.createElement('div'); d.className='followup-card';
+      d.style.animation = 'screenFadeIn 0.4s ease';
+      d.innerHTML = `${progress}<p class="followup-question">${q.q}</p><div class="followup-options">${q.opts.map(o =>
+        `<div class="followup-option" onclick="selFQ('${q.id}','${o.v}',this)" data-qid="${q.id}"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>${o.l}</span></div>${o.n?`<div class="followup-note" data-note="${q.id}-${o.v}">${o.n}</div>`:''}`
+      ).join('')}</div>`;
+      c.appendChild(d);
+      // Update the followups Continue button
+      $('followupNext').disabled = true;
+    }
+    function selFQ(qid,v,el) {
+      document.querySelectorAll(`[data-qid="${qid}"]`).forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected'); S.followups[qid]=v;
+      document.querySelectorAll(`[data-note^="${qid}-"]`).forEach(n => n.classList.remove('visible'));
+      const n = document.querySelector(`[data-note="${qid}-${v}"]`); if (n) n.classList.add('visible');
+      // Auto-advance to next question after a short delay
+      setTimeout(() => {
+        fqIndex++;
+        if (fqIndex < fqList.length) { showCurrentFQ(); }
+        else { $('followupNext').disabled = false; }
+      }, 600);
+    }
+    function submitFollowups() { wizGoTo('address'); }
+
+    // ==========================================
+    // S6b: SPECIALTY CHECK (Group B)
+    // ==========================================
+    function toggleSpecialty(el) {
+      el.classList.toggle('selected');
+      const any = document.querySelectorAll('.specialty-option.selected').length > 0;
+      $('specialtyNext').textContent = '';
+      if (any) {
+        $('specialtyNext').innerHTML = 'Continue <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/></svg>';
+      } else {
+        $('specialtyNext').innerHTML = 'None of these &mdash; get my quote <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/></svg>';
+      }
+    }
+    function submitSpecialty() {
+      S.priceAdj = 0;
+      S.specialties = [];
+      const selected = [];
+      document.querySelectorAll('.specialty-option.selected').forEach(el => {
+        const sp = el.dataset.specialty;
+        selected.push(sp);
+        S.specialties.push(sp);
+        if (sp === 'termites') { S.priceAdj += ADDON_PRICES.termite_spot || 400; if (!S.pests.includes('termites')) S.pests.push('termites'); }
+        if (sp === 'rodents') { if (!S.pests.includes('rodents')) S.pests.push('rodents'); }
+        if (sp === 'carpenter') { S.priceAdj += ADDON_PRICES.carpenter_ants || 100; if (!S.pests.includes('ants')) S.pests.push('ants'); }
+      });
+      if (S.pests.includes('termites') && S.plan !== 'premium') S.plan = 'premium';
+      if (selected.length === 1 && selected[0] === 'rodents') {
+        S.rodentInspection = true;
+        fireGHLLead(false); // Create rodent-inspection tagged lead
+        wizGoTo('schedule');
+      }
+      else { wizGoTo('transition'); }
+    }
+
+    function calcPlan() {
+      S.priceAdj = 0;
+      if (S.followups.termite==='yes') S.priceAdj+=400;
+      if (S.followups.rodent==='inside') S.priceAdj+=0; // free inspection
+      if (S.followups.ant==='carpenter') S.priceAdj+=100;
+      // Only auto-determine plan for Group A; Group B keeps preselected plan
+      if (!S.groupB) {
+        if (S.pests.includes('termites')) S.plan='premium';
+        else if (S.pests.length>2||S.pests.includes('general')) S.plan='standard';
+        else S.plan='basic';
+      }
+    }
+
+    // ==========================================
+    // S9: CALCULATING ANIMATION
+    // ==========================================
+    function runCalc() {
+      const items = document.querySelectorAll('#calcChecklist li');
+      items.forEach(li => li.classList.remove('done','processing'));
+      const d=[0,1200,2400,3600];
+      items.forEach((li,i) => {
+        setTimeout(() => {
+          li.classList.add('processing');
+          setTimeout(() => { li.classList.remove('processing'); li.classList.add('done');
+            if (i===items.length-1) setTimeout(() => { updPlanRec(); wizGoTo('plan'); }, 800);
+          }, 1000);
+        }, d[i]);
+      });
+    }
+
+    // ==========================================
+    // S10: PLAN
+    // ==========================================
+    function updPlanRec() {
+      // Check if custom quote needed
+      if (S.customQuote) {
+        showCustomQuoteScreen();
+        return;
+      }
+      const p = PLANS[S.plan];
+      if (!p || p.customQuote) { showCustomQuoteScreen(); return; }
+      const isAnnual = S.billing === 'annual';
+      const displayPrice = isAnnual ? p.annual : p.price;
+      $('recPlanName').textContent = p.name;
+      $('recPlanTitle').textContent = p.title;
+      $('recPlanDesc').textContent = p.desc;
+      $('recPrice').textContent = displayPrice;
+      $('recPeriod').textContent = isAnnual ? '/mo (billed annually)' : '/month';
+      const tot = p.init + S.priceAdj - (S.exitApplied?30:0);
+      $('recInitial').textContent = `$${tot}`;
+      $('recFeatures').innerHTML = p.feat.map(f => `<li>${CHK}${f}</li>`).join('');
+      // Update mosquito add-on price based on lot size
+      const mqPricing = getMosquitoPricing(S.lotAcres);
+      const mqAddon = document.querySelector('[data-addon="mosquito"]');
+      if (mqAddon && mqPricing) {
+        mqAddon.dataset.price = mqPricing.mo;
+        mqAddon.querySelector('.plan-addon-price').textContent = `+$${mqPricing.mo}/mo`;
+      }
+      // Alt plans
+      const alts = S.plan === 'mosquito'
+        ? ['basic']
+        : Object.keys(PLANS).filter(k => k!==S.plan && k!=='mosquito' && k!=='sentricon' && PLANS[k] && !PLANS[k].customQuote);
+      $('altPlansRow').innerHTML = alts.map(k => { const x=PLANS[k]; const ap=isAnnual?x.annual:x.price; return `<div class="alt-plan-card" onclick="switchPlan('${k}')"><p class="alt-plan-name">${x.name}</p><p class="alt-plan-title">${x.title}</p><p class="alt-plan-price">$${ap}</p><p class="alt-plan-period">/mo</p></div>`; }).join('');
+      if (mqAddon) mqAddon.style.display = S.plan === 'mosquito' ? 'none' : '';
+      $('billingMonthlyLabel').classList.toggle('active', !isAnnual);
+      $('billingAnnualLabel').classList.toggle('active', isAnnual);
+      $('billingSwitch').classList.toggle('active', isAnnual);
+    }
+
+    function showCustomQuoteScreen() {
+      // Hijack the plan screen to show custom quote message
+      const planEl = document.querySelector('[data-screen="plan"]');
+      planEl.innerHTML = `
+        <div style="text-align:center;max-width:480px;margin:0 auto">
+          <div style="width:80px;height:80px;border-radius:50%;background:var(--orange-light);display:flex;align-items:center;justify-content:center;margin:0 auto 24px">
+            <svg width="40" height="40" viewBox="0 0 32 32" fill="none"><path d="M16 3L4 13h3v13h6v-7h6v7h6V13h3L16 3z" fill="#F77D00"/></svg>
+          </div>
+          <h2 style="font-family:var(--font-body);font-weight:400;font-size:28px;color:var(--soil);margin-bottom:8px">Your Home Needs a Custom Quote</h2>
+          <p style="font-family:var(--font-body);font-size:16px;color:var(--dark-grey);line-height:1.6;margin-bottom:24px">Your property (${S.sft ? S.sft.toLocaleString() + ' sq ft' : 'large home'}${S.lotAcres > 1 ? ', ' + S.lotAcres + ' acres' : ''}) is larger than our standard pricing covers. We'll prepare a custom quote just for you.</p>
+          <p style="font-family:var(--font-display);font-size:15px;color:var(--soil);margin-bottom:24px">We'll call you within 1 business day, or call us now:</p>
+          <a href="tel:8176656527" class="btn-wizard btn-wizard-primary" style="width:100%;margin-bottom:12px">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="margin-right:6px"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg>
+            Call (817) 665-6527
+          </a>
+          <p style="font-family:var(--font-display);font-size:13px;color:var(--medium-grey);margin-top:16px">We've saved your info — expect a call from our team soon.</p>
+        </div>`;
+      // Fire GHL lead tagged as custom quote
+      fireGHLLead(false);
+    }
+    function toggleBilling() {
+      S.billing = S.billing === 'monthly' ? 'annual' : 'monthly';
+      updPlanRec();
+    }
+    function switchPlan(k) { S.plan=k; updPlanRec(); }
+    function toggleAddon(el) { el.classList.toggle('selected'); S.addons=[]; document.querySelectorAll('.plan-addon-item.selected').forEach(i => S.addons.push(i.dataset.addon)); }
+
+    // ==========================================
+    // S11: CALENDAR
+    // ==========================================
+    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    function renderCal() {
+      $('calendarMonth').textContent = `${MONTHS[S.calMo]} ${S.calYr}`;
+      const fd = new Date(S.calYr,S.calMo,1).getDay();
+      const dim = new Date(S.calYr,S.calMo+1,0).getDate();
+      const today = new Date();
+      let h = '';
+      ['SUN','MON','TUE','WED','THU','FRI','SAT'].forEach(d => h+=`<div class="calendar-day-label">${d}</div>`);
+      for (let i=0;i<fd;i++) h+='<div class="calendar-day disabled"></div>';
+      for (let d=1;d<=dim;d++) {
+        const dt = new Date(S.calYr,S.calMo,d);
+        const isT = dt.toDateString()===today.toDateString();
+        const past = dt < new Date(today.getFullYear(),today.getMonth(),today.getDate()+2);
+        const sun = dt.getDay()===0;
+        const dis = past||sun;
+        const sel = S.date && dt.toDateString()===S.date.toDateString();
+        let cl='calendar-day'; if(dis)cl+=' disabled'; if(isT)cl+=' today'; if(sel)cl+=' selected';
+        h+=`<div class="${cl}" ${!dis?`onclick="selDate(${S.calYr},${S.calMo},${d})"`:''}">${d}</div>`;
+      }
+      $('calendarGrid').innerHTML = h;
+    }
+    function changeMonth(dir) {
+      S.calMo+=dir;
+      if(S.calMo>11){S.calMo=0;S.calYr++;}
+      if(S.calMo<0){S.calMo=11;S.calYr--;}
+      S.date=null; $('timeSlotsSection').style.display='none'; $('scheduleNext').disabled=true;
+      renderCal();
+    }
+    function selDate(y,m,d) { S.date=new Date(y,m,d); renderCal(); $('timeSlotsSection').style.display='block'; $('scheduleNext').disabled=!S.time; }
+    function selectTime(el) { document.querySelectorAll('.time-slot').forEach(s=>s.classList.remove('selected')); el.classList.add('selected'); S.time=el.dataset.time; $('scheduleNext').disabled=false; }
+
+    async function confirmSchedule() {
+      // Show loading state
+      $('scheduleNext').disabled = true;
+      $('scheduleNext').innerHTML = '<div class="calc-spinner" style="display:inline-block;width:18px;height:18px;margin-right:8px"></div> Confirming...';
+
+      const ds=`${MONTHS[S.date.getMonth()]} ${S.date.getDate()}, ${S.date.getFullYear()}`;
+      const ts=S.time==='am'?'Morning (8am \u2013 12pm)':'Afternoon (12pm \u2013 5pm)';
+
+      // Fire final GHL lead
+      await fireGHLLead(false);
+
+      if (S.rodentInspection) {
+        $('confirmPlan').textContent='Free Rodent Inspection';
+        $('confirmAddonsRow').style.display='none';
+        $('confirmDate').textContent=ds;
+        $('confirmTime').textContent=ts;
+        $('confirmAddr2').textContent=`${S.address}, ${S.city} ${S.zip}`;
+        $('confirmInitialFee').textContent='FREE';
+        wizGoTo('confirmation'); return;
+      }
+      const p=PLANS[S.plan];
+      const isAnnual=S.billing==='annual';
+      const displayPrice=isAnnual?p.annual:p.price;
+      const tot=p.init+S.priceAdj-(S.exitApplied?30:0);
+      $('confirmPlan').textContent=`${p.name} \u2014 $${displayPrice}/mo${isAnnual?' (annual)':''}`;
+      // Build addon display with dynamic mosquito pricing
+      if(S.addons.length){
+        const mqP = getMosquitoPricing(S.lotAcres);
+        const names={mosquito:`Mosquito Protection (+$${mqP?mqP.mo:52}/mo)`,rodent:'Rodent Exclusion Inspection (FREE)'};
+        $('confirmAddons').textContent=S.addons.map(a=>names[a]||a).join(', ');
+        $('confirmAddonsRow').style.display='';
+      }else{$('confirmAddonsRow').style.display='none';}
+      $('confirmDate').textContent=ds;
+      $('confirmTime').textContent=ts;
+      $('confirmAddr2').textContent=`${S.address}, ${S.city} ${S.zip}`;
+      $('confirmInitialFee').textContent=`$${tot}`;
+      wizGoTo('confirmation');
+    }
+
+    // ==========================================
+    // EXIT INTENT
+    // ==========================================
+    document.addEventListener('mouseleave', e => {
+      if (e.clientY<10 && !S.exitShown && !S.exitApplied && S.screen!=='intro' && S.screen!=='name' && S.screen!=='confirmation') {
+        S.exitShown=true; $('exitOverlay').classList.add('visible');
+      }
+    });
+    history.pushState(null,'','');
+    window.addEventListener('popstate', () => {
+      if (!S.exitShown && !S.exitApplied && S.screen!=='intro' && S.screen!=='name' && S.screen!=='confirmation') {
+        S.exitShown=true; $('exitOverlay').classList.add('visible'); history.pushState(null,'','');
+      }
+    });
+    function closeExitPopup() { $('exitOverlay').classList.remove('visible'); }
+    function applyExitDiscount() { S.exitApplied=true; closeExitPopup(); if (S.screen==='plan') updPlanRec(); }
+
+    // ==========================================
+    // INIT
+    // ==========================================
+    // Category mapping: pricing page categories → lemonade pest tile data-pest values
+    const CATEGORY_PESTS = {
+      general:    ['general'],
+      termites:   ['termites'],
+      mosquitoes: ['mosquitoes'],
+      rodents:    ['rodents']
+    };
+
+    window.addEventListener('load', () => {
+      // Parse hash params: supports #category=termites, #plan=premium, #screen=plan
+      const hash = window.location.hash.replace('#','');
+      const hashParams = {};
+      hash.split('&').forEach(p => { const [k,v] = p.split('='); if (k && v) hashParams[k] = v; });
+
+      const category = hashParams.category || null;
+      const selectedPlan = hashParams.plan || null;
+      const targetScreen = hashParams.screen || null;
+
+      // Group B: User chose a specific plan/category on the pricing page
+      if ((category && CATEGORY_PESTS[category]) || selectedPlan) {
+        S.groupB = true;
+        if (category) {
+          S.preselectedCategory = category;
+          S.pests = CATEGORY_PESTS[category] || [];
+        }
+        // Group B flow: skip intro, go straight to name → address (no pest selection)
+        S.screen = 'name';
+        document.querySelector('[data-screen="intro"]').classList.remove('active');
+        document.querySelector('[data-screen="name"]').classList.add('active');
+        updateProg('name');
+        setTimeout(() => $('firstName').focus(), 300);
+      }
+      // If a specific plan was pre-selected, store it
+      if (selectedPlan && PLANS[selectedPlan]) {
+        S.plan = selectedPlan;
+      }
+
+      // Figma capture: #screen=plan (dev/debug)
+      if (targetScreen) {
+        S.firstName = 'Jane'; S.lastName = 'Smith';
+        $('firstName').value = 'Jane'; $('lastName').value = 'Smith';
+        S.address = '123 Main St'; S.city = 'Dallas'; S.zip = '75201';
+        S.propertyType = 'house'; S.sft = 2100; S.lotSize = '0.18';
+        S.pests = ['ants','spiders','mosquitoes'];
+        S.plan = selectedPlan || 'standard'; S.billing = 'monthly';
+        S.email = 'jane@email.com'; S.phone = '(555) 123-4567';
+        if (targetScreen === 'property-confirm') {
+          $('confirmAddress').textContent = '123 Main St, Dallas';
+          $('confirmType').textContent = 'Single Family';
+          $('confirmSFT').textContent = '2,100';
+          $('confirmLot').textContent = '0.18 acres';
+        }
+        if (targetScreen === 'plan') { updPlanRec(); }
+        if (targetScreen === 'confirmation') {
+          if ($('confirmPlan')) $('confirmPlan').textContent = 'STANDARD — $59/mo';
+          if ($('confirmDate')) $('confirmDate').textContent = 'Wed, Mar 11';
+          if ($('confirmTime')) $('confirmTime').textContent = '9:00 AM';
+          if ($('confirmAddr2')) $('confirmAddr2').textContent = '123 Main St, Dallas TX 75201';
+          if ($('confirmInitialFee')) $('confirmInitialFee').textContent = '$149';
+        }
+        showScr(targetScreen);
+      }
+      // Group A: No plan selected — show intro (already default)
+    });
+
+    // ==========================================
+    // GOOGLE PLACES AUTOCOMPLETE
+    // ==========================================
+    function initAutocomplete() {
+      const input = $('address');
+      if (!input || !window.google || !google.maps || !google.maps.places) return;
+      const autocomplete = new google.maps.places.Autocomplete(input, {
+        componentRestrictions: { country: 'us' },
+        fields: ['address_components', 'formatted_address'],
+        types: ['address']
+      });
+      autocomplete.addListener('place_changed', function() {
+        const place = autocomplete.getPlace();
+        if (!place.address_components) return;
+        let street = '', city = '', zip = '';
+        for (const comp of place.address_components) {
+          const t = comp.types[0];
+          if (t === 'street_number') street = comp.long_name + ' ';
+          if (t === 'route') street += comp.short_name;
+          if (t === 'locality') city = comp.long_name;
+          if (t === 'postal_code') zip = comp.long_name;
+        }
+        $('address').value = street.trim();
+        $('city').value = city;
+        $('zip').value = zip;
+        // Trigger input events to enable Continue button
+        ['address','city','zip'].forEach(id => $(id).dispatchEvent(new Event('input')));
+      });
+    }
+    // If Google Maps loaded before our script
+    if (window.google && google.maps && google.maps.places) initAutocomplete();
+  </script>
+
+</body>
+</html>
