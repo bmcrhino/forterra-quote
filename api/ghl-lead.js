@@ -12,6 +12,11 @@ export default async function handler(req, res) {
     const TOKEN = process.env.GHL_API_TOKEN;
     const LOCATION_ID = process.env.GHL_LOCATION_ID;
     const PIPELINE_ID = process.env.GHL_PIPELINE_ID;
+    
+    if (!TOKEN || !LOCATION_ID) {
+      console.error('Missing env vars: TOKEN=', !!TOKEN, 'LOC=', !!LOCATION_ID);
+      return res.status(200).json({ success: false, error: 'Server config error', hasToken: !!TOKEN, hasLocation: !!LOCATION_ID });
+    }
 
     // Build tags
     const tags = ['source:website-quote'];
@@ -39,18 +44,11 @@ export default async function handler(req, res) {
       source: 'website-quote'
     };
 
-    // Add notes with property info
-    const notes = [];
-    if (sqft) notes.push(`Sqft: ${sqft}`);
-    if (lotSize) notes.push(`Lot: ${lotSize} acres`);
-    if (propertyType) notes.push(`Type: ${propertyType}`);
-    if (plan) notes.push(`Plan: ${plan}`);
-    if (billing) notes.push(`Billing: ${billing}`);
-    if (pests && pests.length) notes.push(`Pests: ${pests.join(', ')}`);
-    if (addons && addons.length) notes.push(`Addons: ${addons.join(', ')}`);
-    if (preferredDate) notes.push(`Preferred date: ${preferredDate}`);
-    if (preferredTime) notes.push(`Preferred time: ${preferredTime}`);
-    if (notes.length) contactBody.companyName = notes.join(' | ');
+    // Add property details as additional tags
+    if (sqft) tags.push(`sqft:${sqft}`);
+    if (lotSize) tags.push(`lot:${lotSize}`);
+    if (preferredDate) tags.push(`date:${preferredDate}`);
+    if (preferredTime) tags.push(`time:${preferredTime}`);
 
     const contactResp = await fetch('https://services.leadconnectorhq.com/contacts/', {
       method: 'POST',
