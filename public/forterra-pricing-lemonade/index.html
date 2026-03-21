@@ -1786,7 +1786,9 @@
       document.querySelectorAll('.pac-container').forEach(c => c.style.display = 'none');
       updateProg(scr);
       if (scr === 'address') $('displayName').textContent = S.firstName || 'there';
-      if (scr === 'transition') setTimeout(() => wizGoTo('calculating'), 2500);
+      if (scr === 'transition' && S.transitionTarget === 'calculating') {
+        S._transitionTimer = setTimeout(() => { S._transitionTimer = null; wizGoTo('calculating'); }, 2500);
+      }
       if (scr === 'calculating') runCalc();
       if (scr === 'schedule') renderCal();
       // Pre-select pests from pricing page category (Group A only, if they revisit pests)
@@ -1832,7 +1834,8 @@
       if (!ZIPS.includes(S.zip)) { $('zipError').classList.add('visible'); setTimeout(() => wizGoTo('oos'), 800); return; }
       $('zipError').classList.remove('visible');
 
-      // Show transition screen while fetching
+      // Show transition screen while fetching (NOT auto-advancing to calculating)
+      S.transitionTarget = 'rentcast';
       wizGoTo('transition');
 
       try {
@@ -1968,13 +1971,13 @@
       fireGHLLead(true);
 
       if (S.groupB) {
-        if (S.preselectedCategory === 'mosquitoes') { wizGoTo('transition'); }
+        if (S.preselectedCategory === 'mosquitoes') { S.transitionTarget = 'calculating'; wizGoTo('transition'); }
         else { wizGoTo('specialty-check'); }
       }
       else {
         calcPlan();
         if (S.followups.rodent === 'inside') { S.rodentInspection = true; wizGoTo('schedule'); }
-        else { wizGoTo('transition'); }
+        else { S.transitionTarget = 'calculating'; wizGoTo('transition'); }
       }
     }
 
@@ -2114,7 +2117,7 @@
         fireGHLLead(false); // Create rodent-inspection tagged lead
         wizGoTo('schedule');
       }
-      else { wizGoTo('transition'); }
+      else { S.transitionTarget = 'calculating'; wizGoTo('transition'); }
     }
 
     function calcPlan() {
