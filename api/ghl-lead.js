@@ -61,13 +61,28 @@ export default async function handler(req, res) {
     });
 
     const contactData = await contactResp.json();
+    let contactId = contactData.contact?.id;
     
     if (!contactResp.ok) {
-      console.error('GHL contact error:', contactResp.status, JSON.stringify(contactData));
-      return res.status(200).json({ success: false, error: 'Failed to create contact' });
+      // Handle duplicate contact — GHL returns existing contactId in meta
+      if (contactData.meta?.contactId) {
+        contactId = contactData.meta.contactId;
+        console.log('GHL duplicate contact, using existing:', contactId);
+        // Update existing contact with new tags
+        await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${TOKEN}`,
+            'Content-Type': 'application/json',
+            'Version': '2021-07-28'
+          },
+          body: JSON.stringify({ tags: tags })
+        });
+      } else {
+        console.error('GHL contact error:', contactResp.status, JSON.stringify(contactData));
+        return res.status(200).json({ success: false, error: 'Failed to create contact' });
+      }
     }
-
-    const contactId = contactData.contact?.id;
 
     // Create opportunity (only for non-partial submissions)
     if (contactId && !partial) {

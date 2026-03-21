@@ -1231,6 +1231,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
+    }
+    .property-map img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     .property-map-pin {
       width: 40px; height: 40px;
@@ -1424,7 +1430,7 @@
           <div class="chat-bubble">Here's what we found. Does this look right?</div>
         </div>
         <div class="property-confirm-card">
-          <div class="property-map"><div class="property-map-pin"><div class="property-map-pin-inner"></div></div></div>
+          <div class="property-map" id="propertyMapContainer"><div class="property-map-pin"><div class="property-map-pin-inner"></div></div></div>
           <div class="property-details">
             <div class="property-detail-row"><span class="property-detail-label">Address</span><span class="property-detail-value" id="confirmAddress">123 Main St</span></div>
             <div class="property-detail-row"><span class="property-detail-label">Property Type</span><span class="property-detail-value" id="confirmType">House</span></div>
@@ -1879,6 +1885,12 @@
         setTimeout(() => toggleEditField('SFT'), 100);
       }
       $('confirmLot').textContent = S.lotSize + ' acres';
+
+      // Load static map image
+      const mapContainer = $('propertyMapContainer');
+      const addr = encodeURIComponent(`${S.address}, ${S.city}, TX ${S.zip}`);
+      const mapKey = 'AIzaSyCHRf7QnkZJU6vmijoyur81Qw3UnqnCe0g';
+      mapContainer.innerHTML = `<img src="https://maps.googleapis.com/maps/api/staticmap?center=${addr}&zoom=16&size=600x200&maptype=roadmap&markers=color:orange%7C${addr}&key=${mapKey}" alt="Property location" onerror="this.parentElement.innerHTML='<div class=\\'property-map-pin\\'><div class=\\'property-map-pin-inner\\'></div></div>'">`;
 
       // Check if property exceeds limits
       if (S.sft >= 7000 || S.lotAcres > 1.0) {
