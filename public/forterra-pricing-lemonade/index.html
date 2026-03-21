@@ -1782,6 +1782,8 @@
       document.querySelectorAll('.wizard-screen').forEach(s => s.classList.remove('active'));
       const el = document.querySelector(`[data-screen="${scr}"]`);
       if (el) { void el.offsetWidth; el.classList.add('active'); }
+      // Hide Google Places autocomplete dropdown when leaving address screen
+      document.querySelectorAll('.pac-container').forEach(c => c.style.display = 'none');
       updateProg(scr);
       if (scr === 'address') $('displayName').textContent = S.firstName || 'there';
       if (scr === 'transition') setTimeout(() => wizGoTo('calculating'), 2500);
@@ -1994,18 +1996,20 @@
           specialties: S.specialties
         };
         if (!partial && S.date) {
-          const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
           body.preferredDate = `${S.date.getFullYear()}-${String(S.date.getMonth()+1).padStart(2,'0')}-${String(S.date.getDate()).padStart(2,'0')}`;
           body.preferredTime = S.time === 'am' ? 'Morning' : 'Afternoon';
         }
-        await fetch('/api/ghl-lead', {
+        console.log('[GHL] Sending lead:', partial ? 'PARTIAL' : 'FINAL', body);
+        const resp = await fetch('/api/ghl-lead', {
           method: 'POST',
           headers: {'Content-Type':'application/json'},
           body: JSON.stringify(body)
         });
+        const result = await resp.json();
+        console.log('[GHL] Response:', resp.status, result);
         S.ghlContactCreated = true;
       } catch (err) {
-        console.error('GHL lead error:', err);
+        console.error('[GHL] Lead error:', err);
       }
     }
     function showTerms() { $('termsModal').classList.add('visible'); }
