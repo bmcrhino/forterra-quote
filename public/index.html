@@ -1508,7 +1508,7 @@
           <h2 id="plansHeading">Preventative Plans for Every Home</h2>
           <div class="billing-toggle" id="billingToggle">
             <button class="active" data-period="monthly" onclick="setBilling('monthly')">Monthly</button>
-            <button data-period="annual" onclick="setBilling('annual')">Annual<span class="billing-savings">Save 5%</span></button>
+            <button data-period="annual" onclick="setBilling('annual')">Annual<span class="billing-savings">1 Month Free</span></button>
           </div>
         </div>
 
@@ -1531,7 +1531,7 @@
             <p class="plan-price-label">Starting at</p>
             <div class="plan-price">
               <span class="currency">$</span>
-              <span class="amount" data-monthly="49" data-annual="47">49</span>
+              <span class="amount" data-monthly="49" data-annual="49">49</span>
               <span class="period">/mo</span>
             </div>
             <p class="plan-annual-note annual-note"></p>
@@ -1557,7 +1557,7 @@
             <p class="plan-price-label">Starting at</p>
             <div class="plan-price">
               <span class="currency">$</span>
-              <span class="amount" data-monthly="59" data-annual="56">59</span>
+              <span class="amount" data-monthly="59" data-annual="59">59</span>
               <span class="period">/mo</span>
             </div>
             <p class="plan-annual-note annual-note"></p>
@@ -1583,7 +1583,7 @@
             <p class="plan-price-label">Starting at</p>
             <div class="plan-price">
               <span class="currency">$</span>
-              <span class="amount" data-monthly="69" data-annual="66">69</span>
+              <span class="amount" data-monthly="69" data-annual="69">69</span>
               <span class="period">/mo</span>
             </div>
             <p class="plan-annual-note annual-note"></p>
@@ -1631,7 +1631,7 @@
             <p class="plan-price-label">Starting at</p>
             <div class="plan-price">
               <span class="currency">$</span>
-              <span class="amount" data-monthly="29" data-annual="28">29</span>
+              <span class="amount" data-monthly="29" data-annual="29">29</span>
               <span class="period">/mo</span>
             </div>
             <p class="plan-annual-note annual-note"></p>
@@ -1673,7 +1673,7 @@
             <p class="plan-price-label">Starting at</p>
             <div class="plan-price">
               <span class="currency">$</span>
-              <span class="amount" data-monthly="59" data-annual="56">59</span>
+              <span class="amount" data-monthly="59" data-annual="59">59</span>
               <span class="period">/mo</span>
             </div>
             <p class="plan-annual-note annual-note"></p>
@@ -1726,7 +1726,7 @@
             <p class="plan-price-label">Starting at</p>
             <div class="plan-price">
               <span class="currency">$</span>
-              <span class="amount" data-monthly="69" data-annual="66">69</span>
+              <span class="amount" data-monthly="69" data-annual="69">69</span>
               <span class="period">/mo</span>
             </div>
             <p class="plan-annual-note annual-note"></p>
@@ -1794,7 +1794,7 @@
             <p class="plan-price-label">Starting at</p>
             <div class="plan-price">
               <span class="currency">$</span>
-              <span class="amount" data-monthly="52" data-annual="49">52</span>
+              <span class="amount" data-monthly="52" data-annual="52">52</span>
               <span class="period">/mo</span>
             </div>
             <p class="plan-annual-note annual-note"></p>
@@ -1868,7 +1868,7 @@
             <p class="plan-price-label">Starting at</p>
             <div class="plan-price">
               <span class="currency">$</span>
-              <span class="amount" data-monthly="49" data-annual="47">49</span>
+              <span class="amount" data-monthly="49" data-annual="49">49</span>
               <span class="period">/mo</span>
             </div>
             <p class="plan-annual-note annual-note"></p>
@@ -2423,7 +2423,11 @@
 
       notes.forEach(el => {
         if (period === 'annual') {
-          el.textContent = 'Billed annually';
+          // Find the corresponding amount to calculate annual total
+          const card = el.closest('[data-plan]') || el.parentElement;
+          const amtEl = card ? card.querySelector('.amount') : null;
+          const mo = amtEl ? parseInt(amtEl.dataset.monthly) : 0;
+          el.textContent = mo ? `Pay $${mo * 11}/yr (1 month free)` : 'Billed annually — 1 month free';
         } else {
           el.textContent = '';
         }
