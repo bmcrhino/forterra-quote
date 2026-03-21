@@ -66,7 +66,7 @@ export default async function handler(req, res) {
     
     if (!contactResp.ok) {
       console.error('GHL contact error:', contactResp.status, JSON.stringify(contactData));
-      return res.status(200).json({ success: false, error: 'Failed to create contact' });
+      return res.status(200).json({ success: false, error: 'Failed to create contact', details: contactData, status: contactResp.status });
     }
 
     const contactId = contactData.contact?.id;
