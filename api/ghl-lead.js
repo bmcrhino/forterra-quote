@@ -149,9 +149,9 @@ export default async function handler(req, res) {
     }
 
     // ==========================================
-    // ADD NOTE (audit trail)
+    // ADD NOTE (audit trail — final submission only)
     // ==========================================
-    await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}/notes`, {
+    if (!partial) await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}/notes`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${TOKEN}`,
