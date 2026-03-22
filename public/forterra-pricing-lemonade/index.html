@@ -2008,7 +2008,8 @@
           billing: S.billing, partial: partial,
           rodentInspection: S.rodentInspection,
           customQuote: S.customQuote,
-          specialties: S.specialties
+          specialties: S.specialties,
+          followups: S.followups || {}
         };
         if (!partial && S.date) {
           body.preferredDate = `${S.date.getFullYear()}-${String(S.date.getMonth()+1).padStart(2,'0')}-${String(S.date.getDate()).padStart(2,'0')}`;
