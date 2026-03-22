@@ -1292,8 +1292,11 @@
       max-width: 520px; width: 100%; max-height: 80vh;
       overflow-y: auto; padding: 32px;
     }
-    .modal-content h3 { font-family: var(--font-display); font-weight: 600; font-size: 20px; color: var(--soil); margin-bottom: 16px; }
+    .modal-content { position: relative; }
+    .modal-content h3 { font-family: var(--font-display); font-weight: 600; font-size: 20px; color: var(--soil); margin-bottom: 16px; padding-right: 32px; }
     .modal-content p { font-family: var(--font-body); font-size: 15px; color: var(--dark-grey); line-height: 1.6; margin-bottom: 12px; }
+    .modal-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border: none; background: var(--light-grey); border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--dark-grey); font-size: 18px; line-height: 1; transition: background 0.2s; }
+    .modal-close:hover { background: var(--medium-grey); color: var(--white); }
 
     /* ========================================
        RESPONSIVE
@@ -1466,7 +1469,7 @@
           <div class="form-group"><label class="form-label" for="phone">Phone Number</label><input class="form-input" type="tel" id="phone" placeholder="(555) 123-4567" autocomplete="tel"></div>
           <div style="display:flex;align-items:flex-start;gap:10px;margin-top:4px">
             <input type="checkbox" id="termsCheck" style="margin-top:4px;accent-color:var(--orange)">
-            <label for="termsCheck" style="font-family:var(--font-display);font-size:13px;color:var(--dark-grey);line-height:1.4;cursor:pointer">I agree to the <a href="#" onclick="showTerms();return false" style="color:var(--orange);text-decoration:underline">Terms of Service</a> and <a href="/privacy-policy" style="color:var(--orange);text-decoration:underline" target="_blank">Privacy Policy</a></label>
+            <label for="termsCheck" style="font-family:var(--font-display);font-size:13px;color:var(--dark-grey);line-height:1.4;cursor:pointer">I agree to the <a href="#" onclick="showTerms();return false" style="color:var(--orange);text-decoration:underline">Terms of Service</a> and <a href="#" onclick="showPrivacy();return false" style="color:var(--orange);text-decoration:underline">Privacy Policy</a></label>
           </div>
           <div class="btn-row btn-row-between">
             <button class="btn-wizard btn-wizard-ghost" onclick="wizBack()"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg> Back</button>
@@ -1660,8 +1663,9 @@
   </div>
 
   <!-- TERMS MODAL -->
-  <div class="modal-overlay" id="termsModal">
+  <div class="modal-overlay" id="termsModal" onclick="if(event.target===this)closeTerms()">
     <div class="modal-content">
+      <button class="modal-close" onclick="closeTerms()" aria-label="Close">&times;</button>
       <h3>Terms of Service</h3>
       <p><strong>Quote &amp; Pricing</strong><br>Your quote is an estimate based on the information you provide. If any of the information ends up changing upon initial inspection, we reserve the right to adjust the price of the service. For example, if the size of the home ends up being different or the pest issue is different, pricing may change. In the event pricing changes, you will have the opportunity to refuse service with no fees or penalties.</p>
       <p><strong>Recurring Service</strong><br>Services are provided on a recurring basis as described in your selected plan. By selecting a plan, you authorize recurring billing at the stated frequency.</p>
@@ -1671,6 +1675,24 @@
       <p><strong>Governing Law</strong><br>These terms are governed by the laws of the State of Texas.</p>
       <p style="font-size:12px;color:var(--dark-grey);margin-top:16px">Forterra Pest Control &bull; 935 S Kimball Ave #162, Southlake, TX 76092 &bull; 817-665-6527 &bull; info@forterrapestcontrol.com</p>
       <div class="btn-row btn-row-center" style="margin-top:24px"><button class="btn-wizard btn-wizard-primary" onclick="closeTerms()">I Understand</button></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="privacyModal" onclick="if(event.target===this)closePrivacy()">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closePrivacy()" aria-label="Close">&times;</button>
+      <h3>Privacy Policy</h3>
+      <p style="font-size:12px;color:var(--medium-grey);margin-bottom:16px">Last updated: March 22, 2026</p>
+      <p>Forterra Pest Control ("we," "us," or "our") respects your privacy. This policy explains what information we collect through our website and online quoting tool, how we use it, and how we protect it.</p>
+      <p><strong>Information We Collect</strong><br>When you use our quoting tool or contact us, we may collect: your name, email address, and phone number; property address and service location; property details (square footage, lot size, property type) obtained from public records; pest concerns and service preferences; and scheduling information.</p>
+      <p><strong>How We Use Your Information</strong><br>We use your information to generate accurate pest control quotes, schedule and deliver services, communicate with you about your account, improve our website, and comply with legal obligations.</p>
+      <p><strong>Information Sharing</strong><br>We do not sell, rent, or trade your personal information to third parties. We may share information with trusted service providers who assist us in operating our business (e.g., payment processors, scheduling software), but only as necessary to provide our services.</p>
+      <p><strong>Data Security</strong><br>We use industry-standard security measures, including encryption for data transmitted through our website, to protect your personal information.</p>
+      <p><strong>Cookies</strong><br>Our website uses cookies and similar technologies to improve your browsing experience and analyze site traffic. You can control cookies through your browser settings.</p>
+      <p><strong>Your Rights</strong><br>You may request access to, correction of, or deletion of your personal information at any time by contacting us.</p>
+      <p><strong>Contact Us</strong></p>
+      <p style="font-size:12px;color:var(--dark-grey);margin-top:4px">Forterra Pest Control &bull; 935 S Kimball Ave #162, Southlake, TX 76092 &bull; 817-665-6527 &bull; info@forterrapestcontrol.com</p>
+      <div class="btn-row btn-row-center" style="margin-top:24px"><button class="btn-wizard btn-wizard-primary" onclick="closePrivacy()">I Understand</button></div>
     </div>
   </div>
 
@@ -2062,6 +2084,8 @@
     }
     function showTerms() { $('termsModal').classList.add('visible'); }
     function closeTerms() { $('termsModal').classList.remove('visible'); }
+    function showPrivacy() { $('privacyModal').classList.add('visible'); }
+    function closePrivacy() { $('privacyModal').classList.remove('visible'); }
 
     // ==========================================
     // S6: PESTS
