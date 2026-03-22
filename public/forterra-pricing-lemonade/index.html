@@ -1643,7 +1643,7 @@
         <div class="confirmation-screen">
           <div class="confirm-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#047857" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
           <h2>You're All Set!</h2>
-          <p>Your first service has been booked. We'll send a confirmation to your email.</p>
+          <p id="confirmSubtext">Your first service has been booked. We'll send a confirmation to your email.</p>
           <div class="confirm-summary">
             <div class="confirm-summary-row"><span class="confirm-summary-label">Plan</span><span class="confirm-summary-value" id="confirmPlan">Standard &mdash; $59/mo</span></div>
             <div class="confirm-summary-row" id="confirmAddonsRow" style="display:none"><span class="confirm-summary-label">Add-ons</span><span class="confirm-summary-value" id="confirmAddons"></span></div>
@@ -2203,24 +2203,15 @@
     }
 
     function showCustomQuoteScreen() {
-      // Hijack the plan screen to show custom quote message
-      const planEl = document.querySelector('[data-screen="plan"]');
-      planEl.innerHTML = `
-        <div style="text-align:center;max-width:480px;margin:0 auto">
-          <div style="width:80px;height:80px;border-radius:50%;background:var(--orange-light);display:flex;align-items:center;justify-content:center;margin:0 auto 24px">
-            <svg width="40" height="40" viewBox="0 0 32 32" fill="none"><path d="M16 3L4 13h3v13h6v-7h6v7h6V13h3L16 3z" fill="#F77D00"/></svg>
-          </div>
-          <h2 style="font-family:var(--font-body);font-weight:400;font-size:28px;color:var(--soil);margin-bottom:8px">Your Home Needs a Custom Quote</h2>
-          <p style="font-family:var(--font-body);font-size:16px;color:var(--dark-grey);line-height:1.6;margin-bottom:24px">Your property (${S.sft ? S.sft.toLocaleString() + ' sq ft' : 'large home'}${S.lotAcres > 1 ? ', ' + S.lotAcres + ' acres' : ''}) is larger than our standard pricing covers. We'll prepare a custom quote just for you.</p>
-          <p style="font-family:var(--font-display);font-size:15px;color:var(--soil);margin-bottom:24px">We'll call you within 1 business day, or call us now:</p>
-          <a href="tel:8176656527" class="btn-wizard btn-wizard-primary" style="width:100%;margin-bottom:12px">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="margin-right:6px"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg>
-            Call (817) 665-6527
-          </a>
-          <p style="font-family:var(--font-display);font-size:13px;color:var(--medium-grey);margin-top:16px">We've saved your info — expect a call from our team soon.</p>
-        </div>`;
-      // Fire GHL lead tagged as custom quote
-      fireGHLLead(false);
+      // Route oversized properties to inspection booking (same calendar as rodent)
+      S.customQuote = true;
+      // Update the schedule screen header to reflect custom inspection
+      const scheduleScreen = document.querySelector('[data-screen="schedule"]');
+      const bubble = scheduleScreen.querySelector('.chat-bubble');
+      if (bubble) {
+        bubble.innerHTML = `Your property <strong>(${S.sft ? S.sft.toLocaleString() + ' sq ft' : 'large home'}${S.lotAcres > 1 ? ', ' + S.lotAcres.toFixed(2) + ' acres' : ''})</strong> qualifies for our <strong>Custom Home Program</strong>. We'll send a specialist for a free inspection and build a plan tailored to your property. Pick a time that works:`;
+      }
+      wizGoTo('schedule');
     }
     function toggleBilling() {
       S.billing = S.billing === 'monthly' ? 'annual' : 'monthly';
@@ -2238,15 +2229,33 @@
       const fd = new Date(S.calYr,S.calMo,1).getDay();
       const dim = new Date(S.calYr,S.calMo+1,0).getDate();
       const today = new Date();
+      // Calculate first available date: 1 business day out
+      // If Mon-Thu → next business day. If Fri after 6pm → Tue. If Sat → Tue. If Sun → Tue.
+      const firstAvail = new Date(today);
+      const hour = today.getHours();
+      const dow = today.getDay(); // 0=Sun, 6=Sat
+      if (dow === 5 && hour >= 18) { // Friday evening → Tuesday
+        firstAvail.setDate(firstAvail.getDate() + 4);
+      } else if (dow === 6) { // Saturday → Tuesday
+        firstAvail.setDate(firstAvail.getDate() + 3);
+      } else if (dow === 0) { // Sunday → Tuesday
+        firstAvail.setDate(firstAvail.getDate() + 2);
+      } else if (hour >= 18) { // Weekday evening → day after tomorrow
+        firstAvail.setDate(firstAvail.getDate() + 2);
+      } else { // Weekday during hours → tomorrow
+        firstAvail.setDate(firstAvail.getDate() + 1);
+      }
+      firstAvail.setHours(0,0,0,0);
+
       let h = '';
       ['SUN','MON','TUE','WED','THU','FRI','SAT'].forEach(d => h+=`<div class="calendar-day-label">${d}</div>`);
       for (let i=0;i<fd;i++) h+='<div class="calendar-day disabled"></div>';
       for (let d=1;d<=dim;d++) {
         const dt = new Date(S.calYr,S.calMo,d);
         const isT = dt.toDateString()===today.toDateString();
-        const past = dt < new Date(today.getFullYear(),today.getMonth(),today.getDate()+2);
+        const tooSoon = dt < firstAvail;
         const sun = dt.getDay()===0;
-        const dis = past||sun;
+        const dis = tooSoon||sun;
         const sel = S.date && dt.toDateString()===S.date.toDateString();
         let cl='calendar-day'; if(dis)cl+=' disabled'; if(isT)cl+=' today'; if(sel)cl+=' selected';
         h+=`<div class="${cl}" ${!dis?`onclick="selDate(${S.calYr},${S.calMo},${d})"`:''}">${d}</div>`;
@@ -2281,6 +2290,17 @@
         $('confirmTime').textContent=ts;
         $('confirmAddr2').textContent=`${S.address}, ${S.city} ${S.zip}`;
         $('confirmInitialFee').textContent='FREE';
+        $('confirmSubtext').textContent="Your free rodent inspection is scheduled. A specialist will assess your property and provide a customized exclusion quote on-site.";
+        wizGoTo('confirmation'); return;
+      }
+      if (S.customQuote) {
+        $('confirmPlan').textContent='Custom Home Inspection (FREE)';
+        $('confirmAddonsRow').style.display='none';
+        $('confirmDate').textContent=ds;
+        $('confirmTime').textContent=ts;
+        $('confirmAddr2').textContent=`${S.address}, ${S.city} ${S.zip}`;
+        $('confirmInitialFee').textContent='FREE';
+        $('confirmSubtext').textContent="Your free property inspection is scheduled. A specialist will evaluate your home and build a custom pest control plan tailored to your property.";
         wizGoTo('confirmation'); return;
       }
       const p=PLANS[S.plan];
