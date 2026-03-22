@@ -1627,27 +1627,43 @@
       <!-- S11b: Callback Schedule -->
       <div class="wizard-screen" data-screen="callback-schedule" data-phase="schedule">
         <div style="max-width:480px;margin:0 auto">
-          <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:8px"><div class="avatar" style="width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--warm-beige);display:flex;align-items:center;justify-content:center;flex-shrink:0"><img src="avatar-sarah-cropped.jpg" alt="Sarah" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div><div class="chat-bubble">We'll have one of our pest specialists give you a quick call to figure out the best plan. When works for you?</div></div>
+          <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:8px"><div class="avatar" style="width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--warm-beige);display:flex;align-items:center;justify-content:center;flex-shrink:0"><img src="avatar-sarah-cropped.jpg" alt="Sarah" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div><div class="chat-bubble">We'll have one of our pest specialists give you a quick call. Just let us know how to reach you and when works best.</div></div>
 
-          <div style="margin-top:24px">
-            <p style="font-family:var(--font-display);font-weight:600;font-size:15px;color:var(--soil);margin-bottom:12px">Preferred day</p>
-            <div class="followup-options">
-              <div class="followup-option" onclick="selCallback('day','today',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>Today if possible</span></div>
-              <div class="followup-option" onclick="selCallback('day','tomorrow',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>Tomorrow</span></div>
-              <div class="followup-option" onclick="selCallback('day','anyday',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>Any day this week</span></div>
+          <div class="wizard-form" style="margin-top:24px">
+            <div class="form-row">
+              <div class="form-group"><label class="form-label" for="cbFirstName">First Name</label><input class="form-input" type="text" id="cbFirstName" placeholder="Jane" autocomplete="given-name"></div>
+              <div class="form-group"><label class="form-label" for="cbLastName">Last Name</label><input class="form-input" type="text" id="cbLastName" placeholder="Smith" autocomplete="family-name"></div>
+            </div>
+            <div class="form-group"><label class="form-label" for="cbPhone">Phone Number</label><input class="form-input" type="tel" id="cbPhone" placeholder="(555) 123-4567" autocomplete="tel"></div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="cbDay">Preferred Day</label>
+                <select class="form-input" id="cbDay" style="appearance:auto;padding:10px 12px">
+                  <option value="">Select a day...</option>
+                  <option value="today">Today</option>
+                  <option value="tomorrow">Tomorrow</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cbTime">Preferred Time</label>
+                <select class="form-input" id="cbTime" style="appearance:auto;padding:10px 12px">
+                  <option value="">Select a time...</option>
+                  <option value="8:00 AM">8:00 AM</option>
+                  <option value="9:00 AM">9:00 AM</option>
+                  <option value="10:00 AM">10:00 AM</option>
+                  <option value="11:00 AM">11:00 AM</option>
+                  <option value="12:00 PM">12:00 PM</option>
+                  <option value="1:00 PM">1:00 PM</option>
+                  <option value="2:00 PM">2:00 PM</option>
+                  <option value="3:00 PM">3:00 PM</option>
+                  <option value="4:00 PM">4:00 PM</option>
+                  <option value="5:00 PM">5:00 PM</option>
+                </select>
+              </div>
             </div>
           </div>
 
-          <div style="margin-top:24px">
-            <p style="font-family:var(--font-display);font-weight:600;font-size:15px;color:var(--soil);margin-bottom:12px">Preferred time</p>
-            <div class="followup-options">
-              <div class="followup-option" onclick="selCallback('time','morning',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>Morning (8am – 12pm)</span></div>
-              <div class="followup-option" onclick="selCallback('time','afternoon',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>Afternoon (12pm – 5pm)</span></div>
-              <div class="followup-option" onclick="selCallback('time','anytime',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>Anytime</span></div>
-            </div>
-          </div>
-
-          <div class="btn-row btn-row-between" style="margin-top:32px">
+          <div class="btn-row btn-row-between" style="margin-top:24px">
             <button class="btn-wizard btn-wizard-ghost" onclick="wizBack()"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg> Back</button>
             <button class="btn-wizard btn-wizard-primary" onclick="submitCallback()" id="callbackNext" disabled>Request Call <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></button>
           </div>
@@ -2058,6 +2074,11 @@
         else { wizGoTo('specialty-check'); }
       }
       else {
+        // Apply price adjustments from follow-up answers
+        if (S.followups.ants === 'carpenter') { S.priceAdj += ADDON_PRICES.carpenter_ants || 100; }
+        if (S.followups.roaches === 'german') { S.priceAdj += ADDON_PRICES.german_roaches || 200; }
+        if (S.followups.fleas === 'inside') { S.priceAdj += ADDON_PRICES.fleas || 100; }
+
         calcPlan();
         // Route to free inspection flows based on followup answers
         if (S.followups.termite === 'inspect') {
@@ -2065,10 +2086,7 @@
           routeToFreeInspection('termite');
           return;
         }
-        if (S.followups.notsure === 'callback' || S.followups.other === 'callback') {
-          routeToCallbackSchedule();
-          return;
-        }
+        // callback/callnow routes are handled in submitFollowups() — skip address flow entirely
         if (S.followups.rodent === 'inside') { S.rodentInspection = true; wizGoTo('schedule'); }
         else { wizGoTo('calculating'); }
       }
@@ -2095,31 +2113,59 @@
     // Callback schedule (for Other / Not Sure pests)
     S.callbackDay = ''; S.callbackTime = '';
     function routeToCallbackSchedule() {
-      fireGHLLead(false);
+      // Pre-fill name if we have it
+      if (S.firstName) $('cbFirstName').value = S.firstName;
+      if (S.lastName) $('cbLastName').value = S.lastName;
+      if (S.phone) $('cbPhone').value = S.phone;
+      // Populate day dropdown with next 5 weekdays
+      const daySelect = $('cbDay');
+      daySelect.innerHTML = '<option value="">Select a day...</option>';
+      const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      const MONTHS_S = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const now = new Date();
+      let added = 0;
+      for (let i = 0; i < 10 && added < 5; i++) {
+        const d = new Date(now); d.setDate(d.getDate() + i);
+        const dow = d.getDay();
+        if (dow === 0 || dow === 6) continue; // skip weekends
+        const label = i === 0 ? `Today (${DAYS[dow]})` : i === 1 ? `Tomorrow (${DAYS[dow]})` : `${DAYS[dow]}, ${MONTHS_S[d.getMonth()]} ${d.getDate()}`;
+        daySelect.innerHTML += `<option value="${label}">${label}</option>`;
+        added++;
+      }
       wizGoTo('callback-schedule');
     }
-    function selCallback(group, val, el) {
-      const container = el.closest('.followup-options');
-      container.querySelectorAll('.followup-option').forEach(o => o.classList.remove('selected'));
-      el.classList.add('selected');
-      if (group === 'day') S.callbackDay = val;
-      if (group === 'time') S.callbackTime = val;
-      $('callbackNext').disabled = !(S.callbackDay && S.callbackTime);
+    function chkCallback() {
+      const nameOk = $('cbFirstName').value.trim().length > 0;
+      const phoneOk = $('cbPhone').value.replace(/\D/g,'').length >= 10;
+      const dayOk = $('cbDay').value !== '';
+      const timeOk = $('cbTime').value !== '';
+      $('callbackNext').disabled = !(nameOk && phoneOk && dayOk && timeOk);
     }
+    // Attach listeners when DOM ready
+    ['cbFirstName','cbLastName','cbPhone'].forEach(id => $(id).addEventListener('input', chkCallback));
+    ['cbDay','cbTime'].forEach(id => $(id).addEventListener('change', chkCallback));
+    $('cbPhone').addEventListener('input', function() {
+      let v = this.value.replace(/\D/g,'');
+      if (v.length>10) v=v.slice(0,10);
+      if (v.length>=6) this.value=`(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`;
+      else if (v.length>=3) this.value=`(${v.slice(0,3)}) ${v.slice(3)}`;
+    });
     async function submitCallback() {
+      S.firstName = $('cbFirstName').value.trim();
+      S.lastName = $('cbLastName').value.trim();
+      S.phone = $('cbPhone').value.trim();
+      S.callbackDay = $('cbDay').value;
+      S.callbackTime = $('cbTime').value;
       $('callbackNext').disabled = true;
       $('callbackNext').innerHTML = '<div class="calc-spinner" style="display:inline-block;width:18px;height:18px;margin-right:8px"></div> Submitting...';
-      // Fire updated lead with callback preferences
       S.callbackRequested = true;
       await fireGHLLead(false);
       // Show confirmation
       $('confirmPlan').textContent = 'Phone Consultation';
       $('confirmAddonsRow').style.display = 'none';
-      const dayLabel = S.callbackDay === 'today' ? 'Today' : S.callbackDay === 'tomorrow' ? 'Tomorrow' : 'This week';
-      const timeLabel = S.callbackTime === 'morning' ? 'Morning (8am–12pm)' : S.callbackTime === 'afternoon' ? 'Afternoon (12pm–5pm)' : 'Anytime';
-      $('confirmDate').textContent = dayLabel;
-      $('confirmTime').textContent = timeLabel;
-      $('confirmAddr2').textContent = `${S.address}, ${S.city} ${S.zip}`;
+      $('confirmDate').textContent = S.callbackDay;
+      $('confirmTime').textContent = S.callbackTime;
+      $('confirmAddr2').textContent = S.address ? `${S.address}, ${S.city} ${S.zip}` : 'Not provided';
       $('confirmInitialFee').textContent = 'FREE';
       $('confirmSubtext').textContent = "One of our pest specialists will call you to discuss your situation and recommend the best solution. No obligation.";
       document.querySelector('[data-screen="confirmation"] h2').textContent = "We'll Call You!";
@@ -2232,10 +2278,13 @@
       const q=[], p=S.pests;
       // Keep follow-ups focused on plan-changing / inspection-needed pests only
       if (p.includes('prevention')) q.push({id:'prev',q:'Which pests would you like protection against?',opts:[{l:'General pests (ants, spiders, roaches)',v:'general'},{l:'Termites',v:'termites'},{l:'All of the above',v:'all'}]});
+      if (p.includes('ants')) q.push({id:'ants',q:'What kind of ants are you seeing?',opts:[{l:'Small ants (sugar ants, pavement ants, etc.)',v:'small'},{l:'Large ants that may be damaging wood (carpenter ants)',v:'carpenter',n:'Carpenter ant treatment requires a specialized add-on (+$100)'},{l:"I'm not sure",v:'unsure'}]});
+      if (p.includes('cockroaches')) q.push({id:'roaches',q:'What kind of cockroaches are you seeing?',opts:[{l:'Large roaches (American / smoky brown — usually near doors/garage)',v:'large'},{l:'Small roaches in kitchen or bathroom (German cockroaches)',v:'german',n:'German cockroach treatment requires a specialized add-on (+$200)'},{l:"I'm not sure",v:'unsure'}]});
+      if (p.includes('fleas')) q.push({id:'fleas',q:'Where are you experiencing the flea or tick issue?',opts:[{l:'Inside my home',v:'inside',n:'Interior flea treatment requires a specialized add-on (+$100)'},{l:'Outside in the yard only',v:'outside'},{l:'Just want prevention (I have pets)',v:'prevention'}]});
       if (p.includes('termites')) q.push({id:'termite',q:'Do you suspect an active termite infestation?',opts:[{l:'Yes, I see signs of damage or swarmers',v:'yes',n:'Active treatment may require an on-site inspection'},{l:'No, just want prevention',v:'no'},{l:"Not sure \u2014 I'd like an inspection",v:'inspect'}]});
       if (p.includes('rodents')) q.push({id:'rodent',q:'Are the rodents getting inside your home?',opts:[{l:'Yes, I hear or see them inside',v:'inside',n:"We'll schedule a free on-site inspection"},{l:'No, just outside / in the yard',v:'outside'}]});
-      if (p.includes('other')) q.push({id:'other',q:"No problem! We can help with most pest issues. How would you like to proceed?",opts:[{l:'Have someone from Forterra call me to discuss',v:'callback'},{l:'Start with general prevention',v:'prevention'}]});
-      if (p.includes('notsure')) q.push({id:'notsure',q:"No worries! How would you like to proceed?",opts:[{l:'Have someone from Forterra call me to discuss',v:'callback'},{l:'Start with general prevention',v:'prevention'}]});
+      if (p.includes('other')) q.push({id:'other',q:"We can help with most pest issues. How would you like to proceed?",opts:[{l:'Schedule a time for a Forterra rep to call me',v:'callback'},{l:'Book a general pest plan and have the technician inspect',v:'prevention'},{l:'<a href="tel:8176656527" style="color:var(--orange);text-decoration:none">Call us now: (817) 665-6527</a>',v:'callnow'}]});
+      if (p.includes('notsure')) q.push({id:'notsure',q:"No worries! How would you like to proceed?",opts:[{l:'Schedule a time for a Forterra rep to call me',v:'callback'},{l:'Book a general pest plan and have the technician inspect',v:'prevention'},{l:'<a href="tel:8176656527" style="color:var(--orange);text-decoration:none">Call us now: (817) 665-6527</a>',v:'callnow'}]});
       return q;
     }
     // Conversational Q&A: show one question at a time
@@ -2273,7 +2322,19 @@
         else { $('followupNext').disabled = false; }
       }, 600);
     }
-    function submitFollowups() { wizGoTo('address'); }
+    function submitFollowups() {
+      // Short-circuit: callback/callnow skip the full address→property→account flow
+      if (S.followups.notsure === 'callback' || S.followups.other === 'callback') {
+        wizGoTo('callback-schedule');
+        return;
+      }
+      if (S.followups.notsure === 'callnow' || S.followups.other === 'callnow') {
+        // They clicked call-us-now — just show confirmation
+        routeToCallUs();
+        return;
+      }
+      wizGoTo('address');
+    }
 
     // ==========================================
     // S6b: SPECIALTY CHECK (Group B)
