@@ -1886,11 +1886,11 @@
       }
       $('confirmLot').textContent = S.lotSize + ' acres';
 
-      // Load static map image
+      // Load map via Maps Embed API (free, no extra API enablement needed)
       const mapContainer = $('propertyMapContainer');
       const addr = encodeURIComponent(`${S.address}, ${S.city}, TX ${S.zip}`);
       const mapKey = 'AIzaSyCHRf7QnkZJU6vmijoyur81Qw3UnqnCe0g';
-      mapContainer.innerHTML = `<img src="https://maps.googleapis.com/maps/api/staticmap?center=${addr}&zoom=16&size=600x200&maptype=roadmap&markers=color:orange%7C${addr}&key=${mapKey}" alt="Property location" onerror="this.parentElement.innerHTML='<div class=\\'property-map-pin\\'><div class=\\'property-map-pin-inner\\'></div></div>'">`;
+      mapContainer.innerHTML = `<iframe width="100%" height="200" style="border:0;border-radius:12px;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=${mapKey}&q=${addr}&zoom=16"></iframe>`;
 
       // Track which service types need inspection (not a single binary flag)
       S.pestNeedsInspection = S.sft >= 7000;
