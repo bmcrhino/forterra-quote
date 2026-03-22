@@ -1466,7 +1466,7 @@
           <div class="form-group"><label class="form-label" for="phone">Phone Number</label><input class="form-input" type="tel" id="phone" placeholder="(555) 123-4567" autocomplete="tel"></div>
           <div style="display:flex;align-items:flex-start;gap:10px;margin-top:4px">
             <input type="checkbox" id="termsCheck" style="margin-top:4px;accent-color:var(--orange)">
-            <label for="termsCheck" style="font-family:var(--font-display);font-size:13px;color:var(--dark-grey);line-height:1.4;cursor:pointer">I agree to the <a href="#" onclick="showTerms();return false" style="color:var(--orange);text-decoration:underline">Terms of Service</a> and Privacy Policy</label>
+            <label for="termsCheck" style="font-family:var(--font-display);font-size:13px;color:var(--dark-grey);line-height:1.4;cursor:pointer">I agree to the <a href="#" onclick="showTerms();return false" style="color:var(--orange);text-decoration:underline">Terms of Service</a> and <a href="/privacy-policy" style="color:var(--orange);text-decoration:underline" target="_blank">Privacy Policy</a></label>
           </div>
           <div class="btn-row btn-row-between">
             <button class="btn-wizard btn-wizard-ghost" onclick="wizBack()"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg> Back</button>
@@ -1545,31 +1545,17 @@
         </div>
       </div>
 
-      <!-- S8: Transition -->
-      <div class="wizard-screen" data-screen="transition" data-phase="pests">
-        <div class="transition-screen">
-          <div class="transition-animation"><div class="transition-circle"></div><div class="transition-house"><svg width="40" height="40" viewBox="0 0 32 32" fill="none"><path d="M16 3L4 13h3v13h6v-7h6v7h6V13h3L16 3z" fill="#F77D00"/></svg></div></div>
-          <h2>Measuring your home...</h2>
-          <p>We're pulling property data for the most accurate quote.</p>
-          <div class="calc-trust">
-            <div class="calc-trust-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a3.5 3.5 0 00-3.5 3.5V6h-.25A1.75 1.75 0 002.5 7.75v5.5c0 .966.784 1.75 1.75 1.75h7.5A1.75 1.75 0 0013.5 13.25v-5.5A1.75 1.75 0 0011.75 6h-.25V4.5A3.5 3.5 0 008 1zm2 5V4.5a2 2 0 10-4 0V6h4z"/></svg> 256-bit encrypted</div>
-            <div class="calc-trust-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg> 18+ years experience</div>
-          </div>
-        </div>
-      </div>
-
       <!-- S9: Calculating -->
       <div class="wizard-screen" data-screen="calculating" data-phase="plans">
         <div class="calculating-screen">
           <h2 class="calculating-title">Calculating your price...</h2>
           <p class="calculating-subtitle">Hang tight, this only takes a moment.</p>
           <ul class="calc-checklist" id="calcChecklist">
-            <li><div class="calc-check"><svg width="14" height="14" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><div class="calc-spinner"></div>Analyzing property data</li>
             <li><div class="calc-check"><svg width="14" height="14" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><div class="calc-spinner"></div>Matching pest treatments</li>
             <li><div class="calc-check"><svg width="14" height="14" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><div class="calc-spinner"></div>Building coverage plan</li>
             <li><div class="calc-check"><svg width="14" height="14" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><div class="calc-spinner"></div>Finalizing your price</li>
           </ul>
-          <div class="calc-trust"><div class="calc-trust-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg> Money-back guarantee</div><div class="calc-trust-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg> No contracts required</div></div>
+          <div class="calc-trust"><div class="calc-trust-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg> Money-back guarantee</div></div>
         </div>
       </div>
 
@@ -1677,8 +1663,14 @@
   <div class="modal-overlay" id="termsModal">
     <div class="modal-content">
       <h3>Terms of Service</h3>
-      <p>By using Forterra Pest Control's online quoting tool, you agree to the following. Your quote is an estimate based on the information you provide and may be adjusted after an on-site inspection.</p>
-      <p>Services are provided on a recurring basis as described in your selected plan. You may cancel any time with 30 days written notice. Our money-back guarantee applies to your initial service.</p>
+      <p><strong>Quote &amp; Pricing</strong><br>Your quote is an estimate based on the information you provide. Final pricing will be confirmed after an on-site inspection. Forterra reserves the right to adjust pricing with 30 days written notice.</p>
+      <p><strong>Recurring Service</strong><br>Services are provided on a recurring basis — quarterly for general pest control, or as described in your selected plan. By selecting a plan, you authorize recurring billing at the stated frequency.</p>
+      <p><strong>Annual Plans</strong><br>Annual plans require a 12-month commitment. You are billed monthly at a discounted rate (one month free per year). Early cancellation of annual plans forfeits the discount for remaining months.</p>
+      <p><strong>Cancellation</strong><br>You may cancel with 30 days written notice. Contact us at <a href="mailto:frank@forterrapestcontrol.com" style="color:var(--orange)">frank@forterrapestcontrol.com</a> or call <a href="tel:8176656527" style="color:var(--orange)">817-665-6527</a>.</p>
+      <p><strong>Money-Back Guarantee</strong><br>If you're not satisfied after your initial service, we'll provide a full refund of the initial service fee. This guarantee applies to the first service only.</p>
+      <p><strong>Property Access</strong><br>You agree to provide access to your property on scheduled service days. If access cannot be provided, please reschedule at least 24 hours in advance.</p>
+      <p><strong>Governing Law</strong><br>These terms are governed by the laws of the State of Texas.</p>
+      <p style="font-size:12px;color:var(--dark-grey);margin-top:16px">Forterra Pest Control &bull; 935 S Kimball Ave #162, Southlake, TX 76092 &bull; 817-665-6527 &bull; frank@forterrapestcontrol.com</p>
       <div class="btn-row btn-row-center" style="margin-top:24px"><button class="btn-wizard btn-wizard-primary" onclick="closeTerms()">I Understand</button></div>
     </div>
   </div>
@@ -1734,7 +1726,7 @@
     const ZIPS = ['75001','75002','75006','75007','75010','75013','75019','75023','75024','75025','75028','75034','75035','75038','75039','75040','75041','75042','75043','75044','75048','75050','75051','75052','75054','75056','75057','75060','75061','75062','75063','75065','75067','75068','75069','75070','75071','75074','75075','75077','75078','75080','75081','75082','75083','75087','75088','75089','75093','75094','75098','75104','75115','75116','75119','75125','75126','75134','75137','75141','75142','75143','75146','75149','75150','75152','75154','75159','75160','75166','75167','75172','75180','75181','75182','75189','75201','75202','75203','75204','75205','75206','75207','75208','75209','75210','75211','75212','75214','75215','75216','75217','75218','75219','75220','75223','75224','75225','75226','75227','75228','75229','75230','75231','75232','75233','75234','75235','75236','75237','75238','75240','75241','75243','75244','75246','75247','75248','75249','75251','75252','75253','75254','76001','76002','76006','76010','76011','76012','76013','76014','76015','76016','76017','76018','76021','76022','76028','76034','76039','76040','76051','76052','76053','76054','76063','76092','76102','76103','76104','76105','76106','76107','76108','76109','76110','76111','76112','76114','76115','76116','76117','76118','76119','76120','76123','76126','76127','76131','76132','76133','76134','76135','76137','76140','76148','76155','76164','76177','76179','76180','76182','76244','76248','76262'];
 
     const PHASES = ['you','home','plans','schedule'];
-    const SCR_PHASE = {intro:'you',name:'you',pests:'you','pest-followups':'you',address:'home',oos:'home','property-type':'home','property-confirm':'home',account:'home','specialty-check':'home',transition:'plans',calculating:'plans',plan:'plans',schedule:'schedule',confirmation:'schedule'};
+    const SCR_PHASE = {intro:'you',name:'you',pests:'you','pest-followups':'you',address:'home',oos:'home','property-type':'home','property-confirm':'home',account:'home','specialty-check':'home',calculating:'plans',plan:'plans',schedule:'schedule',confirmation:'schedule'};
 
     const PLAN_TEMPLATES = {
       basic:    {name:'BASIC',    title:'Broad Coverage',      desc:'Best for people who want broad coverage at a reasonable cost.', feat:['Quarterly Exterior Treatments','Interior Treatments (when needed)','Coverage for 50+ pests','Zero-Gap System\u2122','Exterior Rodent Protection','Money-back guarantee','Free re-services','Family & Pet Safe Treatments']},
@@ -1792,9 +1784,6 @@
       document.querySelectorAll('.pac-container').forEach(c => c.style.display = 'none');
       updateProg(scr);
       if (scr === 'address') $('displayName').textContent = S.firstName || 'there';
-      if (scr === 'transition' && S.transitionTarget === 'calculating') {
-        S._transitionTimer = setTimeout(() => { S._transitionTimer = null; wizGoTo('calculating'); }, 2500);
-      }
       if (scr === 'calculating') runCalc();
       if (scr === 'schedule') renderCal();
       // Pre-select pests from pricing page category (Group A only, if they revisit pests)
@@ -1840,9 +1829,9 @@
       if (!ZIPS.includes(S.zip)) { $('zipError').classList.add('visible'); setTimeout(() => wizGoTo('oos'), 800); return; }
       $('zipError').classList.remove('visible');
 
-      // Show transition screen while fetching (NOT auto-advancing to calculating)
-      S.transitionTarget = 'rentcast';
-      wizGoTo('transition');
+      // Disable button to indicate loading while fetching property data
+      const addrBtn = document.querySelector('[data-screen="address"] .btn-wizard-primary');
+      if (addrBtn) { addrBtn.disabled = true; addrBtn.textContent = 'Looking up property...'; }
 
       try {
         const resp = await fetch('/api/rentcast', {
@@ -1983,7 +1972,7 @@
       fireGHLLead(true);
 
       if (S.groupB) {
-        if (S.preselectedCategory === 'mosquitoes') { S.transitionTarget = 'calculating'; wizGoTo('transition'); }
+        if (S.preselectedCategory === 'mosquitoes') { wizGoTo('calculating'); }
         else { wizGoTo('specialty-check'); }
       }
       else {
@@ -2000,7 +1989,7 @@
           return;
         }
         if (S.followups.rodent === 'inside') { S.rodentInspection = true; wizGoTo('schedule'); }
-        else { S.transitionTarget = 'calculating'; wizGoTo('transition'); }
+        else { wizGoTo('calculating'); }
       }
     }
 
@@ -2174,7 +2163,7 @@
         fireGHLLead(false); // Create rodent-inspection tagged lead
         wizGoTo('schedule');
       }
-      else { S.transitionTarget = 'calculating'; wizGoTo('transition'); }
+      else { wizGoTo('calculating'); }
     }
 
     function calcPlan() {
@@ -2250,7 +2239,7 @@
       $('recPlanTitle').textContent = p.title;
       $('recPlanDesc').textContent = p.desc;
       $('recPrice').textContent = displayPrice;
-      $('recPeriod').textContent = isAnnual ? `/mo — Pay $${displayPrice * 11}/yr (1 month free)` : '/month';
+      $('recPeriod').textContent = isAnnual ? `/mo — Save $${displayPrice}/yr with annual plan` : '/month';
       const tot = p.init + S.priceAdj - (S.exitApplied?30:0);
       $('recInitial').textContent = `$${tot}`;
       $('recFeatures').innerHTML = p.feat.map(f => `<li>${CHK}${f}</li>`).join('');
