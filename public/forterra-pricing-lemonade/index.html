@@ -1523,7 +1523,6 @@
           <div class="pest-tile" onclick="togglePest(this)" data-pest="crickets"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="5" ry="6"/><circle cx="12" cy="6" r="3"/><path d="M9 4L7 2M15 4l2-2"/><path d="M7 12L3 9M17 12l4-3M8 19l-3 4M16 19l3 4"/></svg></span><span class="pest-tile-text">Crickets</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
           <div class="pest-tile" onclick="togglePest(this)" data-pest="earwigs"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="10" rx="4" ry="6"/><path d="M12 16v4"/><path d="M9 20c-1 1-1 3 0 3M15 20c1 1 1 3 0 3"/><path d="M8 8L5 5M16 8l3-3M8 12L5 14M16 12l3 2"/></svg></span><span class="pest-tile-text">Earwigs</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
           <div class="pest-tile" onclick="togglePest(this)" data-pest="silverfish"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="4" ry="8"/><path d="M8 6L5 3M16 6l3-3"/><path d="M8 18l-3 3M16 18l3 3M12 20l0 2"/></svg></span><span class="pest-tile-text">Silverfish</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
-          <div class="pest-tile" onclick="togglePest(this)" data-pest="bees"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="6" ry="7"/><path d="M6 11h12M6 14h12M6 17h12"/><circle cx="12" cy="5" r="3"/><path d="M6 5L3 2M18 5l3-3"/></svg></span><span class="pest-tile-text">Bees</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
           <div class="pest-tile" onclick="togglePest(this)" data-pest="other"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg></span><span class="pest-tile-text">Other</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
           <div class="pest-tile" onclick="togglePest(this)" data-pest="notsure"><span class="pest-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#986D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 9a3 3 0 115 2c0 2-2 2-2 4"/><circle cx="12" cy="18" r="0.5" fill="#986D4F"/></svg></span><span class="pest-tile-text">I'm Not Sure</span><span class="checkmark"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></span></div>
         </div>
@@ -2031,9 +2030,9 @@
       else {
         calcPlan();
         // Route to free inspection flows based on followup answers
-        if (S.followups.termite === 'inspect' || S.followups.notsure === 'inspect' || S.followups.bees === 'inspect' || S.followups.other === 'inspect') {
+        if (S.followups.termite === 'inspect' || S.followups.notsure === 'inspect' || S.followups.other === 'inspect') {
           S.customQuote = true;
-          routeToFreeInspection(S.followups.termite === 'inspect' ? 'termite' : S.followups.bees === 'inspect' ? 'bee' : 'general');
+          routeToFreeInspection(S.followups.termite === 'inspect' ? 'termite' : 'general');
           return;
         }
         if (S.followups.notsure === 'call') {
@@ -2169,7 +2168,6 @@
       if (p.includes('prevention')) q.push({id:'prev',q:'Which pests would you like protection against?',opts:[{l:'General pests (ants, spiders, roaches)',v:'general'},{l:'Termites',v:'termites'},{l:'All of the above',v:'all'}]});
       if (p.includes('termites')) q.push({id:'termite',q:'Do you suspect an active termite infestation?',opts:[{l:'Yes, I see signs of damage or swarmers',v:'yes',n:'Active treatment may require an on-site inspection'},{l:'No, just want prevention',v:'no'},{l:"Not sure \u2014 I'd like an inspection",v:'inspect'}]});
       if (p.includes('rodents')) q.push({id:'rodent',q:'Are the rodents getting inside your home?',opts:[{l:'Yes, I hear or see them inside',v:'inside',n:"We'll schedule a free on-site inspection"},{l:'No, just outside / in the yard',v:'outside'}]});
-      if (p.includes('bees')) q.push({id:'bees',q:"Bees are important pollinators! We offer free inspections to assess the situation and recommend safe solutions.",opts:[{l:'Schedule a free bee inspection',v:'inspect'},{l:'Actually, I think they might be wasps',v:'wasps'}]});
       if (p.includes('other')) q.push({id:'other',q:"No problem! We can help with most pest issues. What are you seeing?",opts:[{l:'Schedule a free inspection so we can identify the issue',v:'inspect'},{l:'Start with general prevention',v:'prevention'}]});
       if (p.includes('notsure')) q.push({id:'notsure',q:"No worries! How would you like to proceed?",opts:[{l:'Schedule a free inspection',v:'inspect'},{l:'Start with general prevention',v:'prevention'},{l:"I'd like to talk to someone first",v:'call'}]});
       return q;
@@ -2443,9 +2441,8 @@
       }
       if (S.customQuote) {
         const isTermiteInspect = S.followups.termite === 'inspect';
-        const isBeeInspect = S.followups.bees === 'inspect';
         const isGeneralInspect = S.followups.notsure === 'inspect' || S.followups.other === 'inspect';
-        $('confirmPlan').textContent = isTermiteInspect ? 'Free Termite Inspection' : isBeeInspect ? 'Free Bee Inspection' : isGeneralInspect ? 'Free Pest Inspection' : 'Custom Home Inspection (FREE)';
+        $('confirmPlan').textContent = isTermiteInspect ? 'Free Termite Inspection' : isGeneralInspect ? 'Free Pest Inspection' : 'Custom Home Inspection (FREE)';
         $('confirmAddonsRow').style.display='none';
         $('confirmDate').textContent=ds;
         $('confirmTime').textContent=ts;
@@ -2453,8 +2450,6 @@
         $('confirmInitialFee').textContent='FREE';
         $('confirmSubtext').textContent = isTermiteInspect
           ? "Your free termite inspection is scheduled. A specialist will check for termite activity and recommend the right protection plan."
-          : isBeeInspect
-          ? "Your free bee inspection is scheduled. A specialist will safely assess the situation and recommend the best solution."
           : isGeneralInspect
           ? "Your free pest inspection is scheduled. A specialist will identify the issue and recommend the right plan for your home."
           : "Your free property inspection is scheduled. A specialist will evaluate your home and build a custom pest control plan tailored to your property.";
