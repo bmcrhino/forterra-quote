@@ -226,6 +226,12 @@ export default async function handler(req, res) {
         slackMsg = `🐀 *Rodent Inspection Requested*\n*${firstName} ${lastName}*\n📍 ${address}, ${city} ${zip}\n📅 ${preferredDate || 'TBD'} ${preferredTime || ''}\n\n_Action: Schedule free rodent inspection_`;
       }
 
+      if (callbackRequested) {
+        const dayLabel = callbackDay === 'today' ? 'Today' : callbackDay === 'tomorrow' ? 'Tomorrow' : 'This week';
+        const timeLabel = callbackTime === 'morning' ? 'Morning (8am–12pm)' : callbackTime === 'afternoon' ? 'Afternoon (12pm–5pm)' : 'Anytime';
+        slackMsg = `📞 *Callback Requested*\n*${firstName} ${lastName}*\n📱 ${phone || 'no phone'} | ✉️ ${email || 'no email'}\n📍 ${address}, ${city} ${zip}\n🐛 ${pests?.join(', ') || 'unknown pest'}\n🗓️ ${dayLabel} — ${timeLabel}\n\n_Action: CSR call to discuss pest issue and recommend plan_`;
+      }
+
       if (slackMsg) {
         await fetch(SLACK_WEBHOOK, {
           method: 'POST',
