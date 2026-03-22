@@ -1563,10 +1563,10 @@
         <div class="plan-rec">
           <div class="plan-rec-header"><h2>Your Recommended Plan</h2><p>Based on your home and pest concerns</p></div>
           <div class="billing-toggle">
-            <span class="billing-label active" id="billingMonthlyLabel">Monthly</span>
+            <span class="billing-label active" id="billingMonthlyLabel">Pay Monthly</span>
             <button class="billing-switch" id="billingSwitch" onclick="toggleBilling()" aria-label="Toggle annual billing"><span class="billing-switch-dot"></span></button>
-            <span class="billing-label" id="billingAnnualLabel">Annual</span>
-            <span class="billing-save">1 Month Free</span>
+            <span class="billing-label" id="billingAnnualLabel">Pay Upfront</span>
+            <span class="billing-save">Save 1 Month</span>
           </div>
           <div class="plan-rec-card">
             <div class="plan-rec-badge">Recommended for You</div>
@@ -1600,7 +1600,7 @@
       <div class="wizard-screen" data-screen="schedule" data-phase="schedule">
         <div class="schedule-screen">
           <div class="schedule-header"><h2>Schedule Your First Service</h2><p>Pick a date and time that works for you</p></div>
-          <div class="scarcity-banner"><svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm.75 4.75a.75.75 0 00-1.5 0v3.5c0 .199.079.39.22.53l2 2a.75.75 0 101.06-1.06l-1.78-1.78V6.75z"/></svg> High demand in your area &mdash; only <strong>&nbsp;3 slots left&nbsp;</strong> this week</div>
+          <div class="scarcity-banner"><svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm.75 4.75a.75.75 0 00-1.5 0v3.5c0 .199.079.39.22.53l2 2a.75.75 0 101.06-1.06l-1.78-1.78V6.75z"/></svg> We service your area weekly &mdash; pick a day that works for you</div>
           <div class="calendar-mock">
             <div class="calendar-nav">
               <button class="calendar-arrow" onclick="changeMonth(-1)"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg></button>
@@ -1626,7 +1626,7 @@
       <!-- S12: Preferences -->
       <div class="wizard-screen" data-screen="preferences" data-phase="schedule">
         <div style="max-width:480px;margin:0 auto">
-          <div class="sarah-intro"><div class="sarah-avatar"><img src="/avatar-sarah-cropped.jpg" alt="Sarah"></div><div class="chat-bubble">Almost done! Just a couple quick preferences.</div></div>
+          <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:8px"><div class="avatar" style="width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--warm-beige);display:flex;align-items:center;justify-content:center;flex-shrink:0"><img src="avatar-sarah-cropped.jpg" alt="Sarah" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div><div class="chat-bubble">Almost done! Just a couple quick preferences.</div></div>
 
           <div style="margin-top:24px">
             <p style="font-family:var(--font-display);font-weight:600;font-size:15px;color:var(--soil);margin-bottom:12px">How should we confirm your appointment?</p>
@@ -1638,9 +1638,10 @@
           </div>
 
           <div style="margin-top:24px">
-            <p style="font-family:var(--font-display);font-weight:600;font-size:15px;color:var(--soil);margin-bottom:12px">How would you like to handle payment?</p>
+            <p style="font-family:var(--font-display);font-weight:600;font-size:15px;color:var(--soil);margin-bottom:4px">How would you like to set up payment?</p>
+            <p style="font-family:var(--font-body);font-size:13px;color:var(--medium-grey);margin-bottom:12px">A credit card or ACH is required on file prior to service.</p>
             <div class="followup-options">
-              <div class="followup-option" onclick="selPref('payment','onsite',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>I'll pay the technician on-site</span></div>
+              <div class="followup-option" onclick="selPref('payment','onsite',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>I'll provide my card to the technician on-site</span></div>
               <div class="followup-option" onclick="selPref('payment','call',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>Call me to set up payment before my appointment</span></div>
             </div>
           </div>
@@ -2473,7 +2474,7 @@
         : S.confirmPref === 'email' ? "We'll send a confirmation to your email."
         : S.confirmPref === 'call' ? "We'll give you a quick call to confirm everything."
         : "We'll be in touch to confirm your appointment.";
-      const paymentMsg = S.paymentPref === 'onsite' ? "Payment will be collected by your technician on-site."
+      const paymentMsg = S.paymentPref === 'onsite' ? "Your technician will collect your card or ACH info on-site before service."
         : "Someone from our office will call to set up payment before your appointment.";
       $('confirmSubtext').innerHTML = confirmMsg + '<br><span style="font-size:14px;color:var(--medium-grey)">' + paymentMsg + '</span>';
       wizGoTo('confirmation');

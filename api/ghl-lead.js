@@ -79,6 +79,10 @@ export default async function handler(req, res) {
       if (preferredTime) noteLines.push(`Preferred Time: ${preferredTime}`);
       if (rodentInspection) noteLines.push('⚠️ RODENT INSPECTION REQUESTED (interior rodent issue)');
       if (customQuote) noteLines.push('⚠️ CUSTOM QUOTE NEEDED (oversized property)');
+      if (confirmPreference) noteLines.push(`Confirm via: ${confirmPreference}`);
+      if (paymentPreference) noteLines.push(`Payment: ${paymentPreference === 'onsite' ? 'Card to technician on-site' : 'Call to set up payment'}`);
+      noteLines.push('');
+      noteLines.push('✅ AGREED TO TERMS OF SERVICE');
     } else {
       noteLines.push('');
       noteLines.push('⚠️ QUOTE ABANDONED — customer did not complete');
