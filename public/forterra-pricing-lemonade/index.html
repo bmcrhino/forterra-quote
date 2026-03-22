@@ -1988,9 +1988,53 @@
       }
       else {
         calcPlan();
+        // Route to free inspection flows based on followup answers
+        if (S.followups.termite === 'inspect' || S.followups.notsure === 'inspect') {
+          S.customQuote = true;
+          routeToFreeInspection(S.followups.termite === 'inspect' ? 'termite' : 'general');
+          return;
+        }
+        if (S.followups.notsure === 'call') {
+          // User wants to talk to someone — route to confirmation with call CTA
+          routeToCallUs();
+          return;
+        }
         if (S.followups.rodent === 'inside') { S.rodentInspection = true; wizGoTo('schedule'); }
         else { S.transitionTarget = 'calculating'; wizGoTo('transition'); }
       }
+    }
+
+    // ==========================================
+    // FREE INSPECTION / CALL-US ROUTING
+    // ==========================================
+    function routeToFreeInspection(reason) {
+      // Update schedule screen header for free inspection context
+      const header = document.querySelector('[data-screen="schedule"] .schedule-header');
+      if (header) {
+        if (reason === 'termite') {
+          header.querySelector('h2').textContent = 'Schedule Your Free Termite Inspection';
+          header.querySelector('p').textContent = "We'll send a specialist to inspect your property for termite activity — completely free.";
+        } else {
+          header.querySelector('h2').textContent = 'Schedule Your Free Inspection';
+          header.querySelector('p').textContent = "We'll send a specialist to identify the pest issue and recommend the right plan — completely free.";
+        }
+      }
+      fireGHLLead(false);
+      wizGoTo('schedule');
+    }
+    function routeToCallUs() {
+      // Fire lead so the team knows someone wants a callback
+      fireGHLLead(false);
+      // Show confirmation screen with call-us messaging
+      $('confirmPlan').textContent = 'Callback Requested';
+      $('confirmAddonsRow').style.display = 'none';
+      $('confirmDate').textContent = 'N/A';
+      $('confirmTime').textContent = 'N/A';
+      $('confirmAddr2').textContent = `${S.address}, ${S.city} ${S.zip}`;
+      $('confirmInitialFee').textContent = 'FREE';
+      $('confirmSubtext').textContent = "We've received your info and a specialist will reach out shortly. You can also call us directly at (817) 665-6527.";
+      document.querySelector('[data-screen="confirmation"] h2').textContent = "We'll Be in Touch!";
+      wizGoTo('confirmation');
     }
 
     // ==========================================
@@ -2330,13 +2374,19 @@
         wizGoTo('confirmation'); return;
       }
       if (S.customQuote) {
-        $('confirmPlan').textContent='Custom Home Inspection (FREE)';
+        const isTermiteInspect = S.followups.termite === 'inspect';
+        const isGeneralInspect = S.followups.notsure === 'inspect';
+        $('confirmPlan').textContent = isTermiteInspect ? 'Free Termite Inspection' : isGeneralInspect ? 'Free Pest Inspection' : 'Custom Home Inspection (FREE)';
         $('confirmAddonsRow').style.display='none';
         $('confirmDate').textContent=ds;
         $('confirmTime').textContent=ts;
         $('confirmAddr2').textContent=`${S.address}, ${S.city} ${S.zip}`;
         $('confirmInitialFee').textContent='FREE';
-        $('confirmSubtext').textContent="Your free property inspection is scheduled. A specialist will evaluate your home and build a custom pest control plan tailored to your property.";
+        $('confirmSubtext').textContent = isTermiteInspect
+          ? "Your free termite inspection is scheduled. A specialist will check for termite activity and recommend the right protection plan."
+          : isGeneralInspect
+          ? "Your free pest inspection is scheduled. A specialist will identify the issue and recommend the right plan for your home."
+          : "Your free property inspection is scheduled. A specialist will evaluate your home and build a custom pest control plan tailored to your property.";
         wizGoTo('confirmation'); return;
       }
       const p=PLANS[S.plan];
