@@ -2278,8 +2278,8 @@
       const q=[], p=S.pests;
       // Keep follow-ups focused on plan-changing / inspection-needed pests only
       if (p.includes('prevention')) q.push({id:'prev',q:'Which pests would you like protection against?',opts:[{l:'General pests (ants, spiders, roaches)',v:'general'},{l:'Termites',v:'termites'},{l:'All of the above',v:'all'}]});
-      if (p.includes('ants')) q.push({id:'ants',q:'What kind of ants are you seeing?',opts:[{l:'Small ants (sugar ants, pavement ants, etc.)',v:'small'},{l:'Large ants that may be damaging wood (carpenter ants)',v:'carpenter',n:'Carpenter ant treatment requires a specialized add-on (+$100)'},{l:"I'm not sure",v:'unsure'}]});
-      if (p.includes('cockroaches')) q.push({id:'roaches',q:'What kind of cockroaches are you seeing?',opts:[{l:'Large roaches (American / smoky brown — usually near doors/garage)',v:'large'},{l:'Small roaches in kitchen or bathroom (German cockroaches)',v:'german',n:'German cockroach treatment requires a specialized add-on (+$200)'},{l:"I'm not sure",v:'unsure'}]});
+      if (p.includes('ants')) q.push({id:'ants',q:'Are you seeing sawdust-like shavings near wood?',img:'images/carpenter-ant-frass.png',imgAlt:'Carpenter ant frass on a window sill',opts:[{l:'Yes — I see wood shavings like this',v:'carpenter',n:'Carpenter ant treatment requires a specialized add-on (+$100)'},{l:'No — just regular ants',v:'small'},{l:"I'm not sure",v:'unsure'}]});
+      if (p.includes('cockroaches')) q.push({id:'roaches',q:'Which type looks most like what you\'re seeing?',img:'images/cockroach-id.png',imgAlt:'DFW cockroach identification — German, American, Oriental, Smoky Brown',opts:[{l:'Small roaches in kitchen (German cockroach)',v:'german',n:'German cockroach treatment requires a specialized add-on (+$200)'},{l:'Large roaches (American, Oriental, or Smoky Brown)',v:'large'},{l:"I'm not sure",v:'unsure'}]});
       if (p.includes('fleas')) q.push({id:'fleas',q:'Where are you experiencing the flea or tick issue?',opts:[{l:'Inside my home',v:'inside',n:'Interior flea treatment requires a specialized add-on (+$100)'},{l:'Outside in the yard only',v:'outside'},{l:'Just want prevention (I have pets)',v:'prevention'}]});
       if (p.includes('termites')) q.push({id:'termite',q:'Do you suspect an active termite infestation?',opts:[{l:'Yes, I see signs of damage or swarmers',v:'yes',n:'Active treatment may require an on-site inspection'},{l:'No, just want prevention',v:'no'},{l:"Not sure \u2014 I'd like an inspection",v:'inspect'}]});
       if (p.includes('rodents')) q.push({id:'rodent',q:'Are the rodents getting inside your home?',opts:[{l:'Yes, I hear or see them inside',v:'inside',n:"We'll schedule a free on-site inspection"},{l:'No, just outside / in the yard',v:'outside'}]});
@@ -2303,7 +2303,8 @@
       const progress = `<p style="font-family:var(--font-display);font-size:12px;color:var(--medium-grey);margin-bottom:12px;text-align:center">Question ${fqIndex+1} of ${fqList.length}</p>`;
       const d = document.createElement('div'); d.className='followup-card';
       d.style.animation = 'screenFadeIn 0.4s ease';
-      d.innerHTML = `${progress}<p class="followup-question">${q.q}</p><div class="followup-options">${q.opts.map(o =>
+      const imgHtml = q.img ? `<img src="${q.img}" alt="${q.imgAlt||''}" style="width:100%;max-width:480px;border-radius:12px;margin:0 auto 16px;display:block">` : '';
+      d.innerHTML = `${progress}<p class="followup-question">${q.q}</p>${imgHtml}<div class="followup-options">${q.opts.map(o =>
         `<div class="followup-option" onclick="selFQ('${q.id}','${o.v}',this)" data-qid="${q.id}"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>${o.l}</span></div>${o.n?`<div class="followup-note" data-note="${q.id}-${o.v}">${o.n}</div>`:''}`
       ).join('')}</div>`;
       c.appendChild(d);
