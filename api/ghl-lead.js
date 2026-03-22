@@ -8,7 +8,8 @@ export default async function handler(req, res) {
       firstName, lastName, email, phone, address, city, zip,
       sqft, lotSize, propertyType, plan, pests, addons,
       preferredDate, preferredTime, billing, partial,
-      rodentInspection, customQuote, specialties, followups
+      rodentInspection, customQuote, specialties, followups,
+      confirmPreference, paymentPreference
     } = req.body;
 
     const TOKEN = (process.env.GHL_API_TOKEN || '').trim();
@@ -39,6 +40,8 @@ export default async function handler(req, res) {
     if (pests && pests.length) pests.forEach(p => tags.push(`pest:${p}`));
     if (addons && addons.length) addons.forEach(a => tags.push(`addon:${a}`));
     if (specialties && specialties.length) specialties.forEach(s => tags.push(`specialty:${s}`));
+    if (confirmPreference) tags.push(`confirm-via:${confirmPreference}`);
+    if (paymentPreference) tags.push(`payment:${paymentPreference}`);
 
     // ==========================================
     // BUILD AUDIT NOTE

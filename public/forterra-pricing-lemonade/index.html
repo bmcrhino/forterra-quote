@@ -1467,10 +1467,6 @@
         <div class="wizard-form">
           <div class="form-group"><label class="form-label" for="email">Email Address</label><input class="form-input" type="email" id="email" placeholder="jane@email.com" autocomplete="email"></div>
           <div class="form-group"><label class="form-label" for="phone">Phone Number</label><input class="form-input" type="tel" id="phone" placeholder="(555) 123-4567" autocomplete="tel"></div>
-          <div style="display:flex;align-items:flex-start;gap:10px;margin-top:4px">
-            <input type="checkbox" id="termsCheck" style="margin-top:4px;accent-color:var(--orange)">
-            <label for="termsCheck" style="font-family:var(--font-display);font-size:13px;color:var(--dark-grey);line-height:1.4;cursor:pointer">I agree to the <a href="#" onclick="showTerms();return false" style="color:var(--orange);text-decoration:underline">Terms of Service</a> and <a href="#" onclick="showPrivacy();return false" style="color:var(--orange);text-decoration:underline">Privacy Policy</a></label>
-          </div>
           <div class="btn-row btn-row-between">
             <button class="btn-wizard btn-wizard-ghost" onclick="wizBack()"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg> Back</button>
             <button class="btn-wizard btn-wizard-primary" onclick="submitAccount()" id="accountNext" disabled>Continue <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/></svg></button>
@@ -1622,17 +1618,51 @@
           </div>
           <div class="btn-row btn-row-between" style="margin-top:32px">
             <button class="btn-wizard btn-wizard-ghost" onclick="wizBack()"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg> Back</button>
-            <button class="btn-wizard btn-wizard-primary" onclick="confirmSchedule()" id="scheduleNext" disabled>Confirm Booking <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></button>
+            <button class="btn-wizard btn-wizard-primary" onclick="wizGoTo('preferences')" id="scheduleNext" disabled>Continue <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/></svg></button>
           </div>
         </div>
       </div>
 
-      <!-- S12: Confirmation -->
+      <!-- S12: Preferences -->
+      <div class="wizard-screen" data-screen="preferences" data-phase="schedule">
+        <div style="max-width:480px;margin:0 auto">
+          <div class="sarah-intro"><div class="sarah-avatar"><img src="/avatar-sarah-cropped.jpg" alt="Sarah"></div><div class="chat-bubble">Almost done! Just a couple quick preferences.</div></div>
+
+          <div style="margin-top:24px">
+            <p style="font-family:var(--font-display);font-weight:600;font-size:15px;color:var(--soil);margin-bottom:12px">How should we confirm your appointment?</p>
+            <div class="followup-options">
+              <div class="followup-option" onclick="selPref('confirm','text',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>Text me a confirmation <span style="color:var(--orange);font-size:12px;font-weight:600">(recommended)</span></span></div>
+              <div class="followup-option" onclick="selPref('confirm','email',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>Send me an email confirmation</span></div>
+              <div class="followup-option" onclick="selPref('confirm','call',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>I'd like a quick call to go over everything</span></div>
+            </div>
+          </div>
+
+          <div style="margin-top:24px">
+            <p style="font-family:var(--font-display);font-weight:600;font-size:15px;color:var(--soil);margin-bottom:12px">How would you like to handle payment?</p>
+            <div class="followup-options">
+              <div class="followup-option" onclick="selPref('payment','onsite',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>I'll pay the technician on-site</span></div>
+              <div class="followup-option" onclick="selPref('payment','call',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>Call me to set up payment before my appointment</span></div>
+            </div>
+          </div>
+
+          <div style="margin-top:24px;display:flex;gap:8px;align-items:flex-start">
+            <input type="checkbox" id="prefTermsCheck" style="margin-top:4px;accent-color:var(--orange)">
+            <label for="prefTermsCheck" style="font-family:var(--font-display);font-size:13px;color:var(--dark-grey);line-height:1.4;cursor:pointer">I agree to the <a href="#" onclick="showTerms();return false" style="color:var(--orange);text-decoration:underline">Terms of Service</a> and <a href="#" onclick="showPrivacy();return false" style="color:var(--orange);text-decoration:underline">Privacy Policy</a></label>
+          </div>
+
+          <div class="btn-row btn-row-between" style="margin-top:32px">
+            <button class="btn-wizard btn-wizard-ghost" onclick="wizBack()"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg> Back</button>
+            <button class="btn-wizard btn-wizard-primary" onclick="submitPreferences()" id="prefNext" disabled>Submit &amp; Book Service <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- S13: Confirmation -->
       <div class="wizard-screen" data-screen="confirmation" data-phase="schedule">
         <div class="confirmation-screen">
           <div class="confirm-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#047857" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
           <h2>You're All Set!</h2>
-          <p id="confirmSubtext">Your first service has been booked. We'll send a confirmation to your email.</p>
+          <p id="confirmSubtext">Your first service has been booked.</p>
           <div class="confirm-summary">
             <div class="confirm-summary-row"><span class="confirm-summary-label">Plan</span><span class="confirm-summary-value" id="confirmPlan">Standard &mdash; $59/mo</span></div>
             <div class="confirm-summary-row" id="confirmAddonsRow" style="display:none"><span class="confirm-summary-label">Add-ons</span><span class="confirm-summary-value" id="confirmAddons"></span></div>
@@ -1747,7 +1777,7 @@
     const ZIPS = ['75001','75002','75006','75007','75010','75013','75019','75023','75024','75025','75028','75034','75035','75038','75039','75040','75041','75042','75043','75044','75048','75050','75051','75052','75054','75056','75057','75060','75061','75062','75063','75065','75067','75068','75069','75070','75071','75074','75075','75077','75078','75080','75081','75082','75083','75087','75088','75089','75093','75094','75098','75104','75115','75116','75119','75125','75126','75134','75137','75141','75142','75143','75146','75149','75150','75152','75154','75159','75160','75166','75167','75172','75180','75181','75182','75189','75201','75202','75203','75204','75205','75206','75207','75208','75209','75210','75211','75212','75214','75215','75216','75217','75218','75219','75220','75223','75224','75225','75226','75227','75228','75229','75230','75231','75232','75233','75234','75235','75236','75237','75238','75240','75241','75243','75244','75246','75247','75248','75249','75251','75252','75253','75254','76001','76002','76006','76010','76011','76012','76013','76014','76015','76016','76017','76018','76021','76022','76028','76034','76039','76040','76051','76052','76053','76054','76063','76092','76102','76103','76104','76105','76106','76107','76108','76109','76110','76111','76112','76114','76115','76116','76117','76118','76119','76120','76123','76126','76127','76131','76132','76133','76134','76135','76137','76140','76148','76155','76164','76177','76179','76180','76182','76244','76248','76262'];
 
     const PHASES = ['you','home','plans','schedule'];
-    const SCR_PHASE = {intro:'you',name:'you',pests:'you','pest-followups':'you',address:'home',oos:'home','property-type':'home','property-confirm':'home',account:'home','specialty-check':'home',calculating:'plans',plan:'plans',schedule:'schedule',confirmation:'schedule'};
+    const SCR_PHASE = {intro:'you',name:'you',pests:'you','pest-followups':'you',address:'home',oos:'home','property-type':'home','property-confirm':'home',account:'home','specialty-check':'home',calculating:'plans',plan:'plans',schedule:'schedule',preferences:'schedule',confirmation:'schedule'};
 
     const PLAN_TEMPLATES = {
       basic:    {name:'BASIC',    title:'Broad Coverage',      desc:'Best for people who want broad coverage at a reasonable cost.', feat:['Quarterly Exterior Treatments','Interior Treatments (when needed)','Coverage for 50+ pests','Zero-Gap System\u2122','Exterior Rodent Protection','Money-back guarantee','Free re-services','Family & Pet Safe Treatments']},
@@ -1974,11 +2004,10 @@
     // S5: ACCOUNT
     // ==========================================
     [$('email'),$('phone')].forEach(i => i.addEventListener('input', chkAcct));
-    $('termsCheck').addEventListener('change', chkAcct);
     function chkAcct() {
       const eOk = $('email').value.includes('@') && $('email').value.includes('.');
       const pOk = $('phone').value.replace(/\D/g,'').length >= 10;
-      $('accountNext').disabled = !(eOk && pOk && $('termsCheck').checked);
+      $('accountNext').disabled = !(eOk && pOk);
     }
     $('phone').addEventListener('input', function() {
       let v = this.value.replace(/\D/g,'');
@@ -2063,7 +2092,9 @@
           rodentInspection: S.rodentInspection,
           customQuote: S.customQuote,
           specialties: S.specialties,
-          followups: S.followups || {}
+          followups: S.followups || {},
+          confirmPreference: S.confirmPref || '',
+          paymentPreference: S.paymentPref || ''
         };
         if (!partial && S.date) {
           body.preferredDate = `${S.date.getFullYear()}-${String(S.date.getMonth()+1).padStart(2,'0')}-${String(S.date.getDate()).padStart(2,'0')}`;
@@ -2086,6 +2117,26 @@
     function closeTerms() { $('termsModal').classList.remove('visible'); }
     function showPrivacy() { $('privacyModal').classList.add('visible'); }
     function closePrivacy() { $('privacyModal').classList.remove('visible'); }
+
+    // Preferences screen
+    S.confirmPref = ''; S.paymentPref = '';
+    function selPref(group, val, el) {
+      const container = el.closest('.followup-options');
+      container.querySelectorAll('.followup-option').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+      if (group === 'confirm') S.confirmPref = val;
+      if (group === 'payment') S.paymentPref = val;
+      chkPref();
+    }
+    $('prefTermsCheck').addEventListener('change', chkPref);
+    function chkPref() {
+      $('prefNext').disabled = !(S.confirmPref && S.paymentPref && $('prefTermsCheck').checked);
+    }
+    async function submitPreferences() {
+      $('prefNext').disabled = true;
+      $('prefNext').innerHTML = '<div class="calc-spinner" style="display:inline-block;width:18px;height:18px;margin-right:8px"></div> Submitting...';
+      await confirmSchedule();
+    }
 
     // ==========================================
     // S6: PESTS
@@ -2417,6 +2468,14 @@
       $('confirmTime').textContent=ts;
       $('confirmAddr2').textContent=`${S.address}, ${S.city} ${S.zip}`;
       $('confirmInitialFee').textContent=`$${tot}`;
+      // Set confirmation subtext based on preferences
+      const confirmMsg = S.confirmPref === 'text' ? "We'll text you a confirmation shortly."
+        : S.confirmPref === 'email' ? "We'll send a confirmation to your email."
+        : S.confirmPref === 'call' ? "We'll give you a quick call to confirm everything."
+        : "We'll be in touch to confirm your appointment.";
+      const paymentMsg = S.paymentPref === 'onsite' ? "Payment will be collected by your technician on-site."
+        : "Someone from our office will call to set up payment before your appointment.";
+      $('confirmSubtext').innerHTML = confirmMsg + '<br><span style="font-size:14px;color:var(--medium-grey)">' + paymentMsg + '</span>';
       wizGoTo('confirmation');
     }
 
