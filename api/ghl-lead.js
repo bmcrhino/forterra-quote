@@ -9,7 +9,8 @@ export default async function handler(req, res) {
       sqft, lotSize, propertyType, plan, pests, addons,
       preferredDate, preferredTime, billing, partial,
       rodentInspection, customQuote, specialties, followups,
-      confirmPreference, paymentPreference
+      confirmPreference, paymentPreference,
+      callbackRequested, callbackDay, callbackTime
     } = req.body;
 
     const TOKEN = (process.env.GHL_API_TOKEN || '').trim();
@@ -42,6 +43,7 @@ export default async function handler(req, res) {
     if (specialties && specialties.length) specialties.forEach(s => tags.push(`specialty:${s}`));
     if (confirmPreference) tags.push(`confirm-via:${confirmPreference}`);
     if (paymentPreference) tags.push(`payment:${paymentPreference}`);
+    if (callbackRequested) tags.push('callback-requested');
 
     // ==========================================
     // BUILD AUDIT NOTE
@@ -79,6 +81,12 @@ export default async function handler(req, res) {
       if (preferredTime) noteLines.push(`Preferred Time: ${preferredTime}`);
       if (rodentInspection) noteLines.push('⚠️ RODENT INSPECTION REQUESTED (interior rodent issue)');
       if (customQuote) noteLines.push('⚠️ CUSTOM QUOTE NEEDED (oversized property)');
+      if (callbackRequested) {
+        noteLines.push('');
+        noteLines.push('📞 CALLBACK REQUESTED');
+        noteLines.push(`Preferred day: ${callbackDay || 'not specified'}`);
+        noteLines.push(`Preferred time: ${callbackTime || 'not specified'}`);
+      }
       if (confirmPreference) noteLines.push(`Confirm via: ${confirmPreference}`);
       if (paymentPreference) noteLines.push(`Payment: ${paymentPreference === 'onsite' ? 'Card to technician on-site' : 'Call to set up payment'}`);
       noteLines.push('');

@@ -1624,6 +1624,36 @@
         </div>
       </div>
 
+      <!-- S11b: Callback Schedule -->
+      <div class="wizard-screen" data-screen="callback-schedule" data-phase="schedule">
+        <div style="max-width:480px;margin:0 auto">
+          <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:8px"><div class="avatar" style="width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--warm-beige);display:flex;align-items:center;justify-content:center;flex-shrink:0"><img src="avatar-sarah-cropped.jpg" alt="Sarah" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div><div class="chat-bubble">We'll have one of our pest specialists give you a quick call to figure out the best plan. When works for you?</div></div>
+
+          <div style="margin-top:24px">
+            <p style="font-family:var(--font-display);font-weight:600;font-size:15px;color:var(--soil);margin-bottom:12px">Preferred day</p>
+            <div class="followup-options">
+              <div class="followup-option" onclick="selCallback('day','today',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>Today if possible</span></div>
+              <div class="followup-option" onclick="selCallback('day','tomorrow',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>Tomorrow</span></div>
+              <div class="followup-option" onclick="selCallback('day','anyday',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>Any day this week</span></div>
+            </div>
+          </div>
+
+          <div style="margin-top:24px">
+            <p style="font-family:var(--font-display);font-weight:600;font-size:15px;color:var(--soil);margin-bottom:12px">Preferred time</p>
+            <div class="followup-options">
+              <div class="followup-option" onclick="selCallback('time','morning',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>Morning (8am – 12pm)</span></div>
+              <div class="followup-option" onclick="selCallback('time','afternoon',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>Afternoon (12pm – 5pm)</span></div>
+              <div class="followup-option" onclick="selCallback('time','anytime',this)"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>Anytime</span></div>
+            </div>
+          </div>
+
+          <div class="btn-row btn-row-between" style="margin-top:32px">
+            <button class="btn-wizard btn-wizard-ghost" onclick="wizBack()"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg> Back</button>
+            <button class="btn-wizard btn-wizard-primary" onclick="submitCallback()" id="callbackNext" disabled>Request Call <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></button>
+          </div>
+        </div>
+      </div>
+
       <!-- S12: Preferences -->
       <div class="wizard-screen" data-screen="preferences" data-phase="schedule">
         <div style="max-width:480px;margin:0 auto">
@@ -1779,7 +1809,7 @@
     const ZIPS = ['75001','75002','75006','75007','75010','75013','75019','75023','75024','75025','75028','75034','75035','75038','75039','75040','75041','75042','75043','75044','75048','75050','75051','75052','75054','75056','75057','75060','75061','75062','75063','75065','75067','75068','75069','75070','75071','75074','75075','75077','75078','75080','75081','75082','75083','75087','75088','75089','75093','75094','75098','75104','75115','75116','75119','75125','75126','75134','75137','75141','75142','75143','75146','75149','75150','75152','75154','75159','75160','75166','75167','75172','75180','75181','75182','75189','75201','75202','75203','75204','75205','75206','75207','75208','75209','75210','75211','75212','75214','75215','75216','75217','75218','75219','75220','75223','75224','75225','75226','75227','75228','75229','75230','75231','75232','75233','75234','75235','75236','75237','75238','75240','75241','75243','75244','75246','75247','75248','75249','75251','75252','75253','75254','76001','76002','76006','76010','76011','76012','76013','76014','76015','76016','76017','76018','76021','76022','76028','76034','76039','76040','76051','76052','76053','76054','76063','76092','76102','76103','76104','76105','76106','76107','76108','76109','76110','76111','76112','76114','76115','76116','76117','76118','76119','76120','76123','76126','76127','76131','76132','76133','76134','76135','76137','76140','76148','76155','76164','76177','76179','76180','76182','76244','76248','76262'];
 
     const PHASES = ['you','home','plans','schedule'];
-    const SCR_PHASE = {intro:'you',name:'you',pests:'you','pest-followups':'you',address:'home',oos:'home','property-type':'home','property-confirm':'home',account:'home','specialty-check':'home',calculating:'plans',plan:'plans',schedule:'schedule',preferences:'schedule',confirmation:'schedule'};
+    const SCR_PHASE = {intro:'you',name:'you',pests:'you','pest-followups':'you',address:'home',oos:'home','property-type':'home','property-confirm':'home',account:'home','specialty-check':'home',calculating:'plans',plan:'plans',schedule:'schedule','callback-schedule':'schedule',preferences:'schedule',confirmation:'schedule'};
 
     const PLAN_TEMPLATES = {
       basic:    {name:'BASIC',    title:'Broad Coverage',      desc:'Best for people who want broad coverage at a reasonable cost.', feat:['Quarterly Exterior Treatments','Interior Treatments (when needed)','Coverage for 50+ pests','Zero-Gap System\u2122','Exterior Rodent Protection','Money-back guarantee','Free re-services','Family & Pet Safe Treatments']},
@@ -2030,14 +2060,13 @@
       else {
         calcPlan();
         // Route to free inspection flows based on followup answers
-        if (S.followups.termite === 'inspect' || S.followups.notsure === 'inspect' || S.followups.other === 'inspect') {
+        if (S.followups.termite === 'inspect') {
           S.customQuote = true;
-          routeToFreeInspection(S.followups.termite === 'inspect' ? 'termite' : 'general');
+          routeToFreeInspection('termite');
           return;
         }
-        if (S.followups.notsure === 'call') {
-          // User wants to talk to someone — route to confirmation with call CTA
-          routeToCallUs();
+        if (S.followups.notsure === 'callback' || S.followups.other === 'callback') {
+          routeToCallbackSchedule();
           return;
         }
         if (S.followups.rodent === 'inside') { S.rodentInspection = true; wizGoTo('schedule'); }
@@ -2063,6 +2092,40 @@
       fireGHLLead(false);
       wizGoTo('schedule');
     }
+    // Callback schedule (for Other / Not Sure pests)
+    S.callbackDay = ''; S.callbackTime = '';
+    function routeToCallbackSchedule() {
+      fireGHLLead(false);
+      wizGoTo('callback-schedule');
+    }
+    function selCallback(group, val, el) {
+      const container = el.closest('.followup-options');
+      container.querySelectorAll('.followup-option').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+      if (group === 'day') S.callbackDay = val;
+      if (group === 'time') S.callbackTime = val;
+      $('callbackNext').disabled = !(S.callbackDay && S.callbackTime);
+    }
+    async function submitCallback() {
+      $('callbackNext').disabled = true;
+      $('callbackNext').innerHTML = '<div class="calc-spinner" style="display:inline-block;width:18px;height:18px;margin-right:8px"></div> Submitting...';
+      // Fire updated lead with callback preferences
+      S.callbackRequested = true;
+      await fireGHLLead(false);
+      // Show confirmation
+      $('confirmPlan').textContent = 'Phone Consultation';
+      $('confirmAddonsRow').style.display = 'none';
+      const dayLabel = S.callbackDay === 'today' ? 'Today' : S.callbackDay === 'tomorrow' ? 'Tomorrow' : 'This week';
+      const timeLabel = S.callbackTime === 'morning' ? 'Morning (8am–12pm)' : S.callbackTime === 'afternoon' ? 'Afternoon (12pm–5pm)' : 'Anytime';
+      $('confirmDate').textContent = dayLabel;
+      $('confirmTime').textContent = timeLabel;
+      $('confirmAddr2').textContent = `${S.address}, ${S.city} ${S.zip}`;
+      $('confirmInitialFee').textContent = 'FREE';
+      $('confirmSubtext').textContent = "One of our pest specialists will call you to discuss your situation and recommend the best solution. No obligation.";
+      document.querySelector('[data-screen="confirmation"] h2').textContent = "We'll Call You!";
+      wizGoTo('confirmation');
+    }
+
     function routeToCallUs() {
       // Fire lead so the team knows someone wants a callback
       fireGHLLead(false);
@@ -2096,7 +2159,10 @@
           specialties: S.specialties,
           followups: S.followups || {},
           confirmPreference: S.confirmPref || '',
-          paymentPreference: S.paymentPref || ''
+          paymentPreference: S.paymentPref || '',
+          callbackRequested: S.callbackRequested || false,
+          callbackDay: S.callbackDay || '',
+          callbackTime: S.callbackTime || ''
         };
         if (!partial && S.date) {
           body.preferredDate = `${S.date.getFullYear()}-${String(S.date.getMonth()+1).padStart(2,'0')}-${String(S.date.getDate()).padStart(2,'0')}`;
@@ -2168,8 +2234,8 @@
       if (p.includes('prevention')) q.push({id:'prev',q:'Which pests would you like protection against?',opts:[{l:'General pests (ants, spiders, roaches)',v:'general'},{l:'Termites',v:'termites'},{l:'All of the above',v:'all'}]});
       if (p.includes('termites')) q.push({id:'termite',q:'Do you suspect an active termite infestation?',opts:[{l:'Yes, I see signs of damage or swarmers',v:'yes',n:'Active treatment may require an on-site inspection'},{l:'No, just want prevention',v:'no'},{l:"Not sure \u2014 I'd like an inspection",v:'inspect'}]});
       if (p.includes('rodents')) q.push({id:'rodent',q:'Are the rodents getting inside your home?',opts:[{l:'Yes, I hear or see them inside',v:'inside',n:"We'll schedule a free on-site inspection"},{l:'No, just outside / in the yard',v:'outside'}]});
-      if (p.includes('other')) q.push({id:'other',q:"No problem! We can help with most pest issues. What are you seeing?",opts:[{l:'Schedule a free inspection so we can identify the issue',v:'inspect'},{l:'Start with general prevention',v:'prevention'}]});
-      if (p.includes('notsure')) q.push({id:'notsure',q:"No worries! How would you like to proceed?",opts:[{l:'Schedule a free inspection',v:'inspect'},{l:'Start with general prevention',v:'prevention'},{l:"I'd like to talk to someone first",v:'call'}]});
+      if (p.includes('other')) q.push({id:'other',q:"No problem! We can help with most pest issues. How would you like to proceed?",opts:[{l:'Have someone from Forterra call me to discuss',v:'callback'},{l:'Start with general prevention',v:'prevention'}]});
+      if (p.includes('notsure')) q.push({id:'notsure',q:"No worries! How would you like to proceed?",opts:[{l:'Have someone from Forterra call me to discuss',v:'callback'},{l:'Start with general prevention',v:'prevention'}]});
       return q;
     }
     // Conversational Q&A: show one question at a time
