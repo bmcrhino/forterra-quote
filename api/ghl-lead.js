@@ -1,4 +1,4 @@
-const SLACK_WEBHOOK = process.env.SLACK_WEBHOOK_URL || '';
+const SLACK_WEBHOOK = process.env.SLACK_WEBHOOK_URL || ''; // #office-only
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
     // ==========================================
     // DETERMINE SCENARIO
     // ==========================================
-    let scenario = 'abandoned'; // default
+    let scenario = 'in-progress'; // partial default — GHL automation waits 15 min then flips to abandoned
     if (!partial) {
       if (rodentInspection) scenario = 'rodent-inspection';
       else if (customQuote) scenario = 'custom-quote';
@@ -124,9 +124,9 @@ export default async function handler(req, res) {
         const existingTags = existing.contact?.tags || [];
         const mergedTags = [...new Set([...existingTags, ...tags])];
 
-        // On final submission, remove the abandoned tag
+        // On final submission, remove in-progress tag
         const finalTags = !partial
-          ? mergedTags.filter(t => t !== 'quote-abandoned')
+          ? mergedTags.filter(t => t !== 'quote-in-progress')
           : mergedTags;
 
         await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}`, {
@@ -149,9 +149,9 @@ export default async function handler(req, res) {
     }
 
     // ==========================================
-    // ADD NOTE (audit trail — final submission only)
+    // ADD NOTE (audit trail)
     // ==========================================
-    if (!partial) await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}/notes`, {
+    await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}/notes`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${TOKEN}`,
