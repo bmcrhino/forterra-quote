@@ -16,6 +16,8 @@ export default async function handler(req, res) {
     const TOKEN = (process.env.GHL_API_TOKEN || '').trim();
     const LOCATION_ID = (process.env.GHL_LOCATION_ID || '').trim();
     const PIPELINE_ID = (process.env.GHL_PIPELINE_ID || '').trim();
+    const STAGE_BOOKED = '2cbb6069-92e9-4b16-9278-424ab97e6681';    // Online Quote Booked
+    const STAGE_ABANDONED = '17386d9a-84ac-434f-90bc-cfc777b37e09'; // Online Quote Abandoned
 
     if (!TOKEN || !LOCATION_ID) {
       console.error('Missing env vars');
@@ -214,6 +216,7 @@ export default async function handler(req, res) {
         pipelineId: PIPELINE_ID,
         locationId: LOCATION_ID,
         name: oppName,
+        stageId: STAGE_BOOKED,
         status: 'open',
         contactId: contactId,
         monetaryValue: 0
