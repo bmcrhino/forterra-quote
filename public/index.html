@@ -1909,7 +1909,7 @@
       basic:    {name:'BASIC',    title:'Broad Coverage',      desc:'Best for people who want broad coverage at a reasonable cost.', feat:['Quarterly Exterior Treatments','Interior Treatments (when needed)','Coverage for 50+ pests','Zero-Gap System\u2122','Exterior Rodent Protection','Money-back guarantee','Free re-services','Family & Pet Safe Treatments']},
       standard: {name:'STANDARD', title:'Pests + Termite Watch',desc:'Best for people who want to stay on top of common pests and keep an eye on termites.', feat:['Quarterly Exterior Treatments','Interior Treatments (when needed)','Coverage for 50+ pests','Zero-Gap System\u2122','Exterior Rodent Protection','Money-back guarantee','Free re-services','Family & Pet Safe Treatments','Termite Monitoring System']},
       premium:  {name:'PREMIUM',  title:'Total Home Defense',   desc:'Best for those who want to protect their home against termites and bugs.', feat:['Quarterly Exterior Treatments','Interior Treatments (when needed)','Coverage for 50+ pests','Zero-Gap System\u2122','Exterior Rodent Protection','Money-back guarantee','Free re-services','Family & Pet Safe Treatments','Termite Monitoring System','Sentricon\u00AE Baiting System','Full home termite warranty']},
-      mosquito: {name:'MOSQUITO SERVICE', title:'Seasonal Yard Protection', desc:'Targeted mosquito, flea & tick control for your outdoor spaces.', feat:['Mosquito, Flea & Tick Control (exterior)','7 Seasonal Services per year','Mosquito Bait Box Management','Zero-Gap System\u2122','Free re-services','Money-back guarantee']},
+      mosquito: {name:'MOSQUITO SERVICE', title:'Seasonal Yard Protection', desc:'Targeted mosquito, flea & tick control for your outdoor spaces.', feat:['Mosquito, Flea & Tick Control (exterior)','7 Seasonal Services per year','Mosquito Bait Box Management','Free re-services','Money-back guarantee']},
       sentricon:{name:'SENTRICON\u00AE', title:'Termite-Only Shield', desc:'Standalone termite protection with Sentricon baiting system.', feat:['Termite Monitoring System','Sentricon\u00AE Baiting System','Full home termite warranty','Money-back guarantee','Free re-services','Family & Pet Safe Treatments']}
     };
 
@@ -2627,7 +2627,7 @@
       if (S.plan === 'mosquito') {
         if (!basicAddonEl) {
           // Create the Basic Pest add-on element dynamically
-          const addonContainer = document.querySelector('.plan-addons');
+          const addonContainer = document.querySelector('#addonsContainer');
           if (addonContainer) {
             const div = document.createElement('div');
             div.className = 'plan-addon-item';
