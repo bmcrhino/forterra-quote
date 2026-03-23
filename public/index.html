@@ -2445,17 +2445,20 @@
         if (prev.includes('termites') && !S.pests.includes('termites')) S.pests.push('termites');
         if (prev.includes('mosquitoes') && !S.pests.includes('mosquitoes')) S.pests.push('mosquitoes');
         if (prev.includes('rodents') && !S.pests.includes('rodents')) S.pests.push('rodents');
-        // Rebuild follow-up list with new pests (skip the prev question we just answered)
-        const newFqs = buildFQ().filter(q => q.id !== 'prev');
-        // If rodents NOT alone, remove the rodent follow-up (only needed for rodents-only)
-        if (prev.includes('rodents') && prev.length > 1) {
-          const rIdx = newFqs.findIndex(q => q.id === 'rodent');
-          if (rIdx >= 0) newFqs.splice(rIdx, 1);
+        // Prevention = no further follow-up questions. They said "prevention," not "I have a problem."
+        // Skip straight to address. Rodents-only is the one exception — need inside/outside.
+        if (prev.length === 1 && prev[0] === 'rodents') {
+          // Rodents only: show inside/outside follow-up
+          const rodentFQ = [{id:'rodent',q:'Are the rodents getting inside your home?',opts:[{l:'Yes, I hear or see them inside',v:'inside',n:"We'll schedule a free on-site inspection"},{l:'No, just outside / in the yard',v:'outside'}]}];
+          fqList = [{id:'prev', multi:true, done:true}].concat(rodentFQ);
+          fqIndex = 1;
+          showCurrentFQ();
+          return;
         }
-        fqList = [{id:'prev', multi:true, done:true}].concat(newFqs); // placeholder for prev
-        fqIndex = 1; // skip past prev
-        if (fqIndex < fqList.length) { showCurrentFQ(); }
-        else { $('followupNext').style.display = ''; $('followupNext').disabled = false; }
+        // All other prevention combos: no more questions, go to address
+        $('followupNext').style.display = '';
+        $('followupNext').disabled = false;
+        submitFollowups();
         return;
       }
       fqIndex++;
