@@ -18,6 +18,7 @@ export default async function handler(req, res) {
     const PIPELINE_ID = (process.env.GHL_PIPELINE_ID || '').trim();
     const STAGE_BOOKED = '2cbb6069-92e9-4b16-9278-424ab97e6681';    // Online Quote Booked
     const STAGE_ABANDONED = '17386d9a-84ac-434f-90bc-cfc777b37e09'; // Online Quote Abandoned
+    const STAGE_CALLBACK = '1ff58d07-5f3d-43a5-9e61-1091d48e512c'; // Online Quote Callback
 
     if (!TOKEN || !LOCATION_ID) {
       console.error('Missing env vars');
@@ -202,21 +203,25 @@ export default async function handler(req, res) {
     });
 
     // ==========================================
-    // CREATE OPPORTUNITY (completed bookings only)
+    // CREATE OPPORTUNITY (completed bookings + callbacks)
     // ==========================================
-    if (!partial && (scenario === 'completed' || scenario === 'rodent-inspection' || scenario === 'custom-quote')) {
+    if (!partial && (scenario === 'completed' || scenario === 'rodent-inspection' || scenario === 'custom-quote' || callbackRequested)) {
       const planLabel = plan ? plan.charAt(0).toUpperCase() + plan.slice(1) : 'Custom';
-      const oppName = scenario === 'rodent-inspection'
-        ? `${firstName || ''} ${lastName || ''} - Rodent Inspection`.trim()
-        : scenario === 'custom-quote'
-          ? `${firstName || ''} ${lastName || ''} - Custom Quote`.trim()
-          : `${firstName || ''} ${lastName || ''} - ${planLabel} Plan`.trim();
+      const oppName = callbackRequested
+        ? `${firstName || ''} ${lastName || ''} - Callback Request`.trim()
+        : scenario === 'rodent-inspection'
+          ? `${firstName || ''} ${lastName || ''} - Rodent Inspection`.trim()
+          : scenario === 'custom-quote'
+            ? `${firstName || ''} ${lastName || ''} - Custom Quote`.trim()
+            : `${firstName || ''} ${lastName || ''} - ${planLabel} Plan`.trim();
+
+      const oppStage = callbackRequested ? STAGE_CALLBACK : STAGE_BOOKED;
 
       const oppBody = {
         pipelineId: PIPELINE_ID,
         locationId: LOCATION_ID,
         name: oppName,
-        stageId: STAGE_BOOKED,
+        stageId: oppStage,
         status: 'open',
         contactId: contactId,
         monetaryValue: 0

@@ -10,7 +10,7 @@
 - Creates/updates contact with all tags and custom fields
 - Populates `agreement_type` (mapped to exact dropdown values: Basic Pest Prevention, Standard Pest Prevention, Premium Pest Prevention, Termite Control (Sentricon), Mosquito Control, Inspection)
 - Populates `please_describe_your_pest_concern` with pest list
-- Creates opportunity in Inbound Sales pipeline → **Online Quote Booked** stage (completed bookings only; abandoned quotes get their opportunity from the GHL automation)
+- Creates opportunity in Inbound Sales pipeline → **Online Quote Booked** (completed bookings) or **Online Quote Callback** (callback requests). Abandoned quotes get their opportunity from the GHL automation.
 - Adds detailed audit note (pests, follow-ups, plan, sqft, preferred date/time, payment preference, ToS agreement)
 - Sends Slack notification to #call-review
 - Handles all tag logic (`quote-completed`, `quote-in-progress`, `quote-rodent-inspection`, `quote-custom-quote`, `callback-requested`, `confirm-via:X`, `payment:X`, `plan:X`, `billing:X`, `pest:X`)
@@ -23,6 +23,7 @@
 
 ### Pipeline Stages (already created):
 - **"Online Quote Booked"** (ID: `2cbb6069-92e9-4b16-9278-424ab97e6681`) — where completed online quotes land. API places opportunities here directly.
+- **"Online Quote Callback"** (ID: `1ff58d07-5f3d-43a5-9e61-1091d48e512c`) — callback requests, waiting for CSR follow-up. API places opportunities here directly.
 - **"Online Quote Abandoned"** (ID: `17386d9a-84ac-434f-90bc-cfc777b37e09`) — where abandoned quote opportunities land. Created by GHL automation after 15-min wait confirms abandonment.
 
 ### GHL Merge Fields Used:
