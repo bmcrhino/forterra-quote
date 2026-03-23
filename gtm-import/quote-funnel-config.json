@@ -1,0 +1,366 @@
+{
+  "exportFormatVersion": 2,
+  "exportTime": "2026-03-23 23:30:00",
+  "containerVersion": {
+    "tag": [
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "100",
+        "name": "GA4 - Quote Start",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TAG_REFERENCE", "key": "measurementId", "value": "GA4 Config - Quote Tool" },
+          { "type": "TEMPLATE", "key": "eventName", "value": "quote_start" },
+          {
+            "type": "LIST", "key": "eventParameters", "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "source" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - source}}" }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["100"]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "101",
+        "name": "GA4 - Quote Step",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TAG_REFERENCE", "key": "measurementId", "value": "GA4 Config - Quote Tool" },
+          { "type": "TEMPLATE", "key": "eventName", "value": "quote_step" },
+          {
+            "type": "LIST", "key": "eventParameters", "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "step_name" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - step_name}}" }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["101"]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "102",
+        "name": "GA4 - Pest Selected",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TAG_REFERENCE", "key": "measurementId", "value": "GA4 Config - Quote Tool" },
+          { "type": "TEMPLATE", "key": "eventName", "value": "quote_pest_selected" },
+          {
+            "type": "LIST", "key": "eventParameters", "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "pest_type" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - pest_type}}" }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["102"]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "103",
+        "name": "GA4 - Plan View",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TAG_REFERENCE", "key": "measurementId", "value": "GA4 Config - Quote Tool" },
+          { "type": "TEMPLATE", "key": "eventName", "value": "quote_plan_view" },
+          {
+            "type": "LIST", "key": "eventParameters", "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "plan_name" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - plan_name}}" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "plan_price" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - plan_price}}" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "billing_type" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - billing_type}}" }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["103"]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "104",
+        "name": "GA4 - Plan Switch",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TAG_REFERENCE", "key": "measurementId", "value": "GA4 Config - Quote Tool" },
+          { "type": "TEMPLATE", "key": "eventName", "value": "quote_plan_switch" },
+          {
+            "type": "LIST", "key": "eventParameters", "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "from_plan" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - from_plan}}" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "to_plan" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - to_plan}}" }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["104"]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "105",
+        "name": "GA4 - Addon Toggle",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TAG_REFERENCE", "key": "measurementId", "value": "GA4 Config - Quote Tool" },
+          { "type": "TEMPLATE", "key": "eventName", "value": "quote_addon_toggle" },
+          {
+            "type": "LIST", "key": "eventParameters", "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "addon_name" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - addon_name}}" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "action" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - action}}" }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["105"]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "106",
+        "name": "GA4 - Billing Toggle",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TAG_REFERENCE", "key": "measurementId", "value": "GA4 Config - Quote Tool" },
+          { "type": "TEMPLATE", "key": "eventName", "value": "quote_billing_toggle" },
+          {
+            "type": "LIST", "key": "eventParameters", "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "billing_type" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - billing_type}}" }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["106"]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "107",
+        "name": "GA4 - Callback Request",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TAG_REFERENCE", "key": "measurementId", "value": "GA4 Config - Quote Tool" },
+          { "type": "TEMPLATE", "key": "eventName", "value": "quote_callback" },
+          {
+            "type": "LIST", "key": "eventParameters", "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "pest_type" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - pest_type}}" }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["107"]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "108",
+        "name": "GA4 - Inspection Booking",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TAG_REFERENCE", "key": "measurementId", "value": "GA4 Config - Quote Tool" },
+          { "type": "TEMPLATE", "key": "eventName", "value": "quote_inspection" },
+          {
+            "type": "LIST", "key": "eventParameters", "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "inspection_type" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - inspection_type}}" }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["108"]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "109",
+        "name": "GA4 - Quote Complete",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TAG_REFERENCE", "key": "measurementId", "value": "GA4 Config - Quote Tool" },
+          { "type": "TEMPLATE", "key": "eventName", "value": "quote_complete" },
+          {
+            "type": "LIST", "key": "eventParameters", "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "plan_name" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - plan_name}}" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "initial_price" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - initial_price}}" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "monthly_price" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - monthly_price}}" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "has_mosquito" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - has_mosquito}}" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "billing_type" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - billing_type}}" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "agreement_type" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - agreement_type}}" }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["109"]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "110",
+        "name": "GA4 - Out of Service Area",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TAG_REFERENCE", "key": "measurementId", "value": "GA4 Config - Quote Tool" },
+          { "type": "TEMPLATE", "key": "eventName", "value": "quote_oos" },
+          {
+            "type": "LIST", "key": "eventParameters", "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "zip_code" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - zip_code}}" }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["110"]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "111",
+        "name": "GA4 - Address Entered",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TAG_REFERENCE", "key": "measurementId", "value": "GA4 Config - Quote Tool" },
+          { "type": "TEMPLATE", "key": "eventName", "value": "quote_address_entered" }
+        ],
+        "firingTriggerId": ["111"]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "112",
+        "name": "GA4 - Property Confirmed",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TAG_REFERENCE", "key": "measurementId", "value": "GA4 Config - Quote Tool" },
+          { "type": "TEMPLATE", "key": "eventName", "value": "quote_property_confirmed" },
+          {
+            "type": "LIST", "key": "eventParameters", "list": [
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "sqft" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - sqft}}" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "lot_acres" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - lot_acres}}" }
+              ]},
+              { "type": "MAP", "map": [
+                { "type": "TEMPLATE", "key": "name", "value": "property_type" },
+                { "type": "TEMPLATE", "key": "value", "value": "{{DLV - property_type}}" }
+              ]}
+            ]
+          }
+        ],
+        "firingTriggerId": ["112"]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "113",
+        "name": "GA4 Config - Quote Tool",
+        "type": "gaawc",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "measurementId", "value": "G-8KVK584DR6" }
+        ],
+        "firingTriggerId": ["2147479553"]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "114",
+        "name": "Google Ads - Quote Complete Conversion",
+        "type": "awct",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "conversionId", "value": "AW-307077164" },
+          { "type": "TEMPLATE", "key": "conversionLabel", "value": "" },
+          { "type": "TEMPLATE", "key": "conversionValue", "value": "{{DLV - initial_price}}" },
+          { "type": "TEMPLATE", "key": "currencyCode", "value": "USD" }
+        ],
+        "firingTriggerId": ["109"],
+        "notes": "IMPORTANT: You must set the conversionLabel from your Google Ads account. Go to Google Ads > Goals > Conversions > create a new conversion action, and paste the label here."
+      }
+    ],
+    "trigger": [
+      { "accountId": "0", "containerId": "0", "triggerId": "100", "name": "CE - quote_start", "type": "CUSTOM_EVENT", "customEventFilter": [{ "type": "EQUALS", "parameter": [{ "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" }, { "type": "TEMPLATE", "key": "arg1", "value": "quote_start" }] }] },
+      { "accountId": "0", "containerId": "0", "triggerId": "101", "name": "CE - quote_step", "type": "CUSTOM_EVENT", "customEventFilter": [{ "type": "EQUALS", "parameter": [{ "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" }, { "type": "TEMPLATE", "key": "arg1", "value": "quote_step" }] }] },
+      { "accountId": "0", "containerId": "0", "triggerId": "102", "name": "CE - quote_pest_selected", "type": "CUSTOM_EVENT", "customEventFilter": [{ "type": "EQUALS", "parameter": [{ "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" }, { "type": "TEMPLATE", "key": "arg1", "value": "quote_pest_selected" }] }] },
+      { "accountId": "0", "containerId": "0", "triggerId": "103", "name": "CE - quote_plan_view", "type": "CUSTOM_EVENT", "customEventFilter": [{ "type": "EQUALS", "parameter": [{ "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" }, { "type": "TEMPLATE", "key": "arg1", "value": "quote_plan_view" }] }] },
+      { "accountId": "0", "containerId": "0", "triggerId": "104", "name": "CE - quote_plan_switch", "type": "CUSTOM_EVENT", "customEventFilter": [{ "type": "EQUALS", "parameter": [{ "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" }, { "type": "TEMPLATE", "key": "arg1", "value": "quote_plan_switch" }] }] },
+      { "accountId": "0", "containerId": "0", "triggerId": "105", "name": "CE - quote_addon_toggle", "type": "CUSTOM_EVENT", "customEventFilter": [{ "type": "EQUALS", "parameter": [{ "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" }, { "type": "TEMPLATE", "key": "arg1", "value": "quote_addon_toggle" }] }] },
+      { "accountId": "0", "containerId": "0", "triggerId": "106", "name": "CE - quote_billing_toggle", "type": "CUSTOM_EVENT", "customEventFilter": [{ "type": "EQUALS", "parameter": [{ "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" }, { "type": "TEMPLATE", "key": "arg1", "value": "quote_billing_toggle" }] }] },
+      { "accountId": "0", "containerId": "0", "triggerId": "107", "name": "CE - quote_callback", "type": "CUSTOM_EVENT", "customEventFilter": [{ "type": "EQUALS", "parameter": [{ "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" }, { "type": "TEMPLATE", "key": "arg1", "value": "quote_callback" }] }] },
+      { "accountId": "0", "containerId": "0", "triggerId": "108", "name": "CE - quote_inspection", "type": "CUSTOM_EVENT", "customEventFilter": [{ "type": "EQUALS", "parameter": [{ "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" }, { "type": "TEMPLATE", "key": "arg1", "value": "quote_inspection" }] }] },
+      { "accountId": "0", "containerId": "0", "triggerId": "109", "name": "CE - quote_complete", "type": "CUSTOM_EVENT", "customEventFilter": [{ "type": "EQUALS", "parameter": [{ "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" }, { "type": "TEMPLATE", "key": "arg1", "value": "quote_complete" }] }] },
+      { "accountId": "0", "containerId": "0", "triggerId": "110", "name": "CE - quote_oos", "type": "CUSTOM_EVENT", "customEventFilter": [{ "type": "EQUALS", "parameter": [{ "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" }, { "type": "TEMPLATE", "key": "arg1", "value": "quote_oos" }] }] },
+      { "accountId": "0", "containerId": "0", "triggerId": "111", "name": "CE - quote_address_entered", "type": "CUSTOM_EVENT", "customEventFilter": [{ "type": "EQUALS", "parameter": [{ "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" }, { "type": "TEMPLATE", "key": "arg1", "value": "quote_address_entered" }] }] },
+      { "accountId": "0", "containerId": "0", "triggerId": "112", "name": "CE - quote_property_confirmed", "type": "CUSTOM_EVENT", "customEventFilter": [{ "type": "EQUALS", "parameter": [{ "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" }, { "type": "TEMPLATE", "key": "arg1", "value": "quote_property_confirmed" }] }] }
+    ],
+    "variable": [
+      { "accountId": "0", "containerId": "0", "variableId": "200", "name": "DLV - source", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "source" }] },
+      { "accountId": "0", "containerId": "0", "variableId": "201", "name": "DLV - step_name", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "step_name" }] },
+      { "accountId": "0", "containerId": "0", "variableId": "202", "name": "DLV - pest_type", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "pest_type" }] },
+      { "accountId": "0", "containerId": "0", "variableId": "203", "name": "DLV - plan_name", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "plan_name" }] },
+      { "accountId": "0", "containerId": "0", "variableId": "204", "name": "DLV - plan_price", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "plan_price" }] },
+      { "accountId": "0", "containerId": "0", "variableId": "205", "name": "DLV - billing_type", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "billing_type" }] },
+      { "accountId": "0", "containerId": "0", "variableId": "206", "name": "DLV - from_plan", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "from_plan" }] },
+      { "accountId": "0", "containerId": "0", "variableId": "207", "name": "DLV - to_plan", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "to_plan" }] },
+      { "accountId": "0", "containerId": "0", "variableId": "208", "name": "DLV - addon_name", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "addon_name" }] },
+      { "accountId": "0", "containerId": "0", "variableId": "209", "name": "DLV - action", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "action" }] },
+      { "accountId": "0", "containerId": "0", "variableId": "210", "name": "DLV - inspection_type", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "inspection_type" }] },
+      { "accountId": "0", "containerId": "0", "variableId": "211", "name": "DLV - initial_price", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "initial_price" }] },
+      { "accountId": "0", "containerId": "0", "variableId": "212", "name": "DLV - monthly_price", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "monthly_price" }] },
+      { "accountId": "0", "containerId": "0", "variableId": "213", "name": "DLV - has_mosquito", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "has_mosquito" }] },
+      { "accountId": "0", "containerId": "0", "variableId": "214", "name": "DLV - agreement_type", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "agreement_type" }] },
+      { "accountId": "0", "containerId": "0", "variableId": "215", "name": "DLV - zip_code", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "zip_code" }] },
+      { "accountId": "0", "containerId": "0", "variableId": "216", "name": "DLV - sqft", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "sqft" }] },
+      { "accountId": "0", "containerId": "0", "variableId": "217", "name": "DLV - lot_acres", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "lot_acres" }] },
+      { "accountId": "0", "containerId": "0", "variableId": "218", "name": "DLV - property_type", "type": "v", "parameter": [{ "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "TEMPLATE", "key": "name", "value": "property_type" }] }
+    ]
+  }
+}
