@@ -2,7 +2,7 @@
 
 **Company:** Forterra Pest Control  
 **Phone:** (817) 665-6527  
-**Quote Tool:** quote.forterrapestcontrol.com/forterra-pricing-lemonade  
+**Quote Tool:** quote.forterrapestcontrol.com  
 **Pipeline:** Inbound Sales (ID: QRJpl20GSKW7F1vppJ6T)  
 **Business Hours:** Mon-Fri 8am-5pm CST, Sat 8am-12pm  
 
@@ -190,7 +190,7 @@ If urgent, call us now: (817) 665-6527
 
 ### Step 5: Touch 1 — SMS (15 min after abandonment)
 ```
-Hi {{contact.first_name}}, looks like you didn't finish your Forterra quote. No worries — pick up where you left off: quote.forterrapestcontrol.com/forterra-pricing-lemonade
+Hi {{contact.first_name}}, looks like you didn't finish your Forterra quote. No worries — pick up where you left off: quote.forterrapestcontrol.com
 
 Or call us: (817) 665-6527
 Reply STOP to opt out.
@@ -224,14 +224,14 @@ SCRIPT:
 "Hi {{contact.first_name}}, this is [your name] from Forterra Pest Control. I saw you started a quote on our website — wanted to see if you had any questions I could help with."
 
 If no answer → leave voicemail, then send this text:
-"Hi {{contact.first_name}}, just tried to reach you about your pest control quote. Happy to help with any questions — call us back at (817) 665-6527 or finish online: quote.forterrapestcontrol.com/forterra-pricing-lemonade"
+"Hi {{contact.first_name}}, just tried to reach you about your pest control quote. Happy to help with any questions — call us back at (817) 665-6527 or finish online: quote.forterrapestcontrol.com"
 
 CHECK CONTACT NOTES for full quote details.
 ```
 
 ### Step 9B: If no answer, send follow-up SMS:
 ```
-Hi {{contact.first_name}}, just tried reaching you about your pest control quote. Happy to help — call us at (817) 665-6527 or finish online: quote.forterrapestcontrol.com/forterra-pricing-lemonade
+Hi {{contact.first_name}}, just tried reaching you about your pest control quote. Happy to help — call us at (817) 665-6527 or finish online: quote.forterrapestcontrol.com
 ```
 
 ### Step 10: Wait until Day 1 (24 hours after abandonment)
@@ -249,7 +249,7 @@ Hi {{contact.first_name}},
 You started a quote for {{contact.please_describe_your_pest_concern}} service at {{contact.address1}} but didn't get a chance to finish.
 
 It only takes 2 minutes:
-→ quote.forterrapestcontrol.com/forterra-pricing-lemonade
+→ quote.forterrapestcontrol.com
 
 Or call us and we'll walk you through it: (817) 665-6527
 
@@ -273,7 +273,7 @@ The Forterra Team
 ```
 {{contact.first_name}}, still seeing {{contact.please_describe_your_pest_concern}} around the house? DFW pest season is ramping up — problems only get worse in warm weather.
 
-2-min quote: quote.forterrapestcontrol.com/forterra-pricing-lemonade
+2-min quote: quote.forterrapestcontrol.com
 Or call: (817) 665-6527
 Reply STOP to opt out.
 ```
@@ -299,7 +299,7 @@ Here's what your neighbors are saying about Forterra:
 — Stacy P., Google Review ⭐⭐⭐⭐⭐
 
 Ready to take care of those {{contact.please_describe_your_pest_concern}}?
-→ quote.forterrapestcontrol.com/forterra-pricing-lemonade
+→ quote.forterrapestcontrol.com
 
 Or call: (817) 665-6527
 
@@ -316,7 +316,7 @@ The Forterra Team
 ```
 {{contact.first_name}}, still thinking about pest control? We'll include a FREE mosquito treatment with your first service — but this offer expires in 48 hours.
 
-Finish your quote: quote.forterrapestcontrol.com/forterra-pricing-lemonade
+Finish your quote: quote.forterrapestcontrol.com
 Or call: (817) 665-6527
 Reply STOP to opt out.
 ```

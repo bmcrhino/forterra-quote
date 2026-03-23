@@ -1,7 +1,10 @@
 {
+  "redirects": [
+    { "source": "/forterra-pricing-lemonade", "destination": "/", "permanent": true },
+    { "source": "/forterra-pricing-lemonade/", "destination": "/", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api/:path*" },
-    { "source": "/forterra-pricing-lemonade", "destination": "/forterra-pricing-lemonade/index.html" },
-    { "source": "/forterra-pricing-lemonade/", "destination": "/forterra-pricing-lemonade/index.html" }
+    { "source": "/", "destination": "/forterra-pricing-lemonade/index.html" }
   ]
 }
