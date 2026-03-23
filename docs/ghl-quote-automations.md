@@ -159,46 +159,7 @@ If urgent, call us now: (817) 665-6527
 - Forterra Pest Control
 ```
 
-### Step 2: Create Task
-- **Assign to:** Round Robin (Rachelle, Lyra, Aira, Angela, Hassan)
-- **Title:** 🚨 Callback — {{contact.first_name}} {{contact.last_name}}
-- **Priority:** High
-- **Due:** Today + 30 minutes
-- **Description:**
-```
-Customer used quote tool but wasn't sure about their pest issue.
-Requested a callback instead of booking online.
-
-Phone: {{contact.phone}}
-Pests: {{contact.please_describe_your_pest_concern}}
-Address: {{contact.address1}}
-
-CHECK THE CONTACT NOTES for:
-- Preferred callback day (today / tomorrow / this week)
-- Preferred callback time (morning / afternoon / anytime)
-
-TO DO:
-1. Call to discuss pest issue
-2. Recommend the right plan
-3. Book service if interested
-```
-
-### Step 3: Wait 1 hour
-
-### Step 4: IF/ELSE — Task completed?
-- **If YES →** End workflow
-- **If NO →** Continue
-
-### Step 5: Create Escalation Task
-- **Assign to:** Rachelle
-- **Title:** ⚠️ Missed callback — {{contact.first_name}} {{contact.last_name}}
-- **Priority:** Urgent
-- **Due:** Today + 30 minutes
-- **Description:**
-```
-Callback requested 1+ hour ago, no CSR response.
-Phone: {{contact.phone}}
-```
+> **Note:** The API already sends a Slack notification to #call-review with full details (phone, pests, address, preferred callback day/time). No GHL task needed — whoever sees the Slack message handles it. This avoids duplicate outreach from multiple reps.
 
 ---
 
