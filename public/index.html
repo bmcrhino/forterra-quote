@@ -2617,6 +2617,10 @@
         mqAddon.dataset.price = mqPricing.mo;
         mqAddon.querySelector('.plan-addon-price').textContent = `+$${mqPricing.mo}/mo`;
       }
+      // Pre-select mosquito add-on if it's already in S.addons (e.g., from prevention multi-select)
+      if (mqAddon && S.addons.includes('mosquito') && !mqAddon.classList.contains('selected')) {
+        mqAddon.classList.add('selected');
+      }
       // Alt plans
       const alts = S.plan === 'mosquito'
         ? ['basic']
@@ -2884,13 +2888,16 @@
         $('zip').value = zip;
         // Trigger input events to enable Continue button
         ['address','city','zip'].forEach(id => $(id).dispatchEvent(new Event('input')));
-        // Hide the autocomplete dropdown after selection and blur the input to prevent re-trigger
+        // Hide the autocomplete dropdown after selection — suppress for 500ms
         justSelected = true;
         $('address').blur();
+        document.querySelectorAll('.pac-container').forEach(c => { c.style.display = 'none'; c.style.visibility = 'hidden'; });
         setTimeout(() => {
-          document.querySelectorAll('.pac-container').forEach(c => c.style.display = 'none');
+          document.querySelectorAll('.pac-container').forEach(c => { c.style.display = 'none'; c.style.visibility = 'hidden'; });
           justSelected = false;
-        }, 150);
+        }, 500);
+        // Move focus to city field so cursor isn't stuck on address
+        setTimeout(() => $('city').focus(), 100);
       });
       let justSelected = false;
       // Also hide dropdown when clicking outside the address input
@@ -2899,7 +2906,7 @@
       });
       // Re-show dropdown when focusing back on address input (but not right after a selection)
       input.addEventListener('focus', function() {
-        if (!justSelected) document.querySelectorAll('.pac-container').forEach(c => c.style.display = '');
+        if (!justSelected) document.querySelectorAll('.pac-container').forEach(c => { c.style.display = ''; c.style.visibility = 'visible'; });
       });
     }
     // If Google Maps loaded before our script
