@@ -553,6 +553,83 @@
     }
     .followup-note.visible { display: block; }
 
+    /* Multi-select followup (prevention) */
+    .fq-multi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .fq-multi-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 18px 12px;
+      background: var(--white);
+      border: 2px solid var(--border-grey);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all var(--transition);
+      text-align: center;
+      position: relative;
+    }
+    .fq-multi-card:hover { border-color: var(--orange); }
+    .fq-multi-card.selected {
+      border-color: var(--orange);
+      background: var(--orange-light);
+    }
+    .fq-multi-card .fq-multi-check {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--border-grey);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+    }
+    .fq-multi-card.selected .fq-multi-check {
+      background: var(--orange);
+    }
+    .fq-multi-card .fq-multi-check svg { opacity: 0; transition: opacity 0.2s; }
+    .fq-multi-card.selected .fq-multi-check svg { opacity: 1; }
+    .fq-multi-label {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--soil);
+    }
+    .fq-multi-desc {
+      font-family: var(--font-display);
+      font-size: 12px;
+      color: var(--bark);
+      line-height: 1.3;
+    }
+    .fq-multi-continue {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: var(--radius-md);
+      background: var(--orange);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .fq-multi-continue.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .fq-multi-continue.active:hover { background: var(--soil); }
+
     /* Specialty pest check (Group B) */
     .specialty-option {
       display: flex; align-items: center; gap: 14px;
@@ -2292,7 +2369,7 @@
     function buildFQ() {
       const q=[], p=S.pests;
       // Keep follow-ups focused on plan-changing / inspection-needed pests only
-      if (p.includes('prevention')) q.push({id:'prev',q:'Which pests would you like protection against?',opts:[{l:'General pests (ants, spiders, roaches)',v:'general'},{l:'Termites',v:'termites'},{l:'All of the above',v:'all'}]});
+      if (p.includes('prevention')) q.push({id:'prev',q:'What would you like protection against?',multi:true,opts:[{l:'General Pests',v:'general',desc:'Ants, spiders, roaches & more'},{l:'Termites',v:'termites',desc:'Monitoring & baiting systems'},{l:'Mosquitoes',v:'mosquitoes',desc:'Monthly yard treatments'},{l:'Rodents',v:'rodents',desc:'Exterior protection & monitoring'}]});
       if (p.includes('ants')) q.push({id:'ants',q:'Are you seeing sawdust-like shavings near wood?',img:'./images/carpenter-ant-frass.png',imgAlt:'Carpenter ant frass on a window sill',opts:[{l:'Yes, I see shavings like this',v:'carpenter',n:'Carpenter ant treatment requires a specialized add-on (+$100)'},{l:'No, I don\'t see any shavings',v:'small'},{l:"I'm not sure",v:'unsure'}]});
       if (p.includes('cockroaches')) q.push({id:'roaches',q:'Which type looks most like what you\'re seeing?',img:'./images/cockroach-id.png',imgAlt:'DFW cockroach identification',opts:[{l:'German cockroach (small, kitchen & appliances)',v:'german',n:'German cockroach treatment requires a specialized add-on (+$200)'},{l:'American cockroach (large, garages & drains)',v:'large'},{l:'Oriental cockroach (dark, mulch beds & porches)',v:'large'},{l:'Smoky brown cockroach (dark brown, attics & gutters)',v:'large'},{l:"I'm not sure",v:'unsure'}]});
       if (p.includes('fleas')) q.push({id:'fleas',q:'Where are you experiencing the flea or tick issue?',opts:[{l:'Inside my home',v:'inside',n:'Interior flea treatment requires a specialized add-on (+$100)'},{l:'Outside in the yard only',v:'outside'},{l:'Just want prevention (I have pets)',v:'prevention'}]});
@@ -2318,13 +2395,23 @@
       const progress = `<p style="font-family:var(--font-display);font-size:12px;color:var(--medium-grey);margin-bottom:12px;text-align:center">Question ${fqIndex+1} of ${fqList.length}</p>`;
       const d = document.createElement('div'); d.className='followup-card';
       d.style.animation = 'screenFadeIn 0.4s ease';
-      const imgHtml = q.img ? `<img src="${q.img}" alt="${q.imgAlt||''}" style="width:100%;max-width:480px;border-radius:12px;margin:0 auto 16px;display:block">` : '';
-      d.innerHTML = `${progress}<p class="followup-question">${q.q}</p>${imgHtml}<div class="followup-options">${q.opts.map(o =>
-        `<div class="followup-option" onclick="selFQ('${q.id}','${o.v}',this)" data-qid="${q.id}"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>${o.l}</span></div>${o.n?`<div class="followup-note" data-note="${q.id}-${o.v}">${o.n}</div>`:''}`
-      ).join('')}</div>`;
-      c.appendChild(d);
-      // Update the followups Continue button
-      $('followupNext').disabled = true;
+      if (q.multi) {
+        // Multi-select card layout
+        d.innerHTML = `${progress}<p class="followup-question">${q.q}</p><div class="fq-multi-grid">${q.opts.map(o =>
+          `<div class="fq-multi-card" onclick="toggleFQMulti('${q.id}','${o.v}',this)" data-v="${o.v}"><div class="fq-multi-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><span class="fq-multi-label">${o.l}</span><span class="fq-multi-desc">${o.desc||''}</span></div>`
+        ).join('')}</div><button class="fq-multi-continue" id="fqMultiContinue" onclick="continueFQMulti('${q.id}')">Continue</button>`;
+        c.appendChild(d);
+        S.followups[q.id] = [];
+        $('followupNext').style.display = 'none';
+      } else {
+        const imgHtml = q.img ? `<img src="${q.img}" alt="${q.imgAlt||''}" style="width:100%;max-width:480px;border-radius:12px;margin:0 auto 16px;display:block">` : '';
+        d.innerHTML = `${progress}<p class="followup-question">${q.q}</p>${imgHtml}<div class="followup-options">${q.opts.map(o =>
+          `<div class="followup-option" onclick="selFQ('${q.id}','${o.v}',this)" data-qid="${q.id}"><div class="followup-radio"><div class="followup-radio-dot"></div></div><span>${o.l}</span></div>${o.n?`<div class="followup-note" data-note="${q.id}-${o.v}">${o.n}</div>`:''}`
+        ).join('')}</div>`;
+        c.appendChild(d);
+        $('followupNext').style.display = '';
+        $('followupNext').disabled = true;
+      }
     }
     function selFQ(qid,v,el) {
       document.querySelectorAll(`[data-qid="${qid}"]`).forEach(o => o.classList.remove('selected'));
@@ -2337,6 +2424,43 @@
         if (fqIndex < fqList.length) { showCurrentFQ(); }
         else { $('followupNext').disabled = false; }
       }, 600);
+    }
+    function toggleFQMulti(qid, v, el) {
+      el.classList.toggle('selected');
+      const arr = S.followups[qid] || [];
+      const idx = arr.indexOf(v);
+      if (idx >= 0) arr.splice(idx, 1); else arr.push(v);
+      S.followups[qid] = arr;
+      const btn = $('fqMultiContinue');
+      if (btn) { if (arr.length > 0) btn.classList.add('active'); else btn.classList.remove('active'); }
+    }
+    function continueFQMulti(qid) {
+      const arr = S.followups[qid];
+      if (!arr || arr.length === 0) return;
+      // If this is the prevention multi-select, process selections and rebuild follow-ups
+      if (qid === 'prev') {
+        const prev = arr;
+        // Add selected pests to S.pests so buildFQ generates their follow-ups
+        if (prev.includes('general')) { ['ants','spiders','cockroaches'].forEach(p => { if (!S.pests.includes(p)) S.pests.push(p); }); }
+        if (prev.includes('termites') && !S.pests.includes('termites')) S.pests.push('termites');
+        if (prev.includes('mosquitoes') && !S.pests.includes('mosquitoes')) S.pests.push('mosquitoes');
+        if (prev.includes('rodents') && !S.pests.includes('rodents')) S.pests.push('rodents');
+        // Rebuild follow-up list with new pests (skip the prev question we just answered)
+        const newFqs = buildFQ().filter(q => q.id !== 'prev');
+        // If rodents NOT alone, remove the rodent follow-up (only needed for rodents-only)
+        if (prev.includes('rodents') && prev.length > 1) {
+          const rIdx = newFqs.findIndex(q => q.id === 'rodent');
+          if (rIdx >= 0) newFqs.splice(rIdx, 1);
+        }
+        fqList = [{id:'prev', multi:true, done:true}].concat(newFqs); // placeholder for prev
+        fqIndex = 1; // skip past prev
+        if (fqIndex < fqList.length) { showCurrentFQ(); }
+        else { $('followupNext').style.display = ''; $('followupNext').disabled = false; }
+        return;
+      }
+      fqIndex++;
+      if (fqIndex < fqList.length) { showCurrentFQ(); }
+      else { $('followupNext').style.display = ''; $('followupNext').disabled = false; }
     }
     function submitFollowups() {
       // Short-circuit: callback/callnow skip the full address→property→account flow
@@ -2393,9 +2517,29 @@
       if (S.followups.ant==='carpenter') S.priceAdj+=100;
       // Only auto-determine plan for Group A; Group B keeps preselected plan
       if (!S.groupB) {
-        if (S.pests.includes('termites')) S.plan='premium';
-        else if (S.pests.length>2||S.pests.includes('general')) S.plan='standard';
-        else S.plan='basic';
+        // Handle prevention multi-select
+        const prev = Array.isArray(S.followups.prev) ? S.followups.prev : null;
+        if (prev && prev.length > 0) {
+          const hasTerm = prev.includes('termites');
+          const hasGen = prev.includes('general');
+          const hasMosq = prev.includes('mosquitoes');
+          const hasRod = prev.includes('rodents');
+          // Mosquito add-on when mosquitoes + other stuff
+          if (hasMosq && prev.length > 1) {
+            if (!S.addons) S.addons = [];
+            if (!S.addons.includes('mosquito')) S.addons.push('mosquito');
+          }
+          // Plan defaulting
+          if (prev.length === 1 && hasMosq) S.plan = 'mosquito';
+          else if (prev.length === 1 && hasTerm) S.plan = 'sentricon';
+          else if (hasTerm) S.plan = 'premium';
+          else if (hasRod) S.plan = 'basic';
+          else S.plan = 'standard';
+        } else {
+          if (S.pests.includes('termites')) S.plan='premium';
+          else if (S.pests.length>2||S.pests.includes('general')) S.plan='standard';
+          else S.plan='basic';
+        }
       }
     }
 
