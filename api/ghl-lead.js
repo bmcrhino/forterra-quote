@@ -103,7 +103,16 @@ export default async function handler(req, res) {
     // ==========================================
     // Build pest description for GHL field
     const pestDesc = pests && pests.length ? pests.join(', ') : '';
-    const planLabel = plan ? plan.charAt(0).toUpperCase() + plan.slice(1) : '';
+    // Map plan to exact GHL agreement_type dropdown values
+    const AGREEMENT_MAP = {
+      basic: 'Basic Pest Prevention',
+      standard: 'Standard Pest Prevention',
+      premium: 'Premium Pest Prevention',
+      sentricon: 'Termite Control (Sentricon)',
+      mosquito: 'Mosquito Control'
+    };
+    let planLabel = plan ? (AGREEMENT_MAP[plan] || plan.charAt(0).toUpperCase() + plan.slice(1)) : '';
+    if (rodentInspection || customQuote) planLabel = 'Inspection';
 
     const contactBody = {
       locationId: LOCATION_ID,
