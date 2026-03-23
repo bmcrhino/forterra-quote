@@ -101,6 +101,10 @@ export default async function handler(req, res) {
     // ==========================================
     // CREATE OR UPDATE CONTACT
     // ==========================================
+    // Build pest description for GHL field
+    const pestDesc = pests && pests.length ? pests.join(', ') : '';
+    const planLabel = plan ? plan.charAt(0).toUpperCase() + plan.slice(1) : '';
+
     const contactBody = {
       locationId: LOCATION_ID,
       firstName: firstName || '',
@@ -112,7 +116,11 @@ export default async function handler(req, res) {
       state: 'TX',
       postalCode: zip || '',
       tags: tags,
-      source: 'Online Pricing Tool'
+      source: 'Online Pricing Tool',
+      customFields: [
+        { key: 'agreement_type', field_value: planLabel },
+        { key: 'please_describe_your_pest_concern', field_value: pestDesc }
+      ]
     };
 
     const contactResp = await fetch('https://services.leadconnectorhq.com/contacts/', {
@@ -151,7 +159,13 @@ export default async function handler(req, res) {
             'Content-Type': 'application/json',
             'Version': '2021-07-28'
           },
-          body: JSON.stringify({ tags: finalTags })
+          body: JSON.stringify({
+            tags: finalTags,
+            customFields: [
+              { key: 'agreement_type', field_value: planLabel },
+              { key: 'please_describe_your_pest_concern', field_value: pestDesc }
+            ]
+          })
         });
       } else {
         console.error('GHL contact error:', contactResp.status, JSON.stringify(contactData));
