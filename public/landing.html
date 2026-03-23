@@ -1,0 +1,2583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FFFFFF">
+  <title>Pricing — Forterra Pest Control (V2)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       FORTERRA PEST CONTROL — PRICING PAGE
+       Design System Tokens
+       ======================================== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { background: #FFFFFF; overflow-x: hidden; }
+    body { min-height: 100vh; background: #FFFFFF; overflow-x: hidden; }
+
+    :root {
+      /* Primary Palette */
+      --orange: #F77D00;
+      --orange-hover: #E06F00;
+      --bark: #986D4F;
+      --soil: #42372F;
+      --stem: #54654E;
+
+      /* Secondary Palette */
+      --sunshine: #F4D14F;
+      --sky: #97C4DB;
+      --leaf: #B1C4AA;
+      --twilight: #1A6991;
+
+      /* Neutrals */
+      --white: #FFFFFF;
+      --off-white: #F9FAFB;
+      --warm-beige: #EFDCCB;
+      --light-grey: #F3F4F6;
+      --border-grey: #E5E7EB;
+      --input-border: #D1D5DB;
+      --medium-grey: #9CA3AF;
+      --dark-grey: #374151;
+      --near-black: #1A1A1A;
+
+      /* Semantic */
+      --success: #047857;
+
+      /* Typography — brand fonts with web fallbacks */
+      --font-display: 'Libre Franklin', 'Franklin Gothic URW', 'Arial Narrow', sans-serif;
+      --font-body: 'Lora', 'Benton Modern Text', 'Georgia', serif;
+
+      /* Spacing (8px base) */
+      --xs: 4px;
+      --sm: 8px;
+      --md: 16px;
+      --lg: 24px;
+      --xl: 32px;
+      --2xl: 48px;
+      --3xl: 64px;
+      --4xl: 96px;
+
+      /* Layout */
+      --max-width: 1440px;
+      --gutter: 24px;
+      --radius: 4px;
+      --radius-lg: 8px;
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.12);
+      --shadow-elevated: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--soil);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========================================
+       TOPOGRAPHIC PATTERN (SVG texture)
+       ======================================== */
+    .topo-bg {
+      position: relative;
+    }
+    .topo-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Cg fill='none' stroke='%23986D4F' stroke-width='1.2'%3E%3Cpath d='M-20 55 Q130 25 280 60 Q430 95 620 55'/%3E%3Cpath d='M-20 115 Q160 145 310 110 Q460 75 620 120'/%3E%3Cpath d='M-20 175 Q120 150 270 180 Q420 210 620 170'/%3E%3Cpath d='M-20 235 Q150 265 300 230 Q450 195 620 240'/%3E%3Cpath d='M-20 295 Q140 270 290 300 Q440 330 620 290'/%3E%3Cpath d='M-20 355 Q160 385 310 350 Q460 315 620 360'/%3E%3Cpath d='M-20 415 Q130 390 280 420 Q430 450 620 410'/%3E%3Cpath d='M-20 475 Q150 505 300 470 Q450 435 620 480'/%3E%3Cpath d='M-20 535 Q120 515 270 540 Q420 565 620 530'/%3E%3Cpath d='M-20 595 Q160 620 310 590 Q460 560 620 600'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: 600px 600px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .topo-bg > * { position: relative; z-index: 1; }
+
+    /* ========================================
+       TYPOGRAPHY
+       ======================================== */
+    .subtitle {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--bark);
+      margin-bottom: var(--md);
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 52px;
+      line-height: 1.1;
+      color: var(--soil);
+    }
+    h2 {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 34px;
+      line-height: 1.2;
+      color: var(--soil);
+    }
+    h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 26px;
+      line-height: 1.15;
+      color: var(--soil);
+    }
+    .body-text {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--dark-grey);
+    }
+    .small-copy {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--medium-grey);
+    }
+
+    /* ========================================
+       BUTTONS
+       ======================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      border-radius: var(--radius);
+      padding: 14px 28px;
+      cursor: pointer;
+      transition: background-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+    }
+    .btn-primary:hover {
+      background: var(--orange-hover);
+      box-shadow: 0 2px 8px rgba(247, 125, 0, 0.3);
+    }
+    .btn-secondary {
+      background: var(--soil);
+      color: var(--white);
+    }
+    .btn-secondary:hover {
+      background: #362D25;
+    }
+    .btn-schedule {
+      background: var(--bark);
+      color: var(--white);
+    }
+    .btn-schedule:hover {
+      background: #7E5A40;
+      box-shadow: 0 2px 8px rgba(152, 109, 79, 0.3);
+    }
+    .btn-compare {
+      background: var(--stem);
+      color: var(--white);
+    }
+    .btn-compare:hover {
+      background: #455740;
+      box-shadow: 0 2px 8px rgba(84, 101, 78, 0.35);
+    }
+    .btn-compare svg {
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+    .btn-ghost {
+      background: transparent;
+      border: 2px solid var(--orange);
+      color: var(--orange);
+      padding: 12px 26px;
+    }
+    .btn-ghost:hover {
+      background: var(--orange);
+      color: var(--white);
+    }
+    .btn-sm {
+      padding: 10px 20px;
+      font-size: 13px;
+    }
+    .btn-full { width: 100%; }
+
+    /* ========================================
+       LAYOUT UTILITIES
+       ======================================== */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+    .text-center { text-align: center; }
+    .section-padding { padding: var(--4xl) 0; }
+
+    /* ========================================
+       NAVIGATION
+       ======================================== */
+    .nav {
+      background: var(--stem);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    }
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: var(--sm);
+    }
+    .nav-logo svg { flex-shrink: 0; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--xl);
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 15px;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--white);
+    }
+    .nav-links a.active { font-weight: 500; }
+    .nav-cta .btn {
+      padding: 10px 22px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    /* ========================================
+       HERO SECTION
+       ======================================== */
+    .hero {
+      background: var(--warm-beige);
+      padding: var(--2xl) 0 var(--xl);
+    }
+    .hero-content {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero h1 {
+      margin-bottom: var(--md);
+      font-size: 42px;
+    }
+    .hero .body-text {
+      font-size: 17px;
+      max-width: 520px;
+      margin: 0 auto var(--lg);
+      color: var(--dark-grey);
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--md);
+    }
+    .hero-actions .btn {
+      min-width: 220px;
+      padding: 14px 24px;
+    }
+    .compare-jump-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: var(--md);
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--bark);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .compare-jump-link:hover {
+      color: var(--orange);
+    }
+    .hero-phone {
+      display: flex;
+      align-items: center;
+      gap: var(--sm);
+    }
+    .hero-phone svg {
+      color: var(--soil);
+    }
+
+    /* ========================================
+       PLAN CARDS SECTION
+       ======================================== */
+    .plans-section {
+      background: var(--white);
+      padding: var(--4xl) 0;
+    }
+    .plans-header {
+      text-align: center;
+      margin-bottom: var(--2xl);
+    }
+    .plans-header h2 {
+      margin-bottom: var(--lg);
+    }
+
+    /* Billing Toggle */
+    .billing-toggle {
+      display: inline-flex;
+      align-items: center;
+      background: var(--light-grey);
+      border-radius: 40px;
+      padding: 4px;
+      gap: 0;
+      margin-bottom: var(--3xl);
+    }
+    .billing-toggle button {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 14px;
+      padding: 10px 24px;
+      border: none;
+      border-radius: 36px;
+      background: transparent;
+      color: var(--dark-grey);
+      cursor: pointer;
+      transition: all 0.25s;
+      letter-spacing: 0.01em;
+    }
+    .billing-toggle button.active {
+      background: var(--white);
+      color: var(--soil);
+      font-weight: 600;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .billing-savings {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--success);
+      background: #ECFDF5;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: var(--sm);
+      letter-spacing: 0.02em;
+    }
+
+    /* Plan Cards Grid */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--lg);
+      align-items: stretch;
+    }
+    .plan-card {
+      background: var(--white);
+      border: 1px solid var(--border-grey);
+      border-radius: var(--radius-lg);
+      padding: var(--xl);
+      box-shadow: var(--shadow-card);
+      transition: box-shadow 0.25s, transform 0.2s;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .plan-card .plan-desc {
+      min-height: 96px;
+    }
+    .plan-card .btn-full {
+      margin-top: auto;
+    }
+    .plan-card:hover {
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-2px);
+    }
+    .plan-card.recommended {
+      border: 2px solid var(--orange);
+      box-shadow: var(--shadow-elevated);
+    }
+    .plan-card.recommended:hover {
+      box-shadow: 0 12px 32px rgba(247, 125, 0, 0.15);
+    }
+    .plan-badge {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--orange);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 16px;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+    .plan-name {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bark);
+      margin-bottom: var(--xs);
+    }
+    .plan-title {
+      min-height: 54px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 1.2;
+      color: var(--soil);
+      margin-bottom: var(--md);
+    }
+    .plan-price-label {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--medium-grey);
+      margin-bottom: 2px;
+    }
+    .plan-price {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+    .plan-price .currency {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 20px;
+      color: var(--soil);
+    }
+    .plan-price .amount {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 44px;
+      line-height: 1;
+      color: var(--soil);
+    }
+    .plan-price .period {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 15px;
+      color: var(--medium-grey);
+    }
+    .plan-annual-note {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 13px;
+      color: var(--medium-grey);
+      margin-bottom: var(--lg);
+      height: 18px;
+    }
+    .plan-desc {
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--dark-grey);
+      margin-bottom: var(--lg);
+      padding-bottom: var(--lg);
+      border-bottom: 1px solid var(--light-grey);
+      min-height: 76px;
+    }
+    .plan-features {
+      list-style: none;
+      margin-bottom: var(--xl);
+    }
+    .plan-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.45;
+      color: var(--dark-grey);
+      padding: 6px 0;
+    }
+    .plan-features li svg {
+      flex-shrink: 0;
+      margin-top: 3px;
+      color: var(--orange);
+    }
+    .plan-card.addon .plan-features li svg {
+      color: var(--bark);
+    }
+    .plan-card.addon {
+      background: var(--off-white);
+      border-style: dashed;
+    }
+    .plan-addon-label {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--bark);
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 3px;
+      margin-bottom: var(--md);
+    }
+
+    /* ========================================
+       CATEGORY TABS
+       ======================================== */
+    .category-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: var(--2xl);
+      flex-wrap: wrap;
+      padding: 0 var(--gutter);
+    }
+    .category-tab {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      padding: 11px 26px;
+      border-radius: 40px;
+      border: 2px solid var(--border-grey);
+      background: var(--white);
+      color: var(--dark-grey);
+      cursor: pointer;
+      transition: all 0.25s;
+      white-space: nowrap;
+    }
+    .category-tab:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+    .category-tab.active {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: var(--white);
+    }
+
+    /* Tab Panels */
+    .tab-panel { display: none; }
+    .tab-panel.active {
+      display: block;
+      animation: tabFadeIn 0.35s ease;
+    }
+    @keyframes tabFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Variable-width plan grids per tab */
+    .plans-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--lg);
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .plans-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--lg);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .plans-grid-1 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--lg);
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .plans-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--lg);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Free / Custom price labels */
+    .plan-price .free-label {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 38px;
+      line-height: 1;
+      color: var(--success);
+    }
+    .plan-price .custom-label {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 1.2;
+      color: var(--soil);
+    }
+
+    /* Dual CTA bar below plans */
+    .plans-cta-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--md);
+      margin-top: var(--2xl);
+      padding-top: var(--xl);
+    }
+    .phone-reveal {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .phone-reveal .phone-number-text {
+      max-width: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-width 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+      white-space: nowrap;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+    .phone-reveal:hover .phone-number-text {
+      max-width: 160px;
+      opacity: 1;
+      margin-left: 8px;
+    }
+
+    /* ========================================
+       VIDEO FAQ SECTION
+       ======================================== */
+    .video-faq-section {
+      background: var(--off-white);
+      padding: var(--4xl) 0;
+      border-top: 1px solid var(--light-grey);
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--lg);
+      max-width: 960px;
+      margin: var(--2xl) auto 0;
+    }
+    .video-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-grey);
+      box-shadow: var(--shadow-card);
+      transition: box-shadow 0.25s, transform 0.2s;
+      cursor: pointer;
+    }
+    .video-card:hover {
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-2px);
+    }
+    .video-thumb {
+      position: relative;
+      background: var(--input-border);
+      padding-top: 56.25%;
+    }
+    .video-play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 52px;
+      height: 52px;
+      background: rgba(0,0,0,0.45);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.25s;
+    }
+    .video-card:hover .video-play {
+      background: var(--orange);
+    }
+    .video-play svg {
+      margin-left: 3px;
+    }
+    .video-label {
+      padding: var(--md) var(--md) 14px;
+    }
+    .video-number {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bark);
+      margin-bottom: 4px;
+    }
+    .video-label p {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--soil);
+      line-height: 1.35;
+    }
+    /* Video tab panels */
+    .video-tab-panel { display: none; }
+    .video-tab-panel.active {
+      display: grid;
+      animation: tabFadeIn 0.35s ease;
+    }
+
+    /* ========================================
+       FEATURE COMPARISON TABLE
+       ======================================== */
+    .compare-section {
+      background: var(--off-white);
+      padding: var(--4xl) 0;
+    }
+    .compare-section .subtitle,
+    .compare-section h2 {
+      text-align: center;
+    }
+    .compare-section h2 {
+      margin-bottom: var(--lg);
+    }
+    .compare-section .compare-desc {
+      text-align: center;
+      font-size: 15px;
+      color: var(--dark-grey);
+      margin-bottom: var(--2xl);
+    }
+    .compare-table-wrap {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-grey);
+      box-shadow: var(--shadow-card);
+      overflow: visible;
+    }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .compare-table th,
+    .compare-table td {
+      padding: 12px 14px;
+      text-align: center;
+      border-bottom: 1px solid var(--light-grey);
+      font-size: 14px;
+    }
+    .compare-table thead th {
+      background: var(--white);
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--soil);
+      padding: 20px;
+      border-bottom: 2px solid var(--border-grey);
+      position: sticky;
+      top: 72px;
+      z-index: 10;
+    }
+    .compare-table thead th:first-child {
+      text-align: left;
+    }
+    .compare-table thead th.recommended-col {
+      color: var(--orange);
+    }
+    .compare-table .category-row td {
+      background: var(--off-white);
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bark);
+      text-align: left;
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--border-grey);
+    }
+    .compare-table td:first-child {
+      text-align: left;
+      font-family: var(--font-body);
+      color: var(--dark-grey);
+    }
+    .compare-table .check {
+      color: var(--orange);
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .compare-table .dash {
+      color: var(--input-border);
+      font-size: 18px;
+    }
+    .compare-table tr:last-child td {
+      border-bottom: none;
+    }
+    .compare-table tbody tr:hover td {
+      background: #FFFBF5;
+    }
+
+    /* ========================================
+       TRUST SIGNALS
+       ======================================== */
+    .trust-section {
+      background: var(--white);
+      padding: var(--3xl) 0;
+      border-top: 1px solid var(--light-grey);
+      border-bottom: 1px solid var(--light-grey);
+    }
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--xl);
+      text-align: center;
+    }
+    .trust-item {
+      padding: var(--lg);
+    }
+    .trust-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto var(--md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--orange);
+    }
+    .trust-number {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 32px;
+      color: var(--soil);
+      line-height: 1;
+      margin-bottom: var(--xs);
+    }
+    .trust-label {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 14px;
+      color: var(--dark-grey);
+      line-height: 1.4;
+    }
+
+    /* ========================================
+       REVIEW TRUST BADGES (hero area)
+       ======================================== */
+    .trust-badges {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      border: 1px solid var(--border-grey);
+      border-radius: 40px;
+      padding: 10px 18px 10px 14px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      text-decoration: none;
+      transition: box-shadow 0.2s ease;
+    }
+    .trust-badge:hover {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .trust-badge-logo {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+    .trust-badge-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .trust-badge-stars {
+      display: flex;
+      gap: 1px;
+    }
+    .trust-badge-stars svg {
+      width: 13px;
+      height: 13px;
+    }
+    .trust-badge-stars.google { color: #FBBC04; }
+    .trust-badge-stars.trustpilot { color: #00B67A; }
+    .trust-badge-text {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--dark-grey);
+      line-height: 1;
+    }
+    .trust-badge-text strong {
+      font-weight: 700;
+      color: var(--soil);
+    }
+
+    /* ========================================
+       REVIEWS BANNER (full-width strip)
+       ======================================== */
+    .reviews-banner {
+      background: var(--off-white);
+      padding: var(--2xl) 0;
+      border-top: 1px solid var(--border-grey);
+      border-bottom: 1px solid var(--border-grey);
+    }
+    .reviews-banner-inner {
+      text-align: center;
+    }
+    .reviews-banner-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--md);
+      margin-bottom: var(--lg);
+      flex-wrap: wrap;
+    }
+    .reviews-banner-icon {
+      width: 36px;
+      height: 36px;
+    }
+    .reviews-stars-large {
+      display: flex;
+      gap: 2px;
+      color: #FBBC04;
+    }
+    .reviews-stars-large svg {
+      width: 24px;
+      height: 24px;
+    }
+    .reviews-banner-stat {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--soil);
+    }
+    .reviews-banner-stat span {
+      font-weight: 300;
+      color: var(--dark-grey);
+    }
+    .reviews-quotes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--lg);
+      margin-top: var(--lg);
+    }
+    .review-card {
+      background: var(--white);
+      border: 1px solid var(--border-grey);
+      border-radius: var(--radius-lg);
+      padding: var(--lg);
+      text-align: left;
+    }
+    .review-card-stars {
+      display: flex;
+      gap: 1px;
+      color: #FBBC04;
+      margin-bottom: var(--sm);
+    }
+    .review-card-stars svg {
+      width: 14px;
+      height: 14px;
+    }
+    .review-card-text {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--dark-grey);
+      line-height: 1.5;
+      margin-bottom: var(--sm);
+      font-style: italic;
+    }
+    .review-card-author {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--soil);
+    }
+
+    /* ========================================
+       TRUSTPILOT REVIEWS BANNER
+       ======================================== */
+    .trustpilot-banner {
+      background: var(--white);
+      padding: var(--2xl) 0;
+      border-top: 1px solid var(--border-grey);
+      border-bottom: 1px solid var(--border-grey);
+    }
+    .trustpilot-banner .reviews-banner-inner { text-align: center; }
+    .trustpilot-banner .reviews-stars-large { color: #FBBC05; }
+    .trustpilot-banner .review-card-stars { color: #FBBC05; }
+    .tp-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 20px;
+      color: #191919;
+    }
+    .tp-logo svg { width: 28px; height: 28px; }
+
+    /* ========================================
+       FAQ SECTION
+       ======================================== */
+    .faq-section {
+      background: var(--white);
+      padding: var(--4xl) 0;
+    }
+    .faq-header {
+      text-align: center;
+      margin-bottom: var(--2xl);
+    }
+    .faq-list {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border-grey);
+    }
+    .faq-item:first-child {
+      border-top: 1px solid var(--border-grey);
+    }
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--md);
+      padding: var(--lg) 0;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 17px;
+      color: var(--soil);
+      line-height: 1.3;
+    }
+    .faq-question:hover { color: var(--orange); }
+    .faq-chevron {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      color: var(--medium-grey);
+      transition: transform 0.3s;
+    }
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+      color: var(--orange);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding-bottom: var(--lg);
+    }
+    .faq-answer p {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--dark-grey);
+    }
+
+    /* ========================================
+       FINAL CTA SECTION
+       ======================================== */
+    .final-cta {
+      background: var(--warm-beige);
+      padding: 80px 0;
+    }
+    .final-cta-content {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .final-cta h2 {
+      margin-bottom: var(--md);
+    }
+    .final-cta .body-text {
+      margin-bottom: var(--xl);
+      font-size: 18px;
+    }
+    .final-cta-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--md);
+    }
+
+    /* ========================================
+       FOOTER
+       ======================================== */
+    .footer {
+      background: var(--soil);
+      padding: var(--2xl) 0 var(--xl);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: var(--2xl);
+      margin-bottom: var(--2xl);
+    }
+    .footer-brand p {
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.6);
+      margin-top: var(--md);
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .footer-heading {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: var(--md);
+    }
+    .footer-links {
+      list-style: none;
+    }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: rgba(255,255,255,0.7);
+    }
+    .footer-contact-item svg {
+      flex-shrink: 0;
+      margin-top: 3px;
+      color: var(--orange);
+    }
+    .footer-contact-item a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+    }
+    .footer-contact-item a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: var(--lg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copyright {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+    .footer-legal {
+      display: flex;
+      gap: var(--lg);
+      list-style: none;
+    }
+    .footer-legal a {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+    }
+    .footer-legal a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ========================================
+       STICKY MOBILE CTA BAR
+       ======================================== */
+    .sticky-cta-bar {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: var(--white);
+      border-top: 1px solid var(--border-grey);
+      box-shadow: 0 -2px 12px rgba(0,0,0,0.1);
+      padding: 12px var(--gutter);
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    .sticky-cta-bar.visible {
+      transform: translateY(0);
+    }
+    .sticky-cta-bar .btn {
+      width: 100%;
+      padding: 14px 20px;
+    }
+    @media (max-width: 768px) {
+      .sticky-cta-bar { display: block; }
+      main { padding-bottom: 72px; }
+    }
+
+    /* ========================================
+       RESPONSIVE — Tablet & smaller desktops
+       ======================================== */
+    @media (max-width: 1080px) {
+      .plans-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      .plans-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 620px;
+      }
+      .plans-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 620px;
+      }
+      .plan-card.recommended {
+        order: -1;
+      }
+    }
+    @media (max-width: 768px) {
+      h1 { font-size: 36px; }
+      h2 { font-size: 28px; }
+      .hero {
+        padding: var(--xl) 0 var(--lg);
+      }
+      .plans-grid,
+      .plans-grid-3,
+      .plans-grid-2,
+      .plans-grid-4 {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+      }
+      .plans-grid-1 {
+        max-width: 100%;
+      }
+      .category-tabs {
+        gap: 8px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        justify-content: center;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+      }
+      .category-tabs::-webkit-scrollbar { display: none; }
+      .category-tab {
+        padding: 9px 18px;
+        font-size: 13px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+      .hero-actions .btn {
+        min-width: 0;
+        width: 100%;
+      }
+      .final-cta-actions {
+        flex-direction: column;
+      }
+      .plans-cta-bar {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 320px;
+        margin: var(--2xl) auto 0;
+      }
+      .plans-cta-bar .btn {
+        width: 100%;
+      }
+      .trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .reviews-quotes {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+        margin: var(--lg) auto 0;
+      }
+      .google-badge {
+        padding: 6px 14px 6px 10px;
+      }
+      .video-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--md);
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--xl);
+      }
+      .nav-links { display: none; }
+      .compare-selectors {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--md);
+      }
+      .compare-selector {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .compare-selector label {
+        margin-bottom: 2px;
+      }
+      .compare-selector select {
+        min-width: 0;
+        width: 100%;
+        max-width: 100%;
+        font-size: 16px;
+        padding: 14px 36px 14px 16px;
+      }
+      .compare-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .compare-table {
+        min-width: 500px;
+      }
+      .compare-table thead th {
+        position: static;
+      }
+      .compare-table th,
+      .compare-table td {
+        padding: 10px 12px;
+        font-size: 13px;
+      }
+      .plan-card {
+        padding: var(--lg);
+      }
+      .plan-price .amount {
+        font-size: 36px;
+      }
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 28px; }
+      h2 { font-size: 24px; }
+      .hero h1 { font-size: 28px; }
+      .video-grid {
+        grid-template-columns: 1fr;
+        max-width: 340px;
+        margin: var(--xl) auto 0;
+      }
+      .category-tab {
+        padding: 8px 14px;
+        font-size: 12px;
+      }
+      .trust-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--md);
+      }
+      .trust-number {
+        font-size: 28px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: var(--lg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <header class="nav">
+    <nav class="nav-inner">
+      <a href="#" class="nav-logo">
+        <img src="forterra-logo.png" alt="Forterra Pest Control" height="40">
+      </a>
+      <ul class="nav-links">
+        <li><a href="#">Services</a></li>
+        <li><a href="#" class="active">Pricing</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+        <li class="nav-cta"><a class='btn btn-primary btn-sm' href='/'>GET A FREE QUOTE</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero topo-bg">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Pest Control Plans That Protect What Matters Most</h1>
+          <p class="body-text">Find the right plan for your home &mdash; or get a custom quote in minutes.</p>
+          <div class="hero-actions">
+            <a class='btn btn-primary' href='/'>GET ONLINE QUOTE</a>
+            <a href="tel:8176656527" class="btn btn-secondary hero-phone">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="margin-right:6px">
+                <path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/>
+              </svg>
+              CALL (817) 665-6527
+            </a>
+          </div>
+          <!-- Trust Badges: Google -->
+          <div style="margin-top: var(--lg);">
+            <div class="trust-badges">
+              <!-- Google Badge -->
+              <a href="https://share.google/7myySwWLnvZ7WCwLd" target="_blank" rel="noopener" class="trust-badge">
+                <div class="trust-badge-logo">
+                  <svg style="width:22px;height:22px" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.97 10.97 0 001 12c0 1.77.42 3.44 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                </div>
+                <div class="trust-badge-info">
+                  <div class="trust-badge-stars google">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                  </div>
+                  <span class="trust-badge-text"><strong>5.0</strong> &middot; 2,600+ reviews</span>
+                </div>
+              </a>
+              <!-- Trustpilot Badge removed -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PLAN CARDS ========== -->
+    <section class="plans-section" id="plans">
+      <div class="container">
+
+        <div class="plans-header">
+          <p class="subtitle" id="plansSubtitle">Choose Your Plan</p>
+          <h2 id="plansHeading">Preventative Plans for Every Home</h2>
+          <div class="billing-toggle" id="billingToggle">
+            <button class="active" data-period="monthly" onclick="setBilling('monthly')">Monthly</button>
+            <button data-period="annual" onclick="setBilling('annual')">Annual<span class="billing-savings">1 Month Free</span></button>
+          </div>
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="category-tabs" id="categoryTabs">
+          <button class="category-tab active" data-tab="general" onclick="switchTab('general')">General Pests</button>
+          <button class="category-tab" data-tab="termites" onclick="switchTab('termites')">Termites</button>
+          <button class="category-tab" data-tab="mosquitoes" onclick="switchTab('mosquitoes')">Mosquitoes</button>
+          <button class="category-tab" data-tab="rodents" onclick="switchTab('rodents')">Rodents</button>
+        </div>
+
+        <!-- ===== TAB: GENERAL PESTS (default) ===== -->
+        <div class="tab-panel active" data-tab-panel="general">
+        <div class="plans-grid-3">
+
+          <!-- Basic Plan -->
+          <div class="plan-card" data-plan="basic">
+            <p class="plan-name">Basic</p>
+            <h3 class="plan-title">Broad Coverage</h3>
+            <p class="plan-price-label">Starting at</p>
+            <div class="plan-price">
+              <span class="currency">$</span>
+              <span class="amount" data-monthly="49" data-annual="49">49</span>
+              <span class="period">/mo</span>
+            </div>
+            <p class="plan-annual-note annual-note"></p>
+            <p class="plan-desc">Best for people who want broad coverage at a reasonable cost.</p>
+            <ul class="plan-features">
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Quarterly Exterior Treatments</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Interior Treatments (when needed)</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Coverage for 50+ pests</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Zero-Gap System&trade;</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Exterior Rodent Protection</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Money-back guarantee</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Free re-services</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Family &amp; Pet Safe Treatments</li>
+            </ul>
+            <a href="#" onclick="goToQuote(event)" class="btn btn-primary btn-full">GET YOUR QUOTE</a>
+          </div>
+
+          <!-- Standard Plan (RECOMMENDED) -->
+          <div class="plan-card recommended" data-plan="standard">
+            <span class="plan-badge">Recommended</span>
+            <p class="plan-name">Standard</p>
+            <h3 class="plan-title">Pests + Termite Watch</h3>
+            <p class="plan-price-label">Starting at</p>
+            <div class="plan-price">
+              <span class="currency">$</span>
+              <span class="amount" data-monthly="59" data-annual="59">59</span>
+              <span class="period">/mo</span>
+            </div>
+            <p class="plan-annual-note annual-note"></p>
+            <p class="plan-desc">Best for people who want to stay on top of common pests and keep an eye on termites.</p>
+            <ul class="plan-features">
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Quarterly Exterior Treatments</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Interior Treatments (when needed)</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Coverage for 50+ pests</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Zero-Gap System&trade;</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Exterior Rodent Protection</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Money-back guarantee</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Free re-services</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Family &amp; Pet Safe Treatments</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Termite Monitoring System</li>
+            </ul>
+            <a href="#" onclick="goToQuote(event)" class="btn btn-primary btn-full">GET YOUR QUOTE</a>
+          </div>
+
+          <!-- Premium Plan -->
+          <div class="plan-card" data-plan="premium">
+            <p class="plan-name">Premium</p>
+            <h3 class="plan-title">Total Home Defense</h3>
+            <p class="plan-price-label">Starting at</p>
+            <div class="plan-price">
+              <span class="currency">$</span>
+              <span class="amount" data-monthly="69" data-annual="69">69</span>
+              <span class="period">/mo</span>
+            </div>
+            <p class="plan-annual-note annual-note"></p>
+            <p class="plan-desc">Best for those who want to protect their home against termites and bugs.</p>
+            <ul class="plan-features">
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Quarterly Exterior Treatments</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Interior Treatments (when needed)</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Coverage for 50+ pests</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Zero-Gap System&trade;</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Exterior Rodent Protection</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Money-back guarantee</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Free re-services</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Family &amp; Pet Safe Treatments</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Termite Monitoring System</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Termite Baiting System</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Full home termite warranty</li>
+            </ul>
+            <a href="#" onclick="goToQuote(event)" class="btn btn-primary btn-full">GET YOUR QUOTE</a>
+          </div>
+
+        </div><!-- /.plans-grid-3 -->
+        </div><!-- /.tab-panel general -->
+
+        <!-- ===== TAB: TERMITES ===== -->
+        <div class="tab-panel" data-tab-panel="termites">
+        <div class="plans-grid-4">
+
+          <!-- Termite Inspection (FREE) -->
+          <div class="plan-card" data-plan="termite-inspection">
+            <p class="plan-name">Inspection</p>
+            <h3 class="plan-title">Expert Assessment</h3>
+            <div class="plan-price">
+              <span class="free-label">FREE</span>
+            </div>
+            <p class="plan-annual-note">&nbsp;</p>
+            <p class="plan-desc">Choose this if you&rsquo;re not sure what&rsquo;s going on and want an expert opinion.</p>
+            <ul class="plan-features"></ul>
+            <a href="#" onclick="goToQuote(event)" class="btn btn-primary btn-full">GET YOUR QUOTE</a>
+          </div>
+
+          <!-- Sentricon -->
+          <div class="plan-card" data-plan="sentricon">
+            <p class="plan-name">Termite</p>
+            <h3 class="plan-title">Termite-Only Shield</h3>
+            <p class="plan-price-label">Starting at</p>
+            <div class="plan-price">
+              <span class="currency">$</span>
+              <span class="amount" data-monthly="29" data-annual="29">29</span>
+              <span class="period">/mo</span>
+            </div>
+            <p class="plan-annual-note annual-note"></p>
+            <p class="plan-desc">Best for those who want to protect their home from termites but aren&rsquo;t concerned about other pests.</p>
+            <ul class="plan-features">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Termite Monitoring System
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Termite Baiting System
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Full home termite warranty
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Money-back guarantee
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Free re-services
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Family &amp; Pet Safe Treatments
+              </li>
+            </ul>
+            <a href="#" onclick="goToQuote(event)" class="btn btn-primary btn-full">GET YOUR QUOTE</a>
+          </div>
+
+          <!-- Standard (same as General Pests Standard) -->
+          <div class="plan-card recommended" data-plan="termite-standard">
+            <span class="plan-badge">Recommended</span>
+            <p class="plan-name">Standard</p>
+            <h3 class="plan-title">Pests + Termite Watch</h3>
+            <p class="plan-price-label">Starting at</p>
+            <div class="plan-price">
+              <span class="currency">$</span>
+              <span class="amount" data-monthly="59" data-annual="59">59</span>
+              <span class="period">/mo</span>
+            </div>
+            <p class="plan-annual-note annual-note"></p>
+            <p class="plan-desc">Our most popular plan &mdash; full pest coverage plus proactive termite monitoring to catch threats early.</p>
+            <ul class="plan-features">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Quarterly Exterior Treatments
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Interior Treatments (when needed)
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Coverage for 50+ pests
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Zero-Gap System&trade;
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Exterior Rodent Protection
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Money-back guarantee
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Free re-services
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Family &amp; Pet Safe Treatments
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Termite Monitoring System
+              </li>
+            </ul>
+            <a href="#" onclick="goToQuote(event)" class="btn btn-primary btn-full">GET YOUR QUOTE</a>
+          </div>
+
+          <!-- Premium (same as General Pests Premium) -->
+          <div class="plan-card" data-plan="termite-premium">
+            <p class="plan-name">Premium</p>
+            <h3 class="plan-title">Total Home Defense</h3>
+            <p class="plan-price-label">Starting at</p>
+            <div class="plan-price">
+              <span class="currency">$</span>
+              <span class="amount" data-monthly="69" data-annual="69">69</span>
+              <span class="period">/mo</span>
+            </div>
+            <p class="plan-annual-note annual-note"></p>
+            <p class="plan-desc">Maximum protection &mdash; everything in Standard plus full termite baiting and a home termite warranty.</p>
+            <ul class="plan-features">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Quarterly Exterior Treatments
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Interior Treatments (when needed)
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Coverage for 50+ pests
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Zero-Gap System&trade;
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Exterior Rodent Protection
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Money-back guarantee
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Free re-services
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Family &amp; Pet Safe Treatments
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Termite Monitoring System
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Termite Baiting System
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Full home termite warranty
+              </li>
+            </ul>
+            <a href="#" onclick="goToQuote(event)" class="btn btn-primary btn-full">GET YOUR QUOTE</a>
+          </div>
+
+        </div><!-- /.plans-grid-4 -->
+        </div><!-- /.tab-panel termites -->
+
+        <!-- ===== TAB: MOSQUITOES ===== -->
+        <div class="tab-panel" data-tab-panel="mosquitoes">
+        <div class="plans-grid-1">
+
+          <!-- Mosquito Service -->
+          <div class="plan-card" data-plan="mosquito">
+            <p class="plan-name">Mosquito Service</p>
+            <h3 class="plan-title">Seasonal Yard Protection</h3>
+            <p class="plan-price-label">Starting at</p>
+            <div class="plan-price">
+              <span class="currency">$</span>
+              <span class="amount" data-monthly="52" data-annual="52">52</span>
+              <span class="period">/mo</span>
+            </div>
+            <p class="plan-annual-note annual-note"></p>
+            <p class="plan-desc">Best for those who want ongoing protection against mosquitoes.</p>
+            <ul class="plan-features">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Covers mosquitoes, fleas &amp; ticks (exterior only)
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Free re-services
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Money-back guarantee
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Zero-Gap System&trade;
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                7 Seasonal Services per year
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Mosquito Bait Box Management
+              </li>
+            </ul>
+            <a href="#" onclick="goToQuote(event)" class="btn btn-primary btn-full">GET YOUR QUOTE</a>
+          </div>
+
+        </div><!-- /.plans-grid-1 -->
+        </div><!-- /.tab-panel mosquitoes -->
+
+        <!-- ===== TAB: RODENTS ===== -->
+        <div class="tab-panel" data-tab-panel="rodents">
+        <div class="plans-grid-3">
+
+          <!-- Rodent Inspection (FREE) -->
+          <div class="plan-card" data-plan="rodent-inspection">
+            <p class="plan-name">Inspection</p>
+            <h3 class="plan-title">Rodent Assessment</h3>
+            <div class="plan-price">
+              <span class="free-label">FREE</span>
+            </div>
+            <p class="plan-annual-note">&nbsp;</p>
+            <p class="plan-desc">If you aren&rsquo;t sure what&rsquo;s going on and want a tech out to inspect.</p>
+            <ul class="plan-features"></ul>
+            <a href="#" class="btn btn-schedule btn-full" onclick="goToSchedule(event)">SCHEDULE</a>
+          </div>
+
+          <!-- Exclusion -->
+          <div class="plan-card" data-plan="exclusion">
+            <p class="plan-name">Exclusion</p>
+            <h3 class="plan-title">Seal &amp; Protect</h3>
+            <div class="plan-price">
+              <span class="custom-label">On-site Inspection</span>
+            </div>
+            <p class="plan-annual-note">&nbsp;</p>
+            <p class="plan-desc">If you&rsquo;re dealing with an interior issue, please set up an inspection for us to come out to assess.</p>
+            <ul class="plan-features"></ul>
+            <a href="#" class="btn btn-schedule btn-full" onclick="goToSchedule(event)">SCHEDULE</a>
+          </div>
+
+          <!-- Basic Rodent -->
+          <div class="plan-card" data-plan="rodent-basic">
+            <p class="plan-name">Basic</p>
+            <h3 class="plan-title">Broad Coverage</h3>
+            <p class="plan-price-label">Starting at</p>
+            <div class="plan-price">
+              <span class="currency">$</span>
+              <span class="amount" data-monthly="49" data-annual="49">49</span>
+              <span class="period">/mo</span>
+            </div>
+            <p class="plan-annual-note annual-note"></p>
+            <p class="plan-desc">Best if there are no interior rodent issues and you want broad coverage.</p>
+            <ul class="plan-features">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Coverage for 50+ pests
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Free re-services
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Money-back guarantee
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Zero-Gap System&trade;
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                4 Seasonal Services per year
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
+                Rodent Bait Box Management
+              </li>
+            </ul>
+            <a href="#" onclick="goToQuote(event)" class="btn btn-primary btn-full">GET YOUR QUOTE</a>
+          </div>
+
+        </div><!-- /.plans-grid-3 -->
+        </div><!-- /.tab-panel rodents -->
+
+        <!-- Dual CTA bar -->
+        <div class="plans-cta-bar">
+          <a href="tel:8176656527" class="btn btn-secondary phone-reveal">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="margin-right:6px;flex-shrink:0">
+              <path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/>
+            </svg>
+            CALL US
+            <span class="phone-number-text">(817) 665-6527</span>
+          </a>
+          <a href="#compare" class="btn btn-compare" id="plansCta"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="5"/><line x1="10.5" y1="10.5" x2="14.5" y2="14.5"/></svg>COMPARE PLANS</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== TRUSTPILOT REVIEWS ========== -->
+    <section class="trustpilot-banner">
+      <div class="container">
+        <div class="reviews-banner-inner">
+          <div class="reviews-banner-header">
+            <span class="tp-logo"><svg style="width:22px;height:22px" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.97 10.97 0 001 12c0 1.77.42 3.44 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google Reviews</span>
+            <div class="reviews-stars-large">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            </div>
+            <p class="reviews-banner-stat">5.0 average <span>from 2,600+ Google Reviews</span></p>
+          </div>
+          <div class="reviews-quotes">
+            <div class="review-card">
+              <div class="review-card-stars">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              </div>
+              <p class="review-card-text">&ldquo;I recently switched from a big company to Forterra and it was a great decision. Superior customer service and our technician Ean is thorough and communicative.&rdquo;</p>
+              <p class="review-card-author">Dustin H. &mdash; Google</p>
+            </div>
+            <div class="review-card">
+              <div class="review-card-stars">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              </div>
+              <p class="review-card-text">&ldquo;Drake was an absolute rock star. He took the extra step to send a text, asked questions to understand our concerns, and kept us informed on every step.&rdquo;</p>
+              <p class="review-card-author">Stacy P. &mdash; Google</p>
+            </div>
+            <div class="review-card">
+              <div class="review-card-stars">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              </div>
+              <p class="review-card-text">&ldquo;Every time they come to my home, they have the best customer service I&rsquo;ve experienced. The staff is professional, polite, and engaging.&rdquo;</p>
+              <p class="review-card-author">Sheena R. &mdash; Google</p>
+            </div>
+          </div>
+          <p style="margin-top: var(--lg);"><a href="https://share.google/7myySwWLnvZ7WCwLd" target="_blank" rel="noopener" style="font-family: var(--font-display); font-size: 14px; font-weight: 600; color: #4285F4; text-decoration: underline;">Read all 2,600+ reviews on Google &rarr;</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== VIDEO FAQ (hidden until videos exist) ========== -->
+    <section class="video-faq-section" style="display:none">
+      <div class="container">
+        <div class="text-center">
+          <p class="subtitle" id="videoSubtitle">Helpful Videos</p>
+          <h2 id="videoHeading">Answers to Your Most Common Questions</h2>
+        </div>
+
+        <!-- GENERAL PESTS VIDEOS (6 videos) -->
+        <div class="video-grid video-tab-panel active" data-video-tab="general">
+          <div class="video-card">
+            <div class="video-thumb"><div class="video-play"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="6,3 18,10 6,17"/></svg></div></div>
+            <div class="video-label"><p class="video-number">Video #1</p><p>Can I get a one-time service?</p></div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb"><div class="video-play"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="6,3 18,10 6,17"/></svg></div></div>
+            <div class="video-label"><p class="video-number">Video #2</p><p>What are the differences in termite coverage?</p></div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb"><div class="video-play"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="6,3 18,10 6,17"/></svg></div></div>
+            <div class="video-label"><p class="video-number">Video #3</p><p>What is the Zero-Gap System?</p></div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb"><div class="video-play"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="6,3 18,10 6,17"/></svg></div></div>
+            <div class="video-label"><p class="video-number">Video #4</p><p>Are mosquitoes covered?</p></div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb"><div class="video-play"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="6,3 18,10 6,17"/></svg></div></div>
+            <div class="video-label"><p class="video-number">Video #5</p><p>Is it a contract?</p></div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb"><div class="video-play"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="6,3 18,10 6,17"/></svg></div></div>
+            <div class="video-label"><p class="video-number">Video #6</p><p>Do I have to be home for service?</p></div>
+          </div>
+        </div>
+
+        <!-- TERMITES VIDEOS (same 6 videos as General Pests) -->
+        <div class="video-grid video-tab-panel" data-video-tab="termites">
+          <div class="video-card">
+            <div class="video-thumb"><div class="video-play"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="6,3 18,10 6,17"/></svg></div></div>
+            <div class="video-label"><p class="video-number">Video #1</p><p>Can I get a one-time service?</p></div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb"><div class="video-play"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="6,3 18,10 6,17"/></svg></div></div>
+            <div class="video-label"><p class="video-number">Video #2</p><p>What are the differences in termite coverage?</p></div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb"><div class="video-play"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="6,3 18,10 6,17"/></svg></div></div>
+            <div class="video-label"><p class="video-number">Video #3</p><p>What is the Zero-Gap System?</p></div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb"><div class="video-play"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="6,3 18,10 6,17"/></svg></div></div>
+            <div class="video-label"><p class="video-number">Video #4</p><p>Are mosquitoes covered?</p></div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb"><div class="video-play"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="6,3 18,10 6,17"/></svg></div></div>
+            <div class="video-label"><p class="video-number">Video #5</p><p>Is it a contract?</p></div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb"><div class="video-play"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="6,3 18,10 6,17"/></svg></div></div>
+            <div class="video-label"><p class="video-number">Video #6</p><p>Do I have to be home for service?</p></div>
+          </div>
+        </div>
+
+        <!-- MOSQUITOES VIDEOS (3 videos) -->
+        <div class="video-grid video-tab-panel" data-video-tab="mosquitoes">
+          <div class="video-card">
+            <div class="video-thumb"><div class="video-play"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="6,3 18,10 6,17"/></svg></div></div>
+            <div class="video-label"><p class="video-number">Video #1</p><p>How much does it cost?</p></div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb"><div class="video-play"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="6,3 18,10 6,17"/></svg></div></div>
+            <div class="video-label"><p class="video-number">Video #2</p><p>What does the tech do on site?</p></div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb"><div class="video-play"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="6,3 18,10 6,17"/></svg></div></div>
+            <div class="video-label"><p class="video-number">Video #3</p><p>What is the Zero-Gap System?</p></div>
+          </div>
+        </div>
+
+        <!-- RODENTS VIDEOS (3 videos) -->
+        <div class="video-grid video-tab-panel" data-video-tab="rodents">
+          <div class="video-card">
+            <div class="video-thumb"><div class="video-play"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="6,3 18,10 6,17"/></svg></div></div>
+            <div class="video-label"><p class="video-number">Video #1</p><p>How much does it cost?</p></div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb"><div class="video-play"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="6,3 18,10 6,17"/></svg></div></div>
+            <div class="video-label"><p class="video-number">Video #2</p><p>What does the tech do on site?</p></div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb"><div class="video-play"><svg width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="6,3 18,10 6,17"/></svg></div></div>
+            <div class="video-label"><p class="video-number">Video #3</p><p>What is the Zero-Gap System?</p></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== FULL PLAN COMPARISON TABLE ========== -->
+    <section class="compare-section" id="compare">
+      <div class="container">
+        <p class="subtitle">Compare Plans in Detail</p>
+        <h2>Side-by-Side Comparison</h2>
+        <p class="compare-desc">See exactly what each plan includes at a glance.</p>
+
+        <div id="compareTableWrap" class="compare-table-wrap">
+          <!-- Rendered dynamically by renderComparison() -->
+        </div>
+
+        <div class="compare-cta" style="text-align:center; margin-top:var(--xl);">
+          <a href="#" onclick="goToQuote(event)" class="btn btn-primary">GET YOUR FREE QUOTE</a>
+          <p class="small-copy" style="margin-top:var(--sm);">Not sure which plan is right for you? Our tool will recommend the best fit.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TRUST SIGNALS ========== -->
+    <section class="trust-section">
+      <div class="container">
+        <div class="trust-grid">
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 4L6 10v10c0 8.84 5.98 17.1 14 20 8.02-2.9 14-11.16 14-20V10L20 4z"/>
+                <path d="M14 20l4 4 8-8"/>
+              </svg>
+            </div>
+            <p class="trust-number">17,000+</p>
+            <p class="trust-label">DFW Homes<br>Treated</p>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 36s-14-8.35-14-18.5C6 10.82 11.82 5 18.5 5c3.78 0 7.11 2.56 8.5 5.34C28.39 7.56 31.72 5 35.5 5 42.18 5 48 10.82 48 17.5 48 27.65 34 36 34 36" transform="scale(0.7) translate(5,5)"/>
+              </svg>
+            </div>
+            <p class="trust-number">Family</p>
+            <p class="trust-label">Locally Owned<br>&amp; Operated</p>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="20" cy="20" r="14"/>
+                <path d="M14 20l4 4 8-8"/>
+              </svg>
+            </div>
+            <p class="trust-number">100%</p>
+            <p class="trust-label">Satisfaction<br>Guarantee</p>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="10" width="28" height="22" rx="2"/>
+                <path d="M6 16h28"/>
+                <path d="M12 24h6"/>
+                <path d="M12 28h4"/>
+              </svg>
+            </div>
+            <p class="trust-number">Licensed</p>
+            <p class="trust-label">Fully Insured<br>&amp; Certified</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== GOOGLE REVIEWS BANNER ========== -->
+    <section class="reviews-banner">
+      <div class="container">
+        <div class="reviews-banner-inner">
+          <div class="reviews-banner-header">
+            <svg class="reviews-banner-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.97 10.97 0 001 12c0 1.77.42 3.44 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <div class="reviews-stars-large">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            </div>
+            <p class="reviews-banner-stat">5.0 average <span>from 2,600+ Google Reviews</span></p>
+          </div>
+          <div class="reviews-quotes">
+            <div class="review-card">
+              <div class="review-card-stars">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              </div>
+              <p class="review-card-text">&ldquo;Getting signed up was easy, and they had packages tailored to my needs. Miles was extremely professional and polite. He walked me through my issues and the different treatments.&rdquo;</p>
+              <p class="review-card-author">Kyler W. &mdash; Google Review</p>
+            </div>
+            <div class="review-card">
+              <div class="review-card-stars">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              </div>
+              <p class="review-card-text">&ldquo;Parker was amazing, efficient and fast. We haven&rsquo;t seen any spiders which is great! Love the service.&rdquo;</p>
+              <p class="review-card-author">Grace P. &mdash; Google Review</p>
+            </div>
+            <div class="review-card">
+              <div class="review-card-stars">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              </div>
+              <p class="review-card-text">&ldquo;I have always been very satisfied with the service. Very patient and understanding. I would recommend them to anyone.&rdquo;</p>
+              <p class="review-card-author">Guadalupe P. &mdash; Google Review</p>
+            </div>
+          </div>
+          <p style="margin-top: var(--lg);"><a href="https://share.google/7myySwWLnvZ7WCwLd" target="_blank" rel="noopener" style="font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--twilight); text-decoration: underline;">Read all 2,600+ reviews on Google &rarr;</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FAQ ========== -->
+    <section class="faq-section" id="faq">
+      <div class="container">
+        <div class="faq-header">
+          <p class="subtitle">Frequently Asked Questions</p>
+          <h2>Common Questions About Our Plans</h2>
+        </div>
+
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              What pests are covered under each plan?
+              <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+            </button>
+            <div class="faq-answer"><p>Our Basic plan covers common household pests including ants, spiders, and cockroaches. Standard adds fire ants, rodent monitoring, and seasonal mosquito treatment. Premium covers everything including year-round mosquito and tick control plus termite monitoring. See the full comparison table above for a detailed breakdown.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Do I need to be home during treatments?
+              <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+            </button>
+            <div class="faq-answer"><p>For exterior-only treatments (Basic plan), you do not need to be home. For plans that include interior treatments (Standard and Premium), we ask that someone over 18 is present to provide access. We always notify you before your scheduled visit and work around your schedule.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              What if I see pests between scheduled treatments?
+              <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+            </button>
+            <div class="faq-answer"><p>Standard and Premium plans include free re-treatments between scheduled visits. If you see covered pests after a treatment, call us and we will come back at no extra charge. Premium members receive same-day emergency service for urgent issues.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Are your treatments safe for pets and children?
+              <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+            </button>
+            <div class="faq-answer"><p>Yes. We use EPA-registered products applied by licensed technicians following strict safety guidelines. We recommend keeping pets and children away from treated areas until they are dry, which typically takes 30 to 60 minutes. Your technician will always review safety instructions with you.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              What areas in DFW do you serve?
+              <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+            </button>
+            <div class="faq-answer"><p>We serve the greater Dallas-Fort Worth metroplex including Southlake, Keller, Grapevine, Colleyville, Trophy Club, Westlake, Roanoke, and surrounding communities. Enter your address in our quoting tool to confirm coverage in your area. If we do not serve your zip code, we will connect you with a trusted partner.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              How does the termite baiting system work?
+              <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+            </button>
+            <div class="faq-answer"><p>Our termite system uses strategically placed bait stations around your home's perimeter. Termites find the bait, share it with the colony, and it eliminates the entire colony from the inside. The Always Active technology means stations are working 24 hours a day, 7 days a week. We monitor stations annually and replace bait as needed.</p></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FINAL CTA ========== -->
+    <section class="final-cta topo-bg">
+      <div class="container">
+        <div class="final-cta-content">
+          <p class="subtitle">Get Started Today</p>
+          <h2>Ready to Protect Your Home?</h2>
+          <p class="body-text">Get a personalized quote in minutes &mdash; or call us anytime. We love bugs in their habitat, not in yours.</p>
+          <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:var(--lg); flex-wrap:wrap;">
+            <div class="google-badge-stars" style="display:flex; gap:1px; color:#FBBC04;">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            </div>
+            <span style="font-family:var(--font-display); font-size:14px; font-weight:500; color:var(--soil);">Trusted by 2,600+ homeowners on Google</span>
+          </div>
+          <div class="final-cta-actions">
+            <a class='btn btn-primary' href='/'>GET YOUR FREE QUOTE</a>
+            <a href="tel:8176656527" class="btn btn-secondary">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="margin-right:6px">
+                <path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/>
+              </svg>
+              CALL (817) 665-6527
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== STICKY MOBILE CTA ========== -->
+  <div class="sticky-cta-bar" id="stickyCta">
+    <a class='btn btn-primary' href='/' onclick='goToQuote(event)'>GET YOUR FREE QUOTE</a>
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <p class="footer-logo">FORTERRA</p>
+          <p>Family-owned preventative pest control serving the Dallas-Fort Worth area. Over 17,000 homes treated. We love bugs &mdash; in their habitat, not yours.</p>
+        </div>
+        <div>
+          <p class="footer-heading">Company</p>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-heading">Resources</p>
+          <ul class="footer-links">
+            <li><a href="#">Pest Library</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Service Areas</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-heading">Contact</p>
+          <div class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/>
+            </svg>
+            <a href="tel:8176656527">(817) 665-6527</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M2 4a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V4zm2-.5a.5.5 0 00-.5.5v.217l4.5 3.375L12.5 4.217V4a.5.5 0 00-.5-.5H4zm8.5 1.783L8.326 8.408a.5.5 0 01-.652 0L3.5 5.283V12a.5.5 0 00.5.5h8a.5.5 0 00.5-.5V5.283z"/>
+            </svg>
+            <a href="mailto:info@forterrapestcontrol.com">info@forterrapestcontrol.com</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 1a5 5 0 00-5 5c0 4.17 4.42 8.52 4.6 8.71a.5.5 0 00.8 0C8.58 14.52 13 10.17 13 6a5 5 0 00-5-5zm0 7a2 2 0 110-4 2 2 0 010 4z"/>
+            </svg>
+            <span>935 S Kimball Ave, #162<br>Southlake, TX 76092</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2026 Forterra Pest Control. All rights reserved.</p>
+        <ul class="footer-legal">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    // ---- Category Tab Switching ----
+    const tabHeadings = {
+      general:    { subtitle: 'Choose Your Plan',          heading: 'Preventative Plans for Every Home', cta: 'GET ONLINE QUOTE' },
+      termites:   { subtitle: 'Termite Solutions',         heading: 'Protect Your Home from Termites',   cta: 'GET ONLINE QUOTE' },
+      mosquitoes: { subtitle: 'Mosquito Control',          heading: 'Take Back Your Yard',               cta: 'GET ONLINE QUOTE' },
+      rodents:    { subtitle: 'Rodent Control & Exclusion', heading: 'Keep Rodents Out for Good',         cta: 'GET ONLINE QUOTE' }
+    };
+
+    const videoHeadings = {
+      general:    { subtitle: 'Helpful Videos',         heading: 'Answers to Your Most Common Questions' },
+      termites:   { subtitle: 'Termite Knowledge',      heading: 'Understanding Termite Protection' },
+      mosquitoes: { subtitle: 'Mosquito Tips',           heading: 'Getting the Most from Your Treatment' },
+      rodents:    { subtitle: 'Rodent Expertise',        heading: 'What You Need to Know About Rodents' }
+    };
+
+    function switchTab(tabId) {
+      // Update tab buttons
+      document.querySelectorAll('.category-tab').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tabId);
+      });
+      // Update plan tab panels
+      document.querySelectorAll('.tab-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.dataset.tabPanel === tabId);
+      });
+      // Update video tab panels
+      document.querySelectorAll('.video-tab-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.dataset.videoTab === tabId);
+      });
+      // Update plan headings + CTA
+      const info = tabHeadings[tabId];
+      if (info) {
+        document.getElementById('plansSubtitle').textContent = info.subtitle;
+        document.getElementById('plansHeading').textContent = info.heading;
+      }
+      // Update video headings
+      const vid = videoHeadings[tabId];
+      if (vid) {
+        document.getElementById('videoSubtitle').textContent = vid.subtitle;
+        document.getElementById('videoHeading').textContent = vid.heading;
+      }
+      // Re-apply current billing state to new panel
+      setBilling(currentBilling);
+    }
+
+    // ---- Billing Toggle ----
+    let currentBilling = 'monthly';
+
+    function setBilling(period) {
+      currentBilling = period;
+      const buttons = document.querySelectorAll('.billing-toggle button');
+      buttons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.period === period);
+      });
+
+      // Update ALL amount elements across every tab panel
+      const amounts = document.querySelectorAll('.plan-price .amount');
+      const notes = document.querySelectorAll('.annual-note');
+
+      amounts.forEach(el => {
+        const monthly = el.dataset.monthly;
+        const annual = el.dataset.annual;
+        if (monthly && annual) {
+          el.textContent = period === 'annual' ? annual : monthly;
+        }
+      });
+
+      notes.forEach(el => {
+        if (period === 'annual') {
+          // Find the corresponding amount to calculate annual total
+          const card = el.closest('[data-plan]') || el.parentElement;
+          const amtEl = card ? card.querySelector('.amount') : null;
+          const mo = amtEl ? parseInt(amtEl.dataset.monthly) : 0;
+          el.textContent = mo ? `Pay $${mo * 11}/yr (1 month free)` : 'Billed annually — 1 month free';
+        } else {
+          el.textContent = '';
+        }
+      });
+    }
+
+    // ---- Quote & Schedule Navigation ----
+    const LEMONADE_URL = '/';
+
+    function getActiveCategory() {
+      const activeTab = document.querySelector('.category-tab.active');
+      return activeTab ? activeTab.dataset.tab : 'general';
+    }
+
+    function goToQuote(evt) {
+      if (evt) evt.preventDefault();
+      const cat = getActiveCategory();
+      let url = LEMONADE_URL + '#category=' + cat;
+      /* If clicked from inside a plan card, pass the plan tier */
+      const el = evt && evt.currentTarget;
+      if (el) {
+        const card = el.closest('[data-plan]');
+        if (card) {
+          const raw = card.dataset.plan;
+          /* Map card data-plan values to the wizard's plan keys */
+          const MAP = {basic:'basic', standard:'standard', premium:'premium',
+                       'termite-standard':'standard', 'termite-premium':'premium',
+                       mosquito:'mosquito', 'rodent-basic':'basic'};
+          const mapped = MAP[raw];
+          if (mapped) url += '&plan=' + mapped;
+        }
+      }
+      window.location.href = url;
+    }
+
+    function goToSchedule(evt) {
+      if (evt) evt.preventDefault();
+      const cat = getActiveCategory();
+      let url = LEMONADE_URL + '#category=' + cat;
+      const el = evt && evt.currentTarget;
+      if (el) {
+        const card = el.closest('[data-plan]');
+        if (card) {
+          const raw = card.dataset.plan;
+          const MAP = {basic:'basic', standard:'standard', premium:'premium',
+                       'termite-standard':'standard', 'termite-premium':'premium',
+                       mosquito:'mosquito', 'rodent-basic':'basic'};
+          const mapped = MAP[raw];
+          if (mapped) url += '&plan=' + mapped;
+        }
+      }
+      window.location.href = url;
+    }
+
+    // ---- FAQ Accordion ----
+    function toggleFaq(button) {
+      const item = button.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(el => {
+        el.classList.remove('open');
+      });
+
+      // Toggle clicked
+      if (!wasOpen) {
+        item.classList.add('open');
+      }
+    }
+
+    /* ========== INTERACTIVE COMPARISON TOOL ========== */
+    const PLAN_DATA = {
+      basic:     { name: 'Basic',      price: '$49/mo', recommended: false },
+      standard:  { name: 'Standard',   price: '$59/mo', recommended: true },
+      premium:   { name: 'Premium',    price: '$69/mo', recommended: false },
+      sentricon: { name: 'Termite', price: '$29/mo', recommended: false },
+      mosquito:  { name: 'Mosquito',   price: '$79/mo', recommended: false }
+    };
+
+    const COMPARE_FEATURES = [
+      { category: 'Treatment Schedule' },
+      { label: 'Quarterly',                          basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+      { label: 'Monthly (seasonal Apr\u2013Oct)',    basic: false, standard: false, premium: false, sentricon: false, mosquito: true },
+      { label: 'Annual',                              basic: false, standard: false, premium: false, sentricon: true,  mosquito: false },
+      { category: 'Pest Coverage' },
+      { label: 'Ants',                                basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+      { label: 'Cockroaches',                         basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+      { label: 'Spiders',                             basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+      { label: 'Other common household pests',        basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+      { label: 'Wasps',                               basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+      { label: 'Rodents',                             basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+      { label: 'Termites',                            basic: false, standard: true,  premium: true,  sentricon: true,  mosquito: false },
+      { label: 'Mosquitoes',                          basic: false, standard: false, premium: false, sentricon: false, mosquito: true },
+      { label: 'Fleas',                               basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: true },
+      { category: 'Services' },
+      { label: 'Zero-Gap System',                     basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+      { label: 'De-webbing',                          basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+      { label: 'Exterior foundation treatment',       basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+      { label: 'Interior upon request',               basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+      { label: 'Rodent bait station management',      basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+      { label: 'Termite Monitoring',                  basic: false, standard: true,  premium: true,  sentricon: true,  mosquito: false },
+      { label: 'Termite Treatment',       basic: false, standard: false, premium: true,  sentricon: true,  mosquito: false },
+      { label: 'Fire ant mound treatment',            basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+      { label: 'Full yard treatment',                 basic: false, standard: false, premium: false, sentricon: false, mosquito: true },
+      { label: 'Mosquito Stations',                   basic: false, standard: false, premium: false, sentricon: false, mosquito: true },
+      { category: 'Warranties' },
+      { label: 'Free re-services',                    basic: true,  standard: true,  premium: true,  sentricon: true,  mosquito: true },
+      { label: 'Money-back guarantee',                basic: true,  standard: true,  premium: true,  sentricon: true,  mosquito: true },
+      { label: 'Termite warranty',                    basic: false, standard: false, premium: true,  sentricon: true,  mosquito: false },
+      { label: 'Background-checked and drug-tested technicians', basic: true, standard: true, premium: true, sentricon: true, mosquito: true },
+      { label: 'Pet- and kid-friendly treatments',    basic: true,  standard: true,  premium: true,  sentricon: true,  mosquito: true }
+    ];
+
+    function renderComparison() {
+      const plans = ['basic', 'standard', 'premium', 'sentricon', 'mosquito'];
+      const wrap = document.getElementById('compareTableWrap');
+      const totalCols = plans.length + 1;
+
+      let html = '<table class="compare-table"><thead><tr>';
+      html += '<th style="text-align:left;">Feature</th>';
+      plans.forEach(key => {
+        const p = PLAN_DATA[key];
+        const cls = p.recommended ? ' class="recommended-col"' : '';
+        html += '<th' + cls + '>' + p.name + '</th>';
+      });
+      html += '</tr></thead><tbody>';
+
+      COMPARE_FEATURES.forEach(row => {
+        if (row.category) {
+          html += '<tr class="category-row"><td colspan="' + totalCols + '">' + row.category + '</td></tr>';
+        } else {
+          html += '<tr><td>' + row.label + '</td>';
+          plans.forEach(key => {
+            html += row[key]
+              ? '<td><span class="check">&#10003;</span></td>'
+              : '<td><span class="dash">&mdash;</span></td>';
+          });
+          html += '</tr>';
+        }
+      });
+
+      html += '</tbody></table>';
+      wrap.innerHTML = html;
+    }
+
+    // Initial render
+    renderComparison();
+
+    // ---- Sticky mobile CTA bar (show after scrolling past hero) ----
+    (function() {
+      const bar = document.getElementById('stickyCta');
+      const hero = document.querySelector('.hero');
+      if (!bar || !hero) return;
+      const observer = new IntersectionObserver(([e]) => {
+        bar.classList.toggle('visible', !e.isIntersecting);
+      }, { threshold: 0 });
+      observer.observe(hero);
+    })();
+  </script>
+
+</body>
+</html>
