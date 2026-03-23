@@ -36,6 +36,9 @@
 | `{{contact.address1}}` | Street address | 123 Main St |
 | `{{contact.agreement_type}}` | Plan name (dropdown) | Standard Pest Prevention |
 | `{{contact.please_describe_your_pest_concern}}` | Pest list | ants, cockroaches, spiders |
+| `{{contact.initial_service}}` | Initial service fee (before discounts) | 99 |
+| `{{contact.after_discount}}` | Initial fee after discounts | 69 |
+| `{{contact.monthly_charge}}` | Monthly recurring charge | 59 |
 
 ---
 
@@ -50,13 +53,32 @@
 - **Default (includes `confirm-via:text`):** → go to Step 2A
 
 ### Step 2A: Send SMS (text confirmation)
+
+**IF/ELSE:** Contact has tag `addon:mosquito`
+
+**If YES (pest + mosquito):**
 ```
-Hi {{contact.first_name}}! Your {{contact.agreement_type}} service is confirmed.
+Hi {{contact.first_name}}! Your {{contact.agreement_type}} + Mosquito Protection is confirmed.
 
-We'll call within 24hrs to schedule your first visit and get you set up.
+Initial service: ${{contact.after_discount}}
+Monthly: ${{contact.monthly_charge}}/mo + mosquito add-on (see email for details)
 
-Questions? Call (817) 665-6527
+We'll call within 24hrs to schedule your first visit.
 
+Questions? (817) 665-6527
+- Forterra Pest Control
+```
+
+**If NO (pest only):**
+```
+Hi {{contact.first_name}}! Your {{contact.agreement_type}} is confirmed.
+
+Initial service: ${{contact.after_discount}}
+Monthly: ${{contact.monthly_charge}}/mo
+
+We'll call within 24hrs to schedule your first visit.
+
+Questions? (817) 665-6527
 - Forterra Pest Control
 ```
 
@@ -73,6 +95,8 @@ Your pest control service is confirmed! Here are your details:
 Plan: {{contact.agreement_type}}
 Pests: {{contact.please_describe_your_pest_concern}}
 Property: {{contact.address1}}
+Initial Service Fee: ${{contact.after_discount}}
+Monthly Recurring: ${{contact.monthly_charge}}/mo
 
 WHAT HAPPENS NEXT:
 A member of our team will call you within 24 hours to:

@@ -151,8 +151,8 @@ export default async function handler(req, res) {
       customFields: [
         { key: 'agreement_type', field_value: partial ? '' : planLabel },
         { key: 'please_describe_your_pest_concern', field_value: pestDesc },
-        ...(!partial && initialPrice ? [{ key: 'initial_price', field_value: initialPrice }] : []),
-        ...(!partial && afterDiscounts ? [{ key: 'after_discounts', field_value: afterDiscounts }] : []),
+        ...(!partial && initialPrice ? [{ key: 'initial_service', field_value: initialPrice }] : []),
+        ...(!partial && afterDiscounts ? [{ key: 'after_discount', field_value: afterDiscounts }] : []),
         ...(!partial && monthlyCharge ? [{ key: 'monthly_charge', field_value: monthlyCharge }] : [])
       ]
     };
@@ -198,8 +198,8 @@ export default async function handler(req, res) {
             customFields: [
               { key: 'agreement_type', field_value: partial ? '' : planLabel },
               { key: 'please_describe_your_pest_concern', field_value: pestDesc },
-              ...(!partial && initialPrice ? [{ key: 'initial_price', field_value: initialPrice }] : []),
-              ...(!partial && afterDiscounts ? [{ key: 'after_discounts', field_value: afterDiscounts }] : []),
+              ...(!partial && initialPrice ? [{ key: 'initial_service', field_value: initialPrice }] : []),
+              ...(!partial && afterDiscounts ? [{ key: 'after_discount', field_value: afterDiscounts }] : []),
               ...(!partial && monthlyCharge ? [{ key: 'monthly_charge', field_value: monthlyCharge }] : [])
             ]
           })
