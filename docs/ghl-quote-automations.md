@@ -370,13 +370,25 @@ Address: {{contact.address1}}
 
 ## Testing Checklist
 
+**Automation 1 — Booking Confirmation:**
 - [ ] Submit a test quote (use your own phone/email) → verify `quote-completed` fires Automation 1
 - [ ] Check that `agreement_type` and `please_describe_your_pest_concern` populate on the contact
-- [ ] Verify SMS arrives and reads correctly
-- [ ] Verify email arrives and renders correctly
-- [ ] Check that CSR task appears (for call confirmation and payment collection)
-- [ ] Test abandoned flow: start a quote, enter email/phone, close browser → verify `quote-in-progress` fires Automation 3, and first text arrives after 15 min
-- [ ] Test callback: select "Other" pest → "Schedule a callback" → verify Automation 2 fires
-- [ ] Test rodent inspection: select "Rodents" → "Inside my home" → verify Automation 4 fires
-- [ ] Confirm pipeline stage moves to "Online Quote Booked"
-- [ ] Verify that completing a quote AFTER starting one removes `quote-in-progress` and stops nurture
+- [ ] Verify SMS/email arrives and reads correctly (test each confirm-via option)
+- [ ] Check that CSR task appears (for `confirm-via:call` and `payment:call-setup`)
+- [ ] Verify opportunity lands in **Online Quote Booked** stage (not Lead)
+
+**Automation 2 — Callback:**
+- [ ] Select "Other" pest → "Schedule a callback" → verify SMS arrives
+- [ ] Verify opportunity lands in **Online Quote Callback** stage
+- [ ] Verify Slack notification appears in #call-review with callback day/time
+
+**Automation 3 — Abandoned Quote:**
+- [ ] Start a quote, enter email/phone, close browser → verify `quote-in-progress` tag applied
+- [ ] Wait 15 min → verify tag flips to `quote-abandoned` and opportunity created in **Online Quote Abandoned** stage
+- [ ] Verify first SMS arrives after 15 min
+- [ ] Complete a quote AFTER starting one → verify `quote-in-progress` removed and nurture stops (no abandoned opportunity created)
+
+**Automation 4 — Inspection:**
+- [ ] Select "Rodents" → "Inside my home" → verify SMS + CSR task
+- [ ] Test oversized property (7K+ sqft) → verify custom quote SMS + CSR task
+- [ ] Verify escalation task fires after 24 hours if original task not completed
