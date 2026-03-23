@@ -153,7 +153,8 @@ export default async function handler(req, res) {
         { key: 'please_describe_your_pest_concern', field_value: pestDesc },
         ...(!partial && initialPrice ? [{ key: 'initial_service', field_value: initialPrice }] : []),
         ...(!partial && afterDiscounts ? [{ key: 'after_discount', field_value: afterDiscounts }] : []),
-        ...(!partial && monthlyCharge ? [{ key: 'monthly_charge', field_value: monthlyCharge }] : [])
+        ...(!partial && monthlyCharge ? [{ key: 'monthly_charge', field_value: monthlyCharge }] : []),
+        ...(!partial && mosquitoMonthly ? [{ key: 'mosquito-monthly', field_value: mosquitoMonthly }] : [])
       ]
     };
 
@@ -200,7 +201,8 @@ export default async function handler(req, res) {
               { key: 'please_describe_your_pest_concern', field_value: pestDesc },
               ...(!partial && initialPrice ? [{ key: 'initial_service', field_value: initialPrice }] : []),
               ...(!partial && afterDiscounts ? [{ key: 'after_discount', field_value: afterDiscounts }] : []),
-              ...(!partial && monthlyCharge ? [{ key: 'monthly_charge', field_value: monthlyCharge }] : [])
+              ...(!partial && monthlyCharge ? [{ key: 'monthly_charge', field_value: monthlyCharge }] : []),
+        ...(!partial && mosquitoMonthly ? [{ key: 'mosquito-monthly', field_value: mosquitoMonthly }] : [])
             ]
           })
         });

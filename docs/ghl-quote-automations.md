@@ -39,6 +39,7 @@
 | `{{contact.initial_service}}` | Initial service fee (before discounts) | 99 |
 | `{{contact.after_discount}}` | Initial fee after discounts | 69 |
 | `{{contact.monthly_charge}}` | Monthly recurring charge | 59 |
+| `{{contact.mosquito-monthly}}` | Mosquito add-on monthly charge | 52 |
 
 ---
 
@@ -61,7 +62,7 @@
 Hi {{contact.first_name}}! Your {{contact.agreement_type}} + Mosquito Protection is confirmed.
 
 Initial service: ${{contact.after_discount}}
-Monthly: ${{contact.monthly_charge}}/mo + mosquito add-on (see email for details)
+Monthly: ${{contact.monthly_charge}}/mo + ${{contact.mosquito-monthly}}/mo mosquito
 
 We'll call within 24hrs to schedule your first visit.
 
@@ -97,6 +98,9 @@ Pests: {{contact.please_describe_your_pest_concern}}
 Property: {{contact.address1}}
 Initial Service Fee: ${{contact.after_discount}}
 Monthly Recurring: ${{contact.monthly_charge}}/mo
+
+Note: For the email, add an IF/ELSE block — if contact has tag `addon:mosquito`, insert this line after Monthly Recurring:
+Mosquito Add-on: +${{contact.mosquito-monthly}}/mo
 
 WHAT HAPPENS NEXT:
 A member of our team will call you within 24 hours to:
