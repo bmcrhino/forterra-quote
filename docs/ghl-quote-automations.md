@@ -10,7 +10,7 @@
 - Creates/updates contact with all tags and custom fields
 - Populates `agreement_type` (mapped to exact dropdown values: Basic Pest Prevention, Standard Pest Prevention, Premium Pest Prevention, Termite Control (Sentricon), Mosquito Control, Inspection)
 - Populates `please_describe_your_pest_concern` with pest list
-- Creates opportunity in Inbound Sales pipeline
+- Creates opportunity in Inbound Sales pipeline → **Online Quote Booked** stage (completed bookings only; abandoned quotes get their opportunity from the GHL automation)
 - Adds detailed audit note (pests, follow-ups, plan, sqft, preferred date/time, payment preference, ToS agreement)
 - Sends Slack notification to #call-review
 - Handles all tag logic (`quote-completed`, `quote-in-progress`, `quote-rodent-inspection`, `quote-custom-quote`, `callback-requested`, `confirm-via:X`, `payment:X`, `plan:X`, `billing:X`, `pest:X`)
@@ -21,8 +21,9 @@
 - Abandoned quote nurture drip (multi-day sequences with wait steps)
 - Pipeline stage moves
 
-### Pipeline Stage to Add:
-- **"Online Quote Booked"** — add early in Inbound Sales pipeline (before Quoted). This is where completed online quotes land.
+### Pipeline Stages (already created):
+- **"Online Quote Booked"** (ID: `2cbb6069-92e9-4b16-9278-424ab97e6681`) — where completed online quotes land. API places opportunities here directly.
+- **"Online Quote Abandoned"** (ID: `17386d9a-84ac-434f-90bc-cfc777b37e09`) — where abandoned quote opportunities land. Created by GHL automation after 15-min wait confirms abandonment.
 
 ### GHL Merge Fields Used:
 | Merge Field | What It Contains | Example |
@@ -133,8 +134,8 @@ Plan: {{contact.agreement_type}}
 ```
 - **If NO →** Continue (customer will pay tech on-site)
 
-### Step 4: Update Pipeline Stage
-- **Action:** Move opportunity to **"Online Quote Booked"** stage
+### Step 4: Pipeline Stage (no action needed)
+- The API already places the opportunity directly into **"Online Quote Booked"** stage at creation. No GHL move required.
 
 ### Step 5: Add/Remove Tags
 - **Add:** `booking-confirmed`
@@ -216,7 +217,16 @@ Phone: {{contact.phone}}
 
 ### Step 3: Add tag `quote-abandoned`, remove tag `quote-in-progress`
 
-### Step 4: Touch 1 — SMS (immediate after 15 min)
+### Step 4: Create Opportunity
+- **Pipeline:** Inbound Sales (`QRJpl20GSKW7F1vppJ6T`)
+- **Stage:** Online Quote Abandoned (`17386d9a-84ac-434f-90bc-cfc777b37e09`)
+- **Name:** `{{contact.first_name}} {{contact.last_name}} - Abandoned Quote`
+- **Status:** Open
+- **Monetary Value:** 0
+
+> **Why here and not in the API?** The API fires at the partial-submit moment (when the customer enters email/phone). They might still finish 30 seconds later. The 15-min wait in Step 1 confirms they actually abandoned. Only then do we create the opportunity so it doesn't pollute the pipeline with false abandonments.
+
+### Step 5: Touch 1 — SMS (immediate after 15 min)
 ```
 Hi {{contact.first_name}}, looks like you didn't finish your pest control quote. No worries!
 
@@ -228,13 +238,13 @@ Reply STOP to opt out.
 - Forterra Pest Control
 ```
 
-### Step 5: Wait 1 day
+### Step 6: Wait 1 day
 
-### Step 6: IF/ELSE — Has tag `quote-completed`?
+### Step 7: IF/ELSE — Has tag `quote-completed`?
 - **If YES →** End workflow
 - **If NO →** Continue
 
-### Step 7: Touch 2 — Email (Day 1)
+### Step 8: Touch 2 — Email (Day 1)
 - **Subject:** Your pest control quote is waiting, {{contact.first_name}}
 - **Body:**
 ```
@@ -257,13 +267,13 @@ Talk soon,
 The Forterra Team
 ```
 
-### Step 8: Wait 2 days
+### Step 9: Wait 2 days
 
-### Step 9: IF/ELSE — Has tag `quote-completed`?
+### Step 10: IF/ELSE — Has tag `quote-completed`?
 - **If YES →** End workflow
 - **If NO →** Continue
 
-### Step 10: Touch 3 — SMS (Day 3)
+### Step 11: Touch 3 — SMS (Day 3)
 ```
 {{contact.first_name}}, still seeing {{contact.please_describe_your_pest_concern}} around the house? DFW pest problems get worse in warm weather.
 
@@ -274,13 +284,13 @@ Reply STOP to opt out.
 - Forterra
 ```
 
-### Step 11: Wait 2 days
+### Step 12: Wait 2 days
 
-### Step 12: IF/ELSE — Has tag `quote-completed`?
+### Step 13: IF/ELSE — Has tag `quote-completed`?
 - **If YES →** End workflow
 - **If NO →** Continue
 
-### Step 13: Touch 4 — Email (Day 5)
+### Step 14: Touch 4 — Email (Day 5)
 - **Subject:** What other DFW homeowners say about {{contact.please_describe_your_pest_concern}} control
 - **Body:**
 ```
@@ -302,13 +312,13 @@ Or call: (817) 665-6527
 The Forterra Team
 ```
 
-### Step 14: Wait 2 days
+### Step 15: Wait 2 days
 
-### Step 15: IF/ELSE — Has tag `quote-completed`?
+### Step 16: IF/ELSE — Has tag `quote-completed`?
 - **If YES →** End workflow
 - **If NO →** Continue
 
-### Step 16: Touch 5 — Final SMS (Day 7)
+### Step 17: Touch 5 — Final SMS (Day 7)
 ```
 {{contact.first_name}}, last note from us about pest control for {{contact.address1}}.
 
@@ -320,7 +330,7 @@ Reply STOP to opt out.
 - Forterra Pest Control
 ```
 
-### Step 17: Add tag `nurture-completed`, remove tag `quote-abandoned`
+### Step 18: Add tag `nurture-completed`, remove tag `quote-abandoned`
 
 ---
 
