@@ -2644,9 +2644,17 @@
         if (basicAddonEl) basicAddonEl.style.display = 'none';
       }
       // Alt plans — no alts for mosquito (Basic is now an add-on above)
+      const hasTermites = S.pests && S.pests.includes('termites');
       const alts = S.plan === 'mosquito'
         ? []
-        : Object.keys(PLANS).filter(k => k!==S.plan && k!=='mosquito' && k!=='sentricon' && PLANS[k] && !PLANS[k].customQuote);
+        : Object.keys(PLANS).filter(k => {
+            if (k === S.plan || k === 'mosquito') return false;
+            if (!PLANS[k] || PLANS[k].customQuote) return false;
+            // When termites involved: show sentricon as alt, hide basic (no termite coverage)
+            if (hasTermites) { if (k === 'basic') return false; }
+            else { if (k === 'sentricon') return false; }
+            return true;
+          });
       $('altPlansRow').innerHTML = alts.map(k => { const x=PLANS[k]; const ap=isAnnual?x.annual:x.price; return `<div class="alt-plan-card" onclick="switchPlan('${k}')"><p class="alt-plan-name">${x.name}</p><p class="alt-plan-title">${x.title}</p><p class="alt-plan-price">$${ap}</p><p class="alt-plan-period">/mo</p></div>`; }).join('');
       if (mqAddon) mqAddon.style.display = S.plan === 'mosquito' ? 'none' : '';
       $('billingMonthlyLabel').classList.toggle('active', !isAnnual);
