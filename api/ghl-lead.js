@@ -154,7 +154,7 @@ export default async function handler(req, res) {
         ...(!partial && initialPrice ? [{ key: 'initial_service', field_value: initialPrice }] : []),
         ...(!partial && afterDiscounts ? [{ key: 'after_discount', field_value: afterDiscounts }] : []),
         ...(!partial && monthlyCharge ? [{ key: 'monthly_charge', field_value: monthlyCharge }] : []),
-        ...(!partial && mosquitoMonthly ? [{ key: 'mosquito-monthly', field_value: mosquitoMonthly }] : [])
+        ...(!partial && mosquitoMonthly ? [{ key: 'mosquito_monthly', field_value: mosquitoMonthly }] : [])
       ]
     };
 
@@ -202,7 +202,7 @@ export default async function handler(req, res) {
               ...(!partial && initialPrice ? [{ key: 'initial_service', field_value: initialPrice }] : []),
               ...(!partial && afterDiscounts ? [{ key: 'after_discount', field_value: afterDiscounts }] : []),
               ...(!partial && monthlyCharge ? [{ key: 'monthly_charge', field_value: monthlyCharge }] : []),
-        ...(!partial && mosquitoMonthly ? [{ key: 'mosquito-monthly', field_value: mosquitoMonthly }] : [])
+        ...(!partial && mosquitoMonthly ? [{ key: 'mosquito_monthly', field_value: mosquitoMonthly }] : [])
             ]
           })
         });
