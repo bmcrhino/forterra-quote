@@ -2216,6 +2216,19 @@
           body.preferredDate = `${S.date.getFullYear()}-${String(S.date.getMonth()+1).padStart(2,'0')}-${String(S.date.getDate()).padStart(2,'0')}`;
           body.preferredTime = S.time === 'am' ? 'Morning' : 'Afternoon';
         }
+        if (!partial) {
+          const p = PLANS[S.plan];
+          if (p && !p.customQuote) {
+            const isAnnual = S.billing === 'annual';
+            body.initialPrice = p.init + S.priceAdj;
+            body.afterDiscounts = p.init + S.priceAdj - (S.exitApplied ? 30 : 0);
+            body.monthlyCharge = isAnnual ? p.annual : p.price;
+            if (S.addons.includes('mosquito')) {
+              const mqP = getMosquitoPricing(S.lotAcres);
+              if (mqP) { body.mosquitoMonthly = mqP.mo; }
+            }
+          }
+        }
         console.log('[GHL] Sending lead:', partial ? 'PARTIAL' : 'FINAL', body);
         const resp = await fetch('/api/ghl-lead', {
           method: 'POST',

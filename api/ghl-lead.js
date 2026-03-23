@@ -10,7 +10,8 @@ export default async function handler(req, res) {
       preferredDate, preferredTime, billing, partial,
       rodentInspection, termiteInspection, customQuote, specialties, followups,
       confirmPreference, paymentPreference,
-      callbackRequested, callbackDay, callbackTime
+      callbackRequested, callbackDay, callbackTime,
+      initialPrice, afterDiscounts, monthlyCharge, mosquitoMonthly
     } = req.body;
 
     const TOKEN = (process.env.GHL_API_TOKEN || '').trim();
@@ -101,6 +102,15 @@ export default async function handler(req, res) {
       }
       if (confirmPreference) noteLines.push(`Confirm via: ${confirmPreference}`);
       if (paymentPreference) noteLines.push(`Payment: ${paymentPreference === 'onsite' ? 'Card to technician on-site' : 'Call to set up payment'}`);
+      if (initialPrice) {
+        noteLines.push('');
+        noteLines.push('— PRICING —');
+        noteLines.push(`Initial Service: $${initialPrice} (before discounts)`);
+        noteLines.push(`After Discounts: $${afterDiscounts}`);
+        if (afterDiscounts < initialPrice) noteLines.push('$30 exit intent discount applied');
+        noteLines.push(`Monthly Recurring: $${monthlyCharge}/mo`);
+        if (mosquitoMonthly) noteLines.push(`Mosquito Add-on: +$${mosquitoMonthly}/mo`);
+      }
       noteLines.push('');
       noteLines.push('✅ AGREED TO TERMS OF SERVICE');
     } else {
@@ -139,8 +149,11 @@ export default async function handler(req, res) {
       tags: tags,
       source: 'Online Pricing Tool',
       customFields: [
-        { key: 'agreement_type', field_value: planLabel },
-        { key: 'please_describe_your_pest_concern', field_value: pestDesc }
+        { key: 'agreement_type', field_value: partial ? '' : planLabel },
+        { key: 'please_describe_your_pest_concern', field_value: pestDesc },
+        ...(!partial && initialPrice ? [{ key: 'initial_price', field_value: initialPrice }] : []),
+        ...(!partial && afterDiscounts ? [{ key: 'after_discounts', field_value: afterDiscounts }] : []),
+        ...(!partial && monthlyCharge ? [{ key: 'monthly_charge', field_value: monthlyCharge }] : [])
       ]
     };
 
@@ -183,8 +196,11 @@ export default async function handler(req, res) {
           body: JSON.stringify({
             tags: finalTags,
             customFields: [
-              { key: 'agreement_type', field_value: planLabel },
-              { key: 'please_describe_your_pest_concern', field_value: pestDesc }
+              { key: 'agreement_type', field_value: partial ? '' : planLabel },
+              { key: 'please_describe_your_pest_concern', field_value: pestDesc },
+              ...(!partial && initialPrice ? [{ key: 'initial_price', field_value: initialPrice }] : []),
+              ...(!partial && afterDiscounts ? [{ key: 'after_discounts', field_value: afterDiscounts }] : []),
+              ...(!partial && monthlyCharge ? [{ key: 'monthly_charge', field_value: monthlyCharge }] : [])
             ]
           })
         });
@@ -261,7 +277,9 @@ export default async function handler(req, res) {
       let slackMsg = '';
       if (scenario === 'completed') {
         const planLabel = plan ? plan.charAt(0).toUpperCase() + plan.slice(1) : 'Unknown';
-        slackMsg = `🎯 *New Online Booking*\n*${firstName} ${lastName}* — ${planLabel} Plan\n📍 ${address}, ${city} ${zip}\n🐛 ${pests?.join(', ') || 'general'} | 📐 ${sqft ? sqft.toLocaleString() : '?'} sqft\n📅 ${preferredDate || 'TBD'} ${preferredTime || ''}\n\n_Action: Set up in FieldRoutes, send contract, confirm appointment_`;
+        const pricingLine = initialPrice ? `\n💰 Initial: $${initialPrice} | Monthly: $${monthlyCharge}/mo${mosquitoMonthly ? ` (+$${mosquitoMonthly}/mo mosquito)` : ''}` : '';
+        const prefLine = (confirmPreference || paymentPreference) ? `\n✅ Confirm via: ${confirmPreference || '?'} | 💳 Payment: ${paymentPreference === 'onsite' ? 'on-site' : paymentPreference === 'call' ? 'call to set up' : paymentPreference || '?'}` : '';
+        slackMsg = `🎯 *New Online Booking*\n*${firstName} ${lastName}* — ${planLabel} Plan\n📍 ${address}, ${city} ${zip}\n🐛 ${pests?.join(', ') || 'general'} | 📐 ${sqft ? sqft.toLocaleString() : '?'} sqft${pricingLine}\n📅 ${preferredDate || 'TBD'} ${preferredTime || ''}${prefLine}\n\n_Action: Set up in FieldRoutes, send contract, confirm appointment_`;
       } else if (scenario === 'custom-quote') {
         slackMsg = `🏠 *Custom Quote Needed*\n*${firstName} ${lastName}* — Oversized property\n📍 ${address}, ${city} ${zip}\n📐 ${sqft ? sqft.toLocaleString() : '?'} sqft | ${lotSize || '?'} acres\n🐛 ${pests?.join(', ') || 'general'}\n\n_Action: Schedule inspection, provide custom quote_`;
       } else if (scenario === 'rodent-inspection') {
