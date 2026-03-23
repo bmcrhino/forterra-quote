@@ -29,10 +29,10 @@
 ```
 Hi {{contact.first_name}}! 🎉 Your pest control service is confirmed! 
 
-✅ Plan: {{custom_values.selected_plan}}
-✅ Coverage: {{custom_values.pest_types}}
+✅ Plan: {{contact.agreement_type}}
+✅ Coverage: {{contact.please_describe_your_pest_concern}}
 ✅ Home: {{contact.address1}}
-✅ Preferred Start: {{custom_values.preferred_date}}
+✅ Preferred Start: your requested date
 
 We'll call within 24hrs to schedule your first visit. Questions? Reply STOP to opt out or call (817) 665-6527.
 
@@ -43,7 +43,7 @@ We'll call within 24hrs to schedule your first visit. Questions? Reply STOP to o
 #### Step 2B: Email Confirmation (confirm-via:email)
 - **Action:** Send Email
 - **From:** Forterra Pest Control <info@forterrapestcontrol.com>
-- **Subject:** Your {{custom_values.pest_types}} service is confirmed, {{contact.first_name}}!
+- **Subject:** Your {{contact.please_describe_your_pest_concern}} service is confirmed, {{contact.first_name}}!
 - **Body:**
 ```html
 <p>Hi {{contact.first_name}},</p>
@@ -53,10 +53,10 @@ We'll call within 24hrs to schedule your first visit. Questions? Reply STOP to o
 <div style="background: #f9f9f9; padding: 15px; border-left: 4px solid #28a745;">
 <p><strong>Your Service Details:</strong></p>
 <ul>
-<li><strong>Plan:</strong> {{custom_values.selected_plan}}</li>
-<li><strong>Coverage:</strong> {{custom_values.pest_types}}</li>
+<li><strong>Plan:</strong> {{contact.agreement_type}}</li>
+<li><strong>Coverage:</strong> {{contact.please_describe_your_pest_concern}}</li>
 <li><strong>Property:</strong> {{contact.address1}}</li>
-<li><strong>Preferred Start Date:</strong> {{custom_values.preferred_date}}</li>
+<li><strong>Preferred Start Date:</strong> your requested date</li>
 </ul>
 </div>
 
@@ -91,10 +91,10 @@ QUOTE COMPLETED - CALL CONFIRMATION REQUESTED
 
 Contact: {{contact.first_name}} {{contact.last_name}}
 Phone: {{contact.phone}}
-Plan: {{custom_values.selected_plan}}
-Pests: {{custom_values.pest_types}}
+Plan: {{contact.agreement_type}}
+Pests: {{contact.please_describe_your_pest_concern}}
 Address: {{contact.address1}}
-Preferred Date: {{custom_values.preferred_date}}
+Preferred Date: your requested date
 
 ACTION NEEDED:
 1. Call to confirm service details
@@ -120,7 +120,7 @@ PAYMENT COLLECTION REQUIRED
 
 Contact: {{contact.first_name}} {{contact.last_name}}
 Phone: {{contact.phone}}
-Plan: {{custom_values.selected_plan}}
+Plan: {{contact.agreement_type}}
 Address: {{contact.address1}}
 
 COLLECT:
@@ -145,8 +145,8 @@ NOTE: Service cannot begin until payment is on file (company policy).
       "fields": [
         {"title": "Customer", "value": "{{contact.first_name}} {{contact.last_name}}", "short": true},
         {"title": "Phone", "value": "{{contact.phone}}", "short": true},
-        {"title": "Plan", "value": "{{custom_values.selected_plan}}", "short": true},
-        {"title": "Pests", "value": "{{custom_values.pest_types}}", "short": true},
+        {"title": "Plan", "value": "{{contact.agreement_type}}", "short": true},
+        {"title": "Pests", "value": "{{contact.please_describe_your_pest_concern}}", "short": true},
         {"title": "Address", "value": "{{contact.address1}}", "short": false},
         {"title": "Confirmation Method", "value": "{{custom_values.confirm_method}}", "short": true}
       ]
@@ -193,7 +193,7 @@ CALLBACK PREFERENCES (from notes):
 - Time: {{notes.callback_time_preference}}
 
 QUOTE DETAILS:
-- Pests: {{custom_values.pest_types}}
+- Pests: {{contact.please_describe_your_pest_concern}}
 - Home Size: {{custom_values.square_footage}} sqft
 - Current Issue Level: {{custom_values.pest_severity}}
 
@@ -219,7 +219,7 @@ ACTION REQUIRED:
         {"title": "Phone", "value": "{{contact.phone}}", "short": true},
         {"title": "Callback Day", "value": "{{notes.callback_day_preference}}", "short": true},
         {"title": "Callback Time", "value": "{{notes.callback_time_preference}}", "short": true},
-        {"title": "Pest Issue", "value": "{{custom_values.pest_types}}", "short": false}
+        {"title": "Pest Issue", "value": "{{contact.please_describe_your_pest_concern}}", "short": false}
       ]
     }
   ]
@@ -231,7 +231,7 @@ ACTION REQUIRED:
 - **From:** Forterra Pest Control  
 - **Message:**
 ```
-Hi {{contact.first_name}}! We got your callback request. We'll call you {{notes.callback_day_preference}} {{notes.callback_time_preference}} about your {{custom_values.pest_types}} issue.
+Hi {{contact.first_name}}! We got your callback request. We'll call you {{notes.callback_day_preference}} {{notes.callback_time_preference}} about your {{contact.please_describe_your_pest_concern}} issue.
 
 Any urgent concerns? Call us now: (817) 665-6527
 
@@ -316,7 +316,7 @@ IMMEDIATE ACTION REQUIRED - Call now or delegate to available CSR.
 - **From:** Forterra Pest Control
 - **Message:**
 ```
-Hi {{contact.first_name}}! Saw you were getting a quote for {{custom_values.pest_types}} at {{contact.address1}}. Need help finishing up? 
+Hi {{contact.first_name}}! Saw you were getting a quote for {{contact.please_describe_your_pest_concern}} at {{contact.address1}}. Need help finishing up? 
 
 We're here: (817) 665-6527 
 5.0⭐ 2,600+ reviews
@@ -338,12 +338,12 @@ Reply STOP to opt out.
 #### Step 7: Nurture Touch #2 (Email) - Day 1
 - **Action:** Send Email
 - **From:** Forterra Pest Control <info@forterrapestcontrol.com>
-- **Subject:** Still dealing with {{custom_values.pest_types}} at {{contact.address1}}?
+- **Subject:** Still dealing with {{contact.please_describe_your_pest_concern}} at {{contact.address1}}?
 - **Body:**
 ```html
 <p>Hi {{contact.first_name}},</p>
 
-<p>I noticed you started a quote for {{custom_values.pest_types}} service at your {{contact.address1}} property, but didn't get a chance to finish.</p>
+<p>I noticed you started a quote for {{contact.please_describe_your_pest_concern}} service at your {{contact.address1}} property, but didn't get a chance to finish.</p>
 
 <p><strong>No worries!</strong> Happens to the best of us. 😊</p>
 
@@ -384,7 +384,7 @@ Reply STOP to opt out.
 - **From:** Forterra Pest Control
 - **Message:**
 ```
-{{contact.first_name}}, quick question about the {{custom_values.pest_types}} at your place - are they getting worse? 
+{{contact.first_name}}, quick question about the {{contact.please_describe_your_pest_concern}} at your place - are they getting worse? 
 
 DFW pest issues don't fix themselves! 😬 
 
@@ -407,12 +407,12 @@ Reply STOP to opt out.
 #### Step 13: Nurture Touch #4 (Email) - Day 5
 - **Action:** Send Email
 - **From:** Forterra Pest Control <info@forterrapestcontrol.com>
-- **Subject:** {{contact.first_name}}, here's what our {{custom_values.pest_types}} customers say...
+- **Subject:** {{contact.first_name}}, here's what our {{contact.please_describe_your_pest_concern}} customers say...
 - **Body:**
 ```html
 <p>Hi {{contact.first_name}},</p>
 
-<p>Since you were interested in {{custom_values.pest_types}} control for your {{contact.address1}} property, I thought you'd like to see what other DFW homeowners are saying:</p>
+<p>Since you were interested in {{contact.please_describe_your_pest_concern}} control for your {{contact.address1}} property, I thought you'd like to see what other DFW homeowners are saying:</p>
 
 <div style="background: #f8f9fa; padding: 15px; border-left: 4px solid #28a745; margin: 15px 0;">
 <p><em>"Finally found a pest control company that actually works! No more ants in my kitchen. Highly recommend Forterra!"</em></p>
@@ -424,7 +424,7 @@ Reply STOP to opt out.
 <p><strong>- Mike R., Flower Mound</strong> ⭐⭐⭐⭐⭐</p>
 </div>
 
-<p><strong>Why wait any longer?</strong> Those {{custom_values.pest_types}} aren't going anywhere on their own.</p>
+<p><strong>Why wait any longer?</strong> Those {{contact.please_describe_your_pest_concern}} aren't going anywhere on their own.</p>
 
 <p><a href="quote.forterrapestcontrol.com/forterra-pricing-lemonade" style="background: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Get Your Quote Now</a></p>
 
@@ -452,7 +452,7 @@ Reply STOP to opt out.
 - **From:** Forterra Pest Control
 - **Message:**
 ```
-{{contact.first_name}}, this is our final reminder about {{custom_values.pest_types}} service for {{contact.address1}}.
+{{contact.first_name}}, this is our final reminder about {{contact.please_describe_your_pest_concern}} service for {{contact.address1}}.
 
 2,600+ DFW homeowners chose Forterra. Join them?
 
@@ -503,7 +503,7 @@ Reply STOP to opt out.
 - **From:** Forterra Pest Control
 - **Message:**
 ```
-Hi {{contact.first_name}}! We'll create a custom quote for your {{custom_values.pest_types}} situation at {{contact.address1}}.
+Hi {{contact.first_name}}! We'll create a custom quote for your {{contact.please_describe_your_pest_concern}} situation at {{contact.address1}}.
 
 A CSR will call within 24hrs to discuss details and pricing.
 
@@ -528,7 +528,7 @@ Address: {{contact.address1}}
 Type: {{#if quote-rodent-inspection}}Rodent Inspection{{else}}Custom Quote Inspection{{/if}}
 
 ISSUE DETAILS:
-- Pest Type: {{custom_values.pest_types}}
+- Pest Type: {{contact.please_describe_your_pest_concern}}
 - Home Size: {{custom_values.square_footage}} sqft
 - Severity: {{custom_values.pest_severity}}
 - Notes: {{notes}}
@@ -554,7 +554,7 @@ ACTION REQUIRED:
         {"title": "Customer", "value": "{{contact.first_name}} {{contact.last_name}}", "short": true},
         {"title": "Phone", "value": "{{contact.phone}}", "short": true},
         {"title": "Type", "value": "{{#if quote-rodent-inspection}}Rodent Inspection{{else}}Custom Quote{{/if}}", "short": true},
-        {"title": "Pest Issue", "value": "{{custom_values.pest_types}}", "short": true},
+        {"title": "Pest Issue", "value": "{{contact.please_describe_your_pest_concern}}", "short": true},
         {"title": "Address", "value": "{{contact.address1}}", "short": false}
       ]
     }
