@@ -1787,7 +1787,7 @@
       pests: [], followups: {}, priceAdj: 0,
       plan: 'standard', addons: [], specialties: [],
       date: null, time: null,
-      rodentInspection: false, customQuote: false,
+      rodentInspection: false, termiteInspection: false, customQuote: false,
       exitShown: false, exitApplied: false,
       billing: 'monthly',
       calMo: new Date().getMonth(), calYr: new Date().getFullYear(),
@@ -2083,7 +2083,7 @@
         calcPlan();
         // Route to free inspection flows based on followup answers
         if (S.followups.termite === 'inspect') {
-          S.customQuote = true;
+          S.termiteInspection = true;
           routeToFreeInspection('termite');
           return;
         }
@@ -2202,6 +2202,7 @@
           plan: S.plan, pests: S.pests, addons: S.addons,
           billing: S.billing, partial: partial,
           rodentInspection: S.rodentInspection,
+          termiteInspection: S.termiteInspection,
           customQuote: S.customQuote,
           specialties: S.specialties,
           followups: S.followups || {},

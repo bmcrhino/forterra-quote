@@ -8,7 +8,7 @@ export default async function handler(req, res) {
       firstName, lastName, email, phone, address, city, zip,
       sqft, lotSize, propertyType, plan, pests, addons,
       preferredDate, preferredTime, billing, partial,
-      rodentInspection, customQuote, specialties, followups,
+      rodentInspection, termiteInspection, customQuote, specialties, followups,
       confirmPreference, paymentPreference,
       callbackRequested, callbackDay, callbackTime
     } = req.body;
@@ -31,6 +31,7 @@ export default async function handler(req, res) {
     let scenario = 'in-progress'; // partial default — GHL automation waits 15 min then flips to abandoned
     if (!partial) {
       if (rodentInspection) scenario = 'rodent-inspection';
+      else if (termiteInspection) scenario = 'termite-inspection';
       else if (customQuote) scenario = 'custom-quote';
       else scenario = 'completed';
     }
@@ -90,6 +91,7 @@ export default async function handler(req, res) {
       if (preferredDate) noteLines.push(`Preferred Date: ${preferredDate}`);
       if (preferredTime) noteLines.push(`Preferred Time: ${preferredTime}`);
       if (rodentInspection) noteLines.push('⚠️ RODENT INSPECTION REQUESTED (interior rodent issue)');
+      if (termiteInspection) noteLines.push('⚠️ TERMITE INSPECTION REQUESTED (suspected activity)');
       if (customQuote) noteLines.push('⚠️ CUSTOM QUOTE NEEDED (oversized property)');
       if (callbackRequested) {
         noteLines.push('');
@@ -122,7 +124,7 @@ export default async function handler(req, res) {
       mosquito: 'Mosquito Control'
     };
     let planLabel = plan ? (AGREEMENT_MAP[plan] || plan.charAt(0).toUpperCase() + plan.slice(1)) : '';
-    if (rodentInspection || customQuote) planLabel = 'Inspection';
+    if (rodentInspection || termiteInspection || customQuote) planLabel = 'Inspection';
 
     const contactBody = {
       locationId: LOCATION_ID,
@@ -212,15 +214,17 @@ export default async function handler(req, res) {
     // ==========================================
     // CREATE OPPORTUNITY (completed bookings + callbacks)
     // ==========================================
-    if (!partial && (scenario === 'completed' || scenario === 'rodent-inspection' || scenario === 'custom-quote' || callbackRequested)) {
+    if (!partial && (scenario === 'completed' || scenario === 'rodent-inspection' || scenario === 'termite-inspection' || scenario === 'custom-quote' || callbackRequested)) {
       const planLabel = plan ? plan.charAt(0).toUpperCase() + plan.slice(1) : 'Custom';
       const oppName = callbackRequested
         ? `${firstName || ''} ${lastName || ''} - Callback Request`.trim()
         : scenario === 'rodent-inspection'
           ? `${firstName || ''} ${lastName || ''} - Rodent Inspection`.trim()
-          : scenario === 'custom-quote'
-            ? `${firstName || ''} ${lastName || ''} - Custom Quote`.trim()
-            : `${firstName || ''} ${lastName || ''} - ${planLabel} Plan`.trim();
+          : scenario === 'termite-inspection'
+            ? `${firstName || ''} ${lastName || ''} - Termite Inspection`.trim()
+            : scenario === 'custom-quote'
+              ? `${firstName || ''} ${lastName || ''} - Custom Quote`.trim()
+              : `${firstName || ''} ${lastName || ''} - ${planLabel} Plan`.trim();
 
       const oppStage = callbackRequested ? STAGE_CALLBACK : STAGE_BOOKED;
 
@@ -262,6 +266,8 @@ export default async function handler(req, res) {
         slackMsg = `🏠 *Custom Quote Needed*\n*${firstName} ${lastName}* — Oversized property\n📍 ${address}, ${city} ${zip}\n📐 ${sqft ? sqft.toLocaleString() : '?'} sqft | ${lotSize || '?'} acres\n🐛 ${pests?.join(', ') || 'general'}\n\n_Action: Schedule inspection, provide custom quote_`;
       } else if (scenario === 'rodent-inspection') {
         slackMsg = `🐀 *Rodent Inspection Requested*\n*${firstName} ${lastName}*\n📍 ${address}, ${city} ${zip}\n📅 ${preferredDate || 'TBD'} ${preferredTime || ''}\n\n_Action: Schedule free rodent inspection_`;
+      } else if (scenario === 'termite-inspection') {
+        slackMsg = `🐛 *Termite Inspection Requested*\n*${firstName} ${lastName}*\n📍 ${address}, ${city} ${zip}\n📅 ${preferredDate || 'TBD'} ${preferredTime || ''}\n\n_Action: Schedule free termite inspection_`;
       }
 
       if (callbackRequested) {

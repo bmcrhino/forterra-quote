@@ -13,7 +13,7 @@
 - Creates opportunity in Inbound Sales pipeline → **Online Quote Booked** (completed bookings) or **Online Quote Callback** (callback requests). Abandoned quotes get their opportunity from the GHL automation.
 - Adds detailed audit note (pests, follow-ups, plan, sqft, preferred date/time, payment preference, ToS agreement)
 - Sends Slack notification to #call-review
-- Handles all tag logic (`quote-completed`, `quote-in-progress`, `quote-rodent-inspection`, `quote-custom-quote`, `callback-requested`, `confirm-via:X`, `payment:X`, `plan:X`, `billing:X`, `pest:X`)
+- Handles all tag logic (`quote-completed`, `quote-in-progress`, `quote-rodent-inspection`, `quote-termite-inspection`, `quote-custom-quote`, `callback-requested`, `confirm-via:X`, `payment:X`, `plan:X`, `billing:X`, `pest:X`)
 
 ### What GHL Automations Handle:
 - Sending customer-facing texts and emails (shows in GHL conversation view for CSRs)
@@ -344,11 +344,12 @@ Reply STOP to opt out.
 ## 4. RODENT INSPECTION + CUSTOM QUOTE — Inspection Routing
 
 **Workflow Name:** Quote Tool — Inspection Request  
-**Trigger:** Tag Added → `quote-rodent-inspection` OR `quote-custom-quote`
+**Trigger:** Tag Added → `quote-rodent-inspection` OR `quote-termite-inspection` OR `quote-custom-quote`
 
 ### Step 1: IF/ELSE — Inspection type
 - **Branch A:** Has tag `quote-rodent-inspection` → Step 2A
-- **Branch B:** Has tag `quote-custom-quote` → Step 2B
+- **Branch B:** Has tag `quote-termite-inspection` → Step 2B
+- **Branch C:** Has tag `quote-custom-quote` → Step 2C
 
 ### Step 2A: SMS — Rodent inspection
 ```
@@ -360,7 +361,19 @@ Questions? (817) 665-6527
 - Forterra Pest Control
 ```
 
-### Step 2B: SMS — Custom quote
+### Step 2B: SMS — Termite inspection
+```
+Hi {{contact.first_name}}! We'll schedule a FREE termite inspection at {{contact.address1}}.
+
+A specialist will check for termite activity and recommend the right protection plan.
+
+A team member will call within 24hrs to find a time that works.
+
+Questions? (817) 665-6527
+- Forterra Pest Control
+```
+
+### Step 2C: SMS — Custom quote
 ```
 Hi {{contact.first_name}}! Your property needs a custom quote — we want to make sure we get it right.
 
@@ -381,7 +394,7 @@ INSPECTION NEEDED
 Phone: {{contact.phone}}
 Address: {{contact.address1}}
 Pests: {{contact.please_describe_your_pest_concern}}
-Type: Check tags — rodent inspection or custom quote (oversized property)
+Type: Check tags — rodent inspection, termite inspection, or custom quote (oversized property)
 
 CHECK CONTACT NOTES for full quote details (sqft, lot size, etc.)
 
