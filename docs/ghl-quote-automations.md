@@ -1,652 +1,410 @@
-# Forterra Pest Control - GHL Quote Tool Automations
+# Forterra Pest Control — GHL Quote Tool Automations
 
 **Company:** Forterra Pest Control  
 **Phone:** (817) 665-6527  
 **Quote Tool:** quote.forterrapestcontrol.com/forterra-pricing-lemonade  
 **Pipeline:** Inbound Sales (ID: QRJpl20GSKW7F1vppJ6T)  
 **Business Hours:** Mon-Fri 8am-5pm CST, Sat 8am-12pm  
-**Slack Webhook:** Available for #office-only notifications
+
+### What the API Already Handles (no GHL automation needed):
+- Creates/updates contact with all tags and custom fields
+- Populates `agreement_type` (mapped to exact dropdown values: Basic Pest Prevention, Standard Pest Prevention, Premium Pest Prevention, Termite Control (Sentricon), Mosquito Control, Inspection)
+- Populates `please_describe_your_pest_concern` with pest list
+- Creates opportunity in Inbound Sales pipeline
+- Adds detailed audit note (pests, follow-ups, plan, sqft, preferred date/time, payment preference, ToS agreement)
+- Sends Slack notification to #call-review
+- Handles all tag logic (`quote-completed`, `quote-in-progress`, `quote-rodent-inspection`, `quote-custom-quote`, `callback-requested`, `confirm-via:X`, `payment:X`, `plan:X`, `billing:X`, `pest:X`)
+
+### What GHL Automations Handle:
+- Sending customer-facing texts and emails (shows in GHL conversation view for CSRs)
+- Creating CSR tasks (shows in GHL task queue)
+- Abandoned quote nurture drip (multi-day sequences with wait steps)
+- Pipeline stage moves
+
+### Pipeline Stage to Add:
+- **"Online Quote Booked"** — add early in Inbound Sales pipeline (before Quoted). This is where completed online quotes land.
+
+### GHL Merge Fields Used:
+| Merge Field | What It Contains | Example |
+|---|---|---|
+| `{{contact.first_name}}` | First name | Jane |
+| `{{contact.last_name}}` | Last name | Smith |
+| `{{contact.phone}}` | Phone number | +18175551234 |
+| `{{contact.email}}` | Email | jane@example.com |
+| `{{contact.address1}}` | Street address | 123 Main St |
+| `{{contact.agreement_type}}` | Plan name (dropdown) | Standard Pest Prevention |
+| `{{contact.please_describe_your_pest_concern}}` | Pest list | ants, cockroaches, spiders |
 
 ---
 
 ## 1. QUOTE COMPLETED — Booking Confirmation
 
-**Trigger:** Contact receives tag `quote-completed`
+**Workflow Name:** Quote Tool — Booking Confirmation  
+**Trigger:** Tag Added → `quote-completed`
 
-### Workflow Steps:
+### Step 1: IF/ELSE — Confirmation Method
+- **Branch A:** Contact has tag `confirm-via:email` → go to Step 2B
+- **Branch B:** Contact has tag `confirm-via:call` → go to Step 2C
+- **Default (includes `confirm-via:text`):** → go to Step 2A
 
-#### Step 1: Branch on Confirmation Method
-- **Action:** IF/ELSE Branch
-- **Condition 1:** Contact has tag `confirm-via:text`
-- **Condition 2:** Contact has tag `confirm-via:email`  
-- **Condition 3:** Contact has tag `confirm-via:call`
-- **Default:** Fall through to text confirmation
-
-#### Step 2A: Text Confirmation (confirm-via:text)
-- **Action:** Send SMS
-- **From:** Forterra Pest Control
-- **Message:**
+### Step 2A: Send SMS (text confirmation)
 ```
-Hi {{contact.first_name}}! 🎉 Your pest control service is confirmed! 
+Hi {{contact.first_name}}! Your {{contact.agreement_type}} service is confirmed.
 
-✅ Plan: {{contact.agreement_type}}
-✅ Coverage: {{contact.please_describe_your_pest_concern}}
-✅ Home: {{contact.address1}}
-✅ Preferred Start: your requested date
+We'll call within 24hrs to schedule your first visit and get you set up.
 
-We'll call within 24hrs to schedule your first visit. Questions? Reply STOP to opt out or call (817) 665-6527.
+Questions? Call (817) 665-6527
 
 - Forterra Pest Control
-5.0⭐ (2,600+ reviews)
 ```
 
-#### Step 2B: Email Confirmation (confirm-via:email)
-- **Action:** Send Email
+### Step 2B: Send Email (email confirmation)
 - **From:** Forterra Pest Control <info@forterrapestcontrol.com>
-- **Subject:** Your {{contact.please_describe_your_pest_concern}} service is confirmed, {{contact.first_name}}!
+- **Subject:** You're all set, {{contact.first_name}} — service confirmed!
 - **Body:**
-```html
-<p>Hi {{contact.first_name}},</p>
 
-<p>🎉 <strong>Great news! Your pest control service is officially confirmed!</strong></p>
+```
+Hi {{contact.first_name}},
 
-<div style="background: #f9f9f9; padding: 15px; border-left: 4px solid #28a745;">
-<p><strong>Your Service Details:</strong></p>
-<ul>
-<li><strong>Plan:</strong> {{contact.agreement_type}}</li>
-<li><strong>Coverage:</strong> {{contact.please_describe_your_pest_concern}}</li>
-<li><strong>Property:</strong> {{contact.address1}}</li>
-<li><strong>Preferred Start Date:</strong> your requested date</li>
-</ul>
-</div>
+Your pest control service is confirmed! Here are your details:
 
-<p><strong>What happens next?</strong><br>
-One of our CSR team members will call you within 24 hours to schedule your first service visit and collect payment information.</p>
+Plan: {{contact.agreement_type}}
+Pests: {{contact.please_describe_your_pest_concern}}
+Property: {{contact.address1}}
 
-<p><strong>Why Forterra Pest Control?</strong></p>
-<ul>
-<li>⭐ 5.0 stars with 2,600+ Google reviews</li>
-<li>💯 Money-back guarantee</li>
-<li>🔄 Free re-services if pests return</li>
-<li>📞 Local DFW team: (817) 665-6527</li>
-</ul>
+WHAT HAPPENS NEXT:
+A member of our team will call you within 24 hours to:
+  - Schedule your first treatment
+  - Collect payment information
+  - Answer any questions
 
-<p>Questions before we call? Just reply to this email!</p>
+WHY FORTERRA:
+  • 5.0 stars — 2,600+ Google reviews
+  • Money-back guarantee
+  • Free re-services if pests return between visits
+  • Local DFW family business
 
-<p>Thanks for choosing Forterra,<br>
-<strong>The Forterra Team</strong></p>
+Questions before we call? Reply to this email or call (817) 665-6527.
 
-<hr>
-<p><small>You're receiving this because you requested a quote at quote.forterrapestcontrol.com. <a href="{{unsubscribe_link}}">Unsubscribe</a> | Forterra Pest Control | DFW Area</small></p>
+Thanks for choosing Forterra!
+The Forterra Team
 ```
 
-#### Step 2C: Call Confirmation (confirm-via:call)
-- **Action:** Create Task
-- **Assign to:** CSR Team (Round Robin: Rachelle, Lyra, Aira, Angela, Hassan)
-- **Task Title:** URGENT: Call {{contact.first_name}} {{contact.last_name}} - Quote Confirmation
-- **Due Date:** Today + 2 hours
+### Step 2C: Create Task (call confirmation)
+- **Assign to:** Round Robin (Rachelle, Lyra, Aira, Angela, Hassan)
+- **Title:** Call to confirm — {{contact.first_name}} {{contact.last_name}}
+- **Due:** Today + 2 hours
 - **Description:**
 ```
-QUOTE COMPLETED - CALL CONFIRMATION REQUESTED
+Customer requested a confirmation call.
 
-Contact: {{contact.first_name}} {{contact.last_name}}
 Phone: {{contact.phone}}
 Plan: {{contact.agreement_type}}
 Pests: {{contact.please_describe_your_pest_concern}}
 Address: {{contact.address1}}
-Preferred Date: your requested date
 
-ACTION NEEDED:
+TO DO:
 1. Call to confirm service details
 2. Schedule first treatment
-3. Collect payment info (if payment:call-setup tag exists)
-4. Mark task complete when done
+3. Collect payment info
+4. Check notes for full quote details
+```
+- **ALSO send this SMS** (so they know we got it):
+```
+Hi {{contact.first_name}}! We got your booking. One of our team members will call you shortly to confirm everything.
+
+- Forterra Pest Control
+(817) 665-6527
 ```
 
-#### Step 3: Check Payment Collection Method
-- **Action:** IF/ELSE Branch
+### Step 3: IF/ELSE — Payment Collection
 - **Condition:** Contact has tag `payment:call-setup`
-- **If YES:** Create additional payment collection task
-- **If NO:** Continue to Step 4
-
-#### Step 3A: Payment Collection Task (if payment:call-setup)
-- **Action:** Create Task
-- **Assign to:** CSR Team (Round Robin)
-- **Task Title:** Collect Payment Info - {{contact.first_name}} {{contact.last_name}}
-- **Due Date:** Today + 4 hours
-- **Description:**
+- **If YES →** Create Task:
+  - **Assign to:** Round Robin
+  - **Title:** Collect payment — {{contact.first_name}} {{contact.last_name}}
+  - **Due:** Today + 4 hours
+  - **Description:**
 ```
-PAYMENT COLLECTION REQUIRED
+Customer chose "call to set up payment" on quote tool.
+CC or ACH must be on file before first service.
 
-Contact: {{contact.first_name}} {{contact.last_name}}
 Phone: {{contact.phone}}
 Plan: {{contact.agreement_type}}
-Address: {{contact.address1}}
-
-COLLECT:
-- Credit card OR ACH info
-- Verify billing address
-- Process first payment
-- Update opportunity with payment status
-
-NOTE: Service cannot begin until payment is on file (company policy).
 ```
+- **If NO →** Continue (customer will pay tech on-site)
 
-#### Step 4: Slack Notification
-- **Action:** Send Webhook
-- **URL:** [Slack webhook URL]
-- **Payload:**
-```json
-{
-  "text": "📋 NEW QUOTE COMPLETED",
-  "attachments": [
-    {
-      "color": "good",
-      "fields": [
-        {"title": "Customer", "value": "{{contact.first_name}} {{contact.last_name}}", "short": true},
-        {"title": "Phone", "value": "{{contact.phone}}", "short": true},
-        {"title": "Plan", "value": "{{contact.agreement_type}}", "short": true},
-        {"title": "Pests", "value": "{{contact.please_describe_your_pest_concern}}", "short": true},
-        {"title": "Address", "value": "{{contact.address1}}", "short": false},
-        {"title": "Confirmation Method", "value": "{{custom_values.confirm_method}}", "short": true}
-      ]
-    }
-  ]
-}
-```
+### Step 4: Update Pipeline Stage
+- **Action:** Move opportunity to **"Online Quote Booked"** stage
 
-#### Step 5: Update Pipeline Stage
-- **Action:** Change Pipeline Stage
-- **Pipeline:** Inbound Sales (QRJpl20GSKW7F1vppJ6T)
-- **New Stage:** Confirmed - Awaiting Schedule
-
-#### Step 6: Add Tags
-- **Action:** Add Tags
-- **Tags to Add:** `booking-confirmed`, `awaiting-schedule`
-- **Tags to Remove:** `quote-in-progress`
+### Step 5: Add/Remove Tags
+- **Add:** `booking-confirmed`
+- **Remove:** `quote-in-progress`
 
 ---
 
 ## 2. CALLBACK REQUESTED — CSR Routing
 
-**Trigger:** Contact receives tag `callback-requested`
+**Workflow Name:** Quote Tool — Callback Request  
+**Trigger:** Tag Added → `callback-requested`
 
-### Workflow Steps:
+> **Note:** Callback day/time preferences are in the GHL contact note (not a custom field). CSR should read the note for details.
 
-#### Step 1: Create Urgent CSR Task
-- **Action:** Create Task
-- **Assign to:** CSR Team (Round Robin: Rachelle, Lyra, Aira, Angela, Hassan)
-- **Task Title:** 🚨 CALLBACK REQUESTED - {{contact.first_name}} {{contact.last_name}}
-- **Priority:** High
-- **Due Date:** Today + 1 hour
-- **Description:**
+### Step 1: Send SMS (immediate customer confirmation)
 ```
-CALLBACK REQUESTED FROM QUOTE TOOL
+Hi {{contact.first_name}}! We got your request — a Forterra team member will call you soon to discuss your pest situation.
 
-Contact: {{contact.first_name}} {{contact.last_name}}
-Phone: {{contact.phone}}
-Email: {{contact.email}}
-Address: {{contact.address1}}
+If urgent, call us now: (817) 665-6527
 
-CALLBACK PREFERENCES (from notes):
-- Day: {{notes.callback_day_preference}}
-- Time: {{notes.callback_time_preference}}
-
-QUOTE DETAILS:
-- Pests: {{contact.please_describe_your_pest_concern}}
-- Home Size: {{custom_values.square_footage}} sqft
-- Current Issue Level: {{custom_values.pest_severity}}
-
-ACTION REQUIRED:
-1. Call within 30 minutes if during business hours
-2. Confirm callback preferences
-3. Provide quote and schedule if interested
-4. Update task with outcome
-```
-
-#### Step 2: Slack Notification
-- **Action:** Send Webhook  
-- **URL:** [Slack webhook URL]
-- **Payload:**
-```json
-{
-  "text": "📞 CALLBACK REQUESTED - URGENT",
-  "attachments": [
-    {
-      "color": "warning",
-      "fields": [
-        {"title": "Customer", "value": "{{contact.first_name}} {{contact.last_name}}", "short": true},
-        {"title": "Phone", "value": "{{contact.phone}}", "short": true},
-        {"title": "Callback Day", "value": "{{notes.callback_day_preference}}", "short": true},
-        {"title": "Callback Time", "value": "{{notes.callback_time_preference}}", "short": true},
-        {"title": "Pest Issue", "value": "{{contact.please_describe_your_pest_concern}}", "short": false}
-      ]
-    }
-  ]
-}
-```
-
-#### Step 3: Send Customer Confirmation Text
-- **Action:** Send SMS
-- **From:** Forterra Pest Control  
-- **Message:**
-```
-Hi {{contact.first_name}}! We got your callback request. We'll call you {{notes.callback_day_preference}} {{notes.callback_time_preference}} about your {{contact.please_describe_your_pest_concern}} issue.
-
-Any urgent concerns? Call us now: (817) 665-6527
-
-Reply STOP to opt out.
 - Forterra Pest Control
 ```
 
-#### Step 4: Wait for Business Hours Check
-- **Action:** Wait
-- **Wait Type:** Until business hours (Mon-Fri 8am-5pm, Sat 8am-12pm CST)
-- **Max Wait:** 30 minutes
-
-#### Step 5: Check if CSR Responded
-- **Action:** IF/ELSE Branch
-- **Condition:** Task from Step 1 is marked "Completed"
-- **If NO:** Continue to escalation (Step 6)
-- **If YES:** End workflow
-
-#### Step 6: Escalation - Additional Notification
-- **Action:** Send Webhook
-- **URL:** [Slack webhook URL]  
-- **Payload:**
-```json
-{
-  "text": "⚠️ CALLBACK ESCALATION - 30 MIN NO RESPONSE",
-  "attachments": [
-    {
-      "color": "danger",
-      "text": "{{contact.first_name}} {{contact.last_name}} ({{contact.phone}}) requested callback 30+ minutes ago. No CSR response yet. Please prioritize!"
-    }
-  ]
-}
-```
-
-#### Step 7: Create Escalated Task
-- **Action:** Create Task
-- **Assign to:** Rachelle (CSR Lead)
-- **Task Title:** ⚠️ ESCALATED CALLBACK - {{contact.first_name}} {{contact.last_name}}
-- **Priority:** Urgent
-- **Due Date:** Today + 15 minutes
+### Step 2: Create Task
+- **Assign to:** Round Robin (Rachelle, Lyra, Aira, Angela, Hassan)
+- **Title:** 🚨 Callback — {{contact.first_name}} {{contact.last_name}}
+- **Priority:** High
+- **Due:** Today + 30 minutes
 - **Description:**
 ```
-ESCALATED: No CSR response to callback request in 30+ minutes
+Customer used quote tool but wasn't sure about their pest issue.
+Requested a callback instead of booking online.
 
-Original request time: {{workflow.start_time}}
-Customer: {{contact.first_name}} {{contact.last_name}}
 Phone: {{contact.phone}}
-Callback preferences: {{notes.callback_day_preference}} {{notes.callback_time_preference}}
+Pests: {{contact.please_describe_your_pest_concern}}
+Address: {{contact.address1}}
 
-IMMEDIATE ACTION REQUIRED - Call now or delegate to available CSR.
+CHECK THE CONTACT NOTES for:
+- Preferred callback day (today / tomorrow / this week)
+- Preferred callback time (morning / afternoon / anytime)
+
+TO DO:
+1. Call to discuss pest issue
+2. Recommend the right plan
+3. Book service if interested
 ```
 
-#### Step 8: Add Tags
-- **Action:** Add Tags
-- **Tags to Add:** `callback-pending`, `csr-notified`
+### Step 3: Wait 1 hour
+
+### Step 4: IF/ELSE — Task completed?
+- **If YES →** End workflow
+- **If NO →** Continue
+
+### Step 5: Create Escalation Task
+- **Assign to:** Rachelle
+- **Title:** ⚠️ Missed callback — {{contact.first_name}} {{contact.last_name}}
+- **Priority:** Urgent
+- **Due:** Today + 30 minutes
+- **Description:**
+```
+Callback requested 1+ hour ago, no CSR response.
+Phone: {{contact.phone}}
+```
 
 ---
 
 ## 3. QUOTE ABANDONED — Nurture Sequence
 
-**Trigger:** Contact receives tag `quote-in-progress`
+**Workflow Name:** Quote Tool — Abandoned Quote Nurture  
+**Trigger:** Tag Added → `quote-in-progress`
 
-### Workflow Steps:
+> **Important:** Every touch checks for `quote-completed` first. If the customer finished their quote or called in, the sequence stops.
 
-#### Step 1: Wait Period
-- **Action:** Wait
-- **Wait Time:** 15 minutes
+### Step 1: Wait 15 minutes
 
-#### Step 2: Check if Quote Completed
-- **Action:** IF/ELSE Branch
-- **Condition:** Contact has tag `quote-completed`
-- **If YES:** End workflow (customer completed quote)
-- **If NO:** Continue to nurture sequence
+### Step 2: IF/ELSE — Has tag `quote-completed`?
+- **If YES →** End workflow
+- **If NO →** Continue
 
-#### Step 3: Add Abandoned Tag
-- **Action:** Add Tags
-- **Tags to Add:** `quote-abandoned`
-- **Tags to Remove:** `quote-in-progress`
+### Step 3: Add tag `quote-abandoned`, remove tag `quote-in-progress`
 
-#### Step 4: Nurture Touch #1 (Text) - Immediate
-- **Action:** Send SMS
-- **From:** Forterra Pest Control
-- **Message:**
+### Step 4: Touch 1 — SMS (immediate after 15 min)
 ```
-Hi {{contact.first_name}}! Saw you were getting a quote for {{contact.please_describe_your_pest_concern}} at {{contact.address1}}. Need help finishing up? 
+Hi {{contact.first_name}}, looks like you didn't finish your pest control quote. No worries!
 
-We're here: (817) 665-6527 
-5.0⭐ 2,600+ reviews
+Pick up where you left off: quote.forterrapestcontrol.com/forterra-pricing-lemonade
+
+Or call us: (817) 665-6527
 
 Reply STOP to opt out.
 - Forterra Pest Control
 ```
 
-#### Step 5: Wait Period
-- **Action:** Wait  
-- **Wait Time:** 1 day
+### Step 5: Wait 1 day
 
-#### Step 6: Check if Quote Completed
-- **Action:** IF/ELSE Branch
-- **Condition:** Contact has tag `quote-completed` OR contact has tag `customer-called-in`
-- **If YES:** End workflow
-- **If NO:** Continue to Touch #2
+### Step 6: IF/ELSE — Has tag `quote-completed`?
+- **If YES →** End workflow
+- **If NO →** Continue
 
-#### Step 7: Nurture Touch #2 (Email) - Day 1
-- **Action:** Send Email
-- **From:** Forterra Pest Control <info@forterrapestcontrol.com>
-- **Subject:** Still dealing with {{contact.please_describe_your_pest_concern}} at {{contact.address1}}?
+### Step 7: Touch 2 — Email (Day 1)
+- **Subject:** Your pest control quote is waiting, {{contact.first_name}}
 - **Body:**
-```html
-<p>Hi {{contact.first_name}},</p>
+```
+Hi {{contact.first_name}},
 
-<p>I noticed you started a quote for {{contact.please_describe_your_pest_concern}} service at your {{contact.address1}} property, but didn't get a chance to finish.</p>
+You started a quote for {{contact.please_describe_your_pest_concern}} service at {{contact.address1}} but didn't get a chance to finish.
 
-<p><strong>No worries!</strong> Happens to the best of us. 😊</p>
+It only takes 2 minutes:
+→ quote.forterrapestcontrol.com/forterra-pricing-lemonade
 
-<p>Here's what makes Forterra different in DFW:</p>
-<ul>
-<li>⭐ <strong>5.0 stars</strong> with over 2,600 Google reviews</li>
-<li>💯 <strong>Money-back guarantee</strong> if you're not satisfied</li>
-<li>🔄 <strong>Free re-services</strong> if pests return between visits</li>
-<li>👨‍👩‍👧‍👦 <strong>Local family business</strong> since 2016</li>
-</ul>
+Or call us and we'll walk you through it: (817) 665-6527
 
-<p><strong>Ready to finish your quote?</strong><br>
-<a href="quote.forterrapestcontrol.com/forterra-pricing-lemonade" style="background: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Complete Your Quote</a></p>
+Why Forterra?
+  • 5.0 stars — 2,600+ Google reviews
+  • Money-back guarantee
+  • Free re-services if pests come back
+  • Locally owned, serving DFW since 2021
 
-<p>Or just call us: <strong>(817) 665-6527</strong></p>
-
-<p>Questions? Just reply to this email!</p>
-
-<p>Best,<br>
-<strong>The Forterra Team</strong></p>
-
-<hr>
-<p><small><a href="{{unsubscribe_link}}">Unsubscribe</a> | Forterra Pest Control | Serving DFW</small></p>
+Talk soon,
+The Forterra Team
 ```
 
-#### Step 8: Wait Period
-- **Action:** Wait
-- **Wait Time:** 2 days
+### Step 8: Wait 2 days
 
-#### Step 9: Check if Quote Completed  
-- **Action:** IF/ELSE Branch
-- **Condition:** Contact has tag `quote-completed` OR contact has tag `customer-called-in`
-- **If YES:** End workflow
-- **If NO:** Continue to Touch #3
+### Step 9: IF/ELSE — Has tag `quote-completed`?
+- **If YES →** End workflow
+- **If NO →** Continue
 
-#### Step 10: Nurture Touch #3 (Text) - Day 3
-- **Action:** Send SMS
-- **From:** Forterra Pest Control
-- **Message:**
+### Step 10: Touch 3 — SMS (Day 3)
 ```
-{{contact.first_name}}, quick question about the {{contact.please_describe_your_pest_concern}} at your place - are they getting worse? 
+{{contact.first_name}}, still seeing {{contact.please_describe_your_pest_concern}} around the house? DFW pest problems get worse in warm weather.
 
-DFW pest issues don't fix themselves! 😬 
-
-Get your quote: quote.forterrapestcontrol.com/forterra-pricing-lemonade
+2-min quote: quote.forterrapestcontrol.com/forterra-pricing-lemonade
 Or call: (817) 665-6527
 
 Reply STOP to opt out.
+- Forterra
 ```
 
-#### Step 11: Wait Period
-- **Action:** Wait
-- **Wait Time:** 2 days
+### Step 11: Wait 2 days
 
-#### Step 12: Check if Quote Completed
-- **Action:** IF/ELSE Branch  
-- **Condition:** Contact has tag `quote-completed` OR contact has tag `customer-called-in`
-- **If YES:** End workflow
-- **If NO:** Continue to Touch #4
+### Step 12: IF/ELSE — Has tag `quote-completed`?
+- **If YES →** End workflow
+- **If NO →** Continue
 
-#### Step 13: Nurture Touch #4 (Email) - Day 5
-- **Action:** Send Email
-- **From:** Forterra Pest Control <info@forterrapestcontrol.com>
-- **Subject:** {{contact.first_name}}, here's what our {{contact.please_describe_your_pest_concern}} customers say...
+### Step 13: Touch 4 — Email (Day 5)
+- **Subject:** What other DFW homeowners say about {{contact.please_describe_your_pest_concern}} control
 - **Body:**
-```html
-<p>Hi {{contact.first_name}},</p>
+```
+Hi {{contact.first_name}},
 
-<p>Since you were interested in {{contact.please_describe_your_pest_concern}} control for your {{contact.address1}} property, I thought you'd like to see what other DFW homeowners are saying:</p>
+Here's what DFW homeowners are saying about Forterra:
 
-<div style="background: #f8f9fa; padding: 15px; border-left: 4px solid #28a745; margin: 15px 0;">
-<p><em>"Finally found a pest control company that actually works! No more ants in my kitchen. Highly recommend Forterra!"</em></p>
-<p><strong>- Sarah M., Southlake</strong> ⭐⭐⭐⭐⭐</p>
-</div>
+"I recently switched from a big company to Forterra and it was a great decision. Superior customer service and our technician Ean is thorough and communicative."
+— Dustin H., Google Review ⭐⭐⭐⭐⭐
 
-<div style="background: #f8f9fa; padding: 15px; border-left: 4px solid #28a745; margin: 15px 0;">
-<p><em>"Professional, reliable, and actually care about solving the problem. Been using them for 2 years now."</em></p>
-<p><strong>- Mike R., Flower Mound</strong> ⭐⭐⭐⭐⭐</p>
-</div>
+"Drake was an absolute rock star. He took the extra step to send a text, asked questions to understand our concerns, and kept us informed on every step."
+— Stacy P., Google Review ⭐⭐⭐⭐⭐
 
-<p><strong>Why wait any longer?</strong> Those {{contact.please_describe_your_pest_concern}} aren't going anywhere on their own.</p>
+Ready to take care of those {{contact.please_describe_your_pest_concern}}?
+→ quote.forterrapestcontrol.com/forterra-pricing-lemonade
 
-<p><a href="quote.forterrapestcontrol.com/forterra-pricing-lemonade" style="background: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Get Your Quote Now</a></p>
+Or call: (817) 665-6527
 
-<p>Questions? Call us: <strong>(817) 665-6527</strong></p>
-
-<p>Thanks,<br>
-<strong>The Forterra Team</strong></p>
-
-<hr>
-<p><small><a href="{{unsubscribe_link}}">Unsubscribe</a> | Forterra Pest Control</small></p>
+The Forterra Team
 ```
 
-#### Step 14: Wait Period
-- **Action:** Wait
-- **Wait Time:** 2 days
+### Step 14: Wait 2 days
 
-#### Step 15: Check if Quote Completed
-- **Action:** IF/ELSE Branch
-- **Condition:** Contact has tag `quote-completed` OR contact has tag `customer-called-in`  
-- **If YES:** End workflow
-- **If NO:** Continue to final touch
+### Step 15: IF/ELSE — Has tag `quote-completed`?
+- **If YES →** End workflow
+- **If NO →** Continue
 
-#### Step 16: Nurture Touch #5 (Final Text) - Day 7  
-- **Action:** Send SMS
-- **From:** Forterra Pest Control
-- **Message:**
+### Step 16: Touch 5 — Final SMS (Day 7)
 ```
-{{contact.first_name}}, this is our final reminder about {{contact.please_describe_your_pest_concern}} service for {{contact.address1}}.
+{{contact.first_name}}, last note from us about pest control for {{contact.address1}}.
 
-2,600+ DFW homeowners chose Forterra. Join them?
+If you change your mind, we're here: (817) 665-6527
 
-Quote: quote.forterrapestcontrol.com/forterra-pricing-lemonade
-Call: (817) 665-6527
+5.0 stars, money-back guarantee, free re-services.
 
 Reply STOP to opt out.
-- Forterra Team
+- Forterra Pest Control
 ```
 
-#### Step 17: Final Tags Update
-- **Action:** Add Tags
-- **Tags to Add:** `nurture-completed`
-- **Tags to Remove:** `quote-abandoned`
+### Step 17: Add tag `nurture-completed`, remove tag `quote-abandoned`
 
 ---
 
 ## 4. RODENT INSPECTION + CUSTOM QUOTE — Inspection Routing
 
-**Triggers:** 
-- Contact receives tag `quote-rodent-inspection` OR
-- Contact receives tag `quote-custom-quote`
+**Workflow Name:** Quote Tool — Inspection Request  
+**Trigger:** Tag Added → `quote-rodent-inspection` OR `quote-custom-quote`
 
-### Workflow Steps:
+### Step 1: IF/ELSE — Inspection type
+- **Branch A:** Has tag `quote-rodent-inspection` → Step 2A
+- **Branch B:** Has tag `quote-custom-quote` → Step 2B
 
-#### Step 1: Branch on Quote Type
-- **Action:** IF/ELSE Branch
-- **Condition 1:** Contact has tag `quote-rodent-inspection`
-- **Condition 2:** Contact has tag `quote-custom-quote`
-- **Default:** End workflow (error state)
-
-#### Step 2A: Rodent Inspection Confirmation Text
-- **Action:** Send SMS
-- **From:** Forterra Pest Control
-- **Message:**
+### Step 2A: SMS — Rodent inspection
 ```
-Hi {{contact.first_name}}! We'll need to inspect for rodents at {{contact.address1}} before providing an accurate quote.
+Hi {{contact.first_name}}! We'll schedule a FREE rodent inspection at {{contact.address1}}.
 
-A CSR will call within 24hrs to schedule your FREE inspection.
+A team member will call within 24hrs to find a time that works.
 
 Questions? (817) 665-6527
-Reply STOP to opt out.
 - Forterra Pest Control
 ```
 
-#### Step 2B: Custom Quote Confirmation Text  
-- **Action:** Send SMS
-- **From:** Forterra Pest Control
-- **Message:**
+### Step 2B: SMS — Custom quote
 ```
-Hi {{contact.first_name}}! We'll create a custom quote for your {{contact.please_describe_your_pest_concern}} situation at {{contact.address1}}.
+Hi {{contact.first_name}}! Your property needs a custom quote — we want to make sure we get it right.
 
-A CSR will call within 24hrs to discuss details and pricing.
+A team member will call within 24hrs to discuss details and pricing.
 
 Questions? (817) 665-6527
-Reply STOP to opt out.
 - Forterra Pest Control
 ```
 
-#### Step 3: Create CSR Task
-- **Action:** Create Task
-- **Assign to:** CSR Team (Round Robin: Rachelle, Lyra, Aira, Angela, Hassan)
-- **Task Title:** Schedule Inspection - {{contact.first_name}} {{contact.last_name}}
-- **Due Date:** Today + 4 hours
+### Step 3: Create Task
+- **Assign to:** Round Robin (Rachelle, Lyra, Aira, Angela, Hassan)
+- **Title:** Schedule inspection — {{contact.first_name}} {{contact.last_name}}
+- **Due:** Today + 4 hours
 - **Description:**
 ```
-INSPECTION REQUIRED
+INSPECTION NEEDED
 
-Contact: {{contact.first_name}} {{contact.last_name}}
 Phone: {{contact.phone}}
-Email: {{contact.email}}
 Address: {{contact.address1}}
-Type: {{#if quote-rodent-inspection}}Rodent Inspection{{else}}Custom Quote Inspection{{/if}}
+Pests: {{contact.please_describe_your_pest_concern}}
+Type: Check tags — rodent inspection or custom quote (oversized property)
 
-ISSUE DETAILS:
-- Pest Type: {{contact.please_describe_your_pest_concern}}
-- Home Size: {{custom_values.square_footage}} sqft
-- Severity: {{custom_values.pest_severity}}
-- Notes: {{notes}}
+CHECK CONTACT NOTES for full quote details (sqft, lot size, etc.)
 
-ACTION REQUIRED:
-1. Call customer to schedule inspection
-2. Coordinate with technician availability  
-3. Confirm inspection appointment
-4. Update opportunity with scheduled date/time
+TO DO:
+1. Call to schedule inspection
+2. Coordinate with tech availability
+3. Confirm appointment
 ```
 
-#### Step 4: Slack Notification
-- **Action:** Send Webhook
-- **URL:** [Slack webhook URL]
-- **Payload:**
-```json
-{
-  "text": "🔍 INSPECTION REQUIRED",
-  "attachments": [
-    {
-      "color": "#ff9800",
-      "fields": [
-        {"title": "Customer", "value": "{{contact.first_name}} {{contact.last_name}}", "short": true},
-        {"title": "Phone", "value": "{{contact.phone}}", "short": true},
-        {"title": "Type", "value": "{{#if quote-rodent-inspection}}Rodent Inspection{{else}}Custom Quote{{/if}}", "short": true},
-        {"title": "Pest Issue", "value": "{{contact.please_describe_your_pest_concern}}", "short": true},
-        {"title": "Address", "value": "{{contact.address1}}", "short": false}
-      ]
-    }
-  ]
-}
-```
+### Step 4: Wait 24 hours
 
-#### Step 5: Wait for CSR Response
-- **Action:** Wait
-- **Wait Time:** 24 hours
+### Step 5: IF/ELSE — Task completed?
+- **If YES →** End workflow
+- **If NO →** Continue
 
-#### Step 6: Check if CSR Responded
-- **Action:** IF/ELSE Branch
-- **Condition:** Task from Step 3 is marked "Completed"
-- **If YES:** End workflow
-- **If NO:** Continue to follow-up
-
-#### Step 7: 24hr Follow-up Notification
-- **Action:** Send Webhook
-- **URL:** [Slack webhook URL]
-- **Payload:**
-```json
-{
-  "text": "⏰ INSPECTION FOLLOW-UP NEEDED",
-  "attachments": [
-    {
-      "color": "danger", 
-      "text": "{{contact.first_name}} {{contact.last_name}} ({{contact.phone}}) needs inspection scheduling. No CSR contact in 24hrs. Please follow up!"
-    }
-  ]
-}
-```
-
-#### Step 8: Create Follow-up Task
-- **Action:** Create Task
-- **Assign to:** Rachelle (CSR Lead)
-- **Task Title:** FOLLOW-UP: Inspection Needed - {{contact.first_name}} {{contact.last_name}}
+### Step 6: Escalation Task
+- **Assign to:** Rachelle
+- **Title:** ⚠️ Inspection not scheduled — {{contact.first_name}} {{contact.last_name}}
 - **Priority:** High
-- **Due Date:** Today + 2 hours
+- **Due:** Today + 2 hours
 - **Description:**
 ```
-24-HOUR FOLLOW-UP REQUIRED
-
-Original inspection request: {{workflow.start_time}}
-Customer: {{contact.first_name}} {{contact.last_name}}
+Inspection requested 24+ hours ago, not yet scheduled.
 Phone: {{contact.phone}}
-Type: {{#if quote-rodent-inspection}}Rodent Inspection{{else}}Custom Quote{{/if}}
-
-No CSR contact in 24 hours. Customer is waiting.
-Priority follow-up required.
+Address: {{contact.address1}}
 ```
 
-#### Step 9: Add Tags
-- **Action:** Add Tags
-- **Tags to Add:** `inspection-requested`, `awaiting-csr-contact`
-- **Tags to Remove:** `quote-in-progress`
+### Step 7: Add tag `inspection-requested`
 
 ---
 
-## Implementation Notes for David
+## Testing Checklist
 
-### GHL Workflow Builder Setup Tips:
-
-1. **Triggers:** Use "Tag Added" trigger for each workflow
-2. **Merge Fields:** Ensure these custom fields exist in GHL:
-   - `custom_values.selected_plan`
-   - `custom_values.pest_types` 
-   - `custom_values.preferred_date`
-   - `custom_values.square_footage`
-   - `custom_values.pest_severity`
-   - `notes.callback_day_preference`
-   - `notes.callback_time_preference`
-
-3. **Business Hours:** Set up GHL business hours (Mon-Fri 8am-5pm, Sat 8am-12pm CST)
-
-4. **Task Assignment:** Configure CSR team round-robin rotation
-
-5. **Pipeline Stages:** Ensure "Confirmed - Awaiting Schedule" stage exists
-
-6. **Slack Webhook:** Replace `[Slack webhook URL]` with actual webhook URL
-
-7. **Stop Conditions:** Each nurture workflow should check for `quote-completed` or `customer-called-in` tags to stop sequence
-
-8. **Unsubscribe Links:** GHL will automatically populate `{{unsubscribe_link}}` merge field
-
-### Testing Checklist:
-
-- [ ] Test each trigger condition
-- [ ] Verify SMS character limits (160 max)
-- [ ] Test email rendering on mobile/desktop  
-- [ ] Confirm Slack notifications work
-- [ ] Validate task assignments
-- [ ] Test pipeline stage changes
-- [ ] Verify tag additions/removals
-- [ ] Test stop conditions in nurture sequences
+- [ ] Submit a test quote (use your own phone/email) → verify `quote-completed` fires Automation 1
+- [ ] Check that `agreement_type` and `please_describe_your_pest_concern` populate on the contact
+- [ ] Verify SMS arrives and reads correctly
+- [ ] Verify email arrives and renders correctly
+- [ ] Check that CSR task appears (for call confirmation and payment collection)
+- [ ] Test abandoned flow: start a quote, enter email/phone, close browser → verify `quote-in-progress` fires Automation 3, and first text arrives after 15 min
+- [ ] Test callback: select "Other" pest → "Schedule a callback" → verify Automation 2 fires
+- [ ] Test rodent inspection: select "Rodents" → "Inside my home" → verify Automation 4 fires
+- [ ] Confirm pipeline stage moves to "Online Quote Booked"
+- [ ] Verify that completing a quote AFTER starting one removes `quote-in-progress` and stops nurture
