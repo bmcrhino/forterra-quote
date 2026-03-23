@@ -52,8 +52,15 @@ export default async function handler(req, res) {
     // BUILD AUDIT NOTE
     // ==========================================
     const now = new Date().toLocaleString('en-US', { timeZone: 'America/Chicago', dateStyle: 'medium', timeStyle: 'short' });
+    const consentTimestamp = new Date().toISOString();
+    const consentVersion = 'sms-consent-v1';
     const noteLines = [`📋 ONLINE QUOTE — ${now}`];
     noteLines.push(`Scenario: ${scenario.toUpperCase()}`);
+    noteLines.push('');
+    noteLines.push('— SMS CONSENT —');
+    noteLines.push(`Consent Version: ${consentVersion}`);
+    noteLines.push(`Consent Timestamp: ${consentTimestamp}`);
+    noteLines.push(`Consent Text: By clicking "Get My Quote," you consent to receive automated text messages from Forterra Pest Control at the number provided, including quote details, reminders, and booking confirmations. Msg & data rates may apply. Reply STOP to opt out. Consent is not required to receive a quote.`);
     noteLines.push('');
     noteLines.push('— CUSTOMER INFO —');
     noteLines.push(`Name: ${firstName || ''} ${lastName || ''}`);

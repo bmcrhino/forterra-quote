@@ -164,7 +164,7 @@ If urgent, call us now: (817) 665-6527
 
 ---
 
-## 3. QUOTE ABANDONED — Nurture Sequence
+## 3. QUOTE ABANDONED — Nurture Sequence (7-Touch, 9-Day)
 
 **Workflow Name:** Quote Tool — Abandoned Quote Nurture  
 **Trigger:** Tag Added → `quote-in-progress`
@@ -188,26 +188,60 @@ If urgent, call us now: (817) 665-6527
 
 > **Why here and not in the API?** The API fires at the partial-submit moment (when the customer enters email/phone). They might still finish 30 seconds later. The 15-min wait in Step 1 confirms they actually abandoned. Only then do we create the opportunity so it doesn't pollute the pipeline with false abandonments.
 
-### Step 5: Touch 1 — SMS (immediate after 15 min)
+### Step 5: Touch 1 — SMS (15 min after abandonment)
 ```
-Hi {{contact.first_name}}, looks like you didn't finish your pest control quote. No worries!
-
-Pick up where you left off: quote.forterrapestcontrol.com/forterra-pricing-lemonade
+Hi {{contact.first_name}}, looks like you didn't finish your Forterra quote. No worries — pick up where you left off: quote.forterrapestcontrol.com/forterra-pricing-lemonade
 
 Or call us: (817) 665-6527
-
 Reply STOP to opt out.
-- Forterra Pest Control
 ```
 
-### Step 6: Wait 1 day
+### Step 6: Wait 2 hours (total ~2.5 hours after abandonment)
 
 ### Step 7: IF/ELSE — Has tag `quote-completed`?
 - **If YES →** End workflow
 - **If NO →** Continue
 
-### Step 8: Touch 2 — Email (Day 1)
-- **Subject:** Your pest control quote is waiting, {{contact.first_name}}
+### Step 8: IF/ELSE — Is it business hours? (Mon-Fri 8am-5pm, Sat 8am-12pm CST)
+- **If YES →** Step 9A
+- **If NO →** Skip to Step 10 (next day email)
+
+### Step 9A: Touch 2 — CSR Phone Call
+- **Create Task:**
+  - **Assign to:** Round Robin (Rachelle, Lyra, Aira, Angela, Hassan)
+  - **Title:** Call abandoned quote — {{contact.first_name}} {{contact.last_name}}
+  - **Priority:** High
+  - **Due:** Now (immediate)
+  - **Description:**
+```
+Abandoned online quote ~2 hours ago.
+
+Phone: {{contact.phone}}
+Pests: {{contact.please_describe_your_pest_concern}}
+Address: {{contact.address1}}
+
+SCRIPT:
+"Hi {{contact.first_name}}, this is [your name] from Forterra Pest Control. I saw you started a quote on our website — wanted to see if you had any questions I could help with."
+
+If no answer → leave voicemail, then send this text:
+"Hi {{contact.first_name}}, just tried to reach you about your pest control quote. Happy to help with any questions — call us back at (817) 665-6527 or finish online: quote.forterrapestcontrol.com/forterra-pricing-lemonade"
+
+CHECK CONTACT NOTES for full quote details.
+```
+
+### Step 9B: If no answer, send follow-up SMS:
+```
+Hi {{contact.first_name}}, just tried reaching you about your pest control quote. Happy to help — call us at (817) 665-6527 or finish online: quote.forterrapestcontrol.com/forterra-pricing-lemonade
+```
+
+### Step 10: Wait until Day 1 (24 hours after abandonment)
+
+### Step 11: IF/ELSE — Has tag `quote-completed`?
+- **If YES →** End workflow
+- **If NO →** Continue
+
+### Step 12: Touch 3 — Email (Day 1)
+- **Subject:** {{contact.first_name}}, your quote is waiting
 - **Body:**
 ```
 Hi {{contact.first_name}},
@@ -219,46 +253,44 @@ It only takes 2 minutes:
 
 Or call us and we'll walk you through it: (817) 665-6527
 
-Why Forterra?
+WHY FORTERRA:
   • 5.0 stars — 2,600+ Google reviews
-  • Money-back guarantee
-  • Free re-services if pests come back
+  • Money-back guarantee on every service
+  • Free re-services if pests return between visits
   • Locally owned, serving DFW since 2021
 
 Talk soon,
 The Forterra Team
 ```
 
-### Step 9: Wait 2 days
+### Step 13: Wait 2 days (Day 3)
 
-### Step 10: IF/ELSE — Has tag `quote-completed`?
+### Step 14: IF/ELSE — Has tag `quote-completed`?
 - **If YES →** End workflow
 - **If NO →** Continue
 
-### Step 11: Touch 3 — SMS (Day 3)
+### Step 15: Touch 4 — SMS (Day 3)
 ```
-{{contact.first_name}}, still seeing {{contact.please_describe_your_pest_concern}} around the house? DFW pest problems get worse in warm weather.
+{{contact.first_name}}, still seeing {{contact.please_describe_your_pest_concern}} around the house? DFW pest season is ramping up — problems only get worse in warm weather.
 
 2-min quote: quote.forterrapestcontrol.com/forterra-pricing-lemonade
 Or call: (817) 665-6527
-
 Reply STOP to opt out.
-- Forterra
 ```
 
-### Step 12: Wait 2 days
+### Step 16: Wait 2 days (Day 5)
 
-### Step 13: IF/ELSE — Has tag `quote-completed`?
+### Step 17: IF/ELSE — Has tag `quote-completed`?
 - **If YES →** End workflow
 - **If NO →** Continue
 
-### Step 14: Touch 4 — Email (Day 5)
-- **Subject:** What other DFW homeowners say about {{contact.please_describe_your_pest_concern}} control
+### Step 18: Touch 5 — Email (Day 5)
+- **Subject:** What DFW homeowners say about {{contact.please_describe_your_pest_concern}} control
 - **Body:**
 ```
 Hi {{contact.first_name}},
 
-Here's what DFW homeowners are saying about Forterra:
+Here's what your neighbors are saying about Forterra:
 
 "I recently switched from a big company to Forterra and it was a great decision. Superior customer service and our technician Ean is thorough and communicative."
 — Dustin H., Google Review ⭐⭐⭐⭐⭐
@@ -274,25 +306,38 @@ Or call: (817) 665-6527
 The Forterra Team
 ```
 
-### Step 15: Wait 2 days
+### Step 19: Wait 2 days (Day 7)
 
-### Step 16: IF/ELSE — Has tag `quote-completed`?
+### Step 20: IF/ELSE — Has tag `quote-completed`?
 - **If YES →** End workflow
 - **If NO →** Continue
 
-### Step 17: Touch 5 — Final SMS (Day 7)
+### Step 21: Touch 6 — SMS (Day 7) — Value-add incentive
 ```
-{{contact.first_name}}, last note from us about pest control for {{contact.address1}}.
+{{contact.first_name}}, still thinking about pest control? We'll include a FREE mosquito treatment with your first service — but this offer expires in 48 hours.
+
+Finish your quote: quote.forterrapestcontrol.com/forterra-pricing-lemonade
+Or call: (817) 665-6527
+Reply STOP to opt out.
+```
+
+### Step 22: Wait 2 days (Day 9)
+
+### Step 23: IF/ELSE — Has tag `quote-completed`?
+- **If YES →** End workflow
+- **If NO →** Continue
+
+### Step 24: Touch 7 — SMS (Day 9) — Breakup message
+```
+{{contact.first_name}}, this is our last note about your pest control quote for {{contact.address1}}.
 
 If you change your mind, we're here: (817) 665-6527
 
-5.0 stars, money-back guarantee, free re-services.
-
+5.0 stars, money-back guarantee, free re-services. 🙂
 Reply STOP to opt out.
-- Forterra Pest Control
 ```
 
-### Step 18: Add tag `nurture-completed`, remove tag `quote-abandoned`
+### Step 25: Add tag `nurture-completed`, remove tag `quote-abandoned`
 
 ---
 
@@ -382,10 +427,16 @@ Address: {{contact.address1}}
 - [ ] Verify opportunity lands in **Online Quote Callback** stage
 - [ ] Verify Slack notification appears in #call-review with callback day/time
 
-**Automation 3 — Abandoned Quote:**
+**Automation 3 — Abandoned Quote (7-Touch Nurture):**
+- [ ] TCPA consent disclosure visible above submit button
+- [ ] Consent timestamp logged in contact note
 - [ ] Start a quote, enter email/phone, close browser → verify `quote-in-progress` tag applied
 - [ ] Wait 15 min → verify tag flips to `quote-abandoned` and opportunity created in **Online Quote Abandoned** stage
 - [ ] Verify first SMS arrives after 15 min
+- [ ] CSR phone call task created at ~2.5 hours (business hours only)
+- [ ] Touch 6 free mosquito treatment offer appears at Day 7
+- [ ] Full 7-touch sequence completes over 9 days
+- [ ] Sequence stops at any point if `quote-completed` tag is added
 - [ ] Complete a quote AFTER starting one → verify `quote-in-progress` removed and nurture stops (no abandoned opportunity created)
 
 **Automation 4 — Inspection:**
