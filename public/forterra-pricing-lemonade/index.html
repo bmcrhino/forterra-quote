@@ -1931,7 +1931,7 @@
       const mq = getMosquitoPricing(lotAcres);
       const mt = PLAN_TEMPLATES.mosquito;
       if (mq) {
-        plans.mosquito = {...mt, price: mq.mo, annual: annualPrice(mq.mo), init: 0};
+        plans.mosquito = {...mt, price: mq.mo, annual: annualPrice(mq.mo), init: mq.mo};
       } else {
         plans.mosquito = {...mt, price: 0, annual: 0, init: 0, customQuote: true};
       }
@@ -2621,9 +2621,30 @@
       if (mqAddon && S.addons.includes('mosquito') && !mqAddon.classList.contains('selected')) {
         mqAddon.classList.add('selected');
       }
-      // Alt plans
+      // Show Basic Pest as an add-on when on mosquito plan (not as alt plan)
+      let basicAddonEl = document.querySelector('[data-addon="basic-pest"]');
+      if (S.plan === 'mosquito') {
+        if (!basicAddonEl) {
+          // Create the Basic Pest add-on element dynamically
+          const addonContainer = document.querySelector('.plan-addons');
+          if (addonContainer) {
+            const div = document.createElement('div');
+            div.className = 'plan-addon-item';
+            div.setAttribute('onclick', 'toggleAddon(this)');
+            div.setAttribute('data-addon', 'basic-pest');
+            div.setAttribute('data-price', PLANS.basic ? PLANS.basic.price : 49);
+            div.innerHTML = `<div class="plan-addon-left"><div class="plan-addon-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><span class="plan-addon-name">Basic Pest Prevention</span></div><span class="plan-addon-price">+$${PLANS.basic ? (isAnnual ? PLANS.basic.annual : PLANS.basic.price) : 49}/mo</span>`;
+            addonContainer.appendChild(div);
+            basicAddonEl = div;
+          }
+        }
+        if (basicAddonEl) basicAddonEl.style.display = '';
+      } else {
+        if (basicAddonEl) basicAddonEl.style.display = 'none';
+      }
+      // Alt plans — no alts for mosquito (Basic is now an add-on above)
       const alts = S.plan === 'mosquito'
-        ? ['basic']
+        ? []
         : Object.keys(PLANS).filter(k => k!==S.plan && k!=='mosquito' && k!=='sentricon' && PLANS[k] && !PLANS[k].customQuote);
       $('altPlansRow').innerHTML = alts.map(k => { const x=PLANS[k]; const ap=isAnnual?x.annual:x.price; return `<div class="alt-plan-card" onclick="switchPlan('${k}')"><p class="alt-plan-name">${x.name}</p><p class="alt-plan-title">${x.title}</p><p class="alt-plan-price">$${ap}</p><p class="alt-plan-period">/mo</p></div>`; }).join('');
       if (mqAddon) mqAddon.style.display = S.plan === 'mosquito' ? 'none' : '';
