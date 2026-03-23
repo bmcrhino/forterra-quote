@@ -107,7 +107,7 @@ export default async function handler(req, res) {
         noteLines.push('— PRICING —');
         noteLines.push(`Initial Service: $${initialPrice} (before discounts)`);
         noteLines.push(`After Discounts: $${afterDiscounts}`);
-        if (afterDiscounts < initialPrice) noteLines.push('$30 exit intent discount applied');
+        if (initialPrice && afterDiscounts < (initialPrice - 200)) noteLines.push('$30 exit intent discount applied');
         noteLines.push(`Monthly Recurring: $${monthlyCharge}/mo`);
         if (mosquitoMonthly) noteLines.push(`Mosquito Add-on: +$${mosquitoMonthly}/mo`);
       }
