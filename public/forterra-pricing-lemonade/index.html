@@ -2540,6 +2540,7 @@
           else S.plan = 'standard';
         } else {
           if (S.pests.includes('termites')) S.plan='premium';
+          else if (S.pests.length === 1 && S.pests[0] === 'mosquitoes') S.plan='mosquito';
           else if (S.pests.length>2||S.pests.includes('general')) S.plan='standard';
           else S.plan='basic';
         }
