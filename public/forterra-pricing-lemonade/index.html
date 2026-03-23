@@ -2297,8 +2297,8 @@
           const p = PLANS[S.plan];
           if (p && !p.customQuote) {
             const isAnnual = S.billing === 'annual';
-            body.initialPrice = p.init + S.priceAdj;
-            body.afterDiscounts = p.init + S.priceAdj - (S.exitApplied ? 30 : 0);
+            body.initialPrice = p.init + S.priceAdj + 200;  // full price before $200 annual commitment discount and exit discount
+            body.afterDiscounts = p.init + S.priceAdj - (S.exitApplied ? 30 : 0);  // what they actually pay
             body.monthlyCharge = isAnnual ? p.annual : p.price;
             if (S.addons.includes('mosquito')) {
               const mqP = getMosquitoPricing(S.lotAcres);
@@ -2884,16 +2884,22 @@
         $('zip').value = zip;
         // Trigger input events to enable Continue button
         ['address','city','zip'].forEach(id => $(id).dispatchEvent(new Event('input')));
-        // Hide the autocomplete dropdown after selection
-        setTimeout(() => document.querySelectorAll('.pac-container').forEach(c => c.style.display = 'none'), 50);
+        // Hide the autocomplete dropdown after selection and blur the input to prevent re-trigger
+        justSelected = true;
+        $('address').blur();
+        setTimeout(() => {
+          document.querySelectorAll('.pac-container').forEach(c => c.style.display = 'none');
+          justSelected = false;
+        }, 150);
       });
+      let justSelected = false;
       // Also hide dropdown when clicking outside the address input
       document.addEventListener('click', function(e) {
         if (e.target.id !== 'address') document.querySelectorAll('.pac-container').forEach(c => c.style.display = 'none');
       });
-      // Re-show dropdown when focusing back on address input
+      // Re-show dropdown when focusing back on address input (but not right after a selection)
       input.addEventListener('focus', function() {
-        document.querySelectorAll('.pac-container').forEach(c => c.style.display = '');
+        if (!justSelected) document.querySelectorAll('.pac-container').forEach(c => c.style.display = '');
       });
     }
     // If Google Maps loaded before our script
