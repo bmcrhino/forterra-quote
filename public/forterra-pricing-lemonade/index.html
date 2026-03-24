@@ -2321,14 +2321,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
           }
         }
-        console.log('[GHL] Sending lead:', partial ? 'PARTIAL' : 'FINAL', body);
+        // console.log removed for production
         const resp = await fetch('/api/ghl-lead', {
           method: 'POST',
           headers: {'Content-Type':'application/json'},
           body: JSON.stringify(body)
         });
         const result = await resp.json();
-        console.log('[GHL] Response:', resp.status, result);
+        // console.log removed for production
         if (!partial) {
           const _p = PLANS[S.plan];
           dataLayer.push({event: 'quote_complete', plan_name: _p ? _p.name : S.plan, initial_price: _p ? (_p.init + S.priceAdj) : 0, monthly_price: _p ? (S.billing === 'annual' ? _p.annual : _p.price) : 0, has_mosquito: S.addons.includes('mosquito'), billing_type: S.billing, agreement_type: S.billing === 'annual' ? 'annual' : 'monthly'});

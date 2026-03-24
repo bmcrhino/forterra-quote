@@ -1,0 +1,170 @@
+// ---- Category Tab Switching ----
+  const tabHeadings = {
+    general:    { subtitle: 'Choose Your Plan',          heading: 'Preventative Plans for Every Home', cta: 'GET ONLINE QUOTE' },
+    termites:   { subtitle: 'Termite Solutions',         heading: 'Protect Your Home from Termites',   cta: 'GET ONLINE QUOTE' },
+    mosquitoes: { subtitle: 'Mosquito Control',          heading: 'Take Back Your Yard',               cta: 'GET ONLINE QUOTE' },
+    rodents:    { subtitle: 'Rodent Control & Exclusion', heading: 'Keep Rodents Out for Good',         cta: 'GET ONLINE QUOTE' }
+  };
+
+  function switchTab(tabId) {
+    // Update tab buttons
+    document.querySelectorAll('.forterra-pricing .category-tab').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === tabId);
+    });
+    // Update plan tab panels
+    document.querySelectorAll('.forterra-pricing .tab-panel').forEach(panel => {
+      panel.classList.toggle('active', panel.dataset.tabPanel === tabId);
+    });
+    // Update plan headings + CTA
+    const info = tabHeadings[tabId];
+    if (info) {
+      const subtitle = document.getElementById('plansSubtitle');
+      const heading = document.getElementById('plansHeading');
+      if (subtitle) subtitle.textContent = info.subtitle;
+      if (heading) heading.textContent = info.heading;
+    }
+    // Re-apply current billing state to new panel
+    setBilling(currentBilling);
+  }
+
+  // ---- Billing Toggle ----
+  let currentBilling = 'monthly';
+
+  function setBilling(period) {
+    currentBilling = period;
+    const buttons = document.querySelectorAll('.forterra-pricing .billing-toggle button');
+    buttons.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.period === period);
+    });
+
+    // Update ALL amount elements across every tab panel
+    const amounts = document.querySelectorAll('.forterra-pricing .plan-price .amount');
+    const notes = document.querySelectorAll('.forterra-pricing .annual-note');
+
+    amounts.forEach(el => {
+      const monthly = parseInt(el.dataset.monthly);
+      const annual = parseInt(el.dataset.annual);
+      if (monthly && annual) {
+        el.textContent = period === 'annual' ? annual : monthly;
+      }
+    });
+
+    notes.forEach(el => {
+      if (period === 'annual') {
+        // Calculate annual total: monthly price × 11 months (1 month free)
+        const card = el.closest('.forterra-pricing .plan-card');
+        if (card) {
+          const amountEl = card.querySelector('.plan-price .amount');
+          if (amountEl) {
+            const monthly = parseInt(amountEl.dataset.monthly);
+            const annualTotal = monthly * 11;
+            el.textContent = `Pay $${annualTotal}/yr (1 month free)`;
+          }
+        }
+      } else {
+        el.textContent = '';
+      }
+    });
+  }
+
+  // ---- FAQ Accordion ----
+  function toggleFaq(button) {
+    const item = button.closest('.forterra-pricing .faq-item');
+    const wasOpen = item.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.forterra-pricing .faq-item.open').forEach(el => {
+      el.classList.remove('open');
+    });
+
+    // Toggle clicked
+    if (!wasOpen) {
+      item.classList.add('open');
+    }
+  }
+
+  /* ========== INTERACTIVE COMPARISON TOOL ========== */
+  const PLAN_DATA = {
+    basic:     { name: 'Basic',      price: '$49/mo', recommended: false },
+    standard:  { name: 'Standard',   price: '$59/mo', recommended: true },
+    premium:   { name: 'Premium',    price: '$69/mo', recommended: false },
+    sentricon: { name: 'Sentricon®', price: '$29/mo', recommended: false },
+    mosquito:  { name: 'Mosquito',   price: '$52/mo', recommended: false }
+  };
+
+  const COMPARE_FEATURES = [
+    { category: 'Treatment Schedule' },
+    { label: 'Quarterly',                          basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+    { label: 'Monthly (seasonal Apr–Oct)',    basic: false, standard: false, premium: false, sentricon: false, mosquito: true },
+    { label: 'Annual',                              basic: false, standard: false, premium: false, sentricon: true,  mosquito: false },
+    { category: 'Pest Coverage' },
+    { label: 'Ants',                                basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+    { label: 'Cockroaches',                         basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+    { label: 'Spiders',                             basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+    { label: 'Other common household pests',        basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+    { label: 'Wasps',                               basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+    { label: 'Rodents',                             basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+    { label: 'Termites',                            basic: false, standard: true,  premium: true,  sentricon: true,  mosquito: false },
+    { label: 'Mosquitoes',                          basic: false, standard: false, premium: false, sentricon: false, mosquito: true },
+    { label: 'Fleas',                               basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: true },
+    { category: 'Services' },
+    { label: 'Zero-Gap System',                     basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+    { label: 'De-webbing',                          basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+    { label: 'Exterior foundation treatment',       basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+    { label: 'Interior upon request',               basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+    { label: 'Rodent bait station management',      basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+    { label: 'Termite Monitoring',                  basic: false, standard: true,  premium: true,  sentricon: true,  mosquito: false },
+    { label: 'Termite Treatment (Sentricon)',       basic: false, standard: false, premium: true,  sentricon: true,  mosquito: false },
+    { label: 'Fire ant mound treatment',            basic: true,  standard: true,  premium: true,  sentricon: false, mosquito: false },
+    { label: 'Full yard treatment',                 basic: false, standard: false, premium: false, sentricon: false, mosquito: true },
+    { label: 'Mosquito Stations',                   basic: false, standard: false, premium: false, sentricon: false, mosquito: true },
+    { category: 'Warranties' },
+    { label: 'Free re-services',                    basic: true,  standard: true,  premium: true,  sentricon: true,  mosquito: true },
+    { label: 'Money-back guarantee',                basic: true,  standard: true,  premium: true,  sentricon: true,  mosquito: true },
+    { label: 'Termite warranty',                    basic: false, standard: false, premium: true,  sentricon: true,  mosquito: false },
+    { label: 'Background-checked and drug-tested technicians', basic: true, standard: true, premium: true, sentricon: true, mosquito: true },
+    { label: 'Pet- and kid-friendly treatments',    basic: true,  standard: true,  premium: true,  sentricon: true,  mosquito: true }
+  ];
+
+  function renderComparison() {
+    const plans = ['basic', 'standard', 'premium', 'sentricon', 'mosquito'];
+    const wrap = document.getElementById('compareTableWrap');
+    if (!wrap) return;
+    
+    const totalCols = plans.length + 1;
+
+    let html = '<table class="compare-table"><thead><tr>';
+    html += '<th style="text-align:left;">Feature</th>';
+    plans.forEach(key => {
+      const p = PLAN_DATA[key];
+      const cls = p.recommended ? ' class="recommended-col"' : '';
+      html += '<th' + cls + '>' + p.name + '</th>';
+    });
+    html += '</tr></thead><tbody>';
+
+    COMPARE_FEATURES.forEach(row => {
+      if (row.category) {
+        html += '<tr class="category-row"><td colspan="' + totalCols + '">' + row.category + '</td></tr>';
+      } else {
+        html += '<tr><td>' + row.label + '</td>';
+        plans.forEach(key => {
+          html += row[key]
+            ? '<td><span class="check">&#10003;</span></td>'
+            : '<td><span class="dash">&mdash;</span></td>';
+        });
+        html += '</tr>';
+      }
+    });
+
+    html += '</tbody></table>';
+    wrap.innerHTML = html;
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    renderComparison();
+  });
+// Expose functions globally for onclick handlers in HTML
+window.switchTab = switchTab;
+window.setBilling = setBilling;
+window.goToQuote = function(e) { if(e) e.preventDefault(); window.location.href = 'https://quote.forterrapestcontrol.com'; };

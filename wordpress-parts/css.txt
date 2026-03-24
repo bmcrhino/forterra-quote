@@ -1,0 +1,1115 @@
+/* ========================================
+     FORTERRA PEST CONTROL — PRICING PAGE (WordPress Embeddable)
+     All CSS scoped to .forterra-pricing container
+     ======================================== */
+  
+  .forterra-pricing *, .forterra-pricing *::before, .forterra-pricing *::after { 
+    margin: 0; padding: 0; box-sizing: border-box; 
+  }
+
+  .forterra-pricing {
+    /* Primary Palette */
+    --orange: #F77D00;
+    --orange-hover: #E06F00;
+    --bark: #986D4F;
+    --soil: #42372F;
+    --stem: #54654E;
+
+    /* Secondary Palette */
+    --sunshine: #F4D14F;
+    --sky: #97C4DB;
+    --leaf: #B1C4AA;
+    --twilight: #1A6991;
+
+    /* Neutrals */
+    --white: #FFFFFF;
+    --off-white: #F9FAFB;
+    --warm-beige: #EFDCCB;
+    --light-grey: #F3F4F6;
+    --border-grey: #E5E7EB;
+    --input-border: #D1D5DB;
+    --medium-grey: #9CA3AF;
+    --dark-grey: #374151;
+    --near-black: #1A1A1A;
+
+    /* Semantic */
+    --success: #047857;
+
+    /* Typography — brand fonts with web fallbacks */
+    --font-display: 'Libre Franklin', 'Franklin Gothic URW', 'Arial Narrow', sans-serif;
+    --font-body: 'Lora', 'Benton Modern Text', 'Georgia', serif;
+
+    /* Spacing (8px base) */
+    --xs: 4px;
+    --sm: 8px;
+    --md: 16px;
+    --lg: 24px;
+    --xl: 32px;
+    --2xl: 48px;
+    --3xl: 64px;
+    --4xl: 96px;
+
+    /* Layout */
+    --max-width: 1200px;
+    --gutter: 24px;
+    --radius: 4px;
+    --radius-lg: 8px;
+    --shadow-card: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.12);
+    --shadow-elevated: 0 8px 24px rgba(0,0,0,0.1);
+
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--soil);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ========================================
+     TOPOGRAPHIC PATTERN (SVG texture)
+     ======================================== */
+  .forterra-pricing .topo-bg {
+    position: relative;
+  }
+  .forterra-pricing .topo-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Cg fill='none' stroke='%23986D4F' stroke-width='1.2'%3E%3Cpath d='M-20 55 Q130 25 280 60 Q430 95 620 55'/%3E%3Cpath d='M-20 115 Q160 145 310 110 Q460 75 620 120'/%3E%3Cpath d='M-20 175 Q120 150 270 180 Q420 210 620 170'/%3E%3Cpath d='M-20 235 Q150 265 300 230 Q450 195 620 240'/%3E%3Cpath d='M-20 295 Q140 270 290 300 Q440 330 620 290'/%3E%3Cpath d='M-20 355 Q160 385 310 350 Q460 315 620 360'/%3E%3Cpath d='M-20 415 Q130 390 280 420 Q430 450 620 410'/%3E%3Cpath d='M-20 475 Q150 505 300 470 Q450 435 620 480'/%3E%3Cpath d='M-20 535 Q120 515 270 540 Q420 565 620 530'/%3E%3Cpath d='M-20 595 Q160 620 310 590 Q460 560 620 600'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 600px 600px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .forterra-pricing .topo-bg > * { position: relative; z-index: 1; }
+
+  /* ========================================
+     TYPOGRAPHY
+     ======================================== */
+  .forterra-pricing .subtitle {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bark);
+    margin-bottom: var(--md);
+  }
+  .forterra-pricing h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 52px;
+    line-height: 1.1;
+    color: var(--soil);
+  }
+  .forterra-pricing h2 {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 1.2;
+    color: var(--soil);
+  }
+  .forterra-pricing h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 1.15;
+    color: var(--soil);
+  }
+  .forterra-pricing .body-text {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--dark-grey);
+  }
+  .forterra-pricing .small-copy {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--medium-grey);
+  }
+
+  /* ========================================
+     BUTTONS
+     ======================================== */
+  .forterra-pricing .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    border-radius: var(--radius);
+    padding: 14px 28px;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  }
+  .forterra-pricing .btn-primary {
+    background: var(--orange);
+    color: var(--white);
+  }
+  .forterra-pricing .btn-primary:hover {
+    background: var(--orange-hover);
+    box-shadow: 0 2px 8px rgba(247, 125, 0, 0.3);
+  }
+  .forterra-pricing .btn-secondary {
+    background: var(--soil);
+    color: var(--white);
+  }
+  .forterra-pricing .btn-secondary:hover {
+    background: #362D25;
+  }
+  .forterra-pricing .btn-schedule {
+    background: var(--bark);
+    color: var(--white);
+  }
+  .forterra-pricing .btn-schedule:hover {
+    background: #7E5A40;
+    box-shadow: 0 2px 8px rgba(152, 109, 79, 0.3);
+  }
+  .forterra-pricing .btn-compare {
+    background: var(--stem);
+    color: var(--white);
+  }
+  .forterra-pricing .btn-compare:hover {
+    background: #455740;
+    box-shadow: 0 2px 8px rgba(84, 101, 78, 0.35);
+  }
+  .forterra-pricing .btn-compare svg {
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+  .forterra-pricing .btn-ghost {
+    background: transparent;
+    border: 2px solid var(--orange);
+    color: var(--orange);
+    padding: 12px 26px;
+  }
+  .forterra-pricing .btn-ghost:hover {
+    background: var(--orange);
+    color: var(--white);
+  }
+  .forterra-pricing .btn-sm {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+  .forterra-pricing .btn-full { width: 100%; }
+
+  /* ========================================
+     LAYOUT UTILITIES
+     ======================================== */
+  .forterra-pricing .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+  .forterra-pricing .text-center { text-align: center; }
+  .forterra-pricing .section-padding { padding: var(--4xl) 0; }
+
+  /* ========================================
+     HERO SECTION
+     ======================================== */
+  .forterra-pricing .hero {
+    background: var(--warm-beige);
+    padding: var(--2xl) 0 var(--xl);
+  }
+  .forterra-pricing .hero-content {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .forterra-pricing .hero h1 {
+    margin-bottom: var(--md);
+    font-size: 42px;
+  }
+  .forterra-pricing .hero .body-text {
+    font-size: 17px;
+    max-width: 520px;
+    margin: 0 auto var(--lg);
+    color: var(--dark-grey);
+  }
+  .forterra-pricing .hero-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--md);
+  }
+  .forterra-pricing .hero-actions .btn {
+    min-width: 220px;
+    padding: 14px 24px;
+  }
+  .forterra-pricing .compare-jump-link {
+    display: inline-flex;
+    align-items: center;
+    margin-top: var(--md);
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--bark);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .forterra-pricing .compare-jump-link:hover {
+    color: var(--orange);
+  }
+  .forterra-pricing .hero-phone {
+    display: flex;
+    align-items: center;
+    gap: var(--sm);
+  }
+  .forterra-pricing .hero-phone svg {
+    color: var(--soil);
+  }
+
+  /* ========================================
+     PLAN CARDS SECTION
+     ======================================== */
+  .forterra-pricing .plans-section {
+    background: var(--white);
+    padding: var(--4xl) 0;
+  }
+  .forterra-pricing .plans-header {
+    text-align: center;
+    margin-bottom: var(--2xl);
+  }
+  .forterra-pricing .plans-header h2 {
+    margin-bottom: var(--lg);
+  }
+
+  /* Billing Toggle */
+  .forterra-pricing .billing-toggle {
+    display: inline-flex;
+    align-items: center;
+    background: var(--light-grey);
+    border-radius: 40px;
+    padding: 4px;
+    gap: 0;
+    margin-bottom: var(--3xl);
+  }
+  .forterra-pricing .billing-toggle button {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 14px;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 36px;
+    background: transparent;
+    color: var(--dark-grey);
+    cursor: pointer;
+    transition: all 0.25s;
+    letter-spacing: 0.01em;
+  }
+  .forterra-pricing .billing-toggle button.active {
+    background: var(--white);
+    color: var(--soil);
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  .forterra-pricing .billing-savings {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--success);
+    background: #ECFDF5;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: var(--sm);
+    letter-spacing: 0.02em;
+  }
+
+  /* Plan Cards Grid */
+  .forterra-pricing .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--lg);
+    align-items: start;
+  }
+  .forterra-pricing .plan-card {
+    background: var(--white);
+    border: 1px solid var(--border-grey);
+    border-radius: var(--radius-lg);
+    padding: var(--xl);
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.25s, transform 0.2s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .forterra-pricing .plan-card .btn-full {
+    margin-top: auto;
+  }
+  .forterra-pricing .plan-card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+  .forterra-pricing .plan-card.recommended {
+    border: 2px solid var(--orange);
+    box-shadow: var(--shadow-elevated);
+  }
+  .forterra-pricing .plan-card.recommended:hover {
+    box-shadow: 0 12px 32px rgba(247, 125, 0, 0.15);
+  }
+  .forterra-pricing .plan-badge {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--orange);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 16px;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+  .forterra-pricing .plan-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bark);
+    margin-bottom: var(--xs);
+  }
+  .forterra-pricing .plan-title {
+    min-height: 54px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--soil);
+    margin-bottom: var(--md);
+  }
+  .forterra-pricing .plan-price-label {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--medium-grey);
+    margin-bottom: 2px;
+  }
+  .forterra-pricing .plan-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+  .forterra-pricing .plan-price .currency {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--soil);
+  }
+  .forterra-pricing .plan-price .amount {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 1;
+    color: var(--soil);
+  }
+  .forterra-pricing .plan-price .period {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 15px;
+    color: var(--medium-grey);
+  }
+  .forterra-pricing .plan-annual-note {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 13px;
+    color: var(--medium-grey);
+    margin-bottom: var(--lg);
+    height: 18px;
+  }
+  .forterra-pricing .plan-desc {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--dark-grey);
+    margin-bottom: var(--lg);
+    padding-bottom: var(--lg);
+    border-bottom: 1px solid var(--light-grey);
+    min-height: 76px;
+  }
+  .forterra-pricing .plan-features {
+    list-style: none;
+    margin-bottom: var(--xl);
+  }
+  .forterra-pricing .plan-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--dark-grey);
+    padding: 6px 0;
+  }
+  .forterra-pricing .plan-features li svg {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--orange);
+  }
+  .forterra-pricing .plan-card.addon .plan-features li svg {
+    color: var(--bark);
+  }
+  .forterra-pricing .plan-card.addon {
+    background: var(--off-white);
+    border-style: dashed;
+  }
+  .forterra-pricing .plan-addon-label {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--bark);
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 3px;
+    margin-bottom: var(--md);
+  }
+
+  /* ========================================
+     CATEGORY TABS
+     ======================================== */
+  .forterra-pricing .category-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: var(--2xl);
+    flex-wrap: wrap;
+    padding: 0 var(--gutter);
+  }
+  .forterra-pricing .category-tab {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    padding: 11px 26px;
+    border-radius: 40px;
+    border: 2px solid var(--border-grey);
+    background: var(--white);
+    color: var(--dark-grey);
+    cursor: pointer;
+    transition: all 0.25s;
+    white-space: nowrap;
+  }
+  .forterra-pricing .category-tab:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+  }
+  .forterra-pricing .category-tab.active {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: var(--white);
+  }
+
+  /* Tab Panels */
+  .forterra-pricing .tab-panel { display: none; }
+  .forterra-pricing .tab-panel.active {
+    display: block;
+    animation: tabFadeIn 0.35s ease;
+  }
+  @keyframes tabFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Variable-width plan grids per tab */
+  .forterra-pricing .plans-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--lg);
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .forterra-pricing .plans-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--lg);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .forterra-pricing .plans-grid-1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--lg);
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .forterra-pricing .plans-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Free / Custom price labels */
+  .forterra-pricing .plan-price .free-label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 1;
+    color: var(--success);
+  }
+  .forterra-pricing .plan-price .custom-label {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.2;
+    color: var(--soil);
+  }
+
+  /* Dual CTA bar below plans */
+  .forterra-pricing .plans-cta-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--md);
+    margin-top: var(--2xl);
+    padding-top: var(--xl);
+  }
+  .forterra-pricing .phone-reveal {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .forterra-pricing .phone-reveal .phone-number-text {
+    max-width: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-width 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+    white-space: nowrap;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+  .forterra-pricing .phone-reveal:hover .phone-number-text {
+    max-width: 160px;
+    opacity: 1;
+    margin-left: 8px;
+  }
+
+  /* ========================================
+     FEATURE COMPARISON TABLE
+     ======================================== */
+  .forterra-pricing .compare-section {
+    background: var(--off-white);
+    padding: var(--4xl) 0;
+  }
+  .forterra-pricing .compare-section .subtitle,
+  .forterra-pricing .compare-section h2 {
+    text-align: center;
+  }
+  .forterra-pricing .compare-section h2 {
+    margin-bottom: var(--lg);
+  }
+  .forterra-pricing .compare-section .compare-desc {
+    text-align: center;
+    font-size: 15px;
+    color: var(--dark-grey);
+    margin-bottom: var(--2xl);
+  }
+  .forterra-pricing .compare-table-wrap {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-grey);
+    box-shadow: var(--shadow-card);
+    overflow: visible;
+  }
+  .forterra-pricing .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .forterra-pricing .compare-table th,
+  .forterra-pricing .compare-table td {
+    padding: 12px 14px;
+    text-align: center;
+    border-bottom: 1px solid var(--light-grey);
+    font-size: 14px;
+  }
+  .forterra-pricing .compare-table thead th {
+    background: var(--white);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--soil);
+    padding: 20px;
+    border-bottom: 2px solid var(--border-grey);
+    position: sticky;
+    top: 72px;
+    z-index: 10;
+  }
+  .forterra-pricing .compare-table thead th:first-child {
+    text-align: left;
+  }
+  .forterra-pricing .compare-table thead th.recommended-col {
+    color: var(--orange);
+  }
+  .forterra-pricing .compare-table .category-row td {
+    background: var(--off-white);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bark);
+    text-align: left;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border-grey);
+  }
+  .forterra-pricing .compare-table td:first-child {
+    text-align: left;
+    font-family: var(--font-body);
+    color: var(--dark-grey);
+  }
+  .forterra-pricing .compare-table .check {
+    color: var(--orange);
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .forterra-pricing .compare-table .dash {
+    color: var(--input-border);
+    font-size: 18px;
+  }
+  .forterra-pricing .compare-table tr:last-child td {
+    border-bottom: none;
+  }
+  .forterra-pricing .compare-table tbody tr:hover td {
+    background: #FFFBF5;
+  }
+
+  /* ========================================
+     TRUST SIGNALS
+     ======================================== */
+  .forterra-pricing .trust-section {
+    background: var(--white);
+    padding: var(--3xl) 0;
+    border-top: 1px solid var(--light-grey);
+    border-bottom: 1px solid var(--light-grey);
+  }
+  .forterra-pricing .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--xl);
+    text-align: center;
+  }
+  .forterra-pricing .trust-item {
+    padding: var(--lg);
+  }
+  .forterra-pricing .trust-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto var(--md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--orange);
+  }
+  .forterra-pricing .trust-number {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--soil);
+    line-height: 1;
+    margin-bottom: var(--xs);
+  }
+  .forterra-pricing .trust-label {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 14px;
+    color: var(--dark-grey);
+    line-height: 1.4;
+  }
+
+  /* ========================================
+     REVIEW TRUST BADGES (hero area)
+     ======================================== */
+  .forterra-pricing .trust-badges {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .forterra-pricing .trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--white);
+    border: 1px solid var(--border-grey);
+    border-radius: 40px;
+    padding: 10px 18px 10px 14px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    text-decoration: none;
+    transition: box-shadow 0.2s ease;
+  }
+  .forterra-pricing .trust-badge:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+  .forterra-pricing .trust-badge-logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+  .forterra-pricing .trust-badge-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .forterra-pricing .trust-badge-stars {
+    display: flex;
+    gap: 1px;
+  }
+  .forterra-pricing .trust-badge-stars svg {
+    width: 13px;
+    height: 13px;
+  }
+  .forterra-pricing .trust-badge-stars.google { color: #FBBC04; }
+  .forterra-pricing .trust-badge-stars.google-rev { color: #FBBC04; }
+  .forterra-pricing .trust-badge-text {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--dark-grey);
+    line-height: 1;
+  }
+  .forterra-pricing .trust-badge-text strong {
+    font-weight: 700;
+    color: var(--soil);
+  }
+
+  /* ========================================
+     REVIEWS BANNER (full-width strip)
+     ======================================== */
+  .forterra-pricing .reviews-banner {
+    background: var(--off-white);
+    padding: var(--2xl) 0;
+    border-top: 1px solid var(--border-grey);
+    border-bottom: 1px solid var(--border-grey);
+  }
+  .forterra-pricing .reviews-banner-inner {
+    text-align: center;
+  }
+  .forterra-pricing .reviews-banner-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--md);
+    margin-bottom: var(--lg);
+    flex-wrap: wrap;
+  }
+  .forterra-pricing .reviews-banner-icon {
+    width: 36px;
+    height: 36px;
+  }
+  .forterra-pricing .reviews-stars-large {
+    display: flex;
+    gap: 2px;
+    color: #FBBC04;
+  }
+  .forterra-pricing .reviews-stars-large svg {
+    width: 24px;
+    height: 24px;
+  }
+  .forterra-pricing .reviews-banner-stat {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--soil);
+  }
+  .forterra-pricing .reviews-banner-stat span {
+    font-weight: 300;
+    color: var(--dark-grey);
+  }
+  .forterra-pricing .reviews-quotes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--lg);
+    margin-top: var(--lg);
+  }
+  .forterra-pricing .review-card {
+    background: var(--white);
+    border: 1px solid var(--border-grey);
+    border-radius: var(--radius-lg);
+    padding: var(--lg);
+    text-align: left;
+  }
+  .forterra-pricing .review-card-stars {
+    display: flex;
+    gap: 1px;
+    color: #FBBC04;
+    margin-bottom: var(--sm);
+  }
+  .forterra-pricing .review-card-stars svg {
+    width: 14px;
+    height: 14px;
+  }
+  .forterra-pricing .review-card-text {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--dark-grey);
+    line-height: 1.5;
+    margin-bottom: var(--sm);
+    font-style: italic;
+  }
+  .forterra-pricing .review-card-author {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--soil);
+  }
+
+  /* ========================================
+     GOOGLE REVIEWS BANNER
+     ======================================== */
+  .forterra-pricing .google-reviews-banner {
+    background: var(--white);
+    padding: var(--2xl) 0;
+    border-top: 1px solid var(--border-grey);
+    border-bottom: 1px solid var(--border-grey);
+  }
+  .forterra-pricing .google-reviews-banner .reviews-banner-inner { text-align: center; }
+  .forterra-pricing .google-reviews-banner .reviews-stars-large { color: #FBBC04; }
+  .forterra-pricing .google-reviews-banner .review-card-stars { color: #FBBC04; }
+  .forterra-pricing .google-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+    color: #191919;
+  }
+  .forterra-pricing .google-logo svg { width: 28px; height: 28px; }
+
+  /* ========================================
+     FAQ SECTION
+     ======================================== */
+  .forterra-pricing .faq-section {
+    background: var(--white);
+    padding: var(--4xl) 0;
+  }
+  .forterra-pricing .faq-header {
+    text-align: center;
+    margin-bottom: var(--2xl);
+  }
+  .forterra-pricing .faq-list {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .forterra-pricing .faq-item {
+    border-bottom: 1px solid var(--border-grey);
+  }
+  .forterra-pricing .faq-item:first-child {
+    border-top: 1px solid var(--border-grey);
+  }
+  .forterra-pricing .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--md);
+    padding: var(--lg) 0;
+    cursor: pointer;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--soil);
+    line-height: 1.3;
+  }
+  .forterra-pricing .faq-question:hover { color: var(--orange); }
+  .forterra-pricing .faq-chevron {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: var(--medium-grey);
+    transition: transform 0.3s;
+  }
+  .forterra-pricing .faq-item.open .faq-chevron {
+    transform: rotate(180deg);
+    color: var(--orange);
+  }
+  .forterra-pricing .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+  }
+  .forterra-pricing .faq-item.open .faq-answer {
+    max-height: 300px;
+    padding-bottom: var(--lg);
+  }
+  .forterra-pricing .faq-answer p {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--dark-grey);
+  }
+
+  /* ========================================
+     FINAL CTA SECTION
+     ======================================== */
+  .forterra-pricing .final-cta {
+    background: var(--warm-beige);
+    padding: 80px 0;
+  }
+  .forterra-pricing .final-cta-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .forterra-pricing .final-cta h2 {
+    margin-bottom: var(--md);
+  }
+  .forterra-pricing .final-cta .body-text {
+    margin-bottom: var(--xl);
+    font-size: 18px;
+  }
+  .forterra-pricing .final-cta-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--md);
+  }
+
+  /* ========================================
+     RESPONSIVE — Tablet & smaller desktops
+     ======================================== */
+  @media (max-width: 1080px) {
+    .forterra-pricing .plans-grid {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .forterra-pricing .plans-grid-3 {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 620px;
+    }
+    .forterra-pricing .plans-grid-4 {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 620px;
+    }
+    .forterra-pricing .plan-card.recommended {
+      order: -1;
+    }
+  }
+  @media (max-width: 768px) {
+    .forterra-pricing h1 { font-size: 36px; }
+    .forterra-pricing h2 { font-size: 28px; }
+    .forterra-pricing .hero {
+      padding: var(--xl) 0 var(--lg);
+    }
+    .forterra-pricing .plans-grid,
+    .forterra-pricing .plans-grid-3,
+    .forterra-pricing .plans-grid-2,
+    .forterra-pricing .plans-grid-4 {
+      grid-template-columns: 1fr;
+      max-width: 420px;
+    }
+    .forterra-pricing .plans-grid-1 {
+      max-width: 100%;
+    }
+    .forterra-pricing .category-tabs {
+      gap: 8px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      justify-content: center;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+    .forterra-pricing .category-tabs::-webkit-scrollbar { display: none; }
+    .forterra-pricing .category-tab {
+      padding: 9px 18px;
+      font-size: 13px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .forterra-pricing .hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+    .forterra-pricing .hero-actions .btn {
+      min-width: 0;
+      width: 100%;
+    }
+    .forterra-pricing .final-cta-actions {
+      flex-direction: column;
+    }
+    .forterra-pricing .plans-cta-bar {
+      flex-direction: column;
+      align-items: stretch;
+      max-width: 320px;
+      margin: var(--2xl) auto 0;
+    }
+    .forterra-pricing .plans-cta-bar .btn {
+      width: 100%;
+    }
+    .forterra-pricing .trust-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .forterra-pricing .reviews-quotes {
+      grid-template-columns: 1fr;
+      max-width: 420px;
+      margin: var(--lg) auto 0;
+    }
+    .forterra-pricing .compare-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .forterra-pricing .compare-table {
+      min-width: 500px;
+    }
+    .forterra-pricing .compare-table thead th {
+      position: static;
+    }
+    .forterra-pricing .compare-table th,
+    .forterra-pricing .compare-table td {
+      padding: 10px 12px;
+      font-size: 13px;
+    }
+    .forterra-pricing .plan-card {
+      padding: var(--lg);
+    }
+    .forterra-pricing .plan-price .amount {
+      font-size: 36px;
+    }
+  }
+  @media (max-width: 480px) {
+    .forterra-pricing h1 { font-size: 28px; }
+    .forterra-pricing h2 { font-size: 24px; }
+    .forterra-pricing .hero h1 { font-size: 28px; }
+    .forterra-pricing .category-tab {
+      padding: 8px 14px;
+      font-size: 12px;
+    }
+    .forterra-pricing .trust-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--md);
+    }
+    .forterra-pricing .trust-number {
+      font-size: 28px;
+    }
+  }

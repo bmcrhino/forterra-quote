@@ -1,0 +1,635 @@
+<div class="forterra-pricing">
+
+  
+  <section class="hero topo-bg">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Pest Control Plans That Protect What Matters Most</h1>
+        <p class="body-text">Find the right plan for your home &mdash; or get a custom quote in minutes.</p>
+        <div class="hero-actions">
+          <a class='btn btn-primary' href='https://quote.forterrapestcontrol.com'>GET ONLINE QUOTE</a>
+          <a href="tel:8176656527" class="btn btn-secondary hero-phone">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="margin-right:6px">
+              <path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/>
+            </svg>
+            CALL (817) 665-6527
+          </a>
+        </div>
+        
+        <div style="margin-top: var(--lg);">
+          <div class="trust-badges">
+            
+            <a href="https://share.google/7myySwWLnvZ7WCwLd" target="_blank" rel="noopener" class="trust-badge">
+              <div class="trust-badge-logo">
+                <svg style="width:22px;height:22px" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.97 10.97 0 001 12c0 1.77.42 3.44 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+              </div>
+              <div class="trust-badge-info">
+                <div class="trust-badge-stars google">
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                </div>
+                <span class="trust-badge-text"><strong>5.0</strong> &middot; 2,600+ reviews</span>
+              </div>
+            </a>
+            
+            <a href="https://www.google.com/maps/place/Forterra+Pest+Control/@32.9411,-97.1341,15z/" target="_blank" rel="noopener" class="trust-badge">
+              <div class="trust-badge-logo">
+                <svg style="width:22px;height:22px" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z" fill="#FBBC04"/></svg>
+              </div>
+              <div class="trust-badge-info">
+                <div class="trust-badge-stars google-rev">
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+                </div>
+                <span class="trust-badge-text"><strong>5.0</strong> &middot; 2,600+ reviews</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="plans-section" id="plans">
+    <div class="container">
+
+      <div class="plans-header">
+        <p class="subtitle" id="plansSubtitle">Choose Your Plan</p>
+        <h2 id="plansHeading">Preventative Plans for Every Home</h2>
+        <div class="billing-toggle" id="billingToggle">
+          <button class="active" data-period="monthly" onclick="setBilling('monthly')">Monthly</button>
+          <button data-period="annual" onclick="setBilling('annual')">Annual<span class="billing-savings">1 Month Free</span></button>
+        </div>
+      </div>
+
+      
+      <div class="category-tabs" id="categoryTabs">
+        <button class="category-tab active" data-tab="general" onclick="switchTab('general')">General Pests</button>
+        <button class="category-tab" data-tab="termites" onclick="switchTab('termites')">Termites</button>
+        <button class="category-tab" data-tab="mosquitoes" onclick="switchTab('mosquitoes')">Mosquitoes</button>
+        <button class="category-tab" data-tab="rodents" onclick="switchTab('rodents')">Rodents</button>
+      </div>
+
+      
+      <div class="tab-panel active" data-tab-panel="general">
+      <div class="plans-grid-3">
+
+        
+        <div class="plan-card" data-plan="basic">
+          <p class="plan-name">Basic</p>
+          <h3 class="plan-title">Broad Coverage</h3>
+          <p class="plan-price-label">Starting at</p>
+          <div class="plan-price">
+            <span class="currency">$</span>
+            <span class="amount" data-monthly="49" data-annual="49">49</span>
+            <span class="period">/mo</span>
+          </div>
+          <p class="plan-annual-note annual-note"></p>
+          <p class="plan-desc">Best for people who want broad coverage at a reasonable cost.</p>
+          <ul class="plan-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Quarterly Exterior Treatments</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Interior Treatments (when needed)</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Coverage for 50+ pests</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Zero-Gap System&trade;</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Exterior Rodent Protection</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Money-back guarantee</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Free re-services</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Family &amp; Pet Safe Treatments</li>
+          </ul>
+          <a href="https://quote.forterrapestcontrol.com#category=general&plan=basic" class="btn btn-primary btn-full">GET YOUR QUOTE</a>
+        </div>
+
+        
+        <div class="plan-card recommended" data-plan="standard">
+          <span class="plan-badge">Recommended</span>
+          <p class="plan-name">Standard</p>
+          <h3 class="plan-title">Pests + Termite Watch</h3>
+          <p class="plan-price-label">Starting at</p>
+          <div class="plan-price">
+            <span class="currency">$</span>
+            <span class="amount" data-monthly="59" data-annual="59">59</span>
+            <span class="period">/mo</span>
+          </div>
+          <p class="plan-annual-note annual-note"></p>
+          <p class="plan-desc">Best for people who want to stay on top of common pests and keep an eye on termites.</p>
+          <ul class="plan-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Quarterly Exterior Treatments</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Interior Treatments (when needed)</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Coverage for 50+ pests</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Zero-Gap System&trade;</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Exterior Rodent Protection</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Money-back guarantee</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Free re-services</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Family &amp; Pet Safe Treatments</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Termite Monitoring System</li>
+          </ul>
+          <a href="https://quote.forterrapestcontrol.com#category=general&plan=standard" class="btn btn-primary btn-full">GET YOUR QUOTE</a>
+        </div>
+
+        
+        <div class="plan-card" data-plan="premium">
+          <p class="plan-name">Premium</p>
+          <h3 class="plan-title">Total Home Defense</h3>
+          <p class="plan-price-label">Starting at</p>
+          <div class="plan-price">
+            <span class="currency">$</span>
+            <span class="amount" data-monthly="69" data-annual="69">69</span>
+            <span class="period">/mo</span>
+          </div>
+          <p class="plan-annual-note annual-note"></p>
+          <p class="plan-desc">Best for those who want to protect their home against termites and bugs.</p>
+          <ul class="plan-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Quarterly Exterior Treatments</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Interior Treatments (when needed)</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Coverage for 50+ pests</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Zero-Gap System&trade;</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Exterior Rodent Protection</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Money-back guarantee</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Free re-services</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Family &amp; Pet Safe Treatments</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Termite Monitoring System</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Sentricon&reg; Baiting System</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Full home termite warranty</li>
+          </ul>
+          <a href="https://quote.forterrapestcontrol.com#category=general&plan=premium" class="btn btn-primary btn-full">GET YOUR QUOTE</a>
+        </div>
+
+      </div>
+      </div>
+
+      
+      <div class="tab-panel" data-tab-panel="termites">
+      <div class="plans-grid-4">
+
+        
+        <div class="plan-card" data-plan="termite-inspection">
+          <p class="plan-name">Inspection</p>
+          <h3 class="plan-title">Expert Assessment</h3>
+          <div class="plan-price">
+            <span class="free-label">FREE</span>
+          </div>
+          <p class="plan-annual-note">&nbsp;</p>
+          <p class="plan-desc">Choose this if you&rsquo;re not sure what&rsquo;s going on and want an expert opinion.</p>
+          <ul class="plan-features"></ul>
+          <a href="https://quote.forterrapestcontrol.com#category=termites&plan=basic" class="btn btn-primary btn-full">GET YOUR QUOTE</a>
+        </div>
+
+        
+        <div class="plan-card" data-plan="sentricon">
+          <p class="plan-name">Sentricon&reg;</p>
+          <h3 class="plan-title">Termite-Only Shield</h3>
+          <p class="plan-price-label">Starting at</p>
+          <div class="plan-price">
+            <span class="currency">$</span>
+            <span class="amount" data-monthly="29" data-annual="29">29</span>
+            <span class="period">/mo</span>
+          </div>
+          <p class="plan-annual-note annual-note"></p>
+          <p class="plan-desc">Best for those who want to protect their home from termites but aren&rsquo;t concerned about other pests.</p>
+          <ul class="plan-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Termite Monitoring System</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Sentricon&reg; Baiting System</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Full home termite warranty</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Money-back guarantee</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Free re-services</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Family &amp; Pet Safe Treatments</li>
+          </ul>
+          <a href="https://quote.forterrapestcontrol.com#category=termites&plan=sentricon" class="btn btn-primary btn-full">GET YOUR QUOTE</a>
+        </div>
+
+        
+        <div class="plan-card recommended" data-plan="termite-standard">
+          <span class="plan-badge">Recommended</span>
+          <p class="plan-name">Standard</p>
+          <h3 class="plan-title">Pests + Termite Watch</h3>
+          <p class="plan-price-label">Starting at</p>
+          <div class="plan-price">
+            <span class="currency">$</span>
+            <span class="amount" data-monthly="59" data-annual="59">59</span>
+            <span class="period">/mo</span>
+          </div>
+          <p class="plan-annual-note annual-note"></p>
+          <p class="plan-desc">Our most popular plan &mdash; full pest coverage plus proactive termite monitoring to catch threats early.</p>
+          <ul class="plan-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Quarterly Exterior Treatments</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Interior Treatments (when needed)</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Coverage for 50+ pests</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Zero-Gap System&trade;</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Exterior Rodent Protection</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Money-back guarantee</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Free re-services</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Family &amp; Pet Safe Treatments</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Termite Monitoring System</li>
+          </ul>
+          <a href="https://quote.forterrapestcontrol.com#category=termites&plan=standard" class="btn btn-primary btn-full">GET YOUR QUOTE</a>
+        </div>
+
+        
+        <div class="plan-card" data-plan="termite-premium">
+          <p class="plan-name">Premium</p>
+          <h3 class="plan-title">Total Home Defense</h3>
+          <p class="plan-price-label">Starting at</p>
+          <div class="plan-price">
+            <span class="currency">$</span>
+            <span class="amount" data-monthly="69" data-annual="69">69</span>
+            <span class="period">/mo</span>
+          </div>
+          <p class="plan-annual-note annual-note"></p>
+          <p class="plan-desc">Maximum protection &mdash; everything in Standard plus full Sentricon&reg; baiting and a home termite warranty.</p>
+          <ul class="plan-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Quarterly Exterior Treatments</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Interior Treatments (when needed)</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Coverage for 50+ pests</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Zero-Gap System&trade;</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Exterior Rodent Protection</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Money-back guarantee</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Free re-services</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Family &amp; Pet Safe Treatments</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Termite Monitoring System</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Sentricon&reg; Baiting System</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Full home termite warranty</li>
+          </ul>
+          <a href="https://quote.forterrapestcontrol.com#category=termites&plan=premium" class="btn btn-primary btn-full">GET YOUR QUOTE</a>
+        </div>
+
+      </div>
+      </div>
+
+      
+      <div class="tab-panel" data-tab-panel="mosquitoes">
+      <div class="plans-grid-1">
+
+        
+        <div class="plan-card" data-plan="mosquito">
+          <p class="plan-name">Mosquito Service</p>
+          <h3 class="plan-title">Seasonal Yard Protection</h3>
+          <p class="plan-price-label">Starting at</p>
+          <div class="plan-price">
+            <span class="currency">$</span>
+            <span class="amount" data-monthly="52" data-annual="52">52</span>
+            <span class="period">/mo</span>
+          </div>
+          <p class="plan-annual-note annual-note"></p>
+          <p class="plan-desc">Best for those who want ongoing protection against mosquitoes.</p>
+          <ul class="plan-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Covers mosquitoes, fleas &amp; ticks (exterior only)</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Free re-services</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Money-back guarantee</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Zero-Gap System&trade;</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>7 Seasonal Services per year</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Mosquito Bait Box Management</li>
+          </ul>
+          <a href="https://quote.forterrapestcontrol.com#category=mosquitoes&plan=mosquito" class="btn btn-primary btn-full">GET YOUR QUOTE</a>
+        </div>
+
+      </div>
+      </div>
+
+      
+      <div class="tab-panel" data-tab-panel="rodents">
+      <div class="plans-grid-3">
+
+        
+        <div class="plan-card" data-plan="rodent-inspection">
+          <p class="plan-name">Inspection</p>
+          <h3 class="plan-title">Rodent Assessment</h3>
+          <div class="plan-price">
+            <span class="free-label">FREE</span>
+          </div>
+          <p class="plan-annual-note">&nbsp;</p>
+          <p class="plan-desc">If you aren&rsquo;t sure what&rsquo;s going on and want a tech out to inspect.</p>
+          <ul class="plan-features"></ul>
+          <a href="https://quote.forterrapestcontrol.com#category=rodents" class="btn btn-schedule btn-full">SCHEDULE</a>
+        </div>
+
+        
+        <div class="plan-card" data-plan="exclusion">
+          <p class="plan-name">Exclusion</p>
+          <h3 class="plan-title">Seal &amp; Protect</h3>
+          <div class="plan-price">
+            <span class="custom-label">On-site Inspection</span>
+          </div>
+          <p class="plan-annual-note">&nbsp;</p>
+          <p class="plan-desc">If you&rsquo;re dealing with an interior issue, please set up an inspection for us to come out to assess.</p>
+          <ul class="plan-features"></ul>
+          <a href="https://quote.forterrapestcontrol.com#category=rodents" class="btn btn-schedule btn-full">SCHEDULE</a>
+        </div>
+
+        
+        <div class="plan-card" data-plan="rodent-basic">
+          <p class="plan-name">Basic</p>
+          <h3 class="plan-title">Broad Coverage</h3>
+          <p class="plan-price-label">Starting at</p>
+          <div class="plan-price">
+            <span class="currency">$</span>
+            <span class="amount" data-monthly="49" data-annual="49">49</span>
+            <span class="period">/mo</span>
+          </div>
+          <p class="plan-annual-note annual-note"></p>
+          <p class="plan-desc">Best if there are no interior rodent issues and you want broad coverage.</p>
+          <ul class="plan-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Coverage for 50+ pests</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Free re-services</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Money-back guarantee</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Zero-Gap System&trade;</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>4 Seasonal Services per year</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>Rodent Bait Box Management</li>
+          </ul>
+          <a href="https://quote.forterrapestcontrol.com#category=rodents&plan=basic" class="btn btn-primary btn-full">GET YOUR QUOTE</a>
+        </div>
+
+      </div>
+      </div>
+
+      
+      <div class="plans-cta-bar">
+        <a href="tel:8176656527" class="btn btn-secondary phone-reveal">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="margin-right:6px;flex-shrink:0">
+            <path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/>
+          </svg>
+          CALL US
+          <span class="phone-number-text">(817) 665-6527</span>
+        </a>
+        <a href="#compare" class="btn btn-compare" id="plansCta"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="5"/><line x1="10.5" y1="10.5" x2="14.5" y2="14.5"/></svg>COMPARE PLANS</a>
+      </div>
+
+    </div>
+  </section>
+
+  
+  <section class="google-reviews-banner">
+    <div class="container">
+      <div class="reviews-banner-inner">
+        <div class="reviews-banner-header">
+          <span class="google-logo"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z" fill="#FBBC04"/></svg> Google Reviews</span>
+          <div class="reviews-stars-large">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+          </div>
+          <p class="reviews-banner-stat">5.0 average <span>from 2,600+ Google Reviews Reviews</span></p>
+        </div>
+        <div class="reviews-quotes">
+          <div class="review-card">
+            <div class="review-card-stars">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            </div>
+            <p class="review-card-text">&ldquo;I recently switched from a big company to Forterra and it was a great decision. Superior customer service and our technician Ean is thorough and communicative.&rdquo;</p>
+            <p class="review-card-author">Dustin H. &mdash; Google Reviews</p>
+          </div>
+          <div class="review-card">
+            <div class="review-card-stars">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            </div>
+            <p class="review-card-text">&ldquo;Drake was an absolute rock star. He took the extra step to send a text, asked questions to understand our concerns, and kept us informed on every step.&rdquo;</p>
+            <p class="review-card-author">Stacy P. &mdash; Google Reviews</p>
+          </div>
+          <div class="review-card">
+            <div class="review-card-stars">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            </div>
+            <p class="review-card-text">&ldquo;Every time they come to my home, they have the best customer service I&rsquo;ve experienced. The staff is professional, polite, and engaging.&rdquo;</p>
+            <p class="review-card-author">Sheena R. &mdash; Google Reviews</p>
+          </div>
+        </div>
+        <p style="margin-top: var(--lg);"><a href="https://www.google.com/maps/place/Forterra+Pest+Control/@32.9411,-97.1341,15z/" target="_blank" rel="noopener" style="font-family: var(--font-display); font-size: 14px; font-weight: 600; color: #FBBC04; text-decoration: underline;">Read all 2,600+ reviews on Google Reviews &rarr;</a></p>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="compare-section" id="compare">
+    <div class="container">
+      <p class="subtitle">Compare Plans in Detail</p>
+      <h2>Side-by-Side Comparison</h2>
+      <p class="compare-desc">See exactly what each plan includes at a glance.</p>
+
+      <div id="compareTableWrap" class="compare-table-wrap">
+        
+      </div>
+
+      <div class="compare-cta" style="text-align:center; margin-top:var(--xl);">
+        <a href="https://quote.forterrapestcontrol.com" class="btn btn-primary">GET YOUR FREE QUOTE</a>
+        <p class="small-copy" style="margin-top:var(--sm);">Not sure which plan is right for you? Our tool will recommend the best fit.</p>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="trust-section">
+    <div class="container">
+      <div class="trust-grid">
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 4L6 10v10c0 8.84 5.98 17.1 14 20 8.02-2.9 14-11.16 14-20V10L20 4z"/>
+              <path d="M14 20l4 4 8-8"/>
+            </svg>
+          </div>
+          <p class="trust-number">17,000+</p>
+          <p class="trust-label">DFW Homes<br>Treated</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 36s-14-8.35-14-18.5C6 10.82 11.82 5 18.5 5c3.78 0 7.11 2.56 8.5 5.34C28.39 7.56 31.72 5 35.5 5 42.18 5 48 10.82 48 17.5 48 27.65 34 36 34 36" transform="scale(0.7) translate(5,5)"/>
+            </svg>
+          </div>
+          <p class="trust-number">Family</p>
+          <p class="trust-label">Locally Owned<br>&amp; Operated</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="20" cy="20" r="14"/>
+              <path d="M14 20l4 4 8-8"/>
+            </svg>
+          </div>
+          <p class="trust-number">100%</p>
+          <p class="trust-label">Satisfaction<br>Guarantee</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="10" width="28" height="22" rx="2"/>
+              <path d="M6 16h28"/>
+              <path d="M12 24h6"/>
+              <path d="M12 28h4"/>
+            </svg>
+          </div>
+          <p class="trust-number">Licensed</p>
+          <p class="trust-label">Fully Insured<br>&amp; Certified</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="reviews-banner">
+    <div class="container">
+      <div class="reviews-banner-inner">
+        <div class="reviews-banner-header">
+          <svg class="reviews-banner-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.97 10.97 0 001 12c0 1.77.42 3.44 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          <div class="reviews-stars-large">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+          </div>
+          <p class="reviews-banner-stat">5.0 average <span>from 2,600+ Google Reviews</span></p>
+        </div>
+        <div class="reviews-quotes">
+          <div class="review-card">
+            <div class="review-card-stars">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            </div>
+            <p class="review-card-text">&ldquo;Getting signed up was easy, and they had packages tailored to my needs. Miles was extremely professional and polite. He walked me through my issues and the different treatments.&rdquo;</p>
+            <p class="review-card-author">Kyler W. &mdash; Google Review</p>
+          </div>
+          <div class="review-card">
+            <div class="review-card-stars">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            </div>
+            <p class="review-card-text">&ldquo;Parker was amazing, efficient and fast. We haven&rsquo;t seen any spiders which is great! Love the service.&rdquo;</p>
+            <p class="review-card-author">Grace P. &mdash; Google Review</p>
+          </div>
+          <div class="review-card">
+            <div class="review-card-stars">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            </div>
+            <p class="review-card-text">&ldquo;I have always been very satisfied with the service. Very patient and understanding. I would recommend them to anyone.&rdquo;</p>
+            <p class="review-card-author">Guadalupe P. &mdash; Google Review</p>
+          </div>
+        </div>
+        <p style="margin-top: var(--lg);"><a href="https://share.google/7myySwWLnvZ7WCwLd" target="_blank" rel="noopener" style="font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--twilight); text-decoration: underline;">Read all 2,600+ reviews on Google &rarr;</a></p>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="faq-header">
+        <p class="subtitle">Frequently Asked Questions</p>
+        <h2>Common Questions About Our Plans</h2>
+      </div>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What pests are covered under each plan?
+            <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+          </button>
+          <div class="faq-answer"><p>Our Basic plan covers common household pests including ants, spiders, and cockroaches. Standard adds fire ants, rodent monitoring, and seasonal mosquito treatment. Premium covers everything including year-round mosquito and tick control plus termite monitoring. See the full comparison table above for a detailed breakdown.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Do I need to be home during treatments?
+            <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+          </button>
+          <div class="faq-answer"><p>For exterior-only treatments (Basic plan), you do not need to be home. For plans that include interior treatments (Standard and Premium), we ask that someone over 18 is present to provide access. We always notify you before your scheduled visit and work around your schedule.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What if I see pests between scheduled treatments?
+            <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+          </button>
+          <div class="faq-answer"><p>Standard and Premium plans include free re-treatments between scheduled visits. If you see covered pests after a treatment, call us and we will come back at no extra charge. Premium members receive same-day emergency service for urgent issues.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Are your treatments safe for pets and children?
+            <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+          </button>
+          <div class="faq-answer"><p>Yes. We use EPA-registered products applied by licensed technicians following strict safety guidelines. We recommend keeping pets and children away from treated areas until they are dry, which typically takes 30 to 60 minutes. Your technician will always review safety instructions with you.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What areas in DFW do you serve?
+            <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+          </button>
+          <div class="faq-answer"><p>We serve the greater Dallas-Fort Worth metroplex including Southlake, Keller, Grapevine, Colleyville, Trophy Club, Westlake, Roanoke, and surrounding communities. Enter your address in our quoting tool to confirm coverage in your area. If we do not serve your zip code, we will connect you with a trusted partner.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            How does the Sentricon&reg; termite system work?
+            <svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+          </button>
+          <div class="faq-answer"><p>Sentricon uses strategically placed bait stations around your home's perimeter. Termites find the bait, share it with the colony, and it eliminates the entire colony from the inside. The Always Active technology means stations are working 24 hours a day, 7 days a week. We monitor stations annually and replace bait as needed.</p></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="final-cta topo-bg">
+    <div class="container">
+      <div class="final-cta-content">
+        <p class="subtitle">Get Started Today</p>
+        <h2>Ready to Protect Your Home?</h2>
+        <p class="body-text">Get a personalized quote in minutes &mdash; or call us anytime. We love bugs in their habitat, not in yours.</p>
+        <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:var(--lg); flex-wrap:wrap;">
+          <div class="google-badge-stars" style="display:flex; gap:1px; color:#FBBC04;">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 6.1H19l-5.3 4.1 1.91 6.3L10 13.4l-5.61 4.1 1.91-6.3L1 7.1h6.61z"/></svg>
+          </div>
+          <span style="font-family:var(--font-display); font-size:14px; font-weight:500; color:var(--soil);">Trusted by 2,600+ homeowners on Google</span>
+        </div>
+        <div class="final-cta-actions">
+          <a class='btn btn-primary' href='https://quote.forterrapestcontrol.com'>GET YOUR FREE QUOTE</a>
+          <a href="tel:8176656527" class="btn btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="margin-right:6px">
+              <path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/>
+            </svg>
+            CALL (817) 665-6527
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
