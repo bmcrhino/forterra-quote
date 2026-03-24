@@ -184,7 +184,7 @@ export default async function handler(req, res) {
 
         // On final submission, remove in-progress tag
         const finalTags = !partial
-          ? mergedTags.filter(t => t !== 'quote-in-progress')
+          ? mergedTags.filter(t => t !== 'quote-in-progress' && t !== 'quote-abandoned')
           : mergedTags;
 
         await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}`, {

@@ -2283,7 +2283,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // ==========================================
     // GHL LEAD SUBMISSION
     // ==========================================
+    let _ghlFinalFired = false;
     async function fireGHLLead(partial = false) {
+      // Prevent duplicate final submissions
+      if (!partial) {
+        if (_ghlFinalFired) return;
+        _ghlFinalFired = true;
+      }
       try {
         const body = {
           firstName: S.firstName, lastName: S.lastName,
@@ -2526,7 +2532,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if (S.pests.includes('termites') && S.plan !== 'premium') S.plan = 'premium';
       if (selected.length === 1 && selected[0] === 'rodents') {
         S.rodentInspection = true;
-        fireGHLLead(false); // Create rodent-inspection tagged lead
+        // Don't fire GHL here — confirmSchedule() fires it after scheduling
         wizGoTo('schedule');
       }
       else { wizGoTo('calculating'); }
