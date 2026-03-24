@@ -195,6 +195,9 @@
       margin: 0 auto;
       animation: screenFadeIn 0.5s ease;
     }
+    .wizard-screen[data-screen="plan"] {
+      max-width: 860px;
+    }
     .wizard-screen.active { display: block; }
 
     @keyframes screenFadeIn {
@@ -744,7 +747,7 @@
     /* ========================================
        PLAN RECOMMENDATION
        ======================================== */
-    .plan-rec { max-width: 600px; width: 100%; }
+    .plan-rec { max-width: 820px; width: 100%; }
     .plan-rec-header {
       text-align: center;
       margin-bottom: 32px;
@@ -961,60 +964,112 @@
       color: var(--orange);
     }
 
-    /* Alt plans */
-    .alt-plans { margin-top: 24px; }
-    .alt-plans-label {
-      font-family: var(--font-display);
-      font-size: 13px;
-      color: var(--medium-grey);
-      text-align: center;
-      margin-bottom: 12px;
-    }
-    .alt-plans-row {
+    /* Side-by-side plan cards */
+    .plans-row {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 24px;
     }
-    .alt-plan-card {
+    .plan-card-col {
       background: var(--white);
-      border: 1px solid var(--input-border);
-      border-radius: var(--radius-lg);
-      padding: 20px;
-      cursor: pointer;
+      border: 2px solid var(--border-grey);
+      border-radius: var(--radius-xl);
+      padding: 24px 20px;
       text-align: center;
+      cursor: pointer;
       transition: all var(--transition);
+      position: relative;
+      opacity: 0.75;
     }
-    .alt-plan-card:hover {
+    .plan-card-col:hover {
       border-color: var(--orange);
       box-shadow: var(--shadow-md);
+      opacity: 1;
     }
-    .alt-plan-name {
+    .plan-card-col.selected {
+      border-color: var(--orange);
+      box-shadow: 0 8px 32px rgba(247, 125, 0, 0.2);
+      transform: scale(1.05);
+      opacity: 1;
+      z-index: 2;
+    }
+    .plan-card-badge {
+      display: none;
+      background: var(--orange);
+      color: var(--white);
       font-family: var(--font-display);
-      font-weight: 600;
+      font-weight: 700;
       font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: var(--radius);
+      margin: -8px auto 12px;
+    }
+    .plan-card-col.selected .plan-card-badge { display: inline-block; }
+    .plan-card-name {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       color: var(--bark);
-      margin-bottom: 2px;
+      margin-bottom: 4px;
     }
-    .alt-plan-title {
+    .plan-card-title {
       font-family: var(--font-body);
-      font-size: 13px;
+      font-size: 14px;
       color: var(--dark-grey);
-      margin-bottom: 8px;
+      margin-bottom: 12px;
+      min-height: 40px;
     }
-    .alt-plan-price {
+    .plan-card-price {
       font-family: var(--font-display);
       font-weight: 700;
-      font-size: 28px;
+      font-size: 36px;
       color: var(--soil);
       line-height: 1;
     }
-    .alt-plan-period {
+    .plan-card-period {
       font-family: var(--font-display);
       font-weight: 300;
       font-size: 13px;
       color: var(--medium-grey);
+      margin-bottom: 8px;
+    }
+    .plan-card-initial {
+      font-family: var(--font-display);
+      font-size: 13px;
+      color: var(--dark-grey);
+      margin-bottom: 16px;
+    }
+    .plan-card-features {
+      list-style: none;
+      text-align: left;
+      margin: 0;
+      padding: 0;
+    }
+    .plan-card-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 4px 0;
+      font-family: var(--font-display);
+      font-size: 13px;
+      color: var(--dark-grey);
+      line-height: 1.3;
+    }
+    .plan-card-features li svg { flex-shrink: 0; margin-top: 2px; color: var(--orange); }
+    .plan-card-col:not(.selected) .plan-card-features li svg { color: var(--medium-grey); }
+    @media (max-width: 640px) {
+      .plans-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .plan-card-col.selected { transform: scale(1); }
+      .plan-card-title { min-height: auto; }
     }
 
     /* ========================================
@@ -1376,6 +1431,126 @@
     .modal-close:hover { background: var(--medium-grey); color: var(--white); }
 
     /* ========================================
+       SIDE-BY-SIDE PLAN CARDS
+       ======================================== */
+    .plans-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 24px;
+    }
+    .plan-col-card {
+      background: var(--white);
+      border: 2px solid var(--border-grey);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all var(--transition);
+      position: relative;
+    }
+    .plan-col-card:hover {
+      border-color: var(--orange);
+      box-shadow: var(--shadow-md);
+    }
+    .plan-col-card.selected {
+      border-color: var(--orange);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-8px);
+      z-index: 2;
+    }
+    .plan-col-card:not(.selected) {
+      opacity: 0.75;
+    }
+    .plan-col-card:not(.selected):hover {
+      opacity: 1;
+    }
+    .plan-col-badge {
+      background: var(--orange);
+      color: var(--white);
+      text-align: center;
+      padding: 8px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: none;
+    }
+    .plan-col-card.selected .plan-col-badge {
+      display: block;
+    }
+    .plan-col-body {
+      padding: 24px 20px;
+    }
+    .plan-col-name {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bark);
+      margin-bottom: 4px;
+    }
+    .plan-col-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--soil);
+      margin-bottom: 12px;
+      min-height: 40px;
+    }
+    .plan-col-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+    .plan-col-price {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 1;
+      color: var(--soil);
+    }
+    .plan-col-period {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 14px;
+      color: var(--medium-grey);
+    }
+    .plan-col-initial {
+      font-family: var(--font-display);
+      font-size: 13px;
+      color: var(--dark-grey);
+      margin-bottom: 16px;
+    }
+    .plan-col-initial strong { color: var(--soil); font-weight: 600; }
+    .plan-col-features {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .plan-col-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 4px 0;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--dark-grey);
+      line-height: 1.3;
+    }
+    .plan-col-features li svg {
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--orange);
+    }
+    .plan-col-card:not(.selected) .plan-col-features li svg {
+      color: var(--medium-grey);
+    }
+
+    /* ========================================
        RESPONSIVE
        ======================================== */
     @media (max-width: 640px) {
@@ -1390,6 +1565,8 @@
       .alt-plans-row { grid-template-columns: 1fr; }
       .calc-trust { flex-direction: column; gap: 12px; }
       .plan-rec-price { font-size: 40px; }
+      .plans-row { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto 24px; }
+      .plan-col-card.selected { transform: none; }
       .btn-wizard { min-width: 160px; padding: 14px 24px; }
     }
   </style>
@@ -1653,33 +1830,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="wizard-screen" data-screen="plan" data-phase="plans">
         <div class="plan-rec">
           <div class="plan-rec-header"><h2>Your Recommended Plan</h2><p>Based on your home and pest concerns</p></div>
-          <div class="billing-toggle">
-            <span class="billing-label active" id="billingMonthlyLabel">Pay Monthly</span>
-            <button class="billing-switch" id="billingSwitch" onclick="toggleBilling()" aria-label="Toggle annual billing"><span class="billing-switch-dot"></span></button>
-            <span class="billing-label" id="billingAnnualLabel">Pay Upfront</span>
-            <span class="billing-save">Save 1 Month</span>
+          <!-- billing toggle removed: monthly-only -->
+          <div class="plans-row" id="plansRow"></div>
+          <p class="plan-addons-title" style="margin-top:8px">Available Add-ons</p>
+          <div id="addonsContainer">
+            <div class="plan-addon-item" onclick="toggleAddon(this)" data-addon="mosquito" data-price="52"><div class="plan-addon-left"><div class="plan-addon-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><span class="plan-addon-name">Mosquito Protection</span></div><span class="plan-addon-price">+$52/mo</span></div>
+            <div class="plan-addon-item" onclick="toggleAddon(this)" data-addon="rodent" data-price="0"><div class="plan-addon-left"><div class="plan-addon-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><span class="plan-addon-name">Rodent Exclusion Inspection</span></div><span class="plan-addon-price">FREE</span></div>
           </div>
-          <div class="plan-rec-card">
-            <div class="plan-rec-badge">Recommended for You</div>
-            <div class="plan-rec-body">
-              <p class="plan-rec-name" id="recPlanName">STANDARD</p>
-              <h3 class="plan-rec-title" id="recPlanTitle">Pests + Termite Watch</h3>
-              <p class="plan-rec-desc" id="recPlanDesc">Best for people who want to stay on top of common pests and keep an eye on termites.</p>
-              <div class="plan-rec-price-row">
-                <span style="font-family:var(--font-display);font-weight:600;font-size:20px;color:var(--soil)">$</span>
-                <span class="plan-rec-price" id="recPrice">59</span>
-                <span class="plan-rec-period" id="recPeriod">/month</span>
-              </div>
-              <p class="plan-rec-initial">Initial service: <strong id="recInitial">$149</strong> (one-time)</p>
-              <ul class="plan-rec-features" id="recFeatures"></ul>
-              <p class="plan-addons-title">Available Add-ons</p>
-              <div id="addonsContainer">
-                <div class="plan-addon-item" onclick="toggleAddon(this)" data-addon="mosquito" data-price="52"><div class="plan-addon-left"><div class="plan-addon-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><span class="plan-addon-name">Mosquito Protection</span></div><span class="plan-addon-price">+$52/mo</span></div>
-                <div class="plan-addon-item" onclick="toggleAddon(this)" data-addon="rodent" data-price="0"><div class="plan-addon-left"><div class="plan-addon-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><span class="plan-addon-name">Rodent Exclusion Inspection</span></div><span class="plan-addon-price">FREE</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="alt-plans"><p class="alt-plans-label">Or choose a different plan</p><div class="alt-plans-row" id="altPlansRow"></div></div>
           <div class="btn-row btn-row-between" style="margin-top:32px">
             <button class="btn-wizard btn-wizard-ghost" onclick="wizBack()"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg> Back</button>
             <button class="btn-wizard btn-wizard-primary" onclick="wizGoTo('schedule')" style="min-width:280px">Choose Plan &amp; Schedule <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/></svg></button>
@@ -1874,11 +2031,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       propertyType: '', sft: 0, lotSize: 0, lotAcres: 0,
       email: '', phone: '',
       pests: [], followups: {}, priceAdj: 0,
-      plan: 'standard', addons: [], specialties: [],
+      plan: 'premium', addons: [], specialties: [],
       date: null, time: null,
       rodentInspection: false, termiteInspection: false, customQuote: false,
       exitShown: false, exitApplied: false,
-      billing: 'monthly',
+      billing: 'monthly', // hardcoded monthly-only
       calMo: new Date().getMonth(), calYr: new Date().getFullYear(),
       ghlContactCreated: false
     };
@@ -2561,13 +2718,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           if (prev.length === 1 && hasMosq) S.plan = 'mosquito';
           else if (prev.length === 1 && hasTerm) S.plan = 'sentricon';
           else if (hasTerm) S.plan = 'premium';
-          else if (hasRod) S.plan = 'basic';
-          else S.plan = 'standard';
+          else if (hasRod) S.plan = 'premium';
+          else S.plan = 'premium';
         } else {
           if (S.pests.includes('termites')) S.plan='premium';
           else if (S.pests.length === 1 && S.pests[0] === 'mosquitoes') S.plan='mosquito';
-          else if (S.pests.length>2||S.pests.includes('general')) S.plan='standard';
-          else S.plan='basic';
+          else if (S.pests.length>2||S.pests.includes('general')) S.plan='premium';
+          else S.plan='premium';
         }
       }
     }
@@ -2593,26 +2750,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // S10: PLAN
     // ==========================================
     function updPlanRec() {
+      S.billing = 'monthly'; // hardcode monthly
       // Determine if we need inspection based on what they actually want
       const wantsPest = S.pests.some(p => !['mosquitoes'].includes(p)) || S.plan === 'basic' || S.plan === 'standard' || S.plan === 'premium' || S.plan === 'sentricon';
       const wantsMosquito = S.pests.includes('mosquitoes') || S.plan === 'mosquito';
       const onlyMosquito = wantsMosquito && !wantsPest;
       const onlyPest = wantsPest && !wantsMosquito;
 
-      // Only force inspection if ALL services they want need inspection
       if (S.pestNeedsInspection && wantsPest && !onlyMosquito && S.mosquitoNeedsInspection && wantsMosquito) {
-        // Both pest AND mosquito need inspection → full inspection
         S.customQuote = true; showCustomQuoteScreen(); return;
       }
       if (S.pestNeedsInspection && wantsPest && onlyPest) {
-        // Only wants pest, and pest needs inspection → inspection
         S.customQuote = true; showCustomQuoteScreen(); return;
       }
       if (S.mosquitoNeedsInspection && wantsMosquito && onlyMosquito) {
-        // Only wants mosquito, and mosquito needs inspection → inspection
         S.customQuote = true; showCustomQuoteScreen(); return;
       }
-      // If we get here: at least one service is quotable
+
       // Gray out mosquito addon if lot > 1 acre
       const mqAddonEl = document.querySelector('[data-addon="mosquito"]');
       if (mqAddonEl && S.mosquitoNeedsInspection) {
@@ -2626,33 +2780,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       const p = PLANS[S.plan];
       if (!p || p.customQuote) { showCustomQuoteScreen(); return; }
-      const isAnnual = S.billing === 'annual';
-      const displayPrice = isAnnual ? p.annual : p.price;
-      dataLayer.push({event: 'quote_plan_view', plan_name: p.name, plan_price: displayPrice, billing_type: S.billing});
-      $('recPlanName').textContent = p.name;
-      $('recPlanTitle').textContent = p.title;
-      $('recPlanDesc').textContent = p.desc;
-      $('recPrice').textContent = displayPrice;
-      $('recPeriod').textContent = isAnnual ? `/mo — Save $${displayPrice}/yr with annual plan` : '/month';
-      const tot = p.init + S.priceAdj - (S.exitApplied?30:0);
-      $('recInitial').textContent = `$${tot}`;
-      $('recFeatures').innerHTML = p.feat.map(f => `<li>${CHK}${f}</li>`).join('');
-      // Update mosquito add-on price based on lot size
+      dataLayer.push({event: 'quote_plan_view', plan_name: p.name, plan_price: p.price, billing_type: 'monthly'});
+
+      // Update mosquito add-on price
       const mqPricing = getMosquitoPricing(S.lotAcres);
       const mqAddon = document.querySelector('[data-addon="mosquito"]');
       if (mqAddon && mqPricing) {
         mqAddon.dataset.price = mqPricing.mo;
         mqAddon.querySelector('.plan-addon-price').textContent = `+$${mqPricing.mo}/mo`;
       }
-      // Pre-select mosquito add-on if it's already in S.addons (e.g., from prevention multi-select)
       if (mqAddon && S.addons.includes('mosquito') && !mqAddon.classList.contains('selected')) {
         mqAddon.classList.add('selected');
       }
-      // Show Basic Pest as an add-on when on mosquito plan (not as alt plan)
+      if (mqAddon) mqAddon.style.display = S.plan === 'mosquito' ? 'none' : '';
+
+      // Build side-by-side plan cards: Standard | Premium | Basic
+      const cardOrder = ['standard', 'premium', 'basic'];
+      const plansRow = $('plansRow');
+      plansRow.innerHTML = cardOrder.map(k => {
+        const pl = PLANS[k];
+        if (!pl || pl.customQuote) return '';
+        const isSel = k === S.plan;
+        const tot = pl.init + S.priceAdj - (S.exitApplied ? 30 : 0);
+        return `<div class="plan-col-card${isSel ? ' selected' : ''}" onclick="switchPlan('${k}')">
+          <div class="plan-col-badge">Recommended</div>
+          <div class="plan-col-body">
+            <p class="plan-col-name">${pl.name}</p>
+            <p class="plan-col-title">${pl.title}</p>
+            <div class="plan-col-price-row">
+              <span style="font-family:var(--font-display);font-weight:600;font-size:16px;color:var(--soil)">$</span>
+              <span class="plan-col-price">${pl.price}</span>
+              <span class="plan-col-period">/mo</span>
+            </div>
+            <p class="plan-col-initial">Initial: <strong>$${tot}</strong></p>
+            <ul class="plan-col-features">${pl.feat.map(f => `<li>${CHK}${f}</li>`).join('')}</ul>
+          </div>
+        </div>`;
+      }).join('');
+
+      // Show Basic Pest as an add-on when on mosquito plan
       let basicAddonEl = document.querySelector('[data-addon="basic-pest"]');
       if (S.plan === 'mosquito') {
         if (!basicAddonEl) {
-          // Create the Basic Pest add-on element dynamically
           const addonContainer = document.querySelector('#addonsContainer');
           if (addonContainer) {
             const div = document.createElement('div');
@@ -2660,7 +2829,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             div.setAttribute('onclick', 'toggleAddon(this)');
             div.setAttribute('data-addon', 'basic-pest');
             div.setAttribute('data-price', PLANS.basic ? PLANS.basic.price : 49);
-            div.innerHTML = `<div class="plan-addon-left"><div class="plan-addon-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><span class="plan-addon-name">Basic Pest Prevention</span></div><span class="plan-addon-price">+$${PLANS.basic ? (isAnnual ? PLANS.basic.annual : PLANS.basic.price) : 49}/mo</span>`;
+            div.innerHTML = `<div class="plan-addon-left"><div class="plan-addon-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><span class="plan-addon-name">Basic Pest Prevention</span></div><span class="plan-addon-price">+$${PLANS.basic ? PLANS.basic.price : 49}/mo</span>`;
             addonContainer.appendChild(div);
             basicAddonEl = div;
           }
@@ -2669,23 +2838,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       } else {
         if (basicAddonEl) basicAddonEl.style.display = 'none';
       }
-      // Alt plans — no alts for mosquito (Basic is now an add-on above)
-      const hasTermites = S.pests && S.pests.includes('termites');
-      const alts = S.plan === 'mosquito'
-        ? []
-        : Object.keys(PLANS).filter(k => {
-            if (k === S.plan || k === 'mosquito') return false;
-            if (!PLANS[k] || PLANS[k].customQuote) return false;
-            // When termites involved: show sentricon as alt, hide basic (no termite coverage)
-            if (hasTermites) { if (k === 'basic') return false; }
-            else { if (k === 'sentricon') return false; }
-            return true;
-          });
-      $('altPlansRow').innerHTML = alts.map(k => { const x=PLANS[k]; const ap=isAnnual?x.annual:x.price; return `<div class="alt-plan-card" onclick="switchPlan('${k}')"><p class="alt-plan-name">${x.name}</p><p class="alt-plan-title">${x.title}</p><p class="alt-plan-price">$${ap}</p><p class="alt-plan-period">/mo</p></div>`; }).join('');
-      if (mqAddon) mqAddon.style.display = S.plan === 'mosquito' ? 'none' : '';
-      $('billingMonthlyLabel').classList.toggle('active', !isAnnual);
-      $('billingAnnualLabel').classList.toggle('active', isAnnual);
-      $('billingSwitch').classList.toggle('active', isAnnual);
     }
 
     function showCustomQuoteScreen() {
@@ -2700,9 +2852,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       wizGoTo('schedule');
     }
     function toggleBilling() {
-      S.billing = S.billing === 'monthly' ? 'annual' : 'monthly';
-      dataLayer.push({event: 'quote_billing_toggle', billing_type: S.billing});
-      updPlanRec();
+      // Monthly-only: billing toggle removed
+      S.billing = 'monthly';
     }
     function switchPlan(k) { dataLayer.push({event: 'quote_plan_switch', from_plan: S.plan, to_plan: k}); S.plan=k; updPlanRec(); }
     function toggleAddon(el) { el.classList.toggle('selected'); const action = el.classList.contains('selected') ? 'add' : 'remove'; dataLayer.push({event: 'quote_addon_toggle', addon_name: el.dataset.addon, action: action}); S.addons=[]; document.querySelectorAll('.plan-addon-item.selected').forEach(i => S.addons.push(i.dataset.addon)); }
