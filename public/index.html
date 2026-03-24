@@ -2795,8 +2795,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       }
       if (mqAddon) mqAddon.style.display = S.plan === 'mosquito' ? 'none' : '';
 
-      // Build side-by-side plan cards: Standard | Premium | Basic
-      const cardOrder = ['standard', 'premium', 'basic'];
+      // Build side-by-side plan cards dynamically
+      // When termites: Sentricon replaces Basic. Layout: cheaper alt | RECOMMENDED | other alt
+      const hasTermites = S.pests && S.pests.includes('termites');
+      const availablePlans = ['basic', 'standard', 'premium', 'sentricon'].filter(k => {
+        if (!PLANS[k] || PLANS[k].customQuote) return false;
+        if (hasTermites && k === 'basic') return false;   // no basic when termites
+        if (!hasTermites && k === 'sentricon') return false; // no sentricon without termites
+        return true;
+      });
+      // Order: put selected in center, more expensive left, cheaper right
+      const selected = S.plan;
+      const others = availablePlans.filter(k => k !== selected).sort((a, b) => PLANS[b].price - PLANS[a].price);
+      const cardOrder = others.length >= 2
+        ? [others[0], selected, others[1]]  // expensive | selected | cheaper
+        : others.length === 1
+          ? [others[0], selected]
+          : [selected];
       const plansRow = $('plansRow');
       plansRow.innerHTML = cardOrder.map(k => {
         const pl = PLANS[k];
