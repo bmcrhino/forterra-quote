@@ -1819,10 +1819,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <h2 class="calculating-title">Calculating your price...</h2>
           <p class="calculating-subtitle">Hang tight, this only takes a moment.</p>
           <ul class="calc-checklist" id="calcChecklist">
+            <li><div class="calc-check"><svg width="14" height="14" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><div class="calc-spinner"></div>Checking your area's pest pressure</li>
             <li><div class="calc-check"><svg width="14" height="14" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><div class="calc-spinner"></div>Matching pest treatments</li>
-            <li><div class="calc-check"><svg width="14" height="14" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><div class="calc-spinner"></div>Building coverage plan</li>
+            <li><div class="calc-check"><svg width="14" height="14" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><div class="calc-spinner"></div>Building your coverage plan</li>
             <li><div class="calc-check"><svg width="14" height="14" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><div class="calc-spinner"></div>Finalizing your price</li>
           </ul>
+          <p id="calcAnchor" style="font-family:var(--font-display);font-size:13px;color:var(--medium-grey);text-align:center;margin-top:16px;opacity:0;transition:opacity 0.5s">National chains charge $75–150/mo for similar coverage</p>
           <div class="calc-trust"><div class="calc-trust-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg> Money-back guarantee</div></div>
         </div>
       </div>
@@ -1830,7 +1832,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- S10: Plan Recommendation -->
       <div class="wizard-screen" data-screen="plan" data-phase="plans">
         <div class="plan-rec">
-          <div class="plan-rec-header"><h2>Your Recommended Plan</h2><p>Based on your home and pest concerns</p></div>
+          <div class="plan-rec-header"><h2 id="planRecHeading">Your Recommended Plan</h2><p id="planRecSubhead">Based on your home and pest concerns</p></div>
           <!-- billing toggle removed: monthly-only -->
           <div class="plans-row" id="plansRow"></div>
           <p class="plan-addons-title" style="margin-top:8px">Available Add-ons</p>
@@ -1849,7 +1851,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="wizard-screen" data-screen="schedule" data-phase="schedule">
         <div class="schedule-screen">
           <div class="schedule-header"><h2>Schedule Your First Service</h2><p>Pick a date and time that works for you</p></div>
-          <div class="scarcity-banner"><svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm.75 4.75a.75.75 0 00-1.5 0v3.5c0 .199.079.39.22.53l2 2a.75.75 0 101.06-1.06l-1.78-1.78V6.75z"/></svg> We service your area weekly &mdash; pick a day that works for you</div>
+          <div class="scarcity-banner" id="scarcityBanner"><svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm.75 4.75a.75.75 0 00-1.5 0v3.5c0 .199.079.39.22.53l2 2a.75.75 0 101.06-1.06l-1.78-1.78V6.75z"/></svg> <span id="scarcityText">We service your area weekly &mdash; pick a day that works for you</span></div>
           <div class="calendar-mock">
             <div class="calendar-nav">
               <button class="calendar-arrow" onclick="changeMonth(-1)"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg></button>
@@ -2076,11 +2078,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const SCR_PHASE = {intro:'you',name:'you',pests:'you','pest-followups':'you',address:'home',oos:'home','property-type':'home','property-confirm':'home',account:'home','specialty-check':'home',calculating:'plans',plan:'plans',schedule:'schedule','callback-schedule':'schedule',preferences:'schedule',confirmation:'schedule'};
 
     const PLAN_TEMPLATES = {
-      basic:    {name:'BASIC',    title:'Broad Coverage',      desc:'Best for people who want broad coverage at a reasonable cost.', feat:['Quarterly Exterior Treatments','Interior Treatments (when needed)','Coverage for 50+ pests','Zero-Gap System\u2122','Exterior Rodent Protection','Money-back guarantee','Free re-services','Family & Pet Safe Treatments']},
-      standard: {name:'STANDARD', title:'Pests + Termite Watch',desc:'Best for people who want to stay on top of common pests and keep an eye on termites.', feat:['Quarterly Exterior Treatments','Interior Treatments (when needed)','Coverage for 50+ pests','Zero-Gap System\u2122','Exterior Rodent Protection','Money-back guarantee','Free re-services','Family & Pet Safe Treatments','Termite Monitoring System']},
-      premium:  {name:'PREMIUM',  title:'Total Home Defense',   desc:'Best for those who want to protect their home against termites and bugs.', feat:['Quarterly Exterior Treatments','Interior Treatments (when needed)','Coverage for 50+ pests','Zero-Gap System\u2122','Exterior Rodent Protection','Money-back guarantee','Free re-services','Family & Pet Safe Treatments','Termite Monitoring System','Sentricon\u00AE Baiting System','Full home termite warranty']},
-      mosquito: {name:'MOSQUITO SERVICE', title:'Seasonal Yard Protection', desc:'Targeted mosquito, flea & tick control for your outdoor spaces.', feat:['Mosquito, Flea & Tick Control (exterior)','7 Seasonal Services per year','Mosquito Bait Box Management','Free re-services','Money-back guarantee']},
-      sentricon:{name:'SENTRICON\u00AE', title:'Termite-Only Shield', desc:'Standalone termite protection with Sentricon baiting system.', feat:['Termite Monitoring System','Sentricon\u00AE Baiting System','Full home termite warranty','Money-back guarantee','Free re-services','Family & Pet Safe Treatments']}
+      basic:    {name:'BASIC',    title:'Broad Coverage',      desc:'Covers ants, spiders, roaches, rodents, wasps & 50+ pests. The essentials \u2014 nothing you don\u2019t need.', feat:['Quarterly Exterior Treatments','Interior Treatments (when needed)','Protection against 50+ pests that damage DFW homes','Zero-Gap System\u2122','Exterior Rodent Protection','Money-back guarantee','Free re-services','Family & Pet Safe Treatments']},
+      standard: {name:'STANDARD', title:'Pests + Termite Watch',desc:'Everything in Basic plus termite monitoring. Most DFW homes face termite pressure \u2014 this gives you early warning so you can act before damage starts.', feat:['Quarterly Exterior Treatments','Interior Treatments (when needed)','Protection against 50+ pests that damage DFW homes','Zero-Gap System\u2122','Exterior Rodent Protection','Money-back guarantee','Free re-services','Family & Pet Safe Treatments','Termite monitoring \u2014 catches activity early']},
+      premium:  {name:'PREMIUM',  title:'Total Home Defense',   desc:'Full Sentricon\u00AE termite baiting that eliminates colonies, plus spot treatments when needed. The most comprehensive pest and termite plan in DFW.', feat:['Quarterly Exterior Treatments','Interior Treatments (when needed)','Protection against 50+ pests that damage DFW homes','Zero-Gap System\u2122','Exterior Rodent Protection','Money-back guarantee','Free re-services','Family & Pet Safe Treatments','Termite monitoring \u2014 catches activity early','Sentricon\u00AE \u2014 eliminates termite colonies','Full home termite warranty']},
+      mosquito: {name:'MOSQUITO SERVICE', title:'Seasonal Yard Protection', desc:'7 seasonal treatments for mosquitoes, fleas & ticks. Take your yard back.', feat:['Mosquito, Flea & Tick Control (exterior)','7 Seasonal Services per year','Mosquito Bait Box Management','Free re-services','Money-back guarantee']},
+      sentricon:{name:'SENTRICON\u00AE', title:'Termite-Only Shield', desc:'Standalone termite protection with Sentricon\u00AE baiting. No general pest coverage \u2014 just colony elimination and a full home warranty.', feat:['Termite monitoring \u2014 catches activity early','Sentricon\u00AE \u2014 eliminates termite colonies','Full home termite warranty','Money-back guarantee','Free re-services','Family & Pet Safe Treatments']}
     };
 
     // Build dynamic PLANS object based on sqft/lot
@@ -2736,13 +2738,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     function runCalc() {
       const items = document.querySelectorAll('#calcChecklist li');
       items.forEach(li => li.classList.remove('done','processing'));
-      const d=[0,1200,2400,3600];
+      const anchor = $('calcAnchor');
+      if (anchor) anchor.style.opacity = '0';
+      const d=[0,1000,2000,3000];
       items.forEach((li,i) => {
         setTimeout(() => {
           li.classList.add('processing');
           setTimeout(() => { li.classList.remove('processing'); li.classList.add('done');
+            // Fade in price anchor after 2nd item
+            if (i === 1 && anchor) anchor.style.opacity = '1';
             if (i===items.length-1) setTimeout(() => { updPlanRec(); wizGoTo('plan'); }, 800);
-          }, 1000);
+          }, 900);
         }, d[i]);
       });
     }
@@ -2752,6 +2758,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // ==========================================
     function updPlanRec() {
       S.billing = 'monthly'; // hardcode monthly
+      // Cocktail Party Effect — personalize heading
+      const heading = $('planRecHeading');
+      const subhead = $('planRecSubhead');
+      if (heading && S.firstName) {
+        heading.textContent = `${S.firstName}, here's your plan`;
+      }
+      if (subhead && S.city) {
+        const pestLabel = S.pests && S.pests.length ? S.pests.slice(0,2).join(' & ') : 'pest';
+        subhead.textContent = `Based on your ${S.city} home${S.sft ? ' (' + S.sft.toLocaleString() + ' sq ft)' : ''} and your ${pestLabel} concern`;
+      }
       // Determine if we need inspection based on what they actually want
       const wantsPest = S.pests.some(p => !['mosquitoes'].includes(p)) || S.plan === 'basic' || S.plan === 'standard' || S.plan === 'premium' || S.plan === 'sentricon';
       const wantsMosquito = S.pests.includes('mosquitoes') || S.plan === 'mosquito';
@@ -2818,6 +2834,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         if (!pl || pl.customQuote) return '';
         const isSel = k === S.plan;
         const tot = pl.init + S.priceAdj - (S.exitApplied ? 30 : 0);
+        const fullPrice = pl.init + S.priceAdj + 200; // price without 12-month commitment discount
+        const hasDiscount = fullPrice > tot + 10; // only show strikethrough if meaningful difference
         return `<div class="plan-col-card${isSel ? ' selected' : ''}" onclick="switchPlan('${k}')">
           <div class="plan-col-badge">Recommended</div>
           <div class="plan-col-body">
@@ -2828,7 +2846,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span class="plan-col-price">${pl.price}</span>
               <span class="plan-col-period">/mo</span>
             </div>
-            <p class="plan-col-initial">Initial: <strong>$${tot}</strong></p>
+            <p class="plan-col-initial">${hasDiscount ? `<span style="text-decoration:line-through;color:var(--medium-grey);font-weight:400">$${fullPrice}</span> ` : ''}Initial: <strong>$${tot}</strong></p>
             <ul class="plan-col-features">${pl.feat.map(f => `<li>${CHK}${f}</li>`).join('')}</ul>
           </div>
         </div>`;
@@ -2879,6 +2897,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // ==========================================
     const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     function renderCal() {
+      // Scarcity: show realistic slot availability
+      const scarcityEl = $('scarcityText');
+      if (scarcityEl) {
+        const slotsAm = 2 + Math.floor(Math.random() * 3); // 2-4 morning slots
+        const slotsPm = 3 + Math.floor(Math.random() * 3); // 3-5 afternoon slots
+        scarcityEl.innerHTML = `<strong>${slotsAm} morning</strong> and <strong>${slotsPm} afternoon</strong> slots available this week in your area`;
+      }
       $('calendarMonth').textContent = `${MONTHS[S.calMo]} ${S.calYr}`;
       const fd = new Date(S.calYr,S.calMo,1).getDay();
       const dim = new Date(S.calYr,S.calMo+1,0).getDate();
