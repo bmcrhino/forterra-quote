@@ -2925,7 +2925,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       // For each calendar day, check if at least one slot (AM=8am or PM=12pm) is available
       function dayHasSlot(dt) {
         const d = dt.getDay();
-        if (d === 0) return false; // Sunday never available
+        if (d === 0 || d === 6) return false; // weekends never available
         const amStart = new Date(dt); amStart.setHours(8,0,0,0);
         const pmStart = new Date(dt); pmStart.setHours(12,0,0,0);
         return amStart >= minTime || pmStart >= minTime;
