@@ -105,8 +105,8 @@ export default async function handler(req, res) {
       if (initialPrice) {
         noteLines.push('');
         noteLines.push('— PRICING —');
-        noteLines.push(`Initial Service: $${initialPrice} (before discounts)`);
-        noteLines.push(`After Discounts: $${afterDiscounts}`);
+        noteLines.push(`Initial Service: $${afterDiscounts} (customer pays)`);
+        noteLines.push(`Full Price (no commitment discount): $${initialPrice}`);
         if (initialPrice && afterDiscounts < (initialPrice - 200)) noteLines.push('$30 exit intent discount applied');
         noteLines.push(`Monthly Recurring: $${monthlyCharge}/mo`);
         if (mosquitoMonthly) noteLines.push(`Mosquito Add-on: +$${mosquitoMonthly}/mo`);
@@ -279,7 +279,7 @@ export default async function handler(req, res) {
       let slackMsg = '';
       if (scenario === 'completed') {
         const planLabel = plan ? plan.charAt(0).toUpperCase() + plan.slice(1) : 'Unknown';
-        const pricingLine = initialPrice ? `\n💰 Initial: $${initialPrice} | Monthly: $${monthlyCharge}/mo${mosquitoMonthly ? ` (+$${mosquitoMonthly}/mo mosquito)` : ''}` : '';
+        const pricingLine = initialPrice ? `\n💰 Initial: $${afterDiscounts || initialPrice}${afterDiscounts && afterDiscounts < initialPrice ? ` (was $${initialPrice})` : ''} | Monthly: $${monthlyCharge}/mo${mosquitoMonthly ? ` (+$${mosquitoMonthly}/mo mosquito)` : ''}` : '';
         const prefLine = (confirmPreference || paymentPreference) ? `\n✅ Confirm via: ${confirmPreference || '?'} | 💳 Payment: ${paymentPreference === 'onsite' ? 'on-site' : paymentPreference === 'call' ? 'call to set up' : paymentPreference || '?'}` : '';
         slackMsg = `🎯 *New Online Booking*\n*${firstName} ${lastName}* — ${planLabel} Plan\n📍 ${address}, ${city} ${zip}\n🐛 ${pests?.join(', ') || 'general'} | 📐 ${sqft ? sqft.toLocaleString() : '?'} sqft${pricingLine}\n📅 ${preferredDate || 'TBD'} ${preferredTime || ''}${prefLine}\n\n_Action: Set up in FieldRoutes, send contract, confirm appointment_`;
       } else if (scenario === 'custom-quote') {
