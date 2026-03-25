@@ -1824,7 +1824,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li><div class="calc-check"><svg width="14" height="14" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><div class="calc-spinner"></div>Building your coverage plan</li>
             <li><div class="calc-check"><svg width="14" height="14" viewBox="0 0 16 16" fill="white"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg></div><div class="calc-spinner"></div>Finalizing your price</li>
           </ul>
-          <p id="calcAnchor" style="font-family:var(--font-display);font-size:13px;color:var(--medium-grey);text-align:center;margin-top:16px;opacity:0;transition:opacity 0.5s">National chains charge $75–150/mo for similar coverage</p>
+          <div id="calcAnchor" style="font-family:var(--font-display);font-size:15px;color:var(--soil);text-align:center;margin-top:20px;opacity:0;transition:opacity 0.6s;background:var(--off-white);border-radius:10px;padding:10px 16px;border:1px solid #e8e0d8">
+            <span style="font-weight:600">Did you know?</span> National chains charge <strong>$75–150/mo</strong> for similar coverage
+          </div>
           <div class="calc-trust"><div class="calc-trust-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg> Money-back guarantee</div></div>
         </div>
       </div>
@@ -2225,11 +2227,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       }
       $('confirmLot').textContent = S.lotSize + ' acres';
 
-      // Load map via Maps Embed API (free, no extra API enablement needed)
+      // Load map — try Embed API first, fall back to Static Maps
       const mapContainer = $('propertyMapContainer');
       const addr = encodeURIComponent(`${S.address}, ${S.city}, TX ${S.zip}`);
       const mapKey = 'AIzaSyCHRf7QnkZJU6vmijoyur81Qw3UnqnCe0g';
-      mapContainer.innerHTML = `<iframe width="100%" height="200" style="border:0;border-radius:12px;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=${mapKey}&q=${addr}&zoom=16"></iframe>`;
+      // Use Static Maps API (more reliable, fewer API restrictions)
+      const w = Math.min(600, mapContainer.offsetWidth || 600);
+      mapContainer.innerHTML = `<a href="https://www.google.com/maps/search/?api=1&query=${addr}" target="_blank" rel="noopener" style="display:block;position:relative">
+        <img src="https://maps.googleapis.com/maps/api/staticmap?center=${addr}&zoom=16&size=${w}x200&scale=2&markers=color:orange%7C${addr}&key=${mapKey}" width="100%" height="200" style="border-radius:12px;object-fit:cover" alt="Map of ${S.address}" onerror="this.parentElement.innerHTML='<div style=\\'padding:20px;text-align:center;background:#f5f0eb;border-radius:12px;font-size:14px;color:#666\\'>📍 ${S.address}, ${S.city}, TX ${S.zip}<br><a href=\\'https://www.google.com/maps/search/?api=1&query=${addr}\\' target=\\'_blank\\' style=\\'color:var(--orange)\\'>Open in Maps ↗</a></div>'" />
+        <span style="position:absolute;top:8px;left:8px;background:var(--orange);color:white;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:600">Open in Maps ↗</span>
+      </a>`;
 
       // Track which service types need inspection (not a single binary flag)
       S.pestNeedsInspection = S.sft >= 7000;
