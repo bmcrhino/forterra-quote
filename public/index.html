@@ -2910,29 +2910,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const fd = new Date(S.calYr,S.calMo,1).getDay();
       const dim = new Date(S.calYr,S.calMo+1,0).getDate();
       const today = new Date();
-      // 24 BUSINESS hours minimum: need 24 hours notice from the next business day
-      // Sat/Sun submissions → first slot is Tuesday (skip weekend, then +24h from Monday)
-      // Mon 10am → +24h = Tue 10am → Tue PM (12pm) is first slot
-      // Mon 3pm → +24h = Tue 3pm → Wed AM (8am) is first slot
-      // Fri 3pm → next business day is Mon → +24h from Mon = Tue AM is first slot
-      function addBusinessHours(startDate, hours) {
-        let d = new Date(startDate);
-        let hoursAdded = 0;
-        while (hoursAdded < hours) {
-          d.setHours(d.getHours() + 1);
-          const dow = d.getDay();
-          if (dow !== 0 && dow !== 6) hoursAdded++; // only count business hours
+      // 24-hour notice required, but measured in business days
+      // If submitted on weekend, start counting from Monday 9am
+      // If submitted weekday, 24 hours from submission time
+      function getMinBookingTime() {
+        const dow = today.getDay();
+        if (dow === 0 || dow === 6) {
+          // Weekend submission: next business day is Monday, +24 hours = Tuesday
+          const monday = new Date(today);
+          monday.setDate(today.getDate() + (dow === 0 ? 1 : 2)); // Sunday→Mon, Sat→Mon
+          monday.setHours(9, 0, 0, 0);
+          return new Date(monday.getTime() + 24 * 60 * 60 * 1000);
         }
-        return d;
+        // Weekday submission: simple 24 hours from now
+        return new Date(today.getTime() + 24 * 60 * 60 * 1000);
       }
-      // Find next business day start (9am) from now
-      let nextBusinessStart = new Date(today);
-      nextBusinessStart.setHours(9, 0, 0, 0);
-      while (nextBusinessStart.getDay() === 0 || nextBusinessStart.getDay() === 6 || nextBusinessStart <= today) {
-        nextBusinessStart.setDate(nextBusinessStart.getDate() + 1);
-        nextBusinessStart.setHours(9, 0, 0, 0);
-      }
-      const minTime = addBusinessHours(nextBusinessStart, 24);
+      const minTime = getMinBookingTime();
 
       // For each calendar day, check if at least one slot (AM=8am or PM=12pm) is available
       function dayHasSlot(dt) {
@@ -2968,23 +2961,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       // Show only time slots that are >= 24 business hours from now
       // Recalculate minTime using same logic as renderCal
       const today = new Date();
-      function addBusinessHours(startDate, hours) {
-        let dt = new Date(startDate);
-        let hoursAdded = 0;
-        while (hoursAdded < hours) {
-          dt.setHours(dt.getHours() + 1);
-          const dow = dt.getDay();
-          if (dow !== 0 && dow !== 6) hoursAdded++;
+      function getMinBookingTime() {
+        const dow = today.getDay();
+        if (dow === 0 || dow === 6) {
+          const monday = new Date(today);
+          monday.setDate(today.getDate() + (dow === 0 ? 1 : 2));
+          monday.setHours(9, 0, 0, 0);
+          return new Date(monday.getTime() + 24 * 60 * 60 * 1000);
         }
-        return dt;
+        return new Date(today.getTime() + 24 * 60 * 60 * 1000);
       }
-      let nextBusinessStart = new Date(today);
-      nextBusinessStart.setHours(9, 0, 0, 0);
-      while (nextBusinessStart.getDay() === 0 || nextBusinessStart.getDay() === 6 || nextBusinessStart <= today) {
-        nextBusinessStart.setDate(nextBusinessStart.getDate() + 1);
-        nextBusinessStart.setHours(9, 0, 0, 0);
-      }
-      const minTime = addBusinessHours(nextBusinessStart, 24);
+      const minTime = getMinBookingTime();
       const amStart = new Date(y,m,d,8,0,0);
       const pmStart = new Date(y,m,d,12,0,0);
       const amSlot = document.querySelector('.time-slot[data-time="am"]');
