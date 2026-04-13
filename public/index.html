@@ -2910,12 +2910,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const fd = new Date(S.calYr,S.calMo,1).getDay();
       const dim = new Date(S.calYr,S.calMo+1,0).getDate();
       const today = new Date();
-      // 24 business hours minimum: earliest slot must be >= 24 clock hours from now, on a business day
-      // AM slot = 8am, PM slot = 12pm
-      // Mon 10am → +24h = Tue 10am → Tue PM (12pm) is first slot ≥ 24h
-      // Mon 3pm → +24h = Tue 3pm → Wed AM (8am) is first slot ≥ 24h
-      // Fri 3pm → +24h = Sat 3pm → Mon AM (8am) is first slot ≥ 24h (skip weekend)
-      const minTime = new Date(today.getTime() + 24 * 60 * 60 * 1000); // now + 24 hours
+      // 24 BUSINESS hours minimum: need 24 hours notice from the next business day
+      // Sat/Sun submissions → first slot is Tuesday (skip weekend, then +24h from Monday)
+      // Mon 10am → +24h = Tue 10am → Tue PM (12pm) is first slot
+      // Mon 3pm → +24h = Tue 3pm → Wed AM (8am) is first slot
+      // Fri 3pm → next business day is Mon → +24h from Mon = Tue AM is first slot
+      function addBusinessHours(startDate, hours) {
+        let d = new Date(startDate);
+        let hoursAdded = 0;
+        while (hoursAdded < hours) {
+          d.setHours(d.getHours() + 1);
+          const dow = d.getDay();
+          if (dow !== 0 && dow !== 6) hoursAdded++; // only count business hours
+        }
+        return d;
+      }
+      // Find next business day start (9am) from now
+      let nextBusinessStart = new Date(today);
+      nextBusinessStart.setHours(9, 0, 0, 0);
+      while (nextBusinessStart.getDay() === 0 || nextBusinessStart.getDay() === 6 || nextBusinessStart <= today) {
+        nextBusinessStart.setDate(nextBusinessStart.getDate() + 1);
+        nextBusinessStart.setHours(9, 0, 0, 0);
+      }
+      const minTime = addBusinessHours(nextBusinessStart, 24);
 
       // For each calendar day, check if at least one slot (AM=8am or PM=12pm) is available
       function dayHasSlot(dt) {
@@ -2948,8 +2965,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
     function selDate(y,m,d) {
       S.date=new Date(y,m,d); S.time=null; renderCal();
-      // Show only time slots that are >= 24h from now
-      const minTime = new Date(Date.now() + 24*60*60*1000);
+      // Show only time slots that are >= 24 business hours from now
+      // Recalculate minTime using same logic as renderCal
+      const today = new Date();
+      function addBusinessHours(startDate, hours) {
+        let dt = new Date(startDate);
+        let hoursAdded = 0;
+        while (hoursAdded < hours) {
+          dt.setHours(dt.getHours() + 1);
+          const dow = dt.getDay();
+          if (dow !== 0 && dow !== 6) hoursAdded++;
+        }
+        return dt;
+      }
+      let nextBusinessStart = new Date(today);
+      nextBusinessStart.setHours(9, 0, 0, 0);
+      while (nextBusinessStart.getDay() === 0 || nextBusinessStart.getDay() === 6 || nextBusinessStart <= today) {
+        nextBusinessStart.setDate(nextBusinessStart.getDate() + 1);
+        nextBusinessStart.setHours(9, 0, 0, 0);
+      }
+      const minTime = addBusinessHours(nextBusinessStart, 24);
       const amStart = new Date(y,m,d,8,0,0);
       const pmStart = new Date(y,m,d,12,0,0);
       const amSlot = document.querySelector('.time-slot[data-time="am"]');
